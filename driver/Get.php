@@ -44,8 +44,8 @@ class Get extends Object implements IRequest {
         $ns = $xml->getDocNamespaces();
         $el = $xml->children($ns['are'])->children($ns['D'])->VBAS;
 
-        $data = new Data();
-        return $data->setIN($el->ICO)
+        $this->data = new Data();
+        return $this->data->setIN($el->ICO)
                         ->setTIN($el->DIC)
                         ->setCity($el->AA->N)
                         ->setCompany($el->OF)
