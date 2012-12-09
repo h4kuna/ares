@@ -1,0 +1,22 @@
+{
+    "name": "h4kuna/ares",
+    "type": "library",
+    "description": "Download information about customer via his IN.",
+    "homepage": "https://github.com/h4kuna/ares",
+    "license": "MIT",
+    "authors": [
+    {
+        "name": "Milan Matějček",
+        "email": "milan.matejcek@gmail.com",
+        "role": "Developer"
+    }
+    ],
+    "require": {
+        "php" : ">=5.3.2",
+        "h4kuna/curl": "1.0.*",
+        "h4kuna/data-type": "1.0.*"
+    },
+    "autoload": {
+        "files": ["Ares.php"]
+    }
+}
