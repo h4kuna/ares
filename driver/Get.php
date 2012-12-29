@@ -44,12 +44,22 @@ class Get extends Object implements IRequest {
         $ns = $xml->getDocNamespaces();
         $el = $xml->children($ns['are'])->children($ns['D'])->VBAS;
 
-        $this->data = new Data();
-        return $this->data->setIN($el->ICO)
+        $data = new Data();
+
+        if (!isset($el->ICO)) {
+            return $data;
+        }
+
+        $street = strval($el->AD->UC);
+        if (is_numeric($street)) {
+            $street = $el->AA->NCO . ' ' . $street;
+        }
+
+        return $data->setIN($el->ICO)
                         ->setTIN($el->DIC)
                         ->setCity($el->AA->N)
                         ->setCompany($el->OF)
-                        ->setStreet($el->AD->UC)
+                        ->setStreet($street)
                         ->setZip($el->AA->PSC);
     }
 
