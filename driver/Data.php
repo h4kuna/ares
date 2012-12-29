@@ -45,7 +45,7 @@ class Data extends Object {
 
     /**
      * You can define your own keys
-     * @example 
+     * @example
      * $map = array('tin' => 'dic', 'company' => 'spolecnost')
      * @param array $map
      * @return array

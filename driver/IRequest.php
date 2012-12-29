@@ -11,7 +11,7 @@ interface IRequest {
 
     /**
      * @param string $in Identification Number
-     * @return Data 
+     * @return Data
      */
     public function loadData($in = NULL);
 
