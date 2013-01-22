@@ -6,6 +6,10 @@ use Nette\Object;
 
 /**
  * @author Milan Matějček <milan.matejcek@gmail.com>
+ *
+ * @example
+  $ares = new Ares;
+  var_dump($ares->send('87744473'));
  */
 class Ares extends Object {
 
@@ -35,5 +39,5 @@ class Ares extends Object {
 }
 
 class AresException extends \RuntimeException {
-    
+
 }

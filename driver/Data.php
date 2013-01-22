@@ -38,23 +38,35 @@ class Data extends Object {
         return $this->set('zip', $s);
     }
 
+    public function setActive($s) {
+        $this->data['active'] = strval($s) == 'Aktivní';
+        return $this;
+    }
+
+    public function setFileNumber($s) {
+        return $this->set('file_number', $s);
+    }
+
+    public function setCourt($s) {
+        return $this->set('court', $s);
+    }
+
+    private function setFileNumberAndCourt() {
+        if (array_key_exists('file_number', $this->data) && array_key_exists('court', $this->data)) {
+            $this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
+        }
+    }
+
     private function set($key, $val) {
         $this->data[$key] = strval($val);
         return $this;
     }
 
-    /**
-     * You can define your own keys
-     * @example
-     * $map = array('tin' => 'dic', 'company' => 'spolecnost')
-     * @param array $map
-     * @return array
-     */
     public function toArray($map = array()) {
         if (!$map) {
             return $this->data;
         }
-
+        $this->setFileNumberAndCourt();
         $out = array();
         foreach ($map as $k => $v) {
             if (array_key_exists($k, $this->data)) {

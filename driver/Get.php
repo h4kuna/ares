@@ -4,15 +4,12 @@ namespace h4kuna\Ares;
 
 use Nette\Object;
 
-require_once 'IRequest.php';
-require_once 'Data.php';
-
 /**
  * Description of Get
  *
  * @author milan
  */
-class Get extends Object implements IRequest {
+class Get extends Object {
 
     const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=';
 
@@ -55,12 +52,20 @@ class Get extends Object implements IRequest {
             $street = $el->AA->NCO . ' ' . $street;
         }
 
-        return $data->setIN($el->ICO)
-                        ->setTIN($el->DIC)
-                        ->setCity($el->AA->N)
-                        ->setCompany($el->OF)
-                        ->setStreet($street)
-                        ->setZip($el->AA->PSC);
+        $data->setIN($el->ICO)
+                ->setTIN($el->DIC)
+                ->setCity($el->AA->N)
+                ->setCompany($el->OF)
+                ->setStreet($street)
+                ->setZip($el->AA->PSC);
+
+        if (isset($el->ROR)) {
+            $data->setActive($el->ROR->SOR->SSU)
+                    ->setFileNumber($el->ROR->SZ->OV)
+                    ->setCourt($el->ROR->SZ->SD->T);
+        }
+
+        return $data;
     }
 
     private function setIN($inn) {
