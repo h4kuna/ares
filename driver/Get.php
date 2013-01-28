@@ -4,12 +4,14 @@ namespace h4kuna\Ares;
 
 use Nette\Object;
 
+require_once 'IRequest.php';
+
 /**
  * Description of Get
  *
- * @author milan
+ * @author Milan Matějček
  */
-class Get extends Object {
+class Get extends Object implements IRequest {
 
     const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=';
 

@@ -5,7 +5,7 @@ namespace h4kuna\Ares;
 /**
  * Description of IRequest
  *
- * @author milan
+ * @author Milan Matějček
  */
 interface IRequest {
 

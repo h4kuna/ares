@@ -4,27 +4,26 @@ namespace h4kuna;
 
 use Nette\Object;
 
+require_once 'driver/Get.php';
+
 /**
  * @author Milan Matějček <milan.matejcek@gmail.com>
  *
  * @example
   $ares = new Ares;
-  var_dump($ares->send('87744473'));
+  var_dump($ares->loadData('87744473'));
  */
 class Ares extends Object {
 
-    /** @var Ares\Get */
+    /** @var Ares\IRequest */
     private $class;
 
-    public function __construct($class = 'Get') {
-        $file = __DIR__ . '/driver/' . $class . '.php';
-        if (!file_exists($file)) {
-            throw new AresException('Service is not supported ' . $class . ' in file ' . $file);
+    public function __construct(Ares\IRequest $obj = NULL) {
+        if ($obj === NULL) {
+            $obj = new Ares\Get();
         }
-        require_once $file;
 
-        $class = __NAMESPACE__ . '\Ares\\' . $class;
-        $this->class = new $class;
+        $this->class = $obj;
     }
 
     public function loadData($inn) {
