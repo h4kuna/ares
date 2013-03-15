@@ -62,11 +62,17 @@ class Data extends Object implements \ArrayAccess {
         return $this;
     }
 
-    public function toArray($map = array()) {
+
+    /**
+     * copy data
+     * @param array $map
+     * @return array
+     */
+    public function toArray(array $map = array()) {
+        $this->setFileNumberAndCourt();
         if (!$map) {
             return $this->data;
         }
-        $this->setFileNumberAndCourt();
         $out = array();
         foreach ($map as $k => $v) {
             if ($this->offsetExists($k)) {
