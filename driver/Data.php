@@ -9,7 +9,7 @@ use Nette\Object;
  *
  * @author milan
  */
-class Data extends Object {
+class Data extends Object implements \ArrayAccess {
 
     private $data = array();
 
@@ -69,7 +69,7 @@ class Data extends Object {
         $this->setFileNumberAndCourt();
         $out = array();
         foreach ($map as $k => $v) {
-            if (array_key_exists($k, $this->data)) {
+            if ($this->offsetExists($k)) {
                 if (!$v) {
                     $v = $k;
                 }
@@ -81,6 +81,26 @@ class Data extends Object {
 
     public function __toString() {
         return json_encode($this->data);
+    }
+
+// ---------------- ArrayAccess
+    public function offsetExists($offset) {
+        return array_key_exists($offset, $this->data);
+    }
+
+    public function offsetGet($offset) {
+        if ($this->offsetExists($offset)) {
+            return $this->data[$offset];
+        }
+        return NULL;
+    }
+
+    public function offsetSet($offset, $value) {
+        return $this->data[$offset] = $value;
+    }
+
+    public function offsetUnset($offset) {
+        unset($this->data[$offset]);
     }
 
 }
