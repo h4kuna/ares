@@ -62,6 +62,9 @@ class Data extends Object implements \ArrayAccess {
         return $this;
     }
 
+    public function clean() {
+        $this->data = array();
+    }
 
     /**
      * copy data

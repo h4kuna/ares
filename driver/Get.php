@@ -21,13 +21,11 @@ class Get extends Object implements IRequest {
     protected $IN;
 
     public function __construct(Data $data = NULL) {
-        if (!$data) {
-            $this->data = new Data;
-        }
+        $this->data = $data ? $data : new Data;
     }
 
     public function loadData($inn = NULL) {
-        if ($this->data || $inn === NULL) {
+        if ($inn === NULL) {
             return $this->data;
         }
 
@@ -84,7 +82,8 @@ class Get extends Object implements IRequest {
     }
 
     public function clean() {
-        $this->data = NULL;
+        $this->data->clean();
+        return $this;
     }
 
 }
