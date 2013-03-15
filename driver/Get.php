@@ -5,6 +5,7 @@ namespace h4kuna\Ares;
 use Nette\Object;
 
 require_once 'IRequest.php';
+require_once 'Data.php';
 
 /**
  * Description of Get
@@ -18,6 +19,12 @@ class Get extends Object implements IRequest {
     /** @var Data */
     protected $data;
     protected $IN;
+
+    public function __construct(Data $data = NULL) {
+        if (!$data) {
+            $this->data = new Data;
+        }
+    }
 
     public function loadData($inn = NULL) {
         if ($this->data || $inn === NULL) {
@@ -43,10 +50,8 @@ class Get extends Object implements IRequest {
         $ns = $xml->getDocNamespaces();
         $el = $xml->children($ns['are'])->children($ns['D'])->VBAS;
 
-        $data = new Data();
-
         if (!isset($el->ICO)) {
-            return $data;
+            return $this->data;
         }
 
         $street = strval($el->AD->UC);
@@ -54,7 +59,7 @@ class Get extends Object implements IRequest {
             $street = $el->AA->NCO . ' ' . $street;
         }
 
-        $data->setIN($el->ICO)
+        $this->data->setIN($el->ICO)
                 ->setTIN($el->DIC)
                 ->setCity($el->AA->N)
                 ->setCompany($el->OF)
@@ -62,12 +67,12 @@ class Get extends Object implements IRequest {
                 ->setZip($el->AA->PSC);
 
         if (isset($el->ROR)) {
-            $data->setActive($el->ROR->SOR->SSU)
+            $this->data->setActive($el->ROR->SOR->SSU)
                     ->setFileNumber($el->ROR->SZ->OV)
                     ->setCourt($el->ROR->SZ->SD->T);
         }
 
-        return $data;
+        return $this->data;
     }
 
     private function setIN($inn) {
