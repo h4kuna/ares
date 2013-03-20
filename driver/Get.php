@@ -57,6 +57,10 @@ class Get extends Object implements IRequest {
             $street = $el->AA->NCO . ' ' . $street;
         }
 
+        if (isset($el->AA->CO)) {
+            $street .= '/' . $el->AA->CO;
+        }
+
         $this->data->setIN($el->ICO)
                 ->setTIN($el->DIC)
                 ->setCity($el->AA->N)
