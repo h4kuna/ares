@@ -9,7 +9,7 @@ use Nette\Object;
  *
  * @author milan
  */
-class Data extends Object implements \ArrayAccess {
+class Data extends Object implements \ArrayAccess, \Iterator {
 
     private $data = array();
 
@@ -110,6 +110,27 @@ class Data extends Object implements \ArrayAccess {
 
     public function offsetUnset($offset) {
         unset($this->data[$offset]);
+    }
+
+// ---------------- Iterator
+    public function current() {
+        return current($this->data);
+    }
+
+    public function key() {
+        return key($this->data);
+    }
+
+    public function next() {
+        return next($this->data);
+    }
+
+    public function rewind() {
+        reset($this->data);
+    }
+
+    public function valid() {
+        return array_key_exists($this->key(), $this->data);
     }
 
 }
