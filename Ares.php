@@ -4,8 +4,6 @@ namespace h4kuna;
 
 use Nette\Object;
 
-require_once 'driver/Get.php';
-
 /**
  * @author Milan Matějček <milan.matejcek@gmail.com>
  *
