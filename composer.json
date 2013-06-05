@@ -5,16 +5,19 @@
     "homepage": "https://github.com/h4kuna/ares",
     "license": "MIT",
     "authors": [
-    {
-        "name": "Milan Matějček",
-        "email": "milan.matejcek@gmail.com",
-        "role": "Developer"
-    }
+        {
+            "name": "Milan Matějček",
+            "email": "milan.matejcek@gmail.com",
+            "role": "Developer"
+        }
     ],
     "require": {
-        "nette/nette" : ">=2.0.0",
+        "nette/nette": ">=2.0.0",
         "h4kuna/object-wrapper": "1.0.*",
         "h4kuna/data-type": "1.0.*"
+    },
+    "require-dev": {
+        "nette/nette": "@dev"
     },
     "autoload": {
         "classmap": ["./"]
