@@ -3,10 +3,6 @@ Ares
 
 Download information about customer via his IN.
 
-For dependency look at to composer.json
-- h4kuna/curl
-- h4kuna/data-type
-
 Example
 -------
 ```php

@@ -24,11 +24,22 @@ class Ares extends Object {
         $this->class = $obj;
     }
 
+    /**
+     * Load fresh data
+     *
+     * @param int|string $inn
+     * @return Ares\Data
+     */
     public function loadData($inn) {
         $this->class->clean();
         return $this->class->loadData($inn);
     }
 
+    /**
+     * Get temporary data
+     *
+     * @return Ares\Data
+     */
     public function getData() {
         return $this->class->loadData();
     }

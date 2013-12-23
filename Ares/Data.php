@@ -5,13 +5,51 @@ namespace h4kuna\Ares;
 use Nette\Object;
 
 /**
- * Description of Data
  *
- * @author milan
+ * @author Milan Matějček
  */
-class Data extends Object implements \ArrayAccess, \Iterator {
+class Data extends Object implements \ArrayAccess, \Iterator, \Countable {
 
     private $data = array();
+
+    /**
+     *
+     * @param string $s
+     * @return Data
+     */
+    public function setActive($s) {
+        $this->data['active'] = strval($s) == 'Aktivní';
+        return $this;
+    }
+
+    public function setCity($s) {
+        return $this->set('city', $s);
+    }
+
+    public function setCompany($s) {
+        return $this->set('company', $s);
+    }
+
+    public function setCourt($s) {
+        return $this->set('court', $s);
+    }
+
+    public function setCreated($s) {
+        return $this->set('created', new \DateTime($s));
+    }
+
+    public function setFileNumber($s) {
+        return $this->set('file_number', $s);
+    }
+
+    public function setPerson($s) {
+        $this->data['person'] = strval($s) <= '108';
+        return $this;
+    }
+
+    public function setStreet($s) {
+        return $this->set('street', $s);
+    }
 
     public function setIN($s) {
         return $this->set('in', $s);
@@ -22,33 +60,8 @@ class Data extends Object implements \ArrayAccess, \Iterator {
         return $this->set('vat_pay', (bool) $this->data['tin']);
     }
 
-    public function setCompany($s) {
-        return $this->set('company', $s);
-    }
-
-    public function setStreet($s) {
-        return $this->set('street', $s);
-    }
-
-    public function setCity($s) {
-        return $this->set('city', $s);
-    }
-
     public function setZip($s) {
         return $this->set('zip', $s);
-    }
-
-    public function setActive($s) {
-        $this->data['active'] = strval($s) == 'Aktivní';
-        return $this;
-    }
-
-    public function setFileNumber($s) {
-        return $this->set('file_number', $s);
-    }
-
-    public function setCourt($s) {
-        return $this->set('court', $s);
     }
 
     private function setFileNumberAndCourt() {
@@ -58,16 +71,28 @@ class Data extends Object implements \ArrayAccess, \Iterator {
     }
 
     private function set($key, $val) {
+        if ($val instanceof \DateTime) {
+            $this->data[$key] = $val;
+        } else {
+            $this->data[$key] = strval($val);
+        }
         $this->data[$key] = strval($val);
         return $this;
     }
 
+    /**
+     * Prepare for another load from ares
+     *
+     * @return Data
+     */
     public function clean() {
         $this->data = array();
+        return $this;
     }
 
     /**
-     * copy data
+     * Copy data
+     *
      * @param array $map
      * @return array
      */
@@ -92,11 +117,27 @@ class Data extends Object implements \ArrayAccess, \Iterator {
         return json_encode($this->data);
     }
 
-// ---------------- ArrayAccess
+    /**
+     * ARRAY-ACCESS INTERFACE **************************************************
+     * *************************************************************************
+     */
+
+    /**
+     *
+     * @param string $offset
+     * @return bool
+     */
     public function offsetExists($offset) {
         return array_key_exists($offset, $this->data);
     }
 
+    /**
+     * Return value from array
+     *
+     * @param string $offset
+     * @return string
+     * @throws \h4kuna\AresException
+     */
     public function offsetGet($offset) {
         if ($this->offsetExists($offset)) {
             return $this->data[$offset];
@@ -104,34 +145,75 @@ class Data extends Object implements \ArrayAccess, \Iterator {
         throw new \h4kuna\AresException('Undefined offset: ' . $offset);
     }
 
+    /**
+     * @param string $offset
+     * @param string $value
+     * @return string
+     */
     public function offsetSet($offset, $value) {
         return $this->data[$offset] = $value;
     }
 
+    /**
+     * Remove value from array
+     *
+     * @param string $offset
+     * @return void
+     */
     public function offsetUnset($offset) {
         unset($this->data[$offset]);
     }
 
-// ---------------- Iterator
+    /**
+     * ITERATOR INTERFACE ******************************************************
+     * *************************************************************************
+     */
+
+    /**
+     * Actual value
+     *
+     * @return void
+     */
     public function current() {
         return current($this->data);
     }
 
+    /**
+     * Actual key of value
+     *
+     * @return string
+     */
     public function key() {
         return key($this->data);
     }
 
+    /**
+     * Next value
+     *
+     * @return string
+     */
     public function next() {
         return next($this->data);
     }
 
+    /** @retrun void */
     public function rewind() {
         reset($this->data);
     }
 
+    /** @return bool */
     public function valid() {
         return array_key_exists($this->key(), $this->data);
     }
 
-}
+    /**
+     * COUNTABLE INTERFACE *****************************************************
+     * *************************************************************************
+     */
 
+    /** @return int */
+    public function count() {
+        return count($this->data);
+    }
+
+}

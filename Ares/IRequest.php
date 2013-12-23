@@ -10,12 +10,16 @@ namespace h4kuna\Ares;
 interface IRequest {
 
     /**
+     * Load data from ares
+     *
      * @param string $in Identification Number
      * @return Data
      */
     public function loadData($in = NULL);
 
     /**
+     * Clean temp
+     *
      * clean last request
      * @void
      */

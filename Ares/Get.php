@@ -43,32 +43,34 @@ class Get extends Object implements IRequest {
         }
 
         $ns = $xml->getDocNamespaces();
-        $el = $xml->children($ns['are'])->children($ns['D'])->VBAS;
+        $xmlEl = $xml->children($ns['are'])->children($ns['D'])->VBAS;
 
-        if (!isset($el->ICO)) {
+        if (!isset($xmlEl->ICO)) {
             return $this->data;
         }
 
-        $street = strval($el->AD->UC);
+        $street = strval($xmlEl->AD->UC);
         if (is_numeric($street)) {
-            $street = $el->AA->NCO . ' ' . $street;
+            $street = $xmlEl->AA->NCO . ' ' . $street;
         }
 
-        if (isset($el->AA->CO)) {
-            $street .= '/' . $el->AA->CO;
+        if (isset($xmlEl->AA->CO)) {
+            $street .= '/' . $xmlEl->AA->CO;
         }
 
-        $this->data->setIN($el->ICO)
-                ->setTIN($el->DIC)
-                ->setCity($el->AA->N)
-                ->setCompany($el->OF)
+        $this->data->setIN($xmlEl->ICO)
+                ->setTIN($xmlEl->DIC)
+                ->setCity($xmlEl->AA->N)
+                ->setCompany($xmlEl->OF)
                 ->setStreet($street)
-                ->setZip($el->AA->PSC);
+                ->setZip($xmlEl->AA->PSC)
+                ->setPerson($xmlEl->PF->KPF)
+                ->setCreated($xmlEl->DV);
 
-        if (isset($el->ROR)) {
-            $this->data->setActive($el->ROR->SOR->SSU)
-                    ->setFileNumber($el->ROR->SZ->OV)
-                    ->setCourt($el->ROR->SZ->SD->T);
+        if (isset($xmlEl->ROR)) {
+            $this->data->setActive($xmlEl->ROR->SOR->SSU)
+                    ->setFileNumber($xmlEl->ROR->SZ->OV)
+                    ->setCourt($xmlEl->ROR->SZ->SD->T);
         }
 
         return $this->data;
