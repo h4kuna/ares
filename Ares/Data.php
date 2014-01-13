@@ -3,6 +3,7 @@
 namespace h4kuna\Ares;
 
 use Nette\Object;
+use DateTime;
 
 /**
  *
@@ -71,12 +72,11 @@ class Data extends Object implements \ArrayAccess, \Iterator, \Countable {
     }
 
     private function set($key, $val) {
-        if ($val instanceof \DateTime) {
-            $this->data[$key] = $val;
+        if ($val instanceof DateTime) {
+            $this->data[$key] = $val->format(DateTime::ISO8601);
         } else {
             $this->data[$key] = strval($val);
         }
-        $this->data[$key] = strval($val);
         return $this;
     }
 
