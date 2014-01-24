@@ -18,10 +18,12 @@ class Get extends Object implements IRequest {
 
     /** @var Data */
     protected $data;
-    protected $IN;
 
     public function __construct(Data $data = NULL) {
-        $this->data = $data ? $data : new Data;
+        if ($data === NULL) {
+            $data = new Data;
+        }
+        $this->data = $data;
     }
 
     public function loadData($inn = NULL) {
@@ -32,17 +34,20 @@ class Get extends Object implements IRequest {
         return $this->loadXML($inn);
     }
 
+    /**
+     * Load XML and fill Data object
+     *
+     * @param string $inn
+     * @return Data
+     * @throws AresException
+     */
     private function loadXML($inn) {
-        $this->setIN($inn);
-        $curl = new \h4kuna\CUrl(self::URL . $this->IN);
-        $xmlSource = $curl->exec();
-        if ($xmlSource) {
-            $xml = @simplexml_load_string($xmlSource);
-            if (!$xml) {
-                throw new \h4kuna\AresException('No response.', 404);
-            }
-        } else {
-            $curl->getErrors();
+        $this->clean();
+        $IN = new Int($inn);
+        $xmlSource = CUrl::download(self::URL . (string) $IN);
+        $xml = @simplexml_load_string($xmlSource);
+        if (!$xml) {
+            throw new AresException('No response.', 404);
         }
 
         $ns = $xml->getDocNamespaces();
