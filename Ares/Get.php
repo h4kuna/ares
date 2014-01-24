@@ -2,6 +2,9 @@
 
 namespace h4kuna\Ares;
 
+use h4kuna\AresException;
+use h4kuna\CUrl;
+use h4kuna\Int;
 use Nette\Object;
 
 /**
@@ -76,18 +79,14 @@ class Get extends Object implements IRequest {
         return $this->data;
     }
 
-    private function setIN($inn) {
-        $this->IN = new \h4kuna\Int($inn);
-        if (!preg_match('~^\d{6,9}$~', $this->IN->getValue())) {
-            throw new \h4kuna\AresException('IN must be a number');
-        }
-        return TRUE;
-    }
-
+    /**
+     * Clear data
+     *
+     * @return Get
+     */
     public function clean() {
         $this->data->clean();
         return $this;
     }
 
 }
-
