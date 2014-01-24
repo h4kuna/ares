@@ -2,14 +2,18 @@
 
 namespace h4kuna\Ares;
 
-use Nette\Object;
+use ArrayAccess;
+use Countable;
 use DateTime;
+use h4kuna\AresException;
+use Iterator;
+use Nette\Object;
 
 /**
  *
  * @author Milan Matějček
  */
-class Data extends Object implements \ArrayAccess, \Iterator, \Countable {
+class Data extends Object implements ArrayAccess, Iterator, Countable {
 
     private $data = array();
 
@@ -36,7 +40,7 @@ class Data extends Object implements \ArrayAccess, \Iterator, \Countable {
     }
 
     public function setCreated($s) {
-        return $this->set('created', new \DateTime($s));
+        return $this->set('created', new DateTime($s));
     }
 
     public function setFileNumber($s) {
@@ -136,13 +140,13 @@ class Data extends Object implements \ArrayAccess, \Iterator, \Countable {
      *
      * @param string $offset
      * @return string
-     * @throws \h4kuna\AresException
+     * @throws AresException
      */
     public function offsetGet($offset) {
         if ($this->offsetExists($offset)) {
             return $this->data[$offset];
         }
-        throw new \h4kuna\AresException('Undefined offset: ' . $offset);
+        throw new AresException('Undefined offset: ' . $offset);
     }
 
     /**
