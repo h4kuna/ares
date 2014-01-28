@@ -16,7 +16,7 @@
         "h4kuna/data-type": "1.0.*"
     },
     "require-dev": {
-        "nette/nette": "@dev"
+        "nette/tester": "@dev"
     },
     "autoload": {
         "classmap": ["./"]
