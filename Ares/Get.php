@@ -3,7 +3,7 @@
 namespace h4kuna\Ares;
 
 use h4kuna\AresException;
-use h4kuna\CUrl;
+use h4kuna\CUrl\CurlBuilder;
 use h4kuna\Int;
 use Nette\Object;
 
@@ -44,7 +44,7 @@ class Get extends Object implements IRequest {
     private function loadXML($inn) {
         $this->clean();
         $IN = new Int($inn);
-        $xmlSource = CUrl::download(self::URL . (string) $IN);
+        $xmlSource = CurlBuilder::download(self::URL . (string) $IN);
         $xml = @simplexml_load_string($xmlSource);
         if (!$xml) {
             throw new AresException('No response.', 404);
