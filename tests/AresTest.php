@@ -15,11 +15,13 @@ class AresTest extends PHPUnit_Framework_TestCase {
     public function testResponse() {
         $in = '87744473';
         $ares = new Ares;
-        $file = __DIR__ . '/temp/' . $in;
-
+        $dir = __DIR__ . '/temp';
+        $file = $dir . '/' . $in;
         if (!file_exists($file)) {
             $response = (string) $ares->loadData($in);
-            file_put_contents($file, $response);
+            if (@is_writable($dir)) {
+                file_put_contents($file, $response);
+            }
         } else {
             $response = file_get_contents($file);
         }

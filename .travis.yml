@@ -5,11 +5,13 @@ php:
   - 5.5
 
 before_script:
-  - mkdir --mode=0777 --parents tests/temp
+  - mkdir --mode=777 --parents tests/temp
   - composer self-update
   - composer install --no-interaction --prefer-source --dev
 
-script: VERBOSE=true ./tests/run-tests.sh -s tests/
+script:
+  - VERBOSE=true
+  - ./tests/run-tests.sh -s tests/
 
 after_script:
-  - rm -R tests/temp
+  - rm -R tests/temp/
