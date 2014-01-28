@@ -26,7 +26,7 @@ class AresTest extends PHPUnit_Framework_TestCase {
             $response = file_get_contents($file);
         }
 
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/' . $in . '.json', $response);
+        $this->assertJsonStringEqualsJsonString(file_get_contents(__DIR__ . '/' . $in . '.json'), $response);
     }
 
 }
