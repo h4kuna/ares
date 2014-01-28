@@ -6,7 +6,6 @@ php:
 
 before_script:
   - mkdir --mode=777 --parents tests/temp
-  - php -r "date_default_timezone_set('Europe/Prague');"
   - composer self-update
   - composer install --no-interaction --prefer-source --dev
 
