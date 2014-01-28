@@ -12,8 +12,21 @@ use PHPUnit_Framework_TestCase;
  */
 class AresTest extends PHPUnit_Framework_TestCase {
 
-    public function testResponse() {
+    private function getTemp() {
+        return;
+    }
+
+    public function testFreelancer() {
         $in = '87744473';
+        $this->assertJsonStringEqualsJsonString(file_get_contents(__DIR__ . '/' . $in . '.json'), $this->request($in));
+    }
+
+    public function testMenchart() {
+        $in = '27082440';
+        $this->assertJsonStringEqualsJsonString(file_get_contents(__DIR__ . '/' . $in . '.json'), $this->request($in));
+    }
+
+    private function request($in) {
         $ares = new Ares;
         $dir = __DIR__ . '/temp';
         $file = $dir . '/' . $in;
@@ -26,7 +39,7 @@ class AresTest extends PHPUnit_Framework_TestCase {
             $response = file_get_contents($file);
         }
 
-        $this->assertJsonStringEqualsJsonString(file_get_contents(__DIR__ . '/' . $in . '.json'), $response);
+        return $response;
     }
 
 }

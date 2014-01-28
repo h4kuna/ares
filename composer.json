@@ -15,9 +15,6 @@
         "h4kuna/object-wrapper": "1.0.*",
         "h4kuna/data-type": "1.0.*"
     },
-    "require-dev": {
-        "nette/tester": "@dev"
-    },
     "autoload": {
         "classmap": ["./"]
     }
