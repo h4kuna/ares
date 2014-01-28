@@ -5,6 +5,7 @@ namespace h4kuna\Ares;
 use ArrayAccess;
 use Countable;
 use DateTime;
+use DateTimeZone;
 use h4kuna\AresException;
 use Iterator;
 use Nette\Object;
@@ -40,7 +41,7 @@ class Data extends Object implements ArrayAccess, Iterator, Countable {
     }
 
     public function setCreated($s) {
-        return $this->set('created', new DateTime($s));
+        return $this->set('created', new DateTime($s, new DateTimeZone('Europe/Prague')));
     }
 
     public function setFileNumber($s) {
@@ -70,7 +71,7 @@ class Data extends Object implements ArrayAccess, Iterator, Countable {
     }
 
     private function setFileNumberAndCourt() {
-        if (array_key_exists('file_number', $this->data) && array_key_exists('court', $this->data)) {
+        if (!isset($this->data['court_all']) && array_key_exists('file_number', $this->data) && array_key_exists('court', $this->data)) {
             $this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
         }
     }
@@ -118,7 +119,7 @@ class Data extends Object implements ArrayAccess, Iterator, Countable {
     }
 
     public function __toString() {
-        return json_encode($this->data);
+        return json_encode($this->toArray());
     }
 
     /**
