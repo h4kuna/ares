@@ -31,6 +31,8 @@ if [ -n "$phpIni" ]; then
         php -c "$phpIni" "$runnerScript" -j 20 "$@"
 elif [ -f $phpIniUnix ]; then
         php -c "$dir/php.ini-unix" "$runnerScript" -j 20 -c "$dir/php.ini-unix" "$@"
+else
+        phpunit ./tests
 fi
 error=$?
 
