@@ -13,9 +13,18 @@ use PHPUnit_Framework_TestCase;
 class AresTest extends PHPUnit_Framework_TestCase {
 
     public function testResponse() {
+        $in = '87744473';
         $ares = new Ares;
-        $this->assertEquals('1', '2');
-        # $this->assertJsonStringEqualsJsonFile(__DIR__ . '/87744473.json', (string) $ares->loadData('87744473'));
+        $file = __DIR__ . '/temp/' . $in;
+
+        if (!file_exists($file)) {
+            $response = (string) $ares->loadData($in);
+            file_put_contents($file, $response);
+        } else {
+            $response = file_get_contents($file);
+        }
+
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/' . $in . '.json', $response);
     }
 
 }
