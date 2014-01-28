@@ -14,7 +14,8 @@ class AresTest extends PHPUnit_Framework_TestCase {
 
     public function testResponse() {
         $ares = new Ares;
-        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/87744473.json', (string) $ares->loadData('87744473'));
+        $this->assertEquals('1', '2');
+        # $this->assertJsonStringEqualsJsonFile(__DIR__ . '/87744473.json', (string) $ares->loadData('87744473'));
     }
 
 }
