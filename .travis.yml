@@ -7,12 +7,7 @@ php:
   - 7.0
 
 before_script:
-  - mkdir --mode=777 --parents tests/temp
   - composer self-update
-  - composer install --no-interaction --prefer-source --dev
 
 script:
-  - phpunit tests/
-
-after_script:
-  - rm -R tests/temp/
+  - ./tests/run-tests.sh

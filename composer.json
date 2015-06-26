@@ -1,21 +1,27 @@
 {
-    "name": "h4kuna/ares",
-    "type": "library",
-    "description": "Download information about customer via his IN.",
-    "homepage": "https://github.com/h4kuna/ares",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Milan Matějček",
-            "email": "milan.matejcek@gmail.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "h4kuna/object-wrapper": "~1.0.7",
-        "h4kuna/data-type": "1.0.*"
-    },
-    "autoload": {
-        "classmap": ["./"]
-    }
+	"name": "h4kuna/ares",
+	"type": "library",
+	"description": "Download information about customer via his IN.",
+	"homepage": "https://github.com/h4kuna/ares",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Milan Matějček",
+			"email": "milan.matejcek@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"h4kuna/object-wrapper": "~1.0.9"
+	},
+	"autoload": {
+		"psr-4": {
+			"h4kuna\\Ares\\": "src/"
+		},
+		"files": ["src/exceptions.php"]
+	},
+	"require-dev": {
+		"tracy/tracy": "~2.0",
+		"nette/tester": "~1.0"
+	}
 }
