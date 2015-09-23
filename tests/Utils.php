@@ -5,7 +5,7 @@ namespace Tests;
 class Utils
 {
 
-	private function __constructor() {}
+	private function __construct() {}
 
 	public static function getDataDir()
 	{
