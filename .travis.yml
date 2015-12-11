@@ -10,4 +10,4 @@ before_script:
   - composer self-update
 
 script:
-  - ./tests/run-tests.sh
+  - ./tests/run-tests
