@@ -2,7 +2,7 @@
 
 namespace h4kuna\Ares;
 
-use h4kuna\CUrl,
+use GuzzleHttp,
 	Nette;
 
 /**
@@ -42,8 +42,8 @@ class Get extends Nette\Object implements IRequest
 	private function loadXML($inn)
 	{
 		$this->clean();
-		$IN = intval($inn);
-		$xmlSource = CUrl\CurlBuilder::download(self::URL . (string) $IN);
+		$client = new GuzzleHttp\Client();
+		$xmlSource = $client->request('GET', self::URL . (string) $inn)->getBody();
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
 			throw new InNotFoundExceptions;
@@ -66,18 +66,18 @@ class Get extends Nette\Object implements IRequest
 		}
 
 		$this->data->setIN($xmlEl->ICO)
-				->setTIN($xmlEl->DIC)
-				->setCity($xmlEl->AA->N)
-				->setCompany($xmlEl->OF)
-				->setStreet($street)
-				->setZip($xmlEl->AA->PSC)
-				->setPerson($xmlEl->PF->KPF)
-				->setCreated($xmlEl->DV);
+			->setTIN($xmlEl->DIC)
+			->setCity($xmlEl->AA->N)
+			->setCompany($xmlEl->OF)
+			->setStreet($street)
+			->setZip($xmlEl->AA->PSC)
+			->setPerson($xmlEl->PF->KPF)
+			->setCreated($xmlEl->DV);
 
 		if (isset($xmlEl->ROR)) {
 			$this->data->setActive($xmlEl->ROR->SOR->SSU)
-					->setFileNumber($xmlEl->ROR->SZ->OV)
-					->setCourt($xmlEl->ROR->SZ->SD->T);
+				->setFileNumber($xmlEl->ROR->SZ->OV)
+				->setCourt($xmlEl->ROR->SZ->SD->T);
 		}
 
 		return $this->data;
