@@ -12,7 +12,8 @@
 		}
 	],
 	"require": {
-		"h4kuna/object-wrapper": "~1.0.9"
+		"guzzlehttp/guzzle": "~6.1",
+		"nette/utils": "~2.3"
 	},
 	"autoload": {
 		"psr-4": {
