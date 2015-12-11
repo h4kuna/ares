@@ -15,7 +15,7 @@ use ArrayAccess,
 class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 {
 
-	private $data = array();
+	private $data = [];
 
 	/**
 	 * @param string $s
