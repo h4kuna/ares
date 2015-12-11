@@ -39,5 +39,4 @@ class AresTest extends \Tester\TestCase
 
 }
 
-$test = new AresTest;
-$test->run();
+(new AresTest)->run();
