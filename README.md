@@ -3,6 +3,7 @@ Ares
 
 [![Build Status](https://travis-ci.org/h4kuna/ares.png?branch=master)](https://travis-ci.org/h4kuna/ares)
 
+Is required guzzle/guzzle 6.1+ and php 5.5+. If you have php < 5.5 use older version [v1.0.6] it work but does not use guzzle.
 
 Installation to project
 -----------------------
