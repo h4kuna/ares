@@ -108,7 +108,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Copy data
-	 *
 	 * @param array $map
 	 * @return array
 	 */
@@ -152,7 +151,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Return value from array
-	 *
 	 * @param string $offset
 	 * @return string
 	 * @throws DataOffsetDoesNotExists
@@ -177,7 +175,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Remove value from array
-	 *
 	 * @param string $offset
 	 * @return void
 	 */
@@ -193,7 +190,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Actual value
-	 *
 	 * @return void
 	 */
 	public function current()
@@ -203,7 +199,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Actual key of value
-	 *
 	 * @return string
 	 */
 	public function key()
@@ -213,7 +208,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	/**
 	 * Next value
-	 *
 	 * @return string
 	 */
 	public function next()
