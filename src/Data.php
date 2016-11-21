@@ -102,7 +102,7 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 	 */
 	public function clean()
 	{
-		$this->data = array();
+		$this->data = [];
 		return $this;
 	}
 
@@ -111,13 +111,13 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 	 * @param array $map
 	 * @return array
 	 */
-	public function toArray(array $map = array())
+	public function toArray(array $map = [])
 	{
 		$this->setFileNumberAndCourt();
 		if (!$map) {
 			return $this->data;
 		}
-		$out = array();
+		$out = [];
 		foreach ($map as $k => $v) {
 			if ($this->offsetExists($k)) {
 				if (!$v) {
