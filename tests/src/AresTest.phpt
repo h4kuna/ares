@@ -2,8 +2,8 @@
 
 namespace h4kuna\Ares;
 
-use Tester\Assert,
-	Tests;
+use Salamium\Testinium,
+	Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -26,7 +26,7 @@ class AresTest extends \Tester\TestCase
 		$in = '87744473';
 		/* @var $data Data */
 		$data = (string) $this->ares->loadData($in);
-		Assert::same(Tests\Utils::getContent($in), $data);
+		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
 	public function testMenchart()
@@ -34,7 +34,7 @@ class AresTest extends \Tester\TestCase
 		$in = '27082440';
 		/* @var $data Data */
 		$data = (string) $this->ares->loadData($in);
-		Assert::same(Tests\Utils::getContent($in), $data);
+		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
 }

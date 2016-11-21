@@ -22,7 +22,6 @@
 		"files": ["src/exceptions.php"]
 	},
 	"require-dev": {
-		"tracy/tracy": "~2.0",
-		"nette/tester": "~1.0"
+		"salamium/testinium": "dev-master"
 	}
 }
