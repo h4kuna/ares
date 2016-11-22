@@ -1,7 +1,7 @@
 {
 	"name": "h4kuna/ares",
 	"type": "library",
-	"description": "Download information about customer via his IN.",
+	"description": "Provides information about subjects by their identification number from the ARES database (in Czech Republic).",
 	"homepage": "https://github.com/h4kuna/ares",
 	"license": "MIT",
 	"authors": [
