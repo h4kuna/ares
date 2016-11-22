@@ -39,8 +39,17 @@ class AresTest extends \Tester\TestCase
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
+	public function testMenchartInActive()
+	{
+		$in = '25596641';
+		/* @var $data Data */
+		$data = (string) $this->ares->loadData($in);
+		// Testinium\File::save($in . '.json', (string) $data);
+		Assert::same(Testinium\File::load($in . '.json'), $data);
+	}
+
 	/**
-	 * @throws h4kuna\Ares\InNotFoundExceptions
+	 * @throws h4kuna\Ares\IdentificationNumberNotFoundException
 	 */
 	public function testNoIn()
 	{

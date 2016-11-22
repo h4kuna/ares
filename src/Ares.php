@@ -46,8 +46,9 @@ class Ares
 
 	/**
 	 * Load XML and fill Data object
-	 * @param string $inn
-	 * @throws InNotFoundExceptions
+	 * @param string $in
+	 * @param bool $activeOnly
+	 * @throws IdentificationNumberNotFoundException
 	 */
 	private function loadXML($inn)
 	{
@@ -55,14 +56,14 @@ class Ares
 		$xmlSource = $client->request('GET', self::URL . (string) $inn)->getBody();
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
-			throw new InNotFoundExceptions;
+			throw new IdentificationNumberNotFoundException($in);
 		}
 
 		$ns = $xml->getDocNamespaces();
 		$xmlEl = $xml->children($ns['are'])->children($ns['D'])->VBAS;
 
 		if (!isset($xmlEl->ICO)) {
-			throw new InNotFoundExceptions;
+			throw new IdentificationNumberNotFoundException($in);
 		}
 
 		$this->processXml($xmlEl, $this->dataProvider->prepareData());
