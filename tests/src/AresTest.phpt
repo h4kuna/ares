@@ -26,6 +26,7 @@ class AresTest extends \Tester\TestCase
 		$in = '87744473';
 		/* @var $data Data */
 		$data = (string) $this->ares->loadData($in);
+		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
@@ -34,7 +35,16 @@ class AresTest extends \Tester\TestCase
 		$in = '27082440';
 		/* @var $data Data */
 		$data = (string) $this->ares->loadData($in);
+		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
+	}
+
+	/**
+	 * @throws h4kuna\Ares\InNotFoundExceptions
+	 */
+	public function testNoIn()
+	{
+		$this->ares->loadData('123');
 	}
 
 }

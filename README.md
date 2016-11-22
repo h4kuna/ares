@@ -6,6 +6,8 @@ Ares
 [![Downloads this Month](https://img.shields.io/packagist/dm/h4kuna/ares.svg)](https://packagist.org/packages/h4kuna/ares)
 [![Latest stable](https://img.shields.io/packagist/v/h4kuna/ares.svg)](https://packagist.org/packages/h4kuna/ares)
 
+More information in [changelog](changelog.md).
+
 Is required guzzle/guzzle 6.1+ and php 5.5+. If you have php < 5.5 use older version [v1.0.6] it work but does not use guzzle.
 
 Installation to project

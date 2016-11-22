@@ -2,81 +2,75 @@
 
 namespace h4kuna\Ares;
 
-use ArrayAccess,
-	Countable,
-	DateTime,
-	DateTimeZone,
-	Iterator,
-	Nette;
-
 /**
  * @author Milan Matějček
  */
-class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
+class Data implements IData, \ArrayAccess, \Iterator, \Countable
 {
 
 	private $data = [];
 
 	/**
-	 * @param string $s
-	 * @return Data
+	 * @param bool $isActive
 	 */
-	public function setActive($s)
+	public function setActive($isActive)
 	{
-		$this->data['active'] = strval($s) == 'Aktivní';
-		return $this;
+		$this->data['active'] = $isActive;
 	}
 
-	public function setCity($s)
+	public function setCity($city)
 	{
-		return $this->set('city', $s);
+		$this->data['city'] = $city;
 	}
 
-	public function setCompany($s)
+	public function setCompany($company)
 	{
-		return $this->set('company', $s);
+		$this->data['company'] = $company;
 	}
 
-	public function setCourt($s)
+	public function setCourt($court)
 	{
-		return $this->set('court', $s);
+		$this->data['court'] = $court;
 	}
 
-	public function setCreated($s)
+	public function setCreated(\DateTime $date)
 	{
-		return $this->set('created', new DateTime($s, new DateTimeZone('Europe/Prague')));
+		$this->data['created'] = $date;
 	}
 
-	public function setFileNumber($s)
+	public function setFileNumber($fileNumber)
 	{
-		return $this->set('file_number', $s);
+		$this->data['file_number'] = $fileNumber;
 	}
 
-	public function setPerson($s)
+	public function setPerson($isPerson)
 	{
-		$this->data['person'] = strval($s) <= '108';
-		return $this;
+		$this->data['person'] = $isPerson;
 	}
 
-	public function setStreet($s)
+	public function setStreet($street)
 	{
-		return $this->set('street', $s);
+		$this->data['street'] = $street;
 	}
 
-	public function setIN($s)
+	public function setIN($in)
 	{
-		return $this->set('in', $s);
+		$this->data['in'] = $in;
 	}
 
-	public function setTIN($s)
+	public function setTIN($tin)
 	{
-		$this->set('tin', $s);
-		return $this->set('vat_pay', (bool) $this->data['tin']);
+		$this->data['tin'] = $tin;
 	}
 
-	public function setZip($s)
+	public function setVatpay($vatPay)
 	{
-		return $this->set('zip', $s);
+		$this->data['vat_pay'] = $vatPay;
+	}
+
+	public function setZip($zip)
+	{
+		$this->data['zip'] = $zip;
 	}
 
 	private function setFileNumberAndCourt()
@@ -84,26 +78,6 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 		if (!isset($this->data['court_all']) && array_key_exists('file_number', $this->data) && array_key_exists('court', $this->data)) {
 			$this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
 		}
-	}
-
-	private function set($key, $val)
-	{
-		if ($val instanceof DateTime) {
-			$this->data[$key] = $val->format(DateTime::ISO8601);
-		} else {
-			$this->data[$key] = strval($val);
-		}
-		return $this;
-	}
-
-	/**
-	 * Prepare for another load from ares
-	 * @return self
-	 */
-	public function clean()
-	{
-		$this->data = [];
-		return $this;
 	}
 
 	/**
@@ -131,7 +105,11 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 
 	public function __toString()
 	{
-		return json_encode($this->toArray());
+		$data = $this->toArray();
+		if ($data['created'] instanceof \DateTime) {
+			$data['created'] = $data['created']->format(\DateTime::ISO8601);
+		}
+		return json_encode($data);
 	}
 
 	/**
@@ -157,6 +135,9 @@ class Data extends Nette\Object implements ArrayAccess, Iterator, Countable
 	 */
 	public function offsetGet($offset)
 	{
+		if ($offset === 'court_all') {
+			$this->setFileNumberAndCourt();
+		}
 		if ($this->offsetExists($offset)) {
 			return $this->data[$offset];
 		}
