@@ -10,10 +10,13 @@ use GuzzleHttp;
 class Ares
 {
 
-	const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=';
+	const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 
 	/** @var DataProvider */
 	private $dataProvider;
+
+	/** @var bool */
+	private $activeMode;
 
 	public function __construct(DataProvider $dataProvider = NULL)
 	{
@@ -25,13 +28,17 @@ class Ares
 
 	/**
 	 * Load fresh data.
-	 * @param int|string $inn
-	 * @throws InNotFoundExceptions
+	 * @param int|string $in
 	 * @return IData
+	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData($inn)
+	public function loadData($in)
 	{
-		$this->loadXML($inn);
+		try {
+			$this->loadXML((string) $in, TRUE);
+		} catch (IdentificationNumberNotFoundException $e) {
+			$this->loadXML((string) $in, FALSE);
+		}
 		return $this->getData();
 	}
 
@@ -50,10 +57,10 @@ class Ares
 	 * @param bool $activeOnly
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML($inn)
+	private function loadXML($in, $activeOnly)
 	{
 		$client = new GuzzleHttp\Client();
-		$xmlSource = $client->request('GET', self::URL . (string) $inn)->getBody();
+		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody();
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
 			throw new IdentificationNumberNotFoundException($in);
@@ -85,6 +92,24 @@ class Ares
 				->setFileNumber($xml->ROR->SZ->OV)
 				->setCourt($xml->ROR->SZ->SD->T);
 		}
+		if (!$this->isActiveMode()) {
+			$dataProvider->getData()->setActive(FALSE);
+		}
+	}
+
+	protected function isActiveMode()
+	{
+		return $this->activeMode === TRUE;
+	}
+
+	private function createUrl($inn, $activeOnly)
+	{
+		$this->activeMode = (bool) $activeOnly;
+		$parameters = [
+			'ico' => $inn,
+			'aktivni' => $activeOnly ? 'true' : 'false'
+		];
+		return self::URL . '?' . http_build_query($parameters);
 	}
 
 	private function createDataProvider()
