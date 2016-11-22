@@ -105,7 +105,7 @@ class DataProvider
 	{
 		$tin = strval($s);
 		$this->data->setTIN($tin);
-		$this->data->setVatpay((bool) $tin);
+		$this->data->setVatpayer((bool) $tin);
 		return $this;
 	}
 

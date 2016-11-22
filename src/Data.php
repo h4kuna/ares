@@ -63,9 +63,9 @@ class Data implements IData, \ArrayAccess, \Iterator, \Countable
 		$this->data['tin'] = $tin;
 	}
 
-	public function setVatpay($vatPay)
+	public function setVatpayer($vatPay)
 	{
-		$this->data['vat_pay'] = $vatPay;
+		$this->data['vat_payer'] = $vatPay;
 	}
 
 	public function setZip($zip)

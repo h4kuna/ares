@@ -58,7 +58,7 @@ interface IData
 	/**
 	 * @var bool $isVatPay
 	 */
-	function setVatpay($isVatPay);
+	function setVatpayer($isVatPayer);
 
 	/**
 	 * @param string $zip
