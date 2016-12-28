@@ -26,3 +26,10 @@ Example
 $ares = new \h4kuna\Ares\Ares();
 $ares->loadData('87744473'); // return object \h4kuna\Ares\Data
 ```
+
+Example 2
+-------
+```php
+$ares = new \h4kuna\Ares\Ares();
+$ares->loadData('87744473', FALSE); // return object \h4kuna\Ares\Data or null, exception is disabled
+```

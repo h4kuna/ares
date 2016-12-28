@@ -29,15 +29,16 @@ class Ares
 	/**
 	 * Load fresh data.
 	 * @param int|string $in
+	 * @param boolean $exception
 	 * @return IData
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData($in)
+	public function loadData($in, $exception = TRUE)
 	{
 		try {
-			$this->loadXML((string) $in, TRUE);
+			$this->loadXML((string) $in, $exception, TRUE);
 		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML((string) $in, FALSE);
+			$this->loadXML((string) $in, $exception, FALSE);
 		}
 		return $this->getData();
 	}
@@ -57,7 +58,7 @@ class Ares
 	 * @param bool $activeOnly
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML($in, $activeOnly)
+	private function loadXML($in, $exception, $activeOnly)
 	{
 		$client = new GuzzleHttp\Client();
 		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody();
@@ -70,6 +71,9 @@ class Ares
 		$xmlEl = $xml->children($ns['are'])->children($ns['D'])->VBAS;
 
 		if (!isset($xmlEl->ICO)) {
+			if (!$exception) {
+				return NULL;
+			}
 			throw new IdentificationNumberNotFoundException($in);
 		}
 
