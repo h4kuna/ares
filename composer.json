@@ -22,6 +22,6 @@
 		"files": ["src/exceptions.php"]
 	},
 	"require-dev": {
-		"salamium/testinium": "dev-master"
+		"salamium/testinium": "dev-master#59934597afb1588768d2a847eb4b8a1f1be8e6b1"
 	}
 }

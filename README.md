@@ -8,7 +8,7 @@ Ares
 
 More information in [changelog](changelog.md).
 
-Is required guzzle/guzzle 6.1+ and php 5.5+. If you have php < 5.5 use older version [v1.0.6] it work but does not use guzzle.
+Is required guzzle/guzzle 6.1+ and php 5.5+. If you have php < 5.5 use older version [v1.0.7] it work but does not use guzzle.
 
 Installation to project
 -----------------------
@@ -23,6 +23,12 @@ Download information about customer via his IN.
 Example
 -------
 ```php
-$ares = new \h4kuna\Ares\Ares();
-$ares->loadData('87744473'); // return object \h4kuna\Ares\Data
+$ares = new h4kuna\Ares\Ares();
+try {
+    $response = $ares->loadData('87744473');
+	/* @var $response h4kuna\Ares\Data */
+	dump($response);
+} catch (h4kuna\Ares\IdentificationNumberNotFoundException $e) {
+	// log identification number, why is bad? Or make nothing.
+}
 ```
