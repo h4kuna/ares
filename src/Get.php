@@ -43,7 +43,7 @@ class Get extends Nette\Object implements IRequest
 	{
 		$this->clean();
 		$IN = intval($inn);
-		$xmlSource = CUrl\CurlBuilder::download(self::URL . (string) $IN);
+		$xmlSource = CUrl\CUrlBuilder::download(self::URL . (string) $IN);
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
 			throw new InNotFoundExceptions;
