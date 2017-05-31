@@ -48,6 +48,12 @@ class AresTest extends \Tester\TestCase
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
+	public function testToArray()
+	{
+		$data = $this->ares->loadData('87744473');
+		Assert::type('array', $data->toArray());
+	}
+
 	/**
 	 * @throws h4kuna\Ares\IdentificationNumberNotFoundException
 	 */

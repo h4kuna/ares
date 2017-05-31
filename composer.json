@@ -12,8 +12,8 @@
 		}
 	],
 	"require": {
-		"guzzlehttp/guzzle": "~6.1",
-		"nette/utils": "~2.3"
+		"guzzlehttp/guzzle": "^6.1",
+		"nette/utils": "^2.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -22,6 +22,6 @@
 		"files": ["src/exceptions.php"]
 	},
 	"require-dev": {
-		"salamium/testinium": "dev-master#59934597afb1588768d2a847eb4b8a1f1be8e6b1"
+		"salamium/testinium": "^0.1"
 	}
 }
