@@ -88,7 +88,7 @@ class Data implements IData, \ArrayAccess, \Iterator, \Countable
 	public function toArray(array $map = [])
 	{
 		$this->setFileNumberAndCourt();
-		if (!$map) {
+		if ($map === []) {
 			return $this->data;
 		}
 		$out = [];
