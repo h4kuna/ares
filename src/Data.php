@@ -8,7 +8,7 @@ namespace h4kuna\Ares;
 class Data implements IData, \ArrayAccess, \Iterator, \Countable
 {
 
-	private $data = [];
+	public $data = [];
 
 	/**
 	 * @param bool $isActive
