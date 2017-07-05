@@ -5,6 +5,7 @@ Ares
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/h4kuna/ares/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/h4kuna/ares/?branch=master)
 [![Downloads this Month](https://img.shields.io/packagist/dm/h4kuna/ares.svg)](https://packagist.org/packages/h4kuna/ares)
 [![Latest stable](https://img.shields.io/packagist/v/h4kuna/ares.svg)](https://packagist.org/packages/h4kuna/ares)
+[![Coverage Status](https://coveralls.io/repos/github/h4kuna/ares/badge.svg?branch=master)](https://coveralls.io/github/h4kuna/ares?branch=master)
 
 More information in [changelog](changelog.md).
 
