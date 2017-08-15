@@ -27,9 +27,9 @@ Example
 $ares = new h4kuna\Ares\Ares();
 try {
     $response = $ares->loadData('87744473');
-	/* @var $response h4kuna\Ares\Data */
-	dump($response);
+    /* @var $response h4kuna\Ares\Data */
+    dump($response);
 } catch (h4kuna\Ares\IdentificationNumberNotFoundException $e) {
-	// log identification number, why is bad? Or make nothing.
+    // log identification number, why is bad? Or make nothing.
 }
 ```
