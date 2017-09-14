@@ -13,45 +13,60 @@ require_once __DIR__ . '/../bootstrap.php';
 class AresTest extends \Tester\TestCase
 {
 
-	/** @var Ares */
-	private $ares;
-
-	protected function setUp()
-	{
-		$this->ares = new Ares;
-	}
-
 	public function testFreelancer()
 	{
+		$ares = new Ares;
 		$in = '87744473';
 		/* @var $data Data */
-		$data = (string) $this->ares->loadData($in);
+		$data = (string) $ares->loadData($in);
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
 	public function testMenchart()
 	{
+		$ares = new Ares;
 		$in = '27082440';
 		/* @var $data Data */
-		$data = (string) $this->ares->loadData($in);
+		$data = (string) $ares->loadData($in);
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
 	public function testMenchartInActive()
 	{
+		$ares = new Ares;
 		$in = '25596641';
 		/* @var $data Data */
-		$data = (string) $this->ares->loadData($in);
+		$data = json_encode($ares->loadData($in));
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
 	public function testToArray()
 	{
-		$data = $this->ares->loadData('87744473');
+		$ares = new Ares;
+		$data = $ares->loadData('87744473');
+		Assert::same('Milan Matějček', $data->company);
+
+		$names = [];
+		$propertyRead = \Nette\Reflection\AnnotationsParser::getAll(new \ReflectionClass($data))['property-read'];
+		foreach ($propertyRead as $value) {
+			if (!preg_match('~\$(?P<name>.*)~', $value, $find)) {
+				throw new \RuntimeException('Bad annotation property-read od Data class: ' . $value);
+			}
+			Assert::true(isset($data[$find['name']]));
+			$names[$find['name']] = TRUE;
+		}
+
+		Assert::same([], array_diff_key($data->getData(), $names));
+
 		Assert::type('array', $data->toArray());
+		Assert::same([
+			'c' => 'Milan Matějček',
+			'company' => TRUE,
+			'city' => 'Mladá Boleslav'
+		], $data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => NULL]));
 	}
 
 	/**
@@ -59,7 +74,7 @@ class AresTest extends \Tester\TestCase
 	 */
 	public function testNoIn()
 	{
-		$this->ares->loadData('123');
+		(new Ares)->loadData('123');
 	}
 
 }

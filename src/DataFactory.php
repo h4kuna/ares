@@ -5,9 +5,9 @@ namespace h4kuna\Ares;
 class DataFactory implements IDataFactory
 {
 
-	public function create()
+	public function create(array $data)
 	{
-		return new Data();
+		return new Data($data);
 	}
 
 }

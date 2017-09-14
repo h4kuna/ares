@@ -14,110 +14,135 @@ class DataProvider
 	/** @var IDataFactory */
 	private $dataFactory;
 
-	/** @var IData */
-	private $data;
+	/** @var array */
+	private $data = [];
 
 	public function __construct(IDataFactory $dataFactory)
 	{
 		$this->dataFactory = $dataFactory;
 	}
 
-	/** @return IData */
+	/** @return Data */
 	public function getData()
 	{
+		if (is_array($this->data)) {
+			$this->setFileNumberAndCourt();
+			$this->data = $this->dataFactory->create($this->data);
+		}
 		return $this->data;
 	}
 
 	public function prepareData()
 	{
-		$this->setData($this->dataFactory->create());
+		$this->data = [];
 		return $this;
 	}
 
 	/**
-	 * @param string $s
+	 * @param string|bool $active
 	 * @return self
 	 */
-	public function setActive($s)
+	public function setActive($active)
 	{
-		$this->data->setActive(strval($s) == 'Aktivní');
+		$this->data['active'] = is_bool($active) ? $active : (((string) $active) == 'Aktivní'); // ==
 		return $this;
 	}
 
-	public function setCity($s)
+	public function setCity($city)
 	{
-		$this->data->setCity(strval($s));
+		$this->data['city'] = self::toNull($city);
 		return $this;
 	}
 
-	public function setCompany($s)
+	public function setCompany($company)
 	{
-		$this->data->setCompany(strval($s));
+		$this->data['company'] = self::toNull($company);
 		return $this;
 	}
 
-	public function setCourt($s)
+	public function setCourt($court)
 	{
-		$this->data->setCourt(strval($s));
+		$this->data['court'] = self::toNull($court);
 		return $this;
 	}
 
-	public function setCreated($s)
+	public function setCreated($date)
 	{
-		$this->data->setCreated(new DateTime($s, new DateTimeZone('Europe/Prague')));
+		$this->data['created'] = new DateTime((string) $date, new DateTimeZone('Europe/Prague'));
 		return $this;
 	}
 
-	public function setFileNumber($s)
+	public function setFileNumber($fileNumber)
 	{
-		$this->data->setFileNumber(strval($s));
+		$this->data['file_number'] = self::toNull($fileNumber);
 		return $this;
 	}
 
-	public function setIN($s)
+	public function setIN($in)
 	{
-		$this->data->setIn(strval($s));
+		$this->data['in'] = self::toNull($in);
 		return $this;
 	}
 
-	public function setPerson($s)
+	public function setIsPerson($s)
 	{
-		$this->data->setPerson(strval($s) <= '108');
+		$this->data['is_person'] = ((string) $s) <= '108';
 		return $this;
 	}
 
-	public function setStreet($uc, $nco, $co)
+	private function setFileNumberAndCourt()
 	{
-		$street = strval($uc);
-		if (is_numeric($street)) {
-			$street = $nco . ' ' . $street;
+		$this->data['court_all'] = NULL;
+		if ($this->data['file_number'] && $this->data['court']) {
+			$this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
 		}
+	}
 
-		if ($co) {
-			$street .= '/' . $co;
-		}
+	public function setCityDistrict($district)
+	{
+		$this->data['city_district'] = self::toNull($district);
+		return $this;
+	}
 
-		$this->data->setStreet($street);
+	public function setCityPost($district)
+	{
+		$this->data['city_post'] = self::toNull($district);
+		return $this;
+	}
+
+	public function setStreet($street)
+	{
+		$this->data['street'] = self::toNull($street);
+		return $this;
+	}
+
+	public function setHouseNumber($cd, $co)
+	{
+		$this->data['house_number'] = self::toNull(trim($cd . '/' . $co, '/'));
 		return $this;
 	}
 
 	public function setTIN($s)
 	{
 		$tin = strval($s);
-		$this->data->setTIN($tin);
-		$this->data->setVatpayer((bool) $tin);
+		$this->data['tin'] = self::toNull($tin);
+		$this->data['vat_payer'] = (bool) $tin;
 		return $this;
 	}
 
-	public function setZip($s)
+	public function setZip($zip)
 	{
-		$this->data->setZip(strval($s));
+		$this->data['zip'] = self::toNull($zip);
 		return $this;
 	}
 
-	protected function setData(IData $data)
+	private static function toNull($v)
 	{
-		$this->data = $data;
+		$string = trim((string) $v);
+		if ($string === '') {
+			return NULL;
+		}
+		return $string;
 	}
 
 }

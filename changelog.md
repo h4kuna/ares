@@ -1,8 +1,20 @@
+v1.2.0
+======
+- interface IData was removed
+- change data keys:
+   - person -> is_person 
+   - add house_number
+   - add city_post
+   - add city_district
+- all data keys are visible every time (court, file_number)
+- class Data extends Messenger
+- class Data suggest property
+
 v1.1.3
 ======
 - method Ares::loadData throw IdentificationNumberNotFoundException if find nothing
 - rename InNotFoundExceptions -> IdentificationNumberNotFoundException
-- renane vat_pay -> vat_payer and interface IData
+- rename vat_pay -> vat_payer and interface IData
 - try download exists item if is faild try download item with non-exists parameter
 
 v1.1.2

@@ -13,7 +13,7 @@
 	],
 	"require": {
 		"guzzlehttp/guzzle": "^6.1",
-		"nette/utils": "^2.3"
+		"h4kuna/data-type": "^2.1.1"
 	},
 	"autoload": {
 		"psr-4": {
@@ -22,6 +22,7 @@
 		"files": ["src/exceptions.php"]
 	},
 	"require-dev": {
-		"salamium/testinium": "^0.1"
+		"salamium/testinium": "^0.1",
+		"nette/reflection": "^2.3"
 	}
 }

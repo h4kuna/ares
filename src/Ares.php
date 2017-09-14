@@ -29,7 +29,7 @@ class Ares
 	/**
 	 * Load fresh data.
 	 * @param int|string $in
-	 * @return IData
+	 * @return Data
 	 * @throws IdentificationNumberNotFoundException
 	 */
 	public function loadData($in)
@@ -44,7 +44,7 @@ class Ares
 
 	/**
 	 * Get temporary data.
-	 * @return IData
+	 * @return Data
 	 */
 	public function getData()
 	{
@@ -80,20 +80,27 @@ class Ares
 	{
 		$dataProvider->setIN($xml->ICO)
 			->setTIN($xml->DIC)
-			->setCity($xml->AA->N)
 			->setCompany($xml->OF)
-			->setStreet($xml->AD->UC, $xml->AA->NCO, isset($xml->AA->CO) ? $xml->AA->CO : NULL)
-			->setZip($xml->AA->PSC)
-			->setPerson($xml->PF->KPF)
+			->setZip(self::exists($xml->AA, 'PSC'))
+			->setStreet(self::exists($xml->AA, 'NU'))
+			->setCity(self::exists($xml->AA, 'N'))
+			->setHouseNumber(self::exists($xml->AA, 'CD'), self::exists($xml->AA, 'CO'))
+			->setCityPost(self::exists($xml->AA, 'NMC'))
+			->setCityDistrict(self::exists($xml->AA, 'NCO'))
+			->setIsPerson(self::exists($xml->PF, 'KPF'))
 			->setCreated($xml->DV);
 
 		if (isset($xml->ROR)) {
 			$dataProvider->setActive($xml->ROR->SOR->SSU)
 				->setFileNumber($xml->ROR->SZ->OV)
 				->setCourt($xml->ROR->SZ->SD->T);
+		} else {
+			$dataProvider->setActive($this->activeMode)
+				->setFileNumber('')
+				->setCourt('');
 		}
 		if (!$this->isActiveMode()) {
-			$dataProvider->getData()->setActive(FALSE);
+			$dataProvider->setActive('no');
 		}
 	}
 
@@ -115,6 +122,11 @@ class Ares
 	private function createDataProvider()
 	{
 		return new DataProvider(new DataFactory());
+	}
+
+	private static function exists($element, $property)
+	{
+		return isset($element->{$property}) ? $element->{$property} : '';
 	}
 
 }

@@ -4,6 +4,6 @@ namespace h4kuna\Ares;
 
 interface IDataFactory
 {
-	/** @return IData */
-	function create();
+	/** @return Data */
+	function create(array $data);
 }
