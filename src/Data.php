@@ -48,6 +48,7 @@ class Data extends Immutable\Messenger
 		return $out;
 	}
 
+
 	public function jsonSerialize()
 	{
 		$data = $this->getData();
@@ -56,6 +57,7 @@ class Data extends Immutable\Messenger
 		}
 		return $data;
 	}
+
 
 	public function __toString()
 	{

@@ -23,6 +23,7 @@ class AresTest extends \Tester\TestCase
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
+
 	public function testMenchart()
 	{
 		$ares = new Ares;
@@ -33,6 +34,7 @@ class AresTest extends \Tester\TestCase
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
 
+
 	public function testMenchartInActive()
 	{
 		$ares = new Ares;
@@ -42,6 +44,7 @@ class AresTest extends \Tester\TestCase
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
 	}
+
 
 	public function testToArray()
 	{
@@ -56,7 +59,7 @@ class AresTest extends \Tester\TestCase
 				throw new \RuntimeException('Bad annotation property-read od Data class: ' . $value);
 			}
 			Assert::true(isset($data[$find['name']]));
-			$names[$find['name']] = TRUE;
+			$names[$find['name']] = true;
 		}
 
 		Assert::same([], array_diff_key($data->getData(), $names));
@@ -64,10 +67,11 @@ class AresTest extends \Tester\TestCase
 		Assert::type('array', $data->toArray());
 		Assert::same([
 			'c' => 'Milan Matějček',
-			'company' => TRUE,
+			'company' => true,
 			'city' => 'Mladá Boleslav'
-		], $data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => NULL]));
+		], $data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
 	}
+
 
 	/**
 	 * @throws h4kuna\Ares\IdentificationNumberNotFoundException

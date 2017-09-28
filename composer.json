@@ -1,28 +1,30 @@
 {
-	"name": "h4kuna/ares",
-	"type": "library",
-	"description": "Provides information about subjects by their identification number from the ARES database (in Czech Republic).",
-	"homepage": "https://github.com/h4kuna/ares",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Milan Matějček",
-			"email": "milan.matejcek@gmail.com",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"guzzlehttp/guzzle": "^6.1",
-		"h4kuna/data-type": "^2.1.1"
-	},
-	"autoload": {
-		"psr-4": {
-			"h4kuna\\Ares\\": "src/"
-		},
-		"files": ["src/exceptions.php"]
-	},
-	"require-dev": {
-		"salamium/testinium": "^0.1",
-		"nette/reflection": "^2.3"
-	}
+  "name": "h4kuna/ares",
+  "type": "library",
+  "description": "Provides information about subjects by their identification number from the ARES database (in Czech Republic).",
+  "homepage": "https://github.com/h4kuna/ares",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Milan Matějček",
+      "email": "milan.matejcek@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.1",
+    "h4kuna/data-type": "^2.1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "h4kuna\\Ares\\": "src/"
+    },
+    "files": [
+      "src/exceptions.php"
+    ]
+  },
+  "require-dev": {
+    "salamium/testinium": "^0.1",
+    "nette/reflection": "^2.3"
+  }
 }

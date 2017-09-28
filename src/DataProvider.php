@@ -17,10 +17,12 @@ class DataProvider
 	/** @var array */
 	private $data = [];
 
+
 	public function __construct(IDataFactory $dataFactory)
 	{
 		$this->dataFactory = $dataFactory;
 	}
+
 
 	/** @return Data */
 	public function getData()
@@ -32,11 +34,13 @@ class DataProvider
 		return $this->data;
 	}
 
+
 	public function prepareData()
 	{
 		$this->data = [];
 		return $this;
 	}
+
 
 	/**
 	 * @param string|bool $active
@@ -48,11 +52,13 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setCity($city)
 	{
 		$this->data['city'] = self::toNull($city);
 		return $this;
 	}
+
 
 	public function setCompany($company)
 	{
@@ -60,11 +66,13 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setCourt($court)
 	{
 		$this->data['court'] = self::toNull($court);
 		return $this;
 	}
+
 
 	public function setCreated($date)
 	{
@@ -72,11 +80,13 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setFileNumber($fileNumber)
 	{
 		$this->data['file_number'] = self::toNull($fileNumber);
 		return $this;
 	}
+
 
 	public function setIN($in)
 	{
@@ -84,19 +94,22 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setIsPerson($s)
 	{
 		$this->data['is_person'] = ((string) $s) <= '108';
 		return $this;
 	}
 
+
 	private function setFileNumberAndCourt()
 	{
-		$this->data['court_all'] = NULL;
+		$this->data['court_all'] = null;
 		if ($this->data['file_number'] && $this->data['court']) {
 			$this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
 		}
 	}
+
 
 	public function setCityDistrict($district)
 	{
@@ -104,11 +117,13 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setCityPost($district)
 	{
 		$this->data['city_post'] = self::toNull($district);
 		return $this;
 	}
+
 
 	public function setStreet($street)
 	{
@@ -116,11 +131,13 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setHouseNumber($cd, $co)
 	{
 		$this->data['house_number'] = self::toNull(trim($cd . '/' . $co, '/'));
 		return $this;
 	}
+
 
 	public function setTIN($s)
 	{
@@ -130,17 +147,19 @@ class DataProvider
 		return $this;
 	}
 
+
 	public function setZip($zip)
 	{
 		$this->data['zip'] = self::toNull($zip);
 		return $this;
 	}
 
+
 	private static function toNull($v)
 	{
 		$string = trim((string) $v);
 		if ($string === '') {
-			return NULL;
+			return null;
 		}
 		return $string;
 	}

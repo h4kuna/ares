@@ -18,13 +18,15 @@ class Ares
 	/** @var bool */
 	private $activeMode;
 
-	public function __construct(DataProvider $dataProvider = NULL)
+
+	public function __construct(DataProvider $dataProvider = null)
 	{
-		if ($dataProvider === NULL) {
+		if ($dataProvider === null) {
 			$dataProvider = $this->createDataProvider();
 		}
 		$this->dataProvider = $dataProvider;
 	}
+
 
 	/**
 	 * Load fresh data.
@@ -35,12 +37,13 @@ class Ares
 	public function loadData($in)
 	{
 		try {
-			$this->loadXML((string) $in, TRUE);
+			$this->loadXML((string) $in, true);
 		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML((string) $in, FALSE);
+			$this->loadXML((string) $in, false);
 		}
 		return $this->getData();
 	}
+
 
 	/**
 	 * Get temporary data.
@@ -50,6 +53,7 @@ class Ares
 	{
 		return $this->dataProvider->getData();
 	}
+
 
 	/**
 	 * Load XML and fill Data object
@@ -75,6 +79,7 @@ class Ares
 
 		$this->processXml($xmlEl, $this->dataProvider->prepareData());
 	}
+
 
 	protected function processXml($xml, DataProvider $dataProvider)
 	{
@@ -104,10 +109,12 @@ class Ares
 		}
 	}
 
+
 	protected function isActiveMode()
 	{
-		return $this->activeMode === TRUE;
+		return $this->activeMode === true;
 	}
+
 
 	private function createUrl($inn, $activeOnly)
 	{
@@ -119,10 +126,12 @@ class Ares
 		return self::URL . '?' . http_build_query($parameters);
 	}
 
+
 	private function createDataProvider()
 	{
 		return new DataProvider(new DataFactory());
 	}
+
 
 	private static function exists($element, $property)
 	{
