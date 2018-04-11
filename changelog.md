@@ -1,3 +1,9 @@
+v1.4.0
+======
+- remove support php < 7.1
+- exceptions move to files -> one class is one file and change namespace
+
+
 v1.3.0
 ======
 - remove support for php 5.5

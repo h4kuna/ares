@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace h4kuna\Ares;
 
-/**
- * @author Milan Matějček <milan.matejcek@gmail.com>
- */
+use h4kuna\Ares\Exceptions\ConnectionException;
+use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
+
 class Ares
 {
 
@@ -20,9 +20,9 @@ class Ares
 	private $dataProvider;
 
 
-	public function __construct(IFactory $factory = NULL)
+	public function __construct(IFactory $factory = null)
 	{
-		if ($factory === NULL) {
+		if ($factory === null) {
 			$factory = new Factory();
 		}
 		$this->factory = $factory;
@@ -31,16 +31,14 @@ class Ares
 
 	/**
 	 * Load fresh data.
-	 * @param int|string $in
-	 * @return Data
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData($in)
+	public function loadData(string $in): Data
 	{
 		try {
-			$this->loadXML((string) $in, TRUE);
+			$this->loadXML($in, true);
 		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML((string) $in, FALSE);
+			$this->loadXML($in, false);
 		}
 		return $this->getData();
 	}
@@ -48,9 +46,8 @@ class Ares
 
 	/**
 	 * Get temporary data.
-	 * @return Data
 	 */
-	public function getData()
+	public function getData(): Data
 	{
 		return $this->getDataProvider()->getData();
 	}
@@ -58,14 +55,16 @@ class Ares
 
 	/**
 	 * Load XML and fill Data object
-	 * @param string $in
-	 * @param bool $activeOnly
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML($in, $activeOnly)
+	private function loadXML(string $in, bool $activeOnly)
 	{
 		$client = $this->factory->createGuzzleClient();
-		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody();
+		try {
+			$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody()->getContents();
+		} catch (\Exception $e) {
+			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
+		}
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
 			throw new IdentificationNumberNotFoundException($in);
@@ -82,11 +81,11 @@ class Ares
 	}
 
 
-	protected function processXml($xml, DataProvider $dataProvider)
+	protected function processXml(\SimpleXMLElement $xml, DataProvider $dataProvider): void
 	{
-		$dataProvider->setIN($xml->ICO)
-			->setTIN($xml->DIC)
-			->setCompany($xml->OF)
+		$dataProvider->setIN((string) $xml->ICO)
+			->setTIN((string) $xml->DIC)
+			->setCompany((string) $xml->OF)
 			->setZip(self::exists($xml->AA, 'PSC'))
 			->setStreet(self::exists($xml->AA, 'NU'))
 			->setCity(self::exists($xml->AA, 'N'))
@@ -94,32 +93,32 @@ class Ares
 			->setCityPost(self::exists($xml->AA, 'NMC'))
 			->setCityDistrict(self::exists($xml->AA, 'NCO'))
 			->setIsPerson(self::exists($xml->PF, 'KPF'))
-			->setCreated($xml->DV);
+			->setCreated((string) $xml->DV);
 
 		if (isset($xml->ROR)) {
-			$dataProvider->setActive($xml->ROR->SOR->SSU)
-				->setFileNumber($xml->ROR->SZ->OV)
-				->setCourt($xml->ROR->SZ->SD->T);
+			$dataProvider->setActive((string) $xml->ROR->SOR->SSU)
+				->setFileNumber((string) $xml->ROR->SZ->OV)
+				->setCourt((string) $xml->ROR->SZ->SD->T);
 		} else {
 			$dataProvider->setActive($this->activeMode)
 				->setFileNumber('')
 				->setCourt('');
 		}
 		if (!$this->isActiveMode()) {
-			$dataProvider->setActive('no');
+			$dataProvider->setActive(false);
 		}
 	}
 
 
-	protected function isActiveMode()
+	protected function isActiveMode(): bool
 	{
-		return $this->activeMode === TRUE;
+		return $this->activeMode === true;
 	}
 
 
-	private function createUrl($inn, $activeOnly)
+	private function createUrl(string $inn, bool $activeOnly): string
 	{
-		$this->activeMode = (bool) $activeOnly;
+		$this->activeMode = $activeOnly;
 		$parameters = [
 			'ico' => $inn,
 			'aktivni' => $activeOnly ? 'true' : 'false',
@@ -128,21 +127,18 @@ class Ares
 	}
 
 
-	/**
-	 * @return DataProvider
-	 */
-	private function getDataProvider()
+	private function getDataProvider(): DataProvider
 	{
-		if ($this->dataProvider === NULL) {
+		if ($this->dataProvider === null) {
 			$this->dataProvider = $this->factory->createDataProvider();
 		}
 		return $this->dataProvider;
 	}
 
 
-	private static function exists($element, $property)
+	private static function exists(\SimpleXMLElement $element, string $property): string
 	{
-		return isset($element->{$property}) ? $element->{$property} : '';
+		return isset($element->{$property}) ? ((string) $element->{$property}) : '';
 	}
 
 }

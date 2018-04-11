@@ -2,14 +2,11 @@
 
 namespace h4kuna\Ares;
 
-use Salamium\Testinium,
-	Tester\Assert;
+use Salamium\Testinium;
+use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * @author Milan Matějček
- */
 class AresTest extends \Tester\TestCase
 {
 
@@ -68,13 +65,14 @@ class AresTest extends \Tester\TestCase
 		Assert::same([
 			'c' => 'Milan Matějček',
 			'company' => true,
-			'city' => 'Mladá Boleslav'
-		], $data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+			'city' => 'Mladá Boleslav',
+		],
+			$data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
 	}
 
 
 	/**
-	 * @throws h4kuna\Ares\IdentificationNumberNotFoundException
+	 * @throws \h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException
 	 */
 	public function testNoIn()
 	{
