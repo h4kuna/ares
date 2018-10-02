@@ -63,7 +63,7 @@ class Ares
 	 */
 	private function loadXML($in, $activeOnly)
 	{
-		$client = new GuzzleHttp\Client();
+		$client = new GuzzleHttp\Client(['curl' => [CURLOPT_CONNECTTIMEOUT => 15]]);
 		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody();
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
