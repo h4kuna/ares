@@ -11,16 +11,16 @@ use DateTime,
 class DataProvider
 {
 
-	/** @var IDataFactory */
-	private $dataFactory;
+	/** @var IFactory */
+	private $factory;
 
 	/** @var array */
-	private $data = [];
+	private $data;
 
 
-	public function __construct(IDataFactory $dataFactory)
+	public function __construct(IFactory $dataFactory)
 	{
-		$this->dataFactory = $dataFactory;
+		$this->factory = $dataFactory;
 	}
 
 
@@ -29,7 +29,7 @@ class DataProvider
 	{
 		if (is_array($this->data)) {
 			$this->setFileNumberAndCourt();
-			$this->data = $this->dataFactory->create($this->data);
+			$this->data = $this->factory->createData($this->data);
 		}
 		return $this->data;
 	}

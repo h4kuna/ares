@@ -2,8 +2,6 @@
 
 namespace h4kuna\Ares;
 
-use GuzzleHttp;
-
 /**
  * @author Milan Matějček <milan.matejcek@gmail.com>
  */
@@ -12,19 +10,22 @@ class Ares
 
 	const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 
-	/** @var DataProvider */
-	private $dataProvider;
+	/** @var IFactory */
+	private $factory;
 
 	/** @var bool */
 	private $activeMode;
 
+	/** @var DataProvider */
+	private $dataProvider;
 
-	public function __construct(DataProvider $dataProvider = null)
+
+	public function __construct(IFactory $factory = NULL)
 	{
-		if ($dataProvider === null) {
-			$dataProvider = $this->createDataProvider();
+		if ($factory === NULL) {
+			$factory = new Factory();
 		}
-		$this->dataProvider = $dataProvider;
+		$this->factory = $factory;
 	}
 
 
@@ -37,9 +38,9 @@ class Ares
 	public function loadData($in)
 	{
 		try {
-			$this->loadXML((string) $in, true);
+			$this->loadXML((string) $in, TRUE);
 		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML((string) $in, false);
+			$this->loadXML((string) $in, FALSE);
 		}
 		return $this->getData();
 	}
@@ -51,7 +52,7 @@ class Ares
 	 */
 	public function getData()
 	{
-		return $this->dataProvider->getData();
+		return $this->getDataProvider()->getData();
 	}
 
 
@@ -63,7 +64,7 @@ class Ares
 	 */
 	private function loadXML($in, $activeOnly)
 	{
-		$client = new GuzzleHttp\Client();
+		$client = $this->factory->createGuzzleClient();
 		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody();
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
@@ -77,7 +78,7 @@ class Ares
 			throw new IdentificationNumberNotFoundException($in);
 		}
 
-		$this->processXml($xmlEl, $this->dataProvider->prepareData());
+		$this->processXml($xmlEl, $this->getDataProvider()->prepareData());
 	}
 
 
@@ -112,7 +113,7 @@ class Ares
 
 	protected function isActiveMode()
 	{
-		return $this->activeMode === true;
+		return $this->activeMode === TRUE;
 	}
 
 
@@ -121,15 +122,21 @@ class Ares
 		$this->activeMode = (bool) $activeOnly;
 		$parameters = [
 			'ico' => $inn,
-			'aktivni' => $activeOnly ? 'true' : 'false'
+			'aktivni' => $activeOnly ? 'true' : 'false',
 		];
 		return self::URL . '?' . http_build_query($parameters);
 	}
 
 
-	private function createDataProvider()
+	/**
+	 * @return DataProvider
+	 */
+	private function getDataProvider()
 	{
-		return new DataProvider(new DataFactory());
+		if ($this->dataProvider === NULL) {
+			$this->dataProvider = $this->factory->createDataProvider();
+		}
+		return $this->dataProvider;
 	}
 
 
