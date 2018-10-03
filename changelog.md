@@ -1,3 +1,8 @@
+v1.3.0
+======
+- remove support for php 5.5
+- add Factory provide new instances Guzzle, Data, DataProvider
+
 v1.2.0
 ======
 - interface IData was removed
