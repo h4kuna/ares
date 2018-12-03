@@ -55,7 +55,7 @@ class AresTest extends \Tester\TestCase
 			if (!preg_match('~\$(?P<name>.*)~', $value, $find)) {
 				throw new \RuntimeException('Bad annotation property-read od Data class: ' . $value);
 			}
-			Assert::true(isset($data[$find['name']]));
+			Assert::true($data->exists($find['name']));
 			$names[$find['name']] = true;
 		}
 
