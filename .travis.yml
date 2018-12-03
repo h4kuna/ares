@@ -4,10 +4,6 @@ php:
   - 7.2
   - 7.3
 
-matrix:
-    allow_failures:
-    - php: 7.3
-
 before_script:
   - composer self-update
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then NTESTER_FLAGS="phpdbg --coverage ./coverage.xml --coverage-src ./src"; else NTESTER_FLAGS=""; fi
