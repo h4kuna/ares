@@ -7,15 +7,12 @@ use GuzzleHttp;
 interface IFactory
 {
 
-	/** @return Data */
-	function createData(array $data);
+	function createData(array $data): Data;
 
 
-	/** @return GuzzleHttp\Client */
-	function createGuzzleClient();
+	function createGuzzleClient(): GuzzleHttp\Client;
 
 
-	/** @return DataProvider */
-	function createDataProvider();
+	function createDataProvider(): DataProvider;
 
 }

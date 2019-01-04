@@ -7,19 +7,19 @@ use GuzzleHttp;
 class Factory implements IFactory
 {
 
-	public function createDataProvider()
+	public function createDataProvider(): DataProvider
 	{
 		return new DataProvider($this);
 	}
 
 
-	public function createData(array $data)
+	public function createData(array $data): Data
 	{
 		return new Data($data);
 	}
 
 
-	public function createGuzzleClient()
+	public function createGuzzleClient(): GuzzleHttp\Client
 	{
 		return new GuzzleHttp\Client(['curl' => [CURLOPT_CONNECTTIMEOUT => 30]]);
 	}
