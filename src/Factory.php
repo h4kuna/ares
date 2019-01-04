@@ -19,9 +19,12 @@ class Factory implements IFactory
 	}
 
 
-	public function createGuzzleClient()
+	public function createGuzzleClient(array $curlOptions)
 	{
-		return new GuzzleHttp\Client(['curl' => [CURLOPT_CONNECTTIMEOUT => 30]]);
+	    	if (!isset($curlOptions[CURLOPT_CONNECTTIMEOUT])) {
+		    	$curlOptions[CURLOPT_CONNECTTIMEOUT] = 30;
+		}
+		return new GuzzleHttp\Client(['curl' => $curlOptions]);
 	}
 
 }
