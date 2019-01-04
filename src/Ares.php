@@ -20,7 +20,7 @@ class Ares
 	private $dataProvider;
 	
 	/** @var array */
-	private $curlOptions;
+	private $curlOptions = [];
 	
 
 	public function __construct(IFactory $factory = null)
