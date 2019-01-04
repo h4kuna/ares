@@ -18,7 +18,10 @@ class Ares
 
 	/** @var DataProvider */
 	private $dataProvider;
-
+	
+	/** @var array */
+	private $curlOptions;
+	
 
 	public function __construct(IFactory $factory = null)
 	{
@@ -26,6 +29,20 @@ class Ares
 			$factory = new Factory();
 		}
 		$this->factory = $factory;
+	}
+	
+	/**
+	* @return array
+	*/
+	public function getCurlOptions(): array {
+		return $this->curlOptions;
+	}
+
+	/**
+	* @param array $curlOptions
+	*/
+	public function setCurlOptions(array $curlOptions): void {
+		$this->curlOptions = $curlOptions;
 	}
 
 
@@ -59,7 +76,7 @@ class Ares
 	 */
 	private function loadXML(string $in, bool $activeOnly)
 	{
-		$client = $this->factory->createGuzzleClient();
+		$client = $this->factory->createGuzzleClient($this->getCurlOptions());
 		try {
 			$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody()->getContents();
 		} catch (\Exception $e) {
