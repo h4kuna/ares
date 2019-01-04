@@ -33,12 +33,12 @@ class Ares
 	 * Load fresh data.
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData(string $in): Data
+	public function loadData(string $in, array $options = []): Data
 	{
 		try {
-			$this->loadXML($in, true);
+			$this->loadXML($in, $options, true);
 		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML($in, false);
+			$this->loadXML($in, $options, false);
 		}
 		return $this->getData();
 	}
@@ -57,9 +57,9 @@ class Ares
 	 * Load XML and fill Data object
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML(string $in, bool $activeOnly)
+	private function loadXML(string $in, array $options, bool $activeOnly)
 	{
-		$client = $this->factory->createGuzzleClient();
+		$client = $this->factory->createGuzzleClient($options);
 		try {
 			$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody()->getContents();
 		} catch (\Exception $e) {

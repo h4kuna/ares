@@ -10,7 +10,7 @@ interface IFactory
 	function createData(array $data): Data;
 
 
-	function createGuzzleClient(): GuzzleHttp\Client;
+	function createGuzzleClient(array $options): GuzzleHttp\Client;
 
 
 	function createDataProvider(): DataProvider;

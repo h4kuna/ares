@@ -19,9 +19,9 @@ class Factory implements IFactory
 	}
 
 
-	public function createGuzzleClient(): GuzzleHttp\Client
+	public function createGuzzleClient(array $options = [CURLOPT_CONNECTTIMEOUT => 30]): GuzzleHttp\Client
 	{
-		return new GuzzleHttp\Client(['curl' => [CURLOPT_CONNECTTIMEOUT => 30]]);
+		return new GuzzleHttp\Client(['curl' => $options]);
 	}
 
 }
