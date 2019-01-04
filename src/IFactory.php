@@ -12,7 +12,7 @@ interface IFactory
 
 
 	/** @return GuzzleHttp\Client */
-	function createGuzzleClient();
+	function createGuzzleClient(array $curlOptions);
 
 
 	/** @return DataProvider */
