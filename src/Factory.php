@@ -21,7 +21,7 @@ class Factory implements IFactory
 
 	public function createGuzzleClient(array $options = [CURLOPT_CONNECTTIMEOUT => 30]): GuzzleHttp\Client
 	{
-		return new GuzzleHttp\Client(['curl' => $options]);
+		return new GuzzleHttp\Client(['curl' => $options, 'headers' => ['X-Powered-By' => 'h4kuna/ares']]);
 	}
 
 }
