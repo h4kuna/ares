@@ -23,3 +23,4 @@ after_script:
 
 script:
   - ./tests/run-tests $NTESTER_FLAGS
+  - ./tests/phpstan
