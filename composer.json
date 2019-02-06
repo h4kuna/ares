@@ -13,6 +13,7 @@
   ],
   "require": {
     "php": ">=7.1",
+    "ext-curl": "*",
     "ext-simplexml": "*",
     "guzzlehttp/guzzle": "^6.1",
     "h4kuna/data-type": "^2.1.1"
