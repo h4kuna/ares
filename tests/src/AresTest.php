@@ -61,6 +61,14 @@ class AresTest extends \Tester\TestCase
 
 		Assert::same([], array_diff_key($data->getData(), $names));
 
+		Assert::same([
+			"620",
+			"461",
+			"471",
+			"73110",
+			"7490",
+		], $data->nace);
+
 		Assert::type('array', $data->toArray());
 		Assert::same([
 			'c' => 'Milan Matějček',

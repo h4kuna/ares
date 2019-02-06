@@ -21,6 +21,7 @@ use h4kuna\DataType\Immutable;
  * @property-read string $tin
  * @property-read string $vat_payer
  * @property-read string $zip
+ * @property-read array $nace
  */
 class Data extends Immutable\Messenger
 {
@@ -57,4 +58,5 @@ class Data extends Immutable\Messenger
 	{
 		return (string) json_encode($this->jsonSerialize());
 	}
+
 }

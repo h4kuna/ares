@@ -153,6 +153,13 @@ class DataProvider
 	}
 
 
+	public function setNace(array $nace): self
+	{
+		$this->data['nace'] = $nace;
+		return $this;
+	}
+
+
 	private static function toNull(string $v): ?string
 	{
 		$string = trim($v);
