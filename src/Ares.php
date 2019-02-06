@@ -8,7 +8,7 @@ use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 class Ares
 {
 
-	const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
+	const URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 
 	/** @var IFactory */
 	private $factory;
