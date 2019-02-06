@@ -151,6 +151,12 @@ class DataProvider
 		$this->data['zip'] = self::toNull($zip);
 		return $this;
 	}
+	
+	public function setNace(array $nace): self
+	{
+		$this->data['nace'] = $nace;
+		return $this;
+	}
 
 
 	private static function toNull(string $v): ?string
