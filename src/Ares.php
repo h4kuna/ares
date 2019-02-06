@@ -93,7 +93,8 @@ class Ares
 			->setCityPost(self::exists($xml->AA, 'NMC'))
 			->setCityDistrict(self::exists($xml->AA, 'NCO'))
 			->setIsPerson(self::exists($xml->PF, 'KPF'))
-			->setCreated((string) $xml->DV);
+			->setCreated((string) $xml->DV)
+			->setNace(self::existsArray($xml->Nace, 'NACE'));
 
 		if (isset($xml->ROR)) {
 			$dataProvider->setActive((string) $xml->ROR->SOR->SSU)
@@ -139,6 +140,12 @@ class Ares
 	private static function exists(\SimpleXMLElement $element, string $property): string
 	{
 		return isset($element->{$property}) ? ((string) $element->{$property}) : '';
+	}
+	
+	
+	private static function existsArray(\SimpleXMLElement $element, string $property): array
+	{
+		return isset($element->{$property}) ? ((array) $element->{$property}) : [];
 	}
 
 }
