@@ -21,7 +21,7 @@ class AresTest extends \Tester\TestCase
 	}
 
 
-	public function testMenchart()
+	public function testMerchant()
 	{
 		$ares = new Ares;
 		$in = '27082440';
@@ -32,7 +32,7 @@ class AresTest extends \Tester\TestCase
 	}
 
 
-	public function testMenchartInActive()
+	public function testMerchantInActive()
 	{
 		$ares = new Ares;
 		$in = '25596641';
