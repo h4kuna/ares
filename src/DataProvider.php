@@ -96,7 +96,7 @@ class DataProvider
 
 	public function setIsPerson(string $s): self
 	{
-		$this->data['is_person'] = $s <= '108';
+		$this->data['is_person'] = $s <= '108' || $s == '424' || $s == '425';
 		return $this;
 	}
 
