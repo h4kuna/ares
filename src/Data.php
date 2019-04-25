@@ -16,6 +16,7 @@ use h4kuna\DataType\Immutable;
  * @property-read string $file_number
  * @property-read string $in
  * @property-read bool $is_person
+ * @property-read int $legal_form_code
  * @property-read string $house_number
  * @property-read string $street
  * @property-read string $tin

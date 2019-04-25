@@ -87,6 +87,13 @@ class AresTest extends \Tester\TestCase
 		(new Ares)->loadData('123');
 	}
 
+
+	public function testForeingPerson()
+	{
+		$data = (new Ares)->loadData('6387446');
+		Assert::true($data->is_person);
+	}
+
 }
 
 (new AresTest)->run();
