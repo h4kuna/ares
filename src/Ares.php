@@ -13,9 +13,6 @@ class Ares
 	/** @var IFactory */
 	private $factory;
 
-	/** @var bool */
-	private $activeMode;
-
 	/** @var DataProvider */
 	private $dataProvider;
 
@@ -35,11 +32,7 @@ class Ares
 	 */
 	public function loadData(string $in, array $options = []): Data
 	{
-		try {
-			$this->loadXML($in, $options, true);
-		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML($in, $options, false);
-		}
+		$this->loadXML($in, $options);
 		return $this->getData();
 	}
 
@@ -57,27 +50,23 @@ class Ares
 	 * Load XML and fill Data object
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML(string $in, array $options, bool $activeOnly)
+	private function loadXML(string $in, array $options)
 	{
 		$client = $this->factory->createGuzzleClient($options);
 		try {
-			$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody()->getContents();
-		} catch (\Exception $e) {
+			$xmlSource = $client->request('GET', $this->createUrl($in))->getBody()->getContents();
+		} catch (\Throwable $e) {
 			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
 		}
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
-			throw new IdentificationNumberNotFoundException($in);
+			throw new ConnectionException('No xml from ARES. IN ' . $in);
 		}
 
 		$ns = $xml->getDocNamespaces();
-		$xmlEl = $xml->children($ns['are'])->children($ns['D'])->VBAS;
-
-		if (!isset($xmlEl->ICO)) {
-			throw new IdentificationNumberNotFoundException($in);
-		}
-
-		$this->processXml($xmlEl, $this->getDataProvider()->prepareData());
+		$answer = $xml->children($ns['are'])->children($ns['D']);
+		$this->parseErrorAnswer($answer, $in);
+		$this->processXml($answer->VBAS, $this->getDataProvider()->prepareData());
 	}
 
 
@@ -94,35 +83,26 @@ class Ares
 			->setCityDistrict(self::exists($xml->AA, 'NCO'))
 			->setIsPerson(self::exists($xml->PF, 'KPF'))
 			->setCreated((string) $xml->DV)
-			->setNace(self::existsArray($xml->Nace, 'NACE'));
+			->setNace(self::existsArray($xml->Nace, 'NACE'))
+			->setActive(!isset($xml->DZ));
 
 		if (isset($xml->ROR)) {
-			$dataProvider->setActive((string) $xml->ROR->SOR->SSU)
+			$dataProvider
 				->setFileNumber((string) $xml->ROR->SZ->OV)
 				->setCourt((string) $xml->ROR->SZ->SD->T);
 		} else {
-			$dataProvider->setActive($this->activeMode)
+			$dataProvider
 				->setFileNumber('')
 				->setCourt('');
 		}
-		if (!$this->isActiveMode()) {
-			$dataProvider->setActive(false);
-		}
 	}
 
 
-	protected function isActiveMode(): bool
+	private function createUrl(string $inn): string
 	{
-		return $this->activeMode === true;
-	}
-
-
-	private function createUrl(string $inn, bool $activeOnly): string
-	{
-		$this->activeMode = $activeOnly;
 		$parameters = [
 			'ico' => $inn,
-			'aktivni' => $activeOnly ? 'true' : 'false',
+			'aktivni' => 'false',
 		];
 		return self::URL . '?' . http_build_query($parameters);
 	}
@@ -146,6 +126,18 @@ class Ares
 	private static function existsArray(\SimpleXMLElement $element, string $property): array
 	{
 		return isset($element->{$property}) ? ((array) $element->{$property}) : [];
+	}
+
+
+	private function parseErrorAnswer(\SimpleXMLElement $answer, string $in): void
+	{
+		if (isset($answer->VBAS)) {
+			return;
+		}
+		$error = trim((string) $answer->E->ET);
+		// 61 - subject disappeared
+		// 71 - not exists
+		throw new IdentificationNumberNotFoundException($error, $in);
 	}
 
 }

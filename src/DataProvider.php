@@ -34,67 +34,63 @@ class DataProvider
 	}
 
 
-	public function prepareData(): self
+	public function prepareData()
 	{
 		$this->data = [];
 		return $this;
 	}
 
 
-	/**
-	 * @param string|bool $active
-	 * @return static
-	 */
-	public function setActive($active): self
+	public function setActive(bool $active)
 	{
-		$this->data['active'] = is_bool($active) ? $active : ($active === 'Aktivní');
+		$this->data['active'] = $active;
 		return $this;
 	}
 
 
-	public function setCity(string $city): self
+	public function setCity(string $city)
 	{
 		$this->data['city'] = self::toNull($city);
 		return $this;
 	}
 
 
-	public function setCompany(string $company): self
+	public function setCompany(string $company)
 	{
 		$this->data['company'] = self::toNull($company);
 		return $this;
 	}
 
 
-	public function setCourt(string $court): self
+	public function setCourt(string $court)
 	{
 		$this->data['court'] = self::toNull($court);
 		return $this;
 	}
 
 
-	public function setCreated(string $date): self
+	public function setCreated(string $date)
 	{
 		$this->data['created'] = new DateTime($date, new DateTimeZone('Europe/Prague'));
 		return $this;
 	}
 
 
-	public function setFileNumber(string $fileNumber): self
+	public function setFileNumber(string $fileNumber)
 	{
 		$this->data['file_number'] = self::toNull($fileNumber);
 		return $this;
 	}
 
 
-	public function setIN(string $in): self
+	public function setIN(string $in)
 	{
 		$this->data['in'] = self::toNull($in);
 		return $this;
 	}
 
 
-	public function setIsPerson(string $s): self
+	public function setIsPerson(string $s)
 	{
 		$this->data['is_person'] = $s <= '108' || $s === '424' || $s === '425';
 		$this->data['legal_form_code'] = (int) $s;
@@ -111,35 +107,35 @@ class DataProvider
 	}
 
 
-	public function setCityDistrict(string $district): self
+	public function setCityDistrict(string $district)
 	{
 		$this->data['city_district'] = self::toNull($district);
 		return $this;
 	}
 
 
-	public function setCityPost(string $district): self
+	public function setCityPost(string $district)
 	{
 		$this->data['city_post'] = self::toNull($district);
 		return $this;
 	}
 
 
-	public function setStreet(string $street): self
+	public function setStreet(string $street)
 	{
 		$this->data['street'] = self::toNull($street);
 		return $this;
 	}
 
 
-	public function setHouseNumber(string $cd, string $co): self
+	public function setHouseNumber(string $cd, string $co)
 	{
 		$this->data['house_number'] = self::toNull(trim($cd . '/' . $co, '/'));
 		return $this;
 	}
 
 
-	public function setTIN(string $s): self
+	public function setTIN(string $s)
 	{
 		$this->data['tin'] = self::toNull($s);
 		$this->data['vat_payer'] = (bool) $s;
@@ -147,14 +143,14 @@ class DataProvider
 	}
 
 
-	public function setZip(string $zip): self
+	public function setZip(string $zip)
 	{
 		$this->data['zip'] = self::toNull($zip);
 		return $this;
 	}
 
 
-	public function setNace(array $nace): self
+	public function setNace(array $nace)
 	{
 		$this->data['nace'] = $nace;
 		return $this;

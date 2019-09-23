@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace h4kuna\Ares;
 
@@ -9,6 +9,15 @@ require_once __DIR__ . '/../bootstrap.php';
 
 class AresTest extends \Tester\TestCase
 {
+
+	/**
+	 * @throws \h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException
+	 */
+	public function testNotExists()
+	{
+		(new Ares)->loadData('36620751');
+	}
+
 
 	public function testFreelancer()
 	{
