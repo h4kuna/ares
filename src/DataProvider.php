@@ -71,7 +71,21 @@ class DataProvider
 
 	public function setCreated(string $date)
 	{
-		$this->data['created'] = new DateTime($date, new DateTimeZone('Europe/Prague'));
+		$this->data['created'] = self::createDateTime($date);
+		return $this;
+	}
+
+
+	public function setDissolved(?string $date)
+	{
+		if ($date === null) {
+			$this->setActive(true);
+			$this->data['dissolved'] = null;
+		} else {
+			$this->data['dissolved'] = self::createDateTime($date);
+			$this->setActive(false);
+		}
+
 		return $this;
 	}
 
@@ -164,6 +178,12 @@ class DataProvider
 			return null;
 		}
 		return $string;
+	}
+
+
+	private static function createDateTime(string $date): DateTime
+	{
+		return new DateTime($date, new DateTimeZone('Europe/Prague'));
 	}
 
 }
