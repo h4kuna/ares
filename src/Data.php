@@ -13,6 +13,7 @@ use h4kuna\DataType\Immutable;
  * @property-read string $court
  * @property-read string $court_all
  * @property-read \DateTime $created
+ * @property-read \DateTime $dissolved
  * @property-read string $file_number
  * @property-read string $in
  * @property-read bool $is_person
@@ -50,6 +51,9 @@ class Data extends Immutable\Messenger
 		$data = $this->getData();
 		if ($this->created instanceof \DateTime) {
 			$data['created'] = $this->created->format(\DateTime::ISO8601);
+		}
+		if ($this->dissolved instanceof \DateTime) {
+		    	$data['dissolved'] = $this->dissolved->format(\DateTime::ISO8601);
 		}
 		return $data;
 	}
