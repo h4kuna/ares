@@ -74,6 +74,13 @@ class DataProvider
 		$this->data['created'] = new DateTime($date, new DateTimeZone('Europe/Prague'));
 		return $this;
 	}
+	
+	
+    	public function setDissolved(string $date)
+    	{
+		$this->data['dissolved'] = new DateTime($date, new DateTimeZone('Europe/Prague'));
+		return $this;
+    	}
 
 
 	public function setFileNumber(string $fileNumber)
