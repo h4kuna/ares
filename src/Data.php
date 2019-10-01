@@ -13,6 +13,7 @@ use h4kuna\DataType\Immutable;
  * @property-read string $court
  * @property-read string $court_all
  * @property-read \DateTime $created
+ * @property-read \DateTime $dissolved
  * @property-read string $file_number
  * @property-read string $in
  * @property-read bool $is_person
@@ -48,8 +49,12 @@ class Data extends Immutable\Messenger
 	public function jsonSerialize()
 	{
 		$data = $this->getData();
-		if ($this->created instanceof \DateTime) {
-			$data['created'] = $this->created->format(\DateTime::ISO8601);
+		if ($this->created instanceof \DateTimeInterface) {
+			$data['created'] = self::formatDate($this->created);
+		}
+
+		if ($this->dissolved instanceof \DateTimeInterface) {
+		    $data['dissolved'] = self::formatDate($this->dissolved);
 		}
 		return $data;
 	}
@@ -58,6 +63,12 @@ class Data extends Immutable\Messenger
 	public function __toString()
 	{
 		return (string) json_encode($this->jsonSerialize());
+	}
+
+
+	private static function formatDate(\DateTimeInterface $date)
+	{
+		return $date->format(\DateTime::ISO8601);
 	}
 
 }

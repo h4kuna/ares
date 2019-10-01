@@ -83,8 +83,9 @@ class Ares
 			->setCityDistrict(self::exists($xml->AA, 'NCO'))
 			->setIsPerson(self::exists($xml->PF, 'KPF'))
 			->setCreated((string) $xml->DV)
-			->setNace(self::existsArray($xml->Nace, 'NACE'))
-			->setActive(!isset($xml->DZ));
+			->setNace(self::existsArray($xml->Nace, 'NACE'));
+
+		$dataProvider->setDissolved(isset($xml->DZ) ? (string) $xml->DZ : null);
 
 		if (isset($xml->ROR)) {
 			$dataProvider
