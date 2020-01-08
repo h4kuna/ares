@@ -60,12 +60,12 @@ class Ares
 		}
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
-			throw new ConnectionException('No xml from ARES. IN ' . $in);
+			throw new ConnectionException();
 		}
 
 		$ns = $xml->getDocNamespaces();
 		$answer = $xml->children($ns['are'])->children($ns['D']);
-		$this->parseErrorAnswer($answer, $in);
+		$this->parseErrorAnswer($xml, $in);
 		$this->processXml($answer->VBAS, $this->getDataProvider()->prepareData());
 	}
 
@@ -132,13 +132,28 @@ class Ares
 
 	private function parseErrorAnswer(\SimpleXMLElement $answer, string $in): void
 	{
-		if (isset($answer->VBAS)) {
+		$errorMessage = self::xmlValue($answer, '//D:ET[1]');
+		$errorCode = self::xmlValue($answer, '//D:EK[1]');
+		if ($errorMessage === null && $errorCode === null) {
 			return;
 		}
-		$error = trim((string) $answer->E->ET);
+
 		// 61 - subject disappeared
 		// 71 - not exists
-		throw new IdentificationNumberNotFoundException($error, $in);
+		if (empty($errorMessage)) {
+			throw new ConnectionException();
+		}
+		throw new IdentificationNumberNotFoundException(sprintf('IN "%s". %s', $in, $errorMessage), (int) $errorCode);
+	}
+
+
+	private static function xmlValue(\SimpleXMLElement $xml, string $xpath): ?string
+	{
+		$result = $xml->xpath($xpath);
+		if ($result === []) {
+			return null;
+		}
+		return trim((string) $result[0]);
 	}
 
 }
