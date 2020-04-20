@@ -166,7 +166,11 @@ class DataProvider
 
 	public function setNace(array $nace)
 	{
-		$this->data['nace'] = $nace;
+		$newNace = [];
+		foreach ($nace as $item) {
+			$newNace[] = (string) $item;
+		}
+		$this->data['nace'] = $newNace;
 		return $this;
 	}
 
