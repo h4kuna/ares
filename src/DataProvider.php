@@ -142,9 +142,14 @@ class DataProvider
 	}
 
 
-	public function setHouseNumber(string $cd, string $co)
+	public function setHouseNumber(string $cd, string $co, string $ca)
 	{
-		$this->data['house_number'] = self::toNull(trim($cd . '/' . $co, '/'));
+		$houseNumber = self::toNull(trim($cd . '/' . $co, '/'));
+		if ($houseNumber === NULL) {
+			$houseNumber = self::toNull($ca);
+		}
+
+		$this->data['house_number'] = $houseNumber;
 		return $this;
 	}
 

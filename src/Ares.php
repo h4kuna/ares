@@ -78,7 +78,7 @@ class Ares
 			->setZip(self::exists($xml->AA, 'PSC'))
 			->setStreet(self::exists($xml->AA, 'NU'))
 			->setCity(self::exists($xml->AA, 'N'))
-			->setHouseNumber(self::exists($xml->AA, 'CD'), self::exists($xml->AA, 'CO'))
+			->setHouseNumber(self::exists($xml->AA, 'CD'), self::exists($xml->AA, 'CO'), self::exists($xml->AA, 'CA'))
 			->setCityPost(self::exists($xml->AA, 'NMC'))
 			->setCityDistrict(self::exists($xml->AA, 'NCO'))
 			->setIsPerson(self::exists($xml->PF, 'KPF'))

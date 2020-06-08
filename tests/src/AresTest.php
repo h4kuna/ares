@@ -52,6 +52,17 @@ class AresTest extends \Tester\TestCase
 	}
 
 
+	public function testHouseNumber()
+	{
+		$ares = new Ares;
+		$in = '26713250';
+		/* @var $data Data */
+		$data = json_encode($ares->loadData($in));
+		// Testinium\File::save($in . '.json', (string) $data);
+		Assert::same(Testinium\File::load($in . '.json'), $data);
+	}
+
+
 	public function testToArray()
 	{
 		$ares = new Ares;
