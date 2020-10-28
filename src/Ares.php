@@ -10,6 +10,7 @@ class Ares
 
 	public const URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 	public const POST_URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/xar.cgi';
+	private const POST_IDENTIFICATION_NUMBERS_LIMIT = 100; // in one post request can be max 100 identification numbers
 
 	/** @var IFactory */
 	private $factory;
@@ -28,26 +29,28 @@ class Ares
 
 
 	/**
-	 * @param array $array
+	 * @param array|string[] $identificationNumbers
 	 * @param array $options
-	 * @return array
+	 * @return array|Data[]|Error[]
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 * @throws \Exception
 	 */
-	public function loadPostData(array $array, $options = []): array {
-		$client = $client = $this->factory->createGuzzleClient($options);
+	public function loadByIdentificationNumbers(array $identificationNumbers, $options = []): array
+	{
+		$client = $this->factory->createGuzzleClient($options);
 		$offset = 0;
 		$output = [];
 
-		while (count(array_slice($array, $offset)) > 0) {
-			$slice = array_slice($array, $offset,100, TRUE);
-			$offset += 100;
+		$identificationNumbersCount = count($identificationNumbers);
+		while (($identificationNumbersCount - $offset) > 0) {
+			$identificationNumbersBatch = array_slice($identificationNumbers, $offset,self::POST_IDENTIFICATION_NUMBERS_LIMIT, TRUE);
+			$offset += self::POST_IDENTIFICATION_NUMBERS_LIMIT;
 
 			$response = $client->request('POST', self::POST_URL, [
 				'headers' => [
 					'Content-type' => 'application/xml'
 				],
-				'body' => $this->createBodyContent($slice)
+				'body' => $this->factory->createBodyFactory()->createBodyContent($identificationNumbersBatch)
 			]);
 
 
@@ -67,17 +70,14 @@ class Ares
 				try {
 					if($D->E->asXML() !== FALSE) {
 						$DE = $D->E->children('D', TRUE);
-						throw new IdentificationNumberNotFoundException($DE->ET->__toString(), $DE->EK->__toString());
+						throw new IdentificationNumberNotFoundException(trim($DE->ET->__toString()), $DE->EK->__toString());
 					}
 
 					$this->processXml($D->VBAS, $this->getDataProvider()->prepareData());
 
 					$output[$pid] = $this->getData();
 				} catch (IdentificationNumberNotFoundException $exception) {
-					$output[$pid] = [
-						'error_code' => $exception->getCode(),
-						'error_msg' => $exception->getMessage()
-					];
+					$output[$pid] = new Error($exception->getCode(), $exception->getMessage());
 				}
 			}
 		}
@@ -216,33 +216,4 @@ class Ares
 		return trim((string) $result[0]);
 	}
 
-
-	/**
-	 * @param array $items
-	 * @return string
-	 * @throws \Exception
-	 */
-	private function createBodyContent(array $items): string {
-		$date = new \DateTime();
-		$content = '
-		<are:Ares_dotazy 
-		xmlns:are="http://wwwinfo.mfcr.cz/ares/xml_doc/schemas/ares/ares_request_orrg/v_1.0.0" 
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:schemaLocation="http://wwwinfo.mfcr.cz/ares/xml_doc/schemas/ares/ares_request_orrg/v_1.0.0 http://wwwinfo.mfcr.cz/ares/xml_doc/schemas/ares/ares_request_orrg/v_1.0.0/ares_request_orrg.xsd" 
-		dotaz_datum_cas="' . $date->format('Y-m-dTH:i:s') . '" 
-		dotaz_pocet="' . count($items) . '" 
-		dotaz_typ="Basic" 
-		vystup_format="XML" 
-		validation_XSLT="http://wwwinfo.mfcr.cz/ares/xml_doc/schemas/ares/ares_answer/v_1.0.0/ares_answer.xsl" 
-		answerNamespaceRequired="http://wwwinfo.mfcr.cz/ares/xml_doc/schemas/ares/ares_answer_basic/v_1.0.3"
-		Id="Ares_dotaz">
-		';
-
-		foreach ($items as $key => $ic) {
-			$content .=  '<Dotaz><Pomocne_ID>' . $key . '</Pomocne_ID><ICO>' . $ic . '</ICO></Dotaz>';
-		}
-
-		$content .= '</are:Ares_dotazy>';
-		return $content;
-	}
 }

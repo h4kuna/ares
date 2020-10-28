@@ -114,6 +114,32 @@ class AresTest extends \Tester\TestCase
 		Assert::true($data->is_person);
 	}
 
+	public function testLoadByIdentificationNumbers()
+	{
+		$identificationNumbers = ['6387446', '123', '87744473', '25596641'];
+		$results = (new Ares)->loadByIdentificationNumbers($identificationNumbers);
+		Assert::count(4, $results);
+		Assert::same([
+			'c' => 'Ivan Šebesta',
+			'company' => true,
+			'city' => 'Břest',
+		], $results[0]->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+
+		Assert::same([
+			'code' => 0,
+			'message' => 'Chyba 71 - nenalezeno 123',
+		], $results[1]->toArray());
+		Assert::same([
+			'c' => 'Milan Matějček',
+			'company' => true,
+			'city' => 'Mladá Boleslav',
+		], $results[2]->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+		Assert::same([
+			'code' => 0,
+			'message' => 'Chyba 61 - subjekt zanikl'
+		], $results[3]->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+	}
+
 }
 
 (new AresTest)->run();
