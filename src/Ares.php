@@ -54,7 +54,10 @@ class Ares
 			]);
 
 
-			$simpleXml = simplexml_load_string($response->getBody()->getContents(), null, 0, 'SOAP-ENV', true);
+			$simpleXml = simplexml_load_string($response->getBody()->getContents(), "SimpleXMLElement", 0, 'SOAP-ENV', true);
+			if (!$simpleXml) {
+				throw new ConnectionException();
+			}
 			$simpleXml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
 
 

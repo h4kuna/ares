@@ -41,8 +41,8 @@ class Error
 	public function toArray(): array
 	{
 		return [
-			'code' => $this->code,
-			'message' => $this->message,
+			'code' => $this->getCode(),
+			'message' => $this->getMessage(),
 		];
 	}
 	
