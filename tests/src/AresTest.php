@@ -2,6 +2,7 @@
 
 namespace h4kuna\Ares;
 
+use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 use Salamium\Testinium;
 use Tester\Assert;
 
@@ -112,6 +113,13 @@ class AresTest extends \Tester\TestCase
 	{
 		$data = (new Ares)->loadData('6387446');
 		Assert::true($data->is_person);
+	}
+
+	public function testOnlyActive()
+	{
+		Assert::exception(function() {
+			(new Ares)->loadData('25596641', [], TRUE);
+		}, IdentificationNumberNotFoundException::class);
 	}
 
 	public function testLoadByIdentificationNumbers()

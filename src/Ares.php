@@ -91,11 +91,14 @@ class Ares
 
 	/**
 	 * Load fresh data.
+	 * @param string $in
+	 * @param array $options
+	 * @param bool $onlyActive - false => return all data (icludes defunct companies), true => return only active data (without defunct companies)
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData(string $in, array $options = []): Data
+	public function loadData(string $in, array $options = [], bool $onlyActive = FALSE): Data
 	{
-		$this->loadXML($in, $options);
+		$this->loadXML($in, $options, $onlyActive);
 		return $this->getData();
 	}
 
@@ -113,11 +116,11 @@ class Ares
 	 * Load XML and fill Data object
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML(string $in, array $options)
+	private function loadXML(string $in, array $options, bool $onlyActive = FALSE)
 	{
 		$client = $this->factory->createGuzzleClient($options);
 		try {
-			$xmlSource = $client->request('GET', $this->createUrl($in))->getBody()->getContents();
+			$xmlSource = $client->request('GET', $this->createUrl($in, $onlyActive))->getBody()->getContents();
 		} catch (\Throwable $e) {
 			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
 		}
@@ -162,11 +165,11 @@ class Ares
 	}
 
 
-	private function createUrl(string $inn): string
+	private function createUrl(string $inn, bool $onlyActive = FALSE): string
 	{
 		$parameters = [
 			'ico' => $inn,
-			'aktivni' => 'false',
+			'aktivni' => $onlyActive ? 'true' : 'false',
 		];
 		return self::URL . '?' . http_build_query($parameters);
 	}
