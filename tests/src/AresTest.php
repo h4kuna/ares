@@ -70,8 +70,7 @@ class AresTest extends \Tester\TestCase
 		Assert::same('Milan Matějček', $data->company);
 
 		$names = [];
-		$propertyRead = \Nette\Reflection\AnnotationsParser::getAll(new \ReflectionClass($data))['property-read'];
-		foreach ($propertyRead as $value) {
+		foreach (self::allPropertyRead($data) as $value) {
 			if (!preg_match('~\$(?P<name>.*)~', $value, $find)) {
 				throw new \RuntimeException('Bad annotation property-read od Data class: ' . $value);
 			}
@@ -112,6 +111,21 @@ class AresTest extends \Tester\TestCase
 	{
 		$data = (new Ares)->loadData('6387446');
 		Assert::true($data->is_person);
+	}
+
+
+	/**
+	 * @return array<string>
+	 */
+	private static function allPropertyRead(Data $data): array
+	{
+		$doc = (new \ReflectionClass($data))->getDocComment();
+		if ($doc === false) {
+			throw new \RuntimeException();
+		}
+
+		preg_match_all('/@property-read *(?P<propertyRead>.+)/', $doc, $match);
+		return $match['propertyRead'];
 	}
 
 }
