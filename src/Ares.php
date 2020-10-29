@@ -48,9 +48,10 @@ class Ares
 
 	/**
 	 * Load XML and fill Data object
+	 * @param array<string, mixed> $options
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML(string $in, array $options)
+	private function loadXML(string $in, array $options): void
 	{
 		$client = $this->factory->createGuzzleClient($options);
 		try {
@@ -122,8 +123,8 @@ class Ares
 	{
 		return isset($element->{$property}) ? ((string) $element->{$property}) : '';
 	}
-	
-	
+
+
 	private static function existsArray(\SimpleXMLElement $element, string $property): array
 	{
 		return isset($element->{$property}) ? ((array) $element->{$property}) : [];
@@ -143,14 +144,14 @@ class Ares
 		if (empty($errorMessage)) {
 			throw new ConnectionException();
 		}
-		throw new IdentificationNumberNotFoundException(sprintf('IN "%s". %s', $in, $errorMessage), (int) $errorCode);
+		throw new IdentificationNumberNotFoundException(sprintf('IN "%s", Error: #%s, %s', $in, $errorCode, $errorMessage), $in);
 	}
 
 
 	private static function xmlValue(\SimpleXMLElement $xml, string $xpath): ?string
 	{
 		$result = $xml->xpath($xpath);
-		if ($result === []) {
+		if ($result === false || !isset($result[0])) {
 			return null;
 		}
 		return trim((string) $result[0]);

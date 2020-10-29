@@ -25,6 +25,6 @@
   },
   "require-dev": {
     "salamium/testinium": "^0.1",
-    "phpstan/phpstan": "^0.11.1"
+    "phpstan/phpstan": "^0.12"
   }
 }

@@ -54,7 +54,7 @@ class Data extends Immutable\Messenger
 		}
 
 		if ($this->dissolved instanceof \DateTimeInterface) {
-		    $data['dissolved'] = self::formatDate($this->dissolved);
+			$data['dissolved'] = self::formatDate($this->dissolved);
 		}
 		return $data;
 	}

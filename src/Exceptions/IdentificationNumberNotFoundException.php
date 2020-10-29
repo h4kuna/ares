@@ -4,21 +4,24 @@ namespace h4kuna\Ares\Exceptions;
 
 use Throwable;
 
-class IdentificationNumberNotFoundException extends AresException
+final class IdentificationNumberNotFoundException extends AresException
 {
 
-	/** @var int */
+	/** @var string */
 	private $in;
 
 
-	public function __construct($message = "", $in = 0, Throwable $previous = null)
+	/**
+	 * @param string $in
+	 */
+	public function __construct($message = "", $in = '', Throwable $previous = null)
 	{
 		parent::__construct($message, 0, $previous);
 		$this->in = $in;
 	}
 
 
-	public function getIn(): int
+	public function getIn(): string
 	{
 		return $this->in;
 	}

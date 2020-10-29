@@ -1,0 +1,4 @@
+parameters:
+	scanDirectories:
+		- ../../tests
+	checkMissingIterableValueType: false

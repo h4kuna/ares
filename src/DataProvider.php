@@ -34,6 +34,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function prepareData()
 	{
 		$this->data = [];
@@ -41,6 +44,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setActive(bool $active)
 	{
 		$this->data['active'] = $active;
@@ -48,6 +54,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setCity(string $city)
 	{
 		$this->data['city'] = self::toNull($city);
@@ -55,6 +64,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setCompany(string $company)
 	{
 		$this->data['company'] = self::toNull($company);
@@ -62,6 +74,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setCourt(string $court)
 	{
 		$this->data['court'] = self::toNull($court);
@@ -69,6 +84,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setCreated(string $date)
 	{
 		$this->data['created'] = self::createDateTime($date);
@@ -76,6 +94,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setDissolved(?string $date)
 	{
 		if ($date === null) {
@@ -90,6 +111,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setFileNumber(string $fileNumber)
 	{
 		$this->data['file_number'] = self::toNull($fileNumber);
@@ -97,6 +121,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setIN(string $in)
 	{
 		$this->data['in'] = self::toNull($in);
@@ -104,6 +131,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setIsPerson(string $s)
 	{
 		$this->data['is_person'] = $s <= '108' || $s === '424' || $s === '425';
@@ -121,6 +151,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setCityDistrict(string $district)
 	{
 		$this->data['city_district'] = self::toNull($district);
@@ -128,6 +161,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setCityPost(string $district)
 	{
 		$this->data['city_post'] = self::toNull($district);
@@ -135,6 +171,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setStreet(string $street)
 	{
 		$this->data['street'] = self::toNull($street);
@@ -142,10 +181,13 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setHouseNumber(string $cd, string $co, string $ca)
 	{
 		$houseNumber = self::toNull(trim($cd . '/' . $co, '/'));
-		if ($houseNumber === NULL) {
+		if ($houseNumber === null) {
 			$houseNumber = self::toNull($ca);
 		}
 
@@ -154,6 +196,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setTIN(string $s)
 	{
 		$this->data['tin'] = self::toNull($s);
@@ -162,6 +207,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setZip(string $zip)
 	{
 		$this->data['zip'] = self::toNull($zip);
@@ -169,6 +217,9 @@ class DataProvider
 	}
 
 
+	/**
+	 * @return static
+	 */
 	public function setNace(array $nace)
 	{
 		$newNace = [];

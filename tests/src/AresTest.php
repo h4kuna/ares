@@ -13,13 +13,13 @@ class AresTest extends \Tester\TestCase
 	/**
 	 * @throws \h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException
 	 */
-	public function testNotExists()
+	public function testNotExists(): void
 	{
 		(new Ares)->loadData('36620751');
 	}
 
 
-	public function testFreelancer()
+	public function testFreelancer(): void
 	{
 		$ares = new Ares;
 		$in = '87744473';
@@ -30,7 +30,7 @@ class AresTest extends \Tester\TestCase
 	}
 
 
-	public function testMerchant()
+	public function testMerchant(): void
 	{
 		$ares = new Ares;
 		$in = '27082440';
@@ -41,7 +41,7 @@ class AresTest extends \Tester\TestCase
 	}
 
 
-	public function testMerchantInActive()
+	public function testMerchantInActive(): void
 	{
 		$ares = new Ares;
 		$in = '25596641';
@@ -52,7 +52,7 @@ class AresTest extends \Tester\TestCase
 	}
 
 
-	public function testHouseNumber()
+	public function testHouseNumber(): void
 	{
 		$ares = new Ares;
 		$in = '26713250';
@@ -63,7 +63,7 @@ class AresTest extends \Tester\TestCase
 	}
 
 
-	public function testToArray()
+	public function testToArray(): void
 	{
 		$ares = new Ares;
 		$data = $ares->loadData('87744473');
@@ -101,13 +101,13 @@ class AresTest extends \Tester\TestCase
 	/**
 	 * @throws \h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException
 	 */
-	public function testNoIn()
+	public function testNoIn(): void
 	{
 		(new Ares)->loadData('123');
 	}
 
 
-	public function testForeingPerson()
+	public function testForeingPerson(): void
 	{
 		$data = (new Ares)->loadData('6387446');
 		Assert::true($data->is_person);
