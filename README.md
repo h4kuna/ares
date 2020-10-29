@@ -38,13 +38,15 @@ try {
 Load data by many identification numbers
 
 ```php
+/** @var \h4kuna\Ares\Ares $ares */
 $numbers = ['25596641', '26713250', '27082440', '11111111'];
 $res = $ares->loadByIdentificationNumbers($numbers);
-foreach ($res as $r) {
-    if ($r instanceof h4kuna\Ares\Error) {
-        var_dump($r->getMessage());
-    } else {
-        var_dump($r->company);
-    }
+
+if ($res[$ares::RESULT_FAILED] !== []) {
+    var_dump($res[$ares::RESULT_FAILED]);
+}
+
+foreach ($res[$ares::RESULT_SUCCESS] as $r) {
+    var_dump($r->company);
 }
 ```

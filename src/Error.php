@@ -2,48 +2,51 @@
 
 namespace h4kuna\Ares;
 
-class Error
+final class Error
 {
-	
-	/** @var int */
-	protected $code;
-	
 	/** @var string */
-	protected $message;
+	private $in;
 
-	/**
-	 * Error constructor.
-	 * @param int $code
-	 * @param string $message
-	 */
-	public function __construct(int $code, string $message)
+	/** @var int */
+	private $code;
+
+	/** @var string */
+	private $message;
+
+
+	public function __construct(string $in, int $code, string $message)
 	{
+		$this->in = $in;
 		$this->code = $code;
 		$this->message = $message;
 	}
 
-	/**
-	 * @return int
-	 */
+
 	public function getCode(): int
 	{
 		return $this->code;
 	}
 
-	/**
-	 * @return string
-	 */
+
 	public function getMessage(): string
 	{
 		return $this->message;
 	}
 
+
+	public function getIn(): string
+	{
+		return $this->in;
+	}
+
+
 	public function toArray(): array
 	{
 		return [
-			'code' => $this->getCode(),
-			'message' => $this->getMessage(),
+			'in' => $this->in,
+			'code' => $this->code,
+			'message' => $this->message,
 		];
 	}
-	
+
 }

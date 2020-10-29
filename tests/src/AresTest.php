@@ -133,30 +133,41 @@ class AresTest extends TestCase
 	}
 
 
-	public function testLoadByIdentificationNumbers()
+	public function testLoadByIdentificationNumbers(): void
 	{
 		$identificationNumbers = ['6387446', '123', '87744473', '25596641'];
 		$results = (new Ares\Ares)->loadByIdentificationNumbers($identificationNumbers);
-		Assert::count(4, $results);
+		Assert::count(2, $results[Ares\Ares::RESULT_FAILED]);
+		Assert::count(2, $results[Ares\Ares::RESULT_SUCCESS]);
 		Assert::same([
 			'c' => 'Ivan Šebesta',
 			'company' => true,
 			'city' => 'Břest',
-		], $results[0]->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
-
-		Assert::same([
-			'code' => 0,
-			'message' => 'Chyba 71 - nenalezeno 123',
-		], $results[1]->toArray());
+		], $results[Ares\Ares::RESULT_SUCCESS][0]->toArray([
+			'company' => 'c',
+			'is_person' => 'company',
+			'city' => null,
+		]));
 		Assert::same([
 			'c' => 'Milan Matějček',
 			'company' => true,
 			'city' => 'Mladá Boleslav',
-		], $results[2]->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+		], $results[Ares\Ares::RESULT_SUCCESS][2]->toArray([
+			'company' => 'c',
+			'is_person' => 'company',
+			'city' => null,
+		]));
+
 		Assert::same([
+			'in' => '123',
 			'code' => 0,
-			'message' => 'Chyba 61 - subjekt zanikl'
-		], $results[3]->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+			'message' => 'Chyba 71 - nenalezeno 123',
+		], $results[Ares\Ares::RESULT_FAILED][1]->toArray());
+		Assert::same([
+			'in' => '25596641',
+			'code' => 0,
+			'message' => 'Chyba 61 - subjekt zanikl',
+		], $results[Ares\Ares::RESULT_FAILED][3]->toArray());
 	}
 
 }

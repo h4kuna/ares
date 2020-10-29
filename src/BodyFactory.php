@@ -5,11 +5,8 @@ namespace h4kuna\Ares;
 class BodyFactory
 {
 
-
 	/**
-	 * @param array|string[] $identificationNumbers
-	 * @return string
-	 * @throws \Exception
+	 * @param array<string>|array<int> $identificationNumbers
 	 */
 	public function createBodyContent(array $identificationNumbers): string
 	{
@@ -29,7 +26,7 @@ class BodyFactory
 		';
 
 		foreach ($identificationNumbers as $key => $in) {
-			$content .=  '<Dotaz><Pomocne_ID>' . $key . '</Pomocne_ID><ICO>' . $in . '</ICO></Dotaz>';
+			$content .= "<Dotaz><Pomocne_ID>$key</Pomocne_ID><ICO>$in</ICO></Dotaz>";
 		}
 
 		$content .= '</are:Ares_dotazy>';

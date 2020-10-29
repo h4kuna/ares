@@ -4,10 +4,12 @@ namespace h4kuna\Ares;
 
 use h4kuna\Ares\Exceptions\ConnectionException;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
+use GuzzleHttp;
 
 class Ares
 {
-
+	public const RESULT_FAILED = 'failed';
+	public const RESULT_SUCCESS = 'success';
 	public const URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 	public const POST_URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/xar.cgi';
 	private const POST_IDENTIFICATION_NUMBERS_LIMIT = 100; // in one post request can be max 100 identification numbers
@@ -29,58 +31,41 @@ class Ares
 
 
 	/**
-	 * @param array|string[] $identificationNumbers
-	 * @param array $options
-	 * @return array|Data[]|Error[]
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 * @throws \Exception
+	 * @param array<string>|array<int> $identificationNumbers
+	 * @param array<string, string|int|float> $options
+	 * @return array{failed: array<Error>, success: array<Data>}
 	 */
-	public function loadByIdentificationNumbers(array $identificationNumbers, $options = []): array
+	public function loadByIdentificationNumbers(array $identificationNumbers, array $options = []): array
 	{
 		$client = $this->factory->createGuzzleClient($options);
 		$offset = 0;
-		$output = [];
+		$output = [
+			self::RESULT_FAILED => [],
+			self::RESULT_SUCCESS => [],
+		];
 
 		$identificationNumbersCount = count($identificationNumbers);
 		while (($identificationNumbersCount - $offset) > 0) {
-			$identificationNumbersBatch = array_slice($identificationNumbers, $offset,self::POST_IDENTIFICATION_NUMBERS_LIMIT, TRUE);
+			$identificationNumbersBatch = array_slice($identificationNumbers, $offset, self::POST_IDENTIFICATION_NUMBERS_LIMIT, true);
 			$offset += self::POST_IDENTIFICATION_NUMBERS_LIMIT;
 
-			$response = $client->request('POST', self::POST_URL, [
-				'headers' => [
-					'Content-type' => 'application/xml'
-				],
-				'body' => $this->factory->createBodyFactory()->createBodyContent($identificationNumbersBatch)
-			]);
-
-
-			$simpleXml = simplexml_load_string($response->getBody()->getContents(), "SimpleXMLElement", 0, 'SOAP-ENV', true);
-			if (!$simpleXml) {
-				throw new ConnectionException();
-			}
-			$simpleXml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
-
-
-			$responseData = $simpleXml->children('SOAP-ENV', true)
-				->Body
-				->children('are', true)
-				->children('are', true);
+			$responseData = $this->sendDoseOfInsRequest($client, $identificationNumbersBatch);
 
 			foreach ($responseData as $item) {
-				$D = $item->children('D' , true);
+				$D = $item->children('D', true);
 				$pid = (int) $D->PID->__toString();
 
 				try {
-					if($D->E->asXML() !== FALSE) {
-						$DE = $D->E->children('D', TRUE);
+					if ($D->E->asXML() !== false) {
+						$DE = $D->E->children('D', true);
 						throw new IdentificationNumberNotFoundException(trim($DE->ET->__toString()), $DE->EK->__toString());
 					}
 
 					$this->processXml($D->VBAS, $this->getDataProvider()->prepareData());
 
-					$output[$pid] = $this->getData();
+					$output[self::RESULT_SUCCESS][$pid] = $this->getData();
 				} catch (IdentificationNumberNotFoundException $exception) {
-					$output[$pid] = new Error($exception->getCode(), $exception->getMessage());
+					$output[self::RESULT_FAILED][$pid] = new Error((string) $identificationNumbers[$pid], $exception->getCode(), $exception->getMessage());
 				}
 			}
 		}
@@ -91,6 +76,7 @@ class Ares
 
 	/**
 	 * Load fresh data.
+	 * @param array<string, mixed> $options
 	 * @throws IdentificationNumberNotFoundException
 	 */
 	public function loadData(string $in, array $options = []): Data
@@ -118,7 +104,9 @@ class Ares
 	{
 		$client = $this->factory->createGuzzleClient($options);
 		try {
-			$xmlSource = $client->request('GET', $this->createUrl($in))->getBody()->getContents();
+			$xmlSource = $client->request('GET', $this->createUrl($in))
+				->getBody()
+				->getContents();
 		} catch (\Throwable $e) {
 			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
 		}
@@ -218,6 +206,38 @@ class Ares
 			return null;
 		}
 		return trim((string) $result[0]);
+	}
+
+
+	/**
+	 * @param array<string>|array<int> $identificationNumbersBatch
+	 */
+	public function sendDoseOfInsRequest(
+		GuzzleHttp\Client $client,
+		array $identificationNumbersBatch
+	): \SimpleXMLElement
+	{
+		try {
+			$body = $client->request('POST', self::POST_URL, [
+				'headers' => [
+					'Content-type' => 'application/xml',
+				],
+				'body' => $this->factory->createBodyFactory()->createBodyContent($identificationNumbersBatch),
+			])->getBody()->getContents();
+		} catch (\Throwable $e) {
+			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
+		}
+
+		$simpleXml = @simplexml_load_string($body, "SimpleXMLElement", 0, 'SOAP-ENV', true);
+		if ($simpleXml === false) {
+			throw new ConnectionException();
+		}
+		$simpleXml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
+
+		return $simpleXml->children('SOAP-ENV', true)
+			->Body
+			->children('are', true)
+			->children('are', true);
 	}
 
 }

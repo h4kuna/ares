@@ -24,6 +24,7 @@ class Factory implements IFactory
 		return new GuzzleHttp\Client(['curl' => $options, 'headers' => ['X-Powered-By' => 'h4kuna/ares']]);
 	}
 
+
 	public function createBodyFactory(): BodyFactory
 	{
 		return new BodyFactory();
