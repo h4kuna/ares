@@ -1,9 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
-include __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/TestCase.php';
 
-\Salamium\Testinium\File::setRoot(__DIR__ . '/data');
+Salamium\Testinium\File::setRoot(__DIR__ . '/data');
 
 Tracy\Debugger::enable(false);
 
-Tester\Environment::setup();
+if (!\defined('__PHPSTAN_RUNNING__')) {
+	Tester\Environment::setup();
+}

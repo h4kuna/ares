@@ -1,13 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace h4kuna\Ares;
+namespace h4kuna\Ares\Tests;
 
 use Salamium\Testinium;
 use Tester\Assert;
+use h4kuna\Ares;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-class AresTest extends \Tester\TestCase
+/**
+ * @testCase
+ */
+class AresTest extends TestCase
 {
 
 	/**
@@ -15,15 +19,15 @@ class AresTest extends \Tester\TestCase
 	 */
 	public function testNotExists(): void
 	{
-		(new Ares)->loadData('36620751');
+		(new Ares\Ares)->loadData('36620751');
 	}
 
 
 	public function testFreelancer(): void
 	{
-		$ares = new Ares;
+		$ares = new Ares\Ares;
 		$in = '87744473';
-		/* @var $data Data */
+		/* @var $data Ares\Data */
 		$data = (string) $ares->loadData($in);
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
@@ -32,9 +36,9 @@ class AresTest extends \Tester\TestCase
 
 	public function testMerchant(): void
 	{
-		$ares = new Ares;
+		$ares = new Ares\Ares;
 		$in = '27082440';
-		/* @var $data Data */
+		/* @var $data Ares\Data */
 		$data = (string) $ares->loadData($in);
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
@@ -43,9 +47,9 @@ class AresTest extends \Tester\TestCase
 
 	public function testMerchantInActive(): void
 	{
-		$ares = new Ares;
+		$ares = new Ares\Ares;
 		$in = '25596641';
-		/* @var $data Data */
+		/* @var $data Ares\Data */
 		$data = json_encode($ares->loadData($in));
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
@@ -54,9 +58,9 @@ class AresTest extends \Tester\TestCase
 
 	public function testHouseNumber(): void
 	{
-		$ares = new Ares;
+		$ares = new Ares\Ares;
 		$in = '26713250';
-		/* @var $data Data */
+		/* @var $data Ares\Data */
 		$data = json_encode($ares->loadData($in));
 		// Testinium\File::save($in . '.json', (string) $data);
 		Assert::same(Testinium\File::load($in . '.json'), $data);
@@ -65,7 +69,7 @@ class AresTest extends \Tester\TestCase
 
 	public function testToArray(): void
 	{
-		$ares = new Ares;
+		$ares = new Ares\Ares;
 		$data = $ares->loadData('87744473');
 		Assert::same('Milan Matějček', $data->company);
 
@@ -103,13 +107,13 @@ class AresTest extends \Tester\TestCase
 	 */
 	public function testNoIn(): void
 	{
-		(new Ares)->loadData('123');
+		(new Ares\Ares)->loadData('123');
 	}
 
 
 	public function testForeingPerson(): void
 	{
-		$data = (new Ares)->loadData('6387446');
+		$data = (new Ares\Ares)->loadData('6387446');
 		Assert::true($data->is_person);
 	}
 
@@ -117,7 +121,7 @@ class AresTest extends \Tester\TestCase
 	/**
 	 * @return array<string>
 	 */
-	private static function allPropertyRead(Data $data): array
+	private static function allPropertyRead(Ares\Data $data): array
 	{
 		$doc = (new \ReflectionClass($data))->getDocComment();
 		if ($doc === false) {

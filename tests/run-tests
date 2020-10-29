@@ -11,4 +11,4 @@ else
 	INTERPRET=$@
 fi
 
-$DIR/../vendor/bin/tester -s -j 5 --colors 1 -c $DIR/config/php.ini -p $INTERPRET $DIR/src
+$DIR/../vendor/bin/tester -s -j 4 --colors 1 -c $DIR/config/php.ini -p $INTERPRET $DIR/src
