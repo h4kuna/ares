@@ -168,6 +168,12 @@ class AresTest extends TestCase
 			'code' => 0,
 			'message' => 'Chyba 61 - subjekt zanikl',
 		], $results[Ares\Ares::RESULT_FAILED][3]->toArray());
+
+
+		Assert::same(0, $results[Ares\Ares::RESULT_FAILED][3]->getCode());
+		Assert::same('25596641', $results[Ares\Ares::RESULT_FAILED][3]->getIn());
+		Assert::same('Chyba 61 - subjekt zanikl', $results[Ares\Ares::RESULT_FAILED][3]->getMessage());
+
 	}
 
 }
