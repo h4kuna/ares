@@ -22,6 +22,8 @@ Download information about customer via his IN.
 
 Example
 -------
+
+Load data by one identification number
 ```php
 $ares = new h4kuna\Ares\Ares();
 try {
@@ -30,5 +32,21 @@ try {
     var_dump($response);
 } catch (h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException $e) {
     // log identification number, why is bad? Or make nothing.
+}
+```
+
+Load data by many identification numbers
+
+```php
+/** @var \h4kuna\Ares\Ares $ares */
+$numbers = ['25596641', '26713250', '27082440', '11111111'];
+$res = $ares->loadByIdentificationNumbers($numbers);
+
+if ($res[$ares::RESULT_FAILED] !== []) {
+    var_dump($res[$ares::RESULT_FAILED]);
+}
+
+foreach ($res[$ares::RESULT_SUCCESS] as $r) {
+    var_dump($r->company);
 }
 ```

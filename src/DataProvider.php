@@ -7,12 +7,11 @@ use DateTimeZone;
 
 class DataProvider
 {
-
 	/** @var IFactory */
 	private $factory;
 
-	/** @var array */
-	private $data;
+	/** @var array<mixed> */
+	private $data = [];
 
 	/** @var Data */
 	private $dataMessenger;
