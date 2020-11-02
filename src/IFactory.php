@@ -15,4 +15,7 @@ interface IFactory
 
 	function createDataProvider(): DataProvider;
 
+
+	function createBodyFactory(): BodyFactory;
+
 }

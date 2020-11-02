@@ -12,6 +12,7 @@ final class IdentificationNumberNotFoundException extends AresException
 
 
 	/**
+	 * @param string $message
 	 * @param string $in
 	 */
 	public function __construct($message = "", $in = '', Throwable $previous = null)
