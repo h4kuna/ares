@@ -170,8 +170,11 @@ class Ares
 	}
 
 
-	private static function exists(\SimpleXMLElement $element, string $property): string
+	private static function exists(?\SimpleXMLElement $element, string $property): string
 	{
+	    if ($element === null) {
+	        return '';
+        }
 		return isset($element->{$property}) ? ((string) $element->{$property}) : '';
 	}
 
