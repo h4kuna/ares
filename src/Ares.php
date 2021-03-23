@@ -2,9 +2,9 @@
 
 namespace h4kuna\Ares;
 
+use GuzzleHttp;
 use h4kuna\Ares\Exceptions\ConnectionException;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
-use GuzzleHttp;
 
 class Ares
 {
@@ -116,6 +116,10 @@ class Ares
 		}
 
 		$ns = $xml->getDocNamespaces();
+		if (!isset($ns['are']) || !isset($ns['D'])) {
+			throw new ConnectionException();
+		}
+
 		$answer = $xml->children($ns['are'])->children($ns['D']);
 		$this->parseErrorAnswer($xml, $in);
 		$this->processXml($answer->VBAS, $this->getDataProvider()->prepareData());
