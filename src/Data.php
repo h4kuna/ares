@@ -21,7 +21,7 @@ use h4kuna\DataType\Immutable;
  * @property-read string $house_number
  * @property-read string $street
  * @property-read string $tin
- * @property-read string $vat_payer
+ * @property-read bool $vat_payer
  * @property-read string $zip
  * @property-read array $nace
  */
