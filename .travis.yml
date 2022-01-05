@@ -10,7 +10,7 @@ php:
 jobs:
   allow_failures:
     - php: 8.1
-    
+
 before_script:
   - composer self-update
   - if [ "$TRAVIS_PHP_VERSION" == "7.3" ]; then NTESTER_FLAGS="phpdbg --coverage ./coverage.xml --coverage-src ./src"; else NTESTER_FLAGS=""; fi
