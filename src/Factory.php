@@ -21,7 +21,11 @@ class Factory implements IFactory
 
 	public function createGuzzleClient(array $options = [CURLOPT_CONNECTTIMEOUT => 30]): GuzzleHttp\Client
 	{
-		return new GuzzleHttp\Client(['curl' => $options, 'headers' => ['X-Powered-By' => 'h4kuna/ares']]);
+		return new GuzzleHttp\Client([
+			'curl' => $options,
+			'headers' => ['X-Powered-By' => 'h4kuna/ares'],
+			'verify' => __DIR__ . '/../cert/cacert.pem',
+		]);
 	}
 
 
