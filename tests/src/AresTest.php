@@ -84,19 +84,13 @@ class AresTest extends TestCase
 
 		Assert::same([], array_diff_key($data->getData(), $names));
 
-		Assert::same([
-			"620",
-			"461",
-			"471",
-			"73110",
-			"7490",
-		], $data->nace);
+		Assert::same(['461', '471', '620', '73110', '7490'], $data->nace);
 
 		Assert::type('array', $data->toArray());
 		Assert::same([
 			'c' => 'Milan Matějček',
 			'company' => true,
-			'city' => 'Mladá Boleslav',
+			'city' => 'Dolní Bousov',
 		],
 			$data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
 	}
@@ -129,6 +123,7 @@ class AresTest extends TestCase
 		}
 
 		preg_match_all('/@property-read *(?P<propertyRead>.+)/', $doc, $match);
+
 		return $match['propertyRead'];
 	}
 
@@ -151,7 +146,7 @@ class AresTest extends TestCase
 		Assert::same([
 			'c' => 'Milan Matějček',
 			'company' => true,
-			'city' => 'Mladá Boleslav',
+			'city' => 'Dolní Bousov',
 		], $results[Ares\Ares::RESULT_SUCCESS][2]->toArray([
 			'company' => 'c',
 			'is_person' => 'company',
@@ -169,11 +164,9 @@ class AresTest extends TestCase
 			'message' => 'Chyba 61 - subjekt zanikl',
 		], $results[Ares\Ares::RESULT_FAILED][3]->toArray());
 
-
 		Assert::same(0, $results[Ares\Ares::RESULT_FAILED][3]->getCode());
 		Assert::same('25596641', $results[Ares\Ares::RESULT_FAILED][3]->getIn());
 		Assert::same('Chyba 61 - subjekt zanikl', $results[Ares\Ares::RESULT_FAILED][3]->getMessage());
-
 	}
 
 }
