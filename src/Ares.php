@@ -76,7 +76,7 @@ class Ares
 
 	/**
 	 * Load fresh data.
-	 * @param array<string, mixed> $options
+	 * @param array<int, mixed> $options
 	 * @throws IdentificationNumberNotFoundException
 	 */
 	public function loadData(string $in, array $options = []): Data
@@ -97,7 +97,7 @@ class Ares
 
 	/**
 	 * Load XML and fill Data object
-	 * @param array<string, mixed> $options
+	 * @param array<int, mixed> $options
 	 * @throws IdentificationNumberNotFoundException
 	 */
 	private function loadXML(string $in, array $options): void
