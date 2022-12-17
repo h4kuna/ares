@@ -11,20 +11,39 @@
       "role": "Developer"
     }
   ],
-  "require": {
-    "php": ">=7.1",
-    "ext-curl": "*",
-    "ext-simplexml": "*",
-    "guzzlehttp/guzzle": "^6.1 | ^7.0",
-    "h4kuna/data-type": "^2.1.1"
-  },
   "autoload": {
     "psr-4": {
-      "h4kuna\\Ares\\": ["src/", "tests/src/"]
+      "h4kuna\\Ares\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "h4kuna\\Ares\\Tests\\": "tests/src/"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*",
+    "psr/http-client": "^1.0",
+    "psr/http-factory": "^1.0",
+    "psr/http-message": "^1.0"
+  },
   "require-dev": {
-    "salamium/testinium": "^0.1",
-    "phpstan/phpstan": "^0.12"
+    "guzzlehttp/guzzle": "^7.5",
+    "nette/tester": "^2.4",
+    "phpstan/phpstan": "^1.8",
+    "tracy/tracy": "^2.9"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "phpstan": "vendor/bin/phpstan analyse -c tests/fixtures/phpstan.neon --level max src/ tests/src/",
+    "tests": "vendor/bin/tester -s -j 4 --colors 1 -s -C tests/src"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "As default implementation for PSR standards."
   }
 }

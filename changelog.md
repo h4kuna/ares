@@ -1,3 +1,14 @@
+v2.0.0
+======
+- remove support php < 7.4
+- serialized date use RFC3339 instead of ISO8601, because ISO is deprecated by php
+- removed method Ares::getData()
+- update phpstan
+- properties Data::$created and Data::$dissolved use \DateTimeImmutable instead of \DateTime
+- PSR-7, PSR-17 and PSR-18 ready
+- remove dependency on guzzlehttp/guzzle
+- prepared AresFactory::create() for instance Ares class
+
 v1.4.0
 ======
 - remove support php < 7.1
