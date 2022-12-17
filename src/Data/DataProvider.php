@@ -1,45 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace h4kuna\Ares;
-
-use DateTime;
-use DateTimeZone;
+namespace h4kuna\Ares\Data;
 
 class DataProvider
 {
-	/** @var IFactory */
-	private $factory;
-
-	/** @var array<mixed> */
-	private $data = [];
-
-	/** @var Data */
-	private $dataMessenger;
+	private Data $data;
 
 
-	public function __construct(IFactory $dataFactory)
+	public function __construct(Data $data)
 	{
-		$this->factory = $dataFactory;
+		$this->data = $data;
 	}
 
 
 	public function getData(): Data
 	{
-		if (is_array($this->data)) {
-			$this->setFileNumberAndCourt();
-			$this->dataMessenger = $this->factory->createData($this->data);
-		}
-		return $this->dataMessenger;
-	}
+		$this->setFileNumberAndCourt();
 
-
-	/**
-	 * @return static
-	 */
-	public function prepareData()
-	{
-		$this->data = [];
-		return $this;
+		return $this->data;
 	}
 
 
@@ -48,7 +26,8 @@ class DataProvider
 	 */
 	public function setActive(bool $active)
 	{
-		$this->data['active'] = $active;
+		$this->data->active = $active;
+
 		return $this;
 	}
 
@@ -58,7 +37,8 @@ class DataProvider
 	 */
 	public function setCity(string $city)
 	{
-		$this->data['city'] = self::toNull($city);
+		$this->data->city = self::toNull($city);
+
 		return $this;
 	}
 
@@ -68,7 +48,8 @@ class DataProvider
 	 */
 	public function setCompany(string $company)
 	{
-		$this->data['company'] = self::toNull($company);
+		$this->data->company = self::toNull($company);
+
 		return $this;
 	}
 
@@ -78,7 +59,8 @@ class DataProvider
 	 */
 	public function setCourt(string $court)
 	{
-		$this->data['court'] = self::toNull($court);
+		$this->data->court = self::toNull($court);
+
 		return $this;
 	}
 
@@ -88,7 +70,8 @@ class DataProvider
 	 */
 	public function setCreated(string $date)
 	{
-		$this->data['created'] = self::createDateTime($date);
+		$this->data->created = self::createDateTime($date);
+
 		return $this;
 	}
 
@@ -100,9 +83,8 @@ class DataProvider
 	{
 		if ($date === null) {
 			$this->setActive(true);
-			$this->data['dissolved'] = null;
 		} else {
-			$this->data['dissolved'] = self::createDateTime($date);
+			$this->data->dissolved = self::createDateTime($date);
 			$this->setActive(false);
 		}
 
@@ -115,7 +97,8 @@ class DataProvider
 	 */
 	public function setFileNumber(string $fileNumber)
 	{
-		$this->data['file_number'] = self::toNull($fileNumber);
+		$this->data->file_number = self::toNull($fileNumber);
+
 		return $this;
 	}
 
@@ -125,7 +108,8 @@ class DataProvider
 	 */
 	public function setIN(string $in)
 	{
-		$this->data['in'] = self::toNull($in);
+		$this->data->in = $in;
+
 		return $this;
 	}
 
@@ -135,17 +119,18 @@ class DataProvider
 	 */
 	public function setIsPerson(string $s)
 	{
-		$this->data['is_person'] = $s <= '108' || $s === '424' || $s === '425';
-		$this->data['legal_form_code'] = (int) $s;
+		$this->data->is_person = $s <= '108' || $s === '424' || $s === '425';
+		$this->data->legal_form_code = (int) $s;
+
 		return $this;
 	}
 
 
 	private function setFileNumberAndCourt(): void
 	{
-		$this->data['court_all'] = null;
-		if ($this->data['file_number'] && $this->data['court']) {
-			$this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
+		$this->data->court_all = null;
+		if ($this->data->file_number && $this->data->court) {
+			$this->data->court_all = $this->data->file_number . ', ' . $this->data->court;
 		}
 	}
 
@@ -155,7 +140,8 @@ class DataProvider
 	 */
 	public function setCityDistrict(string $district)
 	{
-		$this->data['city_district'] = self::toNull($district);
+		$this->data->city_district = self::toNull($district);
+
 		return $this;
 	}
 
@@ -165,7 +151,8 @@ class DataProvider
 	 */
 	public function setCityPost(string $district)
 	{
-		$this->data['city_post'] = self::toNull($district);
+		$this->data->city_post = self::toNull($district);
+
 		return $this;
 	}
 
@@ -175,12 +162,15 @@ class DataProvider
 	 */
 	public function setStreet(string $street)
 	{
-		$this->data['street'] = self::toNull($street);
+		$this->data->street = self::toNull($street);
+
 		return $this;
 	}
 
 
 	/**
+	 * @param string $cd
+	 * @param string $co
 	 * @return static
 	 */
 	public function setHouseNumber(string $cd, string $co, string $ca)
@@ -190,7 +180,8 @@ class DataProvider
 			$houseNumber = self::toNull($ca);
 		}
 
-		$this->data['house_number'] = $houseNumber;
+		$this->data->house_number = $houseNumber === '0' ? null : $houseNumber;
+
 		return $this;
 	}
 
@@ -200,8 +191,9 @@ class DataProvider
 	 */
 	public function setTIN(string $s)
 	{
-		$this->data['tin'] = self::toNull($s);
-		$this->data['vat_payer'] = (bool) $s;
+		$this->data->tin = self::toNull($s);
+		$this->data->vat_payer = (bool) $this->data->tin;
+
 		return $this;
 	}
 
@@ -211,12 +203,14 @@ class DataProvider
 	 */
 	public function setZip(string $zip)
 	{
-		$this->data['zip'] = self::toNull($zip);
+		$this->data->zip = self::toNull($zip);
+
 		return $this;
 	}
 
 
 	/**
+	 * @param array<int|string> $nace
 	 * @return static
 	 */
 	public function setNace(array $nace)
@@ -225,7 +219,8 @@ class DataProvider
 		foreach ($nace as $item) {
 			$newNace[] = (string) $item;
 		}
-		$this->data['nace'] = $newNace;
+		$this->data->nace = $newNace;
+
 		return $this;
 	}
 
@@ -236,13 +231,14 @@ class DataProvider
 		if ($string === '') {
 			return null;
 		}
+
 		return $string;
 	}
 
 
-	private static function createDateTime(string $date): DateTime
+	private static function createDateTime(string $date): \DateTimeImmutable
 	{
-		return new DateTime($date, new DateTimeZone('Europe/Prague'));
+		return new \DateTimeImmutable($date, new \DateTimeZone('Europe/Prague'));
 	}
 
 }

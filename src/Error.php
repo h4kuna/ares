@@ -2,16 +2,16 @@
 
 namespace h4kuna\Ares;
 
+/**
+ * The class will be readonly in future php version.
+ */
 final class Error
 {
-	/** @var string */
-	private $in;
+	public string $in;
 
-	/** @var int */
-	private $code;
+	public int $code;
 
-	/** @var string */
-	private $message;
+	public string $message;
 
 
 	public function __construct(string $in, int $code, string $message)
@@ -22,24 +22,9 @@ final class Error
 	}
 
 
-	public function getCode(): int
-	{
-		return $this->code;
-	}
-
-
-	public function getMessage(): string
-	{
-		return $this->message;
-	}
-
-
-	public function getIn(): string
-	{
-		return $this->in;
-	}
-
-
+	/**
+	 * @return array{in: string, code: int, message: string}
+	 */
 	public function toArray(): array
 	{
 		return [

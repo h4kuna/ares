@@ -2,42 +2,38 @@
 
 namespace h4kuna\Ares;
 
-use GuzzleHttp;
+use h4kuna\Ares\Data\Data;
+use h4kuna\Ares\Data\DataProvider;
+use h4kuna\Ares\Data\DataProviderFactory;
 use h4kuna\Ares\Exceptions\ConnectionException;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
+use h4kuna\Ares\Http\RequestProvider;
 
 class Ares
 {
 	public const RESULT_FAILED = 'failed';
 	public const RESULT_SUCCESS = 'success';
-	public const URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
-	public const POST_URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/xar.cgi';
+
 	private const POST_IDENTIFICATION_NUMBERS_LIMIT = 100; // in one post request can be max 100 identification numbers
 
-	/** @var IFactory */
-	private $factory;
+	protected RequestProvider $requestProvider;
 
-	/** @var DataProvider */
-	private $dataProvider;
+	protected DataProviderFactory $dataProviderFactory;
 
 
-	public function __construct(IFactory $factory = null)
+	public function __construct(RequestProvider $requestProvider, DataProviderFactory $dataProviderFactory)
 	{
-		if ($factory === null) {
-			$factory = new Factory();
-		}
-		$this->factory = $factory;
+		$this->requestProvider = $requestProvider;
+		$this->dataProviderFactory = $dataProviderFactory;
 	}
 
 
 	/**
 	 * @param array<string>|array<int> $identificationNumbers
-	 * @param array<string, string|int|float> $options
 	 * @return array{failed: array<Error>, success: array<Data>}
 	 */
-	public function loadByIdentificationNumbers(array $identificationNumbers, array $options = []): array
+	public function loadByIdentificationNumbers(array $identificationNumbers): array
 	{
-		$client = $this->factory->createGuzzleClient($options);
 		$offset = 0;
 		$output = [
 			self::RESULT_FAILED => [],
@@ -49,7 +45,7 @@ class Ares
 			$identificationNumbersBatch = array_slice($identificationNumbers, $offset, self::POST_IDENTIFICATION_NUMBERS_LIMIT, true);
 			$offset += self::POST_IDENTIFICATION_NUMBERS_LIMIT;
 
-			$responseData = $this->sendDoseOfInsRequest($client, $identificationNumbersBatch);
+			$responseData = $this->sendDoseOfInsRequest($identificationNumbersBatch);
 
 			foreach ($responseData as $item) {
 				$D = $item->children('D', true);
@@ -61,9 +57,10 @@ class Ares
 						throw new IdentificationNumberNotFoundException(trim($DE->ET->__toString()), $DE->EK->__toString());
 					}
 
-					$this->processXml($D->VBAS, $this->getDataProvider()->prepareData());
+					$provider = $this->dataProviderFactory->create();
+					$this->processXml($D->VBAS, $provider);
 
-					$output[self::RESULT_SUCCESS][$pid] = $this->getData();
+					$output[self::RESULT_SUCCESS][$pid] = $provider->getData();
 				} catch (IdentificationNumberNotFoundException $exception) {
 					$output[self::RESULT_FAILED][$pid] = new Error((string) $identificationNumbers[$pid], $exception->getCode(), $exception->getMessage());
 				}
@@ -75,41 +72,24 @@ class Ares
 
 
 	/**
-	 * Load fresh data.
-	 * @param array<int, mixed> $options
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData(string $in, array $options = []): Data
+	public function loadData(string $in): Data
 	{
-		$this->loadXML($in, $options);
-		return $this->getData();
-	}
-
-
-	/**
-	 * Get temporary data.
-	 */
-	public function getData(): Data
-	{
-		return $this->getDataProvider()->getData();
+		return $this->loadXML($in)->getData();
 	}
 
 
 	/**
 	 * Load XML and fill Data object
-	 * @param array<int, mixed> $options
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML(string $in, array $options): void
+	private function loadXML(string $in): DataProvider
 	{
-		$client = $this->factory->createGuzzleClient($options);
-		try {
-			$xmlSource = $client->request('GET', $this->createUrl($in))
-				->getBody()
-				->getContents();
-		} catch (\Throwable $e) {
-			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
-		}
+		$xmlSource = $this->requestProvider->oneIn($in)
+			->getBody()
+			->getContents();
+
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
 			throw new ConnectionException();
@@ -122,7 +102,10 @@ class Ares
 
 		$answer = $xml->children($ns['are'])->children($ns['D']);
 		$this->parseErrorAnswer($xml, $in);
-		$this->processXml($answer->VBAS, $this->getDataProvider()->prepareData());
+		$provider = $this->dataProviderFactory->create();
+		$this->processXml($answer->VBAS, $provider);
+
+		return $provider;
 	}
 
 
@@ -155,31 +138,15 @@ class Ares
 	}
 
 
-	private function createUrl(string $inn): string
-	{
-		$parameters = [
-			'ico' => $inn,
-			'aktivni' => 'false',
-		];
-		return self::URL . '?' . http_build_query($parameters);
-	}
-
-
-	private function getDataProvider(): DataProvider
-	{
-		if ($this->dataProvider === null) {
-			$this->dataProvider = $this->factory->createDataProvider();
-		}
-		return $this->dataProvider;
-	}
-
-
 	private static function exists(?\SimpleXMLElement $element, string $property): string
 	{
 		return isset($element->{$property}) ? ((string) $element->{$property}) : '';
 	}
 
 
+	/**
+	 * @return array<string|int>
+	 */
 	private static function existsArray(\SimpleXMLElement $element, string $property): array
 	{
 		return isset($element->{$property}) ? ((array) $element->{$property}) : [];
@@ -196,7 +163,7 @@ class Ares
 
 		// 61 - subject disappeared
 		// 71 - not exists
-		if (empty($errorMessage)) {
+		if ($errorMessage === '') {
 			throw new ConnectionException();
 		}
 		throw new IdentificationNumberNotFoundException(sprintf('IN "%s", Error: #%s, %s', $in, $errorCode, $errorMessage), $in);
@@ -209,6 +176,7 @@ class Ares
 		if ($result === false || !isset($result[0])) {
 			return null;
 		}
+
 		return trim((string) $result[0]);
 	}
 
@@ -217,22 +185,14 @@ class Ares
 	 * @param array<string>|array<int> $identificationNumbersBatch
 	 */
 	public function sendDoseOfInsRequest(
-		GuzzleHttp\Client $client,
-		array $identificationNumbersBatch
+		array $identificationNumbersBatch,
 	): \SimpleXMLElement
 	{
-		try {
-			$body = $client->request('POST', self::POST_URL, [
-				'headers' => [
-					'Content-type' => 'application/xml',
-				],
-				'body' => $this->factory->createBodyFactory()->createBodyContent($identificationNumbersBatch),
-			])->getBody()->getContents();
-		} catch (\Throwable $e) {
-			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
-		}
+		$body = $this->requestProvider->multiIn($identificationNumbersBatch)
+			->getBody()
+			->getContents();
 
-		$simpleXml = @simplexml_load_string($body, "SimpleXMLElement", 0, 'SOAP-ENV', true);
+		$simpleXml = @simplexml_load_string($body, \SimpleXMLElement::class, 0, 'SOAP-ENV', true);
 		if ($simpleXml === false) {
 			throw new ConnectionException();
 		}

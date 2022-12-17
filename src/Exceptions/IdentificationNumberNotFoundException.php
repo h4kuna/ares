@@ -7,15 +7,10 @@ use Throwable;
 final class IdentificationNumberNotFoundException extends AresException
 {
 
-	/** @var string */
-	private $in;
+	private string $in;
 
 
-	/**
-	 * @param string $message
-	 * @param string $in
-	 */
-	public function __construct($message = "", $in = '', Throwable $previous = null)
+	public function __construct(string $message = '', string $in = '', Throwable $previous = null)
 	{
 		parent::__construct($message, 0, $previous);
 		$this->in = $in;

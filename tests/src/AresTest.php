@@ -2,9 +2,8 @@
 
 namespace h4kuna\Ares\Tests;
 
-use Salamium\Testinium;
-use Tester\Assert;
 use h4kuna\Ares;
+use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -19,70 +18,61 @@ class AresTest extends TestCase
 	 */
 	public function testNotExists(): void
 	{
-		(new Ares\Ares)->loadData('36620751');
+		(new Ares\AresFactory())->create()->loadData('36620751');
 	}
 
 
 	public function testFreelancer(): void
 	{
-		$ares = new Ares\Ares;
+		$ares = (new Ares\AresFactory())->create();
 		$in = '87744473';
-		/* @var $data Ares\Data */
-		$data = (string) $ares->loadData($in);
-		// Testinium\File::save($in . '.json', (string) $data);
-		Assert::same(Testinium\File::load($in . '.json'), $data);
+		$data = json_decode((string) $ares->loadData($in));
+		Assert::equal(loadResult($in), $data);
 	}
 
 
 	public function testMerchant(): void
 	{
-		$ares = new Ares\Ares;
+		$ares = (new Ares\AresFactory())->create();
 		$in = '27082440';
-		/* @var $data Ares\Data */
-		$data = (string) $ares->loadData($in);
-		// Testinium\File::save($in . '.json', (string) $data);
-		Assert::same(Testinium\File::load($in . '.json'), $data);
+		$data = json_decode((string) $ares->loadData($in));
+		Assert::equal(loadResult($in), $data);
 	}
 
 
 	public function testMerchantInActive(): void
 	{
-		$ares = new Ares\Ares;
+		$ares = (new Ares\AresFactory())->create();
 		$in = '25596641';
-		/* @var $data Ares\Data */
-		$data = json_encode($ares->loadData($in));
-		// Testinium\File::save($in . '.json', (string) $data);
-		Assert::same(Testinium\File::load($in . '.json'), $data);
+		$data = json_decode((string) $ares->loadData($in));
+		Assert::equal(loadResult($in), $data);
 	}
 
 
 	public function testHouseNumber(): void
 	{
-		$ares = new Ares\Ares;
+		$ares = (new Ares\AresFactory())->create();
 		$in = '26713250';
-		/* @var $data Ares\Data */
-		$data = json_encode($ares->loadData($in));
-		// Testinium\File::save($in . '.json', (string) $data);
-		Assert::same(Testinium\File::load($in . '.json'), $data);
+		$data = json_decode((string) $ares->loadData($in));
+		Assert::equal(loadResult($in), $data);
 	}
 
 
 	public function testToArray(): void
 	{
-		$ares = new Ares\Ares;
+		$ares = (new Ares\AresFactory())->create();
 		$data = $ares->loadData('87744473');
 		Assert::same('Milan Matějček', $data->company);
 
 		$names = [];
-		foreach (self::allPropertyRead($data) as $value) {
-			if (!preg_match('~\$(?P<name>.*)~', $value, $find)) {
-				throw new \RuntimeException('Bad annotation property-read od Data class: ' . $value);
-			}
-			Assert::true($data->exists($find['name']));
-			$names[$find['name']] = true;
+		$arrayData = $data->toArray();
+		$properties = self::allPropertyRead();
+		foreach ($properties as $key => $name) {
+			Assert::true(array_key_exists($name, $arrayData));
+			unset($properties[$key]);
 		}
 
-		Assert::same([], array_diff_key($data->getData(), $names));
+		Assert::same([], $properties);
 
 		Assert::same(['461', '471', '620', '73110', '7490'], $data->nace);
 
@@ -101,13 +91,13 @@ class AresTest extends TestCase
 	 */
 	public function testNoIn(): void
 	{
-		(new Ares\Ares)->loadData('123');
+		(new Ares\AresFactory())->create()->loadData('123');
 	}
 
 
 	public function testForeingPerson(): void
 	{
-		$data = (new Ares\Ares)->loadData('6387446');
+		$data = (new Ares\AresFactory())->create()->loadData('6387446');
 		Assert::true($data->is_person);
 	}
 
@@ -115,23 +105,19 @@ class AresTest extends TestCase
 	/**
 	 * @return array<string>
 	 */
-	private static function allPropertyRead(Ares\Data $data): array
+	private static function allPropertyRead(): array
 	{
-		$doc = (new \ReflectionClass($data))->getDocComment();
-		if ($doc === false) {
-			throw new \RuntimeException();
-		}
+		$reflection = new \ReflectionClass(Ares\Data\Data::class);
+		$properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
 
-		preg_match_all('/@property-read *(?P<propertyRead>.+)/', $doc, $match);
-
-		return $match['propertyRead'];
+		return array_column($properties, 'name');
 	}
 
 
 	public function testLoadByIdentificationNumbers(): void
 	{
 		$identificationNumbers = ['6387446', '123', '87744473', '25596641'];
-		$results = (new Ares\Ares)->loadByIdentificationNumbers($identificationNumbers);
+		$results = (new Ares\AresFactory())->create()->loadByIdentificationNumbers($identificationNumbers);
 		Assert::count(2, $results[Ares\Ares::RESULT_FAILED]);
 		Assert::count(2, $results[Ares\Ares::RESULT_SUCCESS]);
 		Assert::same([
@@ -164,9 +150,9 @@ class AresTest extends TestCase
 			'message' => 'Chyba 61 - subjekt zanikl',
 		], $results[Ares\Ares::RESULT_FAILED][3]->toArray());
 
-		Assert::same(0, $results[Ares\Ares::RESULT_FAILED][3]->getCode());
-		Assert::same('25596641', $results[Ares\Ares::RESULT_FAILED][3]->getIn());
-		Assert::same('Chyba 61 - subjekt zanikl', $results[Ares\Ares::RESULT_FAILED][3]->getMessage());
+		Assert::same(0, $results[Ares\Ares::RESULT_FAILED][3]->code);
+		Assert::same('25596641', $results[Ares\Ares::RESULT_FAILED][3]->in);
+		Assert::same('Chyba 61 - subjekt zanikl', $results[Ares\Ares::RESULT_FAILED][3]->message);
 	}
 
 }
