@@ -184,9 +184,7 @@ class Ares
 	/**
 	 * @param array<string>|array<int> $identificationNumbersBatch
 	 */
-	public function sendDoseOfInsRequest(
-		array $identificationNumbersBatch,
-	): \SimpleXMLElement
+	public function sendDoseOfInsRequest(array $identificationNumbersBatch): \SimpleXMLElement
 	{
 		$body = $this->requestProvider->multiIn($identificationNumbersBatch)
 			->getBody()
