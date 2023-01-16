@@ -35,6 +35,8 @@ class AresTest extends TestCase
 		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RZP_4));
 		Assert::same('N', $aresData->psu(Ares\Data\SubjectFlag::NRPZS_5));
 		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RPDPH_6));
+
+		Assert::equal($aresData, unserialize(serialize($aresData)));
 	}
 
 

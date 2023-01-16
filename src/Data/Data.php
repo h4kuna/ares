@@ -106,6 +106,20 @@ class Data implements \JsonSerializable
 	}
 
 
+	public function __serialize(): array
+	{
+		return $this->getData();
+	}
+
+
+	public function __unserialize(array $data): void
+	{
+		foreach ($data as $name => $value) {
+			$this->$name = $value;
+		}
+	}
+
+
 	/**
 	 * @return array<string, mixed>
 	 */
