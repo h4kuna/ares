@@ -126,6 +126,20 @@ class DataProvider
 	}
 
 
+	/**
+	 * Příznaky subjektu - NAAANANNNNNNNNNNNNNNPNNNANNNNN
+	 * @see https://wwwinfo.mfcr.cz/ares/ares_xml_standard.html.cz
+	 *
+	 * @return static
+	 */
+	public function setPSU(string $psu)
+	{
+		$this->data->psu = $psu;
+
+		return $this;
+	}
+
+
 	private function setFileNumberAndCourt(): void
 	{
 		$this->data->court_all = null;

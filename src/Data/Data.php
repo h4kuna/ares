@@ -45,6 +45,8 @@ class Data implements \JsonSerializable
 	 */
 	public array $nace = [];
 
+	public string $psu = '';
+
 
 	/**
 	 * @param array<string, string|null> $map
@@ -68,6 +70,15 @@ class Data implements \JsonSerializable
 		}
 
 		return $mappedData;
+	}
+
+
+	/**
+	 * @param SubjectFlag::* $index
+	 */
+	public function psu(int $index): string
+	{
+		return substr($this->psu, $index, 1);
 	}
 
 

@@ -26,8 +26,15 @@ class AresTest extends TestCase
 	{
 		$ares = (new Ares\AresFactory())->create();
 		$in = '87744473';
-		$data = json_decode((string) $ares->loadData($in));
+		$aresData = $ares->loadData($in);
+		$data = json_decode((string) $aresData);
 		Assert::equal(loadResult($in), $data);
+
+		Assert::same('N', $aresData->psu(Ares\Data\SubjectFlag::VR_2));
+		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RES_3));
+		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RZP_4));
+		Assert::same('N', $aresData->psu(Ares\Data\SubjectFlag::NRPZS_5));
+		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RPDPH_6));
 	}
 
 

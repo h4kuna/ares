@@ -1,1 +1,22 @@
-{"in":"25596641","tin":null,"vat_payer":false,"company":"ZERO Brno s.r.o.","zip":"60300","street":"K\u0159\u00eddlovick\u00e1","city":"Brno","house_number":"943\/24a","city_post":"Brno-st\u0159ed","city_district":"Star\u00e9 Brno","is_person":false,"legal_form_code":112,"created":"2000-04-13T00:00:00+02:00","nace":[],"dissolved":"2009-05-26T00:00:00+02:00","active":false,"file_number":null,"court":null,"court_all":null}
+{
+    "active": false,
+    "city": "Brno",
+    "company": "ZERO Brno s.r.o.",
+    "court": null,
+    "created": "2000-04-13T00:00:00+02:00",
+    "dissolved": "2009-05-26T00:00:00+02:00",
+    "file_number": null,
+    "city_district": "Star\u00e9 Brno",
+    "city_post": "Brno-st\u0159ed",
+    "court_all": null,
+    "in": "25596641",
+    "is_person": false,
+    "legal_form_code": 112,
+    "house_number": "943\/24a",
+    "street": "K\u0159\u00eddlovick\u00e1",
+    "tin": null,
+    "vat_payer": false,
+    "zip": "60300",
+    "nace": [],
+    "psu": "NZHHNNNNZNNNNNNNNNNNNNNNZNNNNN"
+}

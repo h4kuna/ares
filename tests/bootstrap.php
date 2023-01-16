@@ -2,11 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function loadResult(string $name, string $save = ''): \stdClass
+function loadResult(string $name, \stdClass $save = null): \stdClass
 {
 	$file = __DIR__ . "/fixtures/response/$name.json";
-	if ($save !== '') {
-		file_put_contents($file, $save);
+	if ($save !== null) {
+		file_put_contents($file, json_encode($save, JSON_PRETTY_PRINT));
 	}
 
 	return json_decode(file_get_contents($file));
