@@ -43,7 +43,7 @@ class Data implements \JsonSerializable
 	/**
 	 * @var array<string>
 	 */
-	public array $nace;
+	public array $nace = [];
 
 
 	/**

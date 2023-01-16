@@ -2,8 +2,6 @@
 
 namespace h4kuna\Ares\Data;
 
-use h4kuna\Ares;
-
 class DataProviderFactory
 {
 
