@@ -3,7 +3,7 @@
 namespace h4kuna\Ares;
 
 use GuzzleHttp;
-use h4kuna\Ares\Data\DataProviderFactory;
+use h4kuna\Ares\Basic;
 use h4kuna\Ares\Http\RequestProvider;
 
 final class AresFactory
@@ -11,7 +11,8 @@ final class AresFactory
 
 	public function create(): Ares
 	{
-		return new Ares($this->createRequestProviderFactory(), new DataProviderFactory());
+		$basicContent = new Basic\ContentProvider(new Basic\DataProviderFactory(), $this->createRequestProviderFactory());
+		return new Ares($basicContent);
 	}
 
 

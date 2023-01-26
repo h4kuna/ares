@@ -1,7 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace h4kuna\Ares\Data;
+namespace h4kuna\Ares\Basic;
 
+/**
+ * @phpstan-type DataType array<string, mixed>
+ */
 class Data implements \JsonSerializable
 {
 	public bool $active;
@@ -106,12 +109,18 @@ class Data implements \JsonSerializable
 	}
 
 
+	/**
+	 * @return DataType
+	 */
 	public function __serialize(): array
 	{
 		return $this->getData();
 	}
 
 
+	/**
+	 * @param DataType $data
+	 */
 	public function __unserialize(array $data): void
 	{
 		foreach ($data as $name => $value) {

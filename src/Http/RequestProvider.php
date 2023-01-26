@@ -14,6 +14,7 @@ class RequestProvider
 {
 	private const BASE_URL = 'https://wwwinfo.mfcr.cz/cgi-bin/ares';
 	protected const ONE_IN = self::BASE_URL . '/darv_bas.cgi';
+	protected const ONE_BL = self::BASE_URL . '/darv_or.cgi';
 	protected const MULTI_IN = self::BASE_URL . '/xar.cgi';
 
 	private RequestFactoryInterface $requestFactory;
@@ -35,24 +36,55 @@ class RequestProvider
 	}
 
 
-	public function oneIn(string $in): ResponseInterface
+	public function businessList(string $in): \SimpleXMLElement
 	{
-		$request = $this->requestFactory->createRequest('GET', self::createUrl($in))
-			->withHeader('X-Powered-By', 'h4kuna/ares');
+		$parameters = [
+			'ico' => $in,
+		];
+
+		$url = self::ONE_BL . '?' . http_build_query($parameters);
+
+		return $this->xmlResponse($url);
+	}
+
+
+	public function basic(string $in): \SimpleXMLElement
+	{
+		return $this->xmlResponse(self::createUrl($in));
+	}
+
+
+	protected function xmlResponse(string $url): \SimpleXMLElement
+	{
+		$request = $this->createRequest($url);
 		try {
-			return $this->client->sendRequest($this->modifyOneRequest($request));
+			$response = $this->client->sendRequest($request);
 		} catch (ClientExceptionInterface $e) {
 			throw new ConnectionException($e->getMessage(), $e->getCode(), $e);
 		}
+
+		$xml = @simplexml_load_string($response->getBody()->getContents());
+		if (!$xml) {
+			throw new ConnectionException();
+		}
+
+		return $xml;
+	}
+
+
+	private function createRequest(string $url, string $method = 'GET'): RequestInterface
+	{
+		return $this->requestFactory->createRequest($method, $url)
+			->withHeader('X-Powered-By', 'h4kuna/ares');
 	}
 
 
 	/**
 	 * @param array<string>|array<int> $identificationNumbersBatch
 	 */
-	public function multiIn(array $identificationNumbersBatch): ResponseInterface
+	public function basicMulti(array $identificationNumbersBatch): ResponseInterface
 	{
-		$request = $this->requestFactory->createRequest('POST', self::MULTI_IN)
+		$request = $this->createRequest(self::MULTI_IN, 'POST')
 			->withHeader('Content-type', 'application/xml')
 			->withBody(
 				$this->streamFactory->createStream(
@@ -76,12 +108,6 @@ class RequestProvider
 		];
 
 		return self::ONE_IN . '?' . http_build_query($parameters);
-	}
-
-
-	protected function modifyOneRequest(RequestInterface $request): RequestInterface
-	{
-		return $request;
 	}
 
 

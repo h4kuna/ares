@@ -26,8 +26,8 @@ Load data by one identification number
 ```php
 $ares = (new h4kuna\Ares\AresFactory())->create();
 try {
-    $response = $ares->loadData('87744473');
-    /* @var $response h4kuna\Ares\Data\Data */
+    $response = $ares->loadBasic('87744473');
+    /* @var $response h4kuna\Ares\Basic\Data */
     var_dump($response);
 } catch (h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException $e) {
     // log identification number, why is bad? Or make nothing.

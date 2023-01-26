@@ -18,7 +18,7 @@ class AresTest extends TestCase
 	 */
 	public function testNotExists(): void
 	{
-		(new Ares\AresFactory())->create()->loadData('36620751');
+		(new Ares\AresFactory())->create()->loadBasic('36620751');
 	}
 
 
@@ -26,15 +26,15 @@ class AresTest extends TestCase
 	{
 		$ares = (new Ares\AresFactory())->create();
 		$in = '87744473';
-		$aresData = $ares->loadData($in);
+		$aresData = $ares->loadBasic($in);
 		$data = json_decode((string) $aresData);
 		Assert::equal(loadResult($in), $data);
 
-		Assert::same('N', $aresData->psu(Ares\Data\SubjectFlag::VR_2));
-		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RES_3));
-		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RZP_4));
-		Assert::same('N', $aresData->psu(Ares\Data\SubjectFlag::NRPZS_5));
-		Assert::same('A', $aresData->psu(Ares\Data\SubjectFlag::RPDPH_6));
+		Assert::same('N', $aresData->psu(Ares\Basic\SubjectFlag::VR_2));
+		Assert::same('A', $aresData->psu(Ares\Basic\SubjectFlag::RES_3));
+		Assert::same('A', $aresData->psu(Ares\Basic\SubjectFlag::RZP_4));
+		Assert::same('N', $aresData->psu(Ares\Basic\SubjectFlag::NRPZS_5));
+		Assert::same('A', $aresData->psu(Ares\Basic\SubjectFlag::RPDPH_6));
 
 		Assert::equal($aresData, unserialize(serialize($aresData)));
 	}
@@ -44,7 +44,7 @@ class AresTest extends TestCase
 	{
 		$ares = (new Ares\AresFactory())->create();
 		$in = '27082440';
-		$data = json_decode((string) $ares->loadData($in));
+		$data = json_decode((string) $ares->loadBasic($in));
 		Assert::equal(loadResult($in), $data);
 	}
 
@@ -53,7 +53,7 @@ class AresTest extends TestCase
 	{
 		$ares = (new Ares\AresFactory())->create();
 		$in = '25596641';
-		$data = json_decode((string) $ares->loadData($in));
+		$data = json_decode((string) $ares->loadBasic($in));
 		Assert::equal(loadResult($in), $data);
 	}
 
@@ -62,7 +62,7 @@ class AresTest extends TestCase
 	{
 		$ares = (new Ares\AresFactory())->create();
 		$in = '26713250';
-		$data = json_decode((string) $ares->loadData($in));
+		$data = json_decode((string) $ares->loadBasic($in));
 		Assert::equal(loadResult($in), $data);
 	}
 
@@ -70,7 +70,7 @@ class AresTest extends TestCase
 	public function testToArray(): void
 	{
 		$ares = (new Ares\AresFactory())->create();
-		$data = $ares->loadData('87744473');
+		$data = $ares->loadBasic('87744473');
 		Assert::same('Milan Matějček', $data->company);
 
 		$names = [];
@@ -100,13 +100,13 @@ class AresTest extends TestCase
 	 */
 	public function testNoIn(): void
 	{
-		(new Ares\AresFactory())->create()->loadData('123');
+		(new Ares\AresFactory())->create()->loadBasic('123');
 	}
 
 
 	public function testForeingPerson(): void
 	{
-		$data = (new Ares\AresFactory())->create()->loadData('6387446');
+		$data = (new Ares\AresFactory())->create()->loadBasic('6387446');
 		Assert::true($data->is_person);
 	}
 
@@ -116,7 +116,7 @@ class AresTest extends TestCase
 	 */
 	private static function allPropertyRead(): array
 	{
-		$reflection = new \ReflectionClass(Ares\Data\Data::class);
+		$reflection = new \ReflectionClass(Ares\Basic\Data::class);
 		$properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
 
 		return array_column($properties, 'name');
