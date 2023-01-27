@@ -23,6 +23,7 @@ class AresTest extends TestCase
 			$data = $ares->loadBusinessList($in);
 		} catch (IdentificationNumberNotFoundException $e) {
 			Assert::same('87744473', $e->getIn());
+
 			return; // intentionally
 		}
 
@@ -49,6 +50,12 @@ class AresTest extends TestCase
 			],
 			[
 				'in' => '25110161', // v.o.s.
+			],
+			[
+				'in' => '62413686', // k.s.
+			],
+			[
+				'in' => '02491427', // o.s.
 			],
 		];
 	}

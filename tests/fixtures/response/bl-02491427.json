@@ -1,0 +1,53 @@
+{
+    "UVOD": {},
+    "ZAU": {
+        "S": {
+            "SSU": "Aktivn\u00ed",
+            "KKZ": {
+                "K": "0"
+            },
+            "VY": {
+                "K": "0"
+            },
+            "ZAM": {
+                "K": "0"
+            },
+            "LI": {
+                "K": "0"
+            }
+        },
+        "ICO": "02491427",
+        "OF": "Z\u00e1pado\u010desk\u00e1 spole\u010dnost, o.s.",
+        "PFO": {
+            "KPF": "706",
+            "NPF": "Spolek",
+            "PFO": "P",
+            "TZU": "Tuzemsk\u00e1"
+        },
+        "SI": {
+            "IDA": "16520806",
+            "KS": "203",
+            "NS": "\u010cesk\u00e1 republika",
+            "NOK": "P\u00edsek",
+            "N": "P\u00edsek",
+            "NCO": "Bud\u011bjovick\u00e9 P\u0159edm\u011bst\u00ed",
+            "NU": "Budovcova",
+            "CD": "105",
+            "TCD": "1",
+            "CO": "4",
+            "PSC": "39701"
+        },
+        "DVOR": "2013-12-27",
+        "DZOR": "2014-01-01",
+        "POD": ""
+    },
+    "REG": {
+        "SZ": {
+            "SD": {
+                "K": "3",
+                "T": "Krajsk\u00fd soud v \u010cesk\u00fdch Bud\u011bjovic\u00edch"
+            },
+            "OV": "L 6235"
+        }
+    }
+}
