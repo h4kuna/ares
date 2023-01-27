@@ -164,10 +164,10 @@ class AresTest extends TestCase
 	}
 
 
-	public function testLoadByIdentificationNumbers(): void
+	public function testLoadBasicMulti(): void
 	{
 		$identificationNumbers = ['6387446', '123', '87744473', '25596641'];
-		$results = (new Ares\AresFactory())->create()->loadByIdentificationNumbers($identificationNumbers);
+		$results = (new Ares\AresFactory())->create()->loadBasicMulti($identificationNumbers);
 		Assert::count(2, $results[Ares\Ares::RESULT_FAILED]);
 		Assert::count(2, $results[Ares\Ares::RESULT_SUCCESS]);
 		Assert::same([

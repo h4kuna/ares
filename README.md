@@ -39,7 +39,7 @@ Load data by many identification numbers
 ```php
 /** @var h4kuna\Ares\Ares $ares */
 $numbers = ['25596641', '26713250', '27082440', '11111111'];
-$res = $ares->loadByIdentificationNumbers($numbers);
+$res = $ares->loadBasicMulti($numbers);
 
 if ($res[$ares::RESULT_FAILED] !== []) {
     var_dump($res[$ares::RESULT_FAILED]);

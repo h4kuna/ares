@@ -28,8 +28,19 @@ class Ares
 	/**
 	 * @param array<string|int> $identificationNumbers
 	 * @return array{failed: array<Error>, success: array<Basic\Data>}
+	 * @deprecated use loadBasicMulti()
 	 */
 	public function loadByIdentificationNumbers(array $identificationNumbers): array
+	{
+		return $this->basicContentProvider->loadByIdentificationNumbers($identificationNumbers);
+	}
+
+
+	/**
+	 * @param array<string|int> $identificationNumbers
+	 * @return array{failed: array<Error>, success: array<Basic\Data>}
+	 */
+	public function loadBasicMulti(array $identificationNumbers): array
 	{
 		return $this->basicContentProvider->loadByIdentificationNumbers($identificationNumbers);
 	}
