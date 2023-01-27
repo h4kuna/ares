@@ -143,7 +143,7 @@ class DataProvider
 	private function setFileNumberAndCourt(): void
 	{
 		$this->data->court_all = null;
-		if ($this->data->file_number && $this->data->court) {
+		if ($this->data->file_number !== null && $this->data->court !== null) {
 			$this->data->court_all = $this->data->file_number . ', ' . $this->data->court;
 		}
 	}

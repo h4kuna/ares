@@ -71,18 +71,8 @@ final class ContentProvider
 
 	/**
 	 * @throws IdentificationNumberNotFoundException
-	 * @deprecated use loadBasic()
 	 */
-	public function loadData(string $in): Data
-	{
-		return $this->loadBasic($in);
-	}
-
-
-	/**
-	 * @throws IdentificationNumberNotFoundException
-	 */
-	public function loadBasic(string $in): Data
+	public function load(string $in): Data
 	{
 		return $this->loadXML($in)->getData();
 	}
@@ -94,15 +84,8 @@ final class ContentProvider
 	 */
 	private function loadXML(string $in): DataProvider
 	{
-		$xml = $this->requestProvider->basic($in);
+		$answer = $this->requestProvider->basic($in);
 
-		$ns = $xml->getDocNamespaces();
-		if (!isset($ns['are']) || !isset($ns['D'])) {
-			throw new ConnectionException();
-		}
-
-		$answer = $xml->children($ns['are'])->children($ns['D']);
-		$this->parseErrorAnswer($xml, $in);
 		$provider = $this->dataProviderFactory->create();
 		$this->processXml($answer->VBAS, $provider);
 
@@ -142,7 +125,7 @@ final class ContentProvider
 
 	private static function exists(?\SimpleXMLElement $element, string $property): string
 	{
-		return isset($element->{$property}) ? ((string) $element->{$property}) : '';
+		return isset($element->$property) ? ((string) $element->$property) : '';
 	}
 
 
@@ -151,35 +134,7 @@ final class ContentProvider
 	 */
 	private static function existsArray(\SimpleXMLElement $element, string $property): array
 	{
-		return isset($element->{$property}) ? ((array) $element->{$property}) : [];
-	}
-
-
-	private function parseErrorAnswer(\SimpleXMLElement $answer, string $in): void
-	{
-		$errorMessage = self::xmlValue($answer, '//D:ET[1]');
-		$errorCode = self::xmlValue($answer, '//D:EK[1]');
-		if ($errorMessage === null && $errorCode === null) {
-			return;
-		}
-
-		// 61 - subject disappeared
-		// 71 - not exists
-		if ($errorMessage === '') {
-			throw new ConnectionException();
-		}
-		throw new IdentificationNumberNotFoundException(sprintf('IN "%s", Error: #%s, %s', $in, $errorCode, $errorMessage), $in);
-	}
-
-
-	private static function xmlValue(\SimpleXMLElement $xml, string $xpath): ?string
-	{
-		$result = $xml->xpath($xpath);
-		if ($result === false || !isset($result[0])) {
-			return null;
-		}
-
-		return trim((string) $result[0]);
+		return isset($element->$property) ? ((array) $element->$property) : [];
 	}
 
 

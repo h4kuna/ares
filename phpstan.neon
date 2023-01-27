@@ -1,0 +1,21 @@
+parameters:
+	level: max
+	paths:
+		- src
+		- tests/src
+	scanDirectories:
+		- tests
+	ignoreErrors:
+		-
+			message: "#^Variable property access on SimpleXMLElement\\.$#"
+			count: 4
+			path: src/Basic/ContentProvider.php
+
+		-
+			message: "#^Variable property access on \\$this\\(h4kuna\\\\Ares\\\\Basic\\\\Data\\)\\.$#"
+			count: 1
+			path: src/Basic/Data.php
+
+
+includes:
+	- vendor/phpstan/phpstan-strict-rules/rules.neon

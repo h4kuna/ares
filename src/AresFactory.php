@@ -11,8 +11,10 @@ final class AresFactory
 
 	public function create(): Ares
 	{
-		$basicContent = new Basic\ContentProvider(new Basic\DataProviderFactory(), $this->createRequestProviderFactory());
-		return new Ares($basicContent);
+		$requestProvider = $this->createRequestProviderFactory();
+		$basicContent = new Basic\ContentProvider(new Basic\DataProviderFactory(), $requestProvider);
+		$businessListProvider = new BusinessList\ContentProvider($requestProvider);
+		return new Ares($basicContent, $businessListProvider);
 	}
 
 

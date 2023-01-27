@@ -10,12 +10,18 @@ class Ares
 	public const RESULT_FAILED = Basic\ContentProvider::RESULT_FAILED;
 	public const RESULT_SUCCESS = Basic\ContentProvider::RESULT_SUCCESS;
 
-	protected Basic\ContentProvider $contentProvider;
+	protected Basic\ContentProvider $basicContentProvider;
+
+	protected BusinessList\ContentProvider $businessListContentProvider;
 
 
-	public function __construct(Basic\ContentProvider $contentProvider)
+	public function __construct(
+		Basic\ContentProvider $contentProvider,
+		BusinessList\ContentProvider $businessListContentProvider
+	)
 	{
-		$this->contentProvider = $contentProvider;
+		$this->basicContentProvider = $contentProvider;
+		$this->businessListContentProvider = $businessListContentProvider;
 	}
 
 
@@ -25,7 +31,7 @@ class Ares
 	 */
 	public function loadByIdentificationNumbers(array $identificationNumbers): array
 	{
-		return $this->contentProvider->loadByIdentificationNumbers($identificationNumbers);
+		return $this->basicContentProvider->loadByIdentificationNumbers($identificationNumbers);
 	}
 
 
@@ -35,7 +41,7 @@ class Ares
 	 */
 	public function loadData(string $in): Basic\Data
 	{
-		return $this->contentProvider->loadBasic($in);
+		return $this->basicContentProvider->load($in);
 	}
 
 
@@ -44,7 +50,16 @@ class Ares
 	 */
 	public function loadBasic(string $in): Basic\Data
 	{
-		return $this->contentProvider->loadBasic($in);
+		return $this->basicContentProvider->load($in);
+	}
+
+
+	/**
+	 * @throws IdentificationNumberNotFoundException
+	 */
+	public function loadBusinessList(string $in): \stdClass
+	{
+		return $this->businessListContentProvider->load($in)->Vypis_OR;
 	}
 
 }

@@ -3,6 +3,7 @@
 namespace h4kuna\Ares\Http;
 
 use h4kuna\Ares\Exceptions\ConnectionException;
+use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -36,6 +37,9 @@ class RequestProvider
 	}
 
 
+	/**
+	 * @throws IdentificationNumberNotFoundException
+	 */
 	public function businessList(string $in): \SimpleXMLElement
 	{
 		$parameters = [
@@ -44,17 +48,30 @@ class RequestProvider
 
 		$url = self::ONE_BL . '?' . http_build_query($parameters);
 
-		return $this->xmlResponse($url);
+		return $this->xmlResponse($url, $in);
 	}
 
 
+	/**
+	 * @throws IdentificationNumberNotFoundException
+	 */
 	public function basic(string $in): \SimpleXMLElement
 	{
-		return $this->xmlResponse(self::createUrl($in));
+		$parameters = [
+			'ico' => $in,
+			'aktivni' => 'false',
+		];
+
+		$url = self::ONE_IN . '?' . http_build_query($parameters);
+
+		return $this->xmlResponse($url, $in);
 	}
 
 
-	protected function xmlResponse(string $url): \SimpleXMLElement
+	/**
+	 * @throws IdentificationNumberNotFoundException
+	 */
+	protected function xmlResponse(string $url, string $in): \SimpleXMLElement
 	{
 		$request = $this->createRequest($url);
 		try {
@@ -64,11 +81,17 @@ class RequestProvider
 		}
 
 		$xml = @simplexml_load_string($response->getBody()->getContents());
-		if (!$xml) {
+		if ($xml === false) {
 			throw new ConnectionException();
 		}
 
-		return $xml;
+		$ns = $xml->getDocNamespaces();
+		if (!isset($ns['are']) || !isset($ns['D'])) {
+			throw new ConnectionException();
+		}
+		self::parseErrorAnswer($xml, $in);
+
+		return $xml->children($ns['are'])->children($ns['D']);
 	}
 
 
@@ -100,17 +123,6 @@ class RequestProvider
 	}
 
 
-	protected static function createUrl(string $inn): string
-	{
-		$parameters = [
-			'ico' => $inn,
-			'aktivni' => 'false',
-		];
-
-		return self::ONE_IN . '?' . http_build_query($parameters);
-	}
-
-
 	/**
 	 * @param array<string>|array<int> $identificationNumbers
 	 */
@@ -137,6 +149,34 @@ class RequestProvider
 		}
 
 		return $content . '</are:Ares_dotazy>';
+	}
+
+
+	private static function parseErrorAnswer(\SimpleXMLElement $answer, string $in): void
+	{
+		$errorMessage = self::xmlValue($answer, '//D:ET[1]');
+		$errorCode = self::xmlValue($answer, '//D:EK[1]');
+		if ($errorMessage === null && $errorCode === null) {
+			return;
+		}
+
+		// 61 - subject disappeared
+		// 71 - not exists
+		if ($errorMessage === '') {
+			throw new ConnectionException();
+		}
+		throw new IdentificationNumberNotFoundException(sprintf('IN "%s", Error: #%s, %s', $in, $errorCode, $errorMessage), $in);
+	}
+
+
+	private static function xmlValue(\SimpleXMLElement $xml, string $xpath): ?string
+	{
+		$result = $xml->xpath($xpath);
+		if ($result === false || !isset($result[0])) {
+			return null;
+		}
+
+		return trim((string) $result[0]);
 	}
 
 }

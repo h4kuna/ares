@@ -3,6 +3,7 @@
 namespace h4kuna\Ares\Tests;
 
 use h4kuna\Ares;
+use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -12,6 +13,46 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class AresTest extends TestCase
 {
+	/**
+	 * @dataProvider BusinessListData
+	 */
+	public function testBusinessListFreelancer(string $in): void
+	{
+		$ares = (new Ares\AresFactory())->create();
+		try {
+			$data = $ares->loadBusinessList($in);
+		} catch (IdentificationNumberNotFoundException $e) {
+			Assert::same('87744473', $e->getIn());
+			return; // intentionally
+		}
+
+		$data->UVOD = new \stdClass();
+		$data->ZAU->POD = '';
+		Assert::equal(loadResult("bl-$in"), $data);
+	}
+
+
+	/**
+	 * @return array<array{in: string}>
+	 */
+	public static function BusinessListData(): array
+	{
+		return [
+			[
+				'in' => '27082440', // a.s.
+			],
+			[
+				'in' => '49812670', // s.r.o.
+			],
+			[
+				'in' => '87744473', // freelancer
+			],
+			[
+				'in' => '25110161', // v.o.s.
+			],
+		];
+	}
+
 
 	/**
 	 * @throws \h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException

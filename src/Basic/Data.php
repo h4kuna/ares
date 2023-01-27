@@ -134,10 +134,7 @@ class Data implements \JsonSerializable
 	 */
 	private function getData(): array
 	{
-		$data = get_object_vars($this);
-		assert(is_array($data));
-
-		return $data;
+		return get_object_vars($this);
 	}
 
 
