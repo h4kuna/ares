@@ -116,6 +116,16 @@ class AresTest extends TestCase
 	}
 
 
+	public function testGroupVAT(): void
+	{
+		$ares = (new Ares\AresFactory())->create();
+		$in = '02319918';
+		$data = $ares->loadBasic($in);
+		Assert::true($data->isGroupVat());
+		Assert::equal('Skupinove_DPH', $data->tin);
+	}
+
+
 	public function testToArray(): void
 	{
 		$ares = (new Ares\AresFactory())->create();

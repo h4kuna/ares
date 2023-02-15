@@ -76,6 +76,12 @@ class Data implements \JsonSerializable
 	}
 
 
+	public function isGroupVat(): bool
+	{
+		return $this->psu(SubjectFlag::RPDPH_6) === 'S';
+	}
+
+
 	/**
 	 * @param SubjectFlag::* $index
 	 */
