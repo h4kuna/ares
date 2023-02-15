@@ -14,15 +14,12 @@ final class ContentProvider
 
 	private const POST_IDENTIFICATION_NUMBERS_LIMIT = 100; // in one post request can be max 100 identification numbers
 
-	private DataProviderFactory $dataProviderFactory;
 
-	private RequestProvider $requestProvider;
-
-
-	public function __construct(DataProviderFactory $dataProviderFactory, RequestProvider $requestProvider)
+	public function __construct(
+		private DataProviderFactory $dataProviderFactory,
+		private RequestProvider $requestProvider,
+	)
 	{
-		$this->dataProviderFactory = $dataProviderFactory;
-		$this->requestProvider = $requestProvider;
 	}
 
 

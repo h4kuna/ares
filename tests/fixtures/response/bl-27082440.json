@@ -20,7 +20,7 @@
         "ICO": "27082440",
         "OF": "Alza.cz a.s.",
         "PFO": {
-            "KPF": "121",
+            "KPF": 121,
             "NPF": "Akciov\u00e1 spole\u010dnost",
             "PFO": "P",
             "TZU": "Tuzemsk\u00e1"
@@ -36,7 +36,15 @@
             "CD": "1522",
             "TCD": "1",
             "CO": "53",
-            "PSC": "17000"
+            "PSC": "17000",
+            "optional": {
+                "zip": "17000",
+                "ks": "203",
+                "country": "\u010cesk\u00e1 republika",
+                "street": "Jankovcova",
+                "house": "1522\/53",
+                "city": "Praha - Hole\u0161ovice"
+            }
         },
         "DZOR": "2003-08-26"
     },
@@ -96,9 +104,13 @@
                     "F": "M\u00edstop\u0159edseda p\u0159edstavenstva",
                     "FO": {
                         "TP": "Ing.",
-                        "J": "PETR",
-                        "P": "BENA",
-                        "DN": "1969-12-02",
+                        "J": "Petr",
+                        "P": "Bena",
+                        "DN": {
+                            "date": "1969-12-02 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198615",
                             "KS": "203",
@@ -110,14 +122,30 @@
                             "CD": "3331",
                             "TCD": "1",
                             "CO": "3",
-                            "PSC": "15000"
+                            "PSC": "15000",
+                            "optional": {
+                                "zip": "15000",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Kobrova",
+                                "house": "3331\/3",
+                                "city": "Praha - Sm\u00edchov"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2020-06-17"
+                        "DZA": {
+                            "date": "2020-06-17 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     },
                     "VF": {
-                        "DZA": "2020-06-17"
+                        "DZA": {
+                            "date": "2020-06-17 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             },
@@ -126,9 +154,13 @@
                     "KAN": "1",
                     "F": "M\u00edstop\u0159edseda p\u0159edstavenstva",
                     "FO": {
-                        "J": "JAKUB",
-                        "P": "KREJ\u010c\u00cd\u0158",
-                        "DN": "1986-02-19",
+                        "J": "Jakub",
+                        "P": "Krej\u010d\u00ed\u0159",
+                        "DN": {
+                            "date": "1986-02-19 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198616",
                             "KS": "203",
@@ -139,14 +171,30 @@
                             "CD": "2855",
                             "TCD": "1",
                             "CO": "7",
-                            "PSC": "13000"
+                            "PSC": "13000",
+                            "optional": {
+                                "zip": "13000",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Ke kapslovn\u011b",
+                                "house": "2855\/7",
+                                "city": "Praha - \u017di\u017ekov"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2022-08-15"
+                        "DZA": {
+                            "date": "2022-08-15 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     },
                     "VF": {
-                        "DZA": "2022-08-15"
+                        "DZA": {
+                            "date": "2022-08-15 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             },
@@ -155,9 +203,13 @@
                     "KAN": "1",
                     "F": "M\u00edstop\u0159edseda p\u0159edstavenstva",
                     "FO": {
-                        "J": "MIROSLAV",
-                        "P": "K\u00d6V\u00c1RY",
-                        "DN": "1989-07-27",
+                        "J": "Miroslav",
+                        "P": "K\u00f6v\u00e1ry",
+                        "DN": {
+                            "date": "1989-07-27 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198617",
                             "KS": "203",
@@ -168,14 +220,30 @@
                             "CD": "945",
                             "TCD": "1",
                             "CO": "3",
-                            "PSC": "16000"
+                            "PSC": "16000",
+                            "optional": {
+                                "zip": "16000",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Zelen\u00e1",
+                                "house": "945\/3",
+                                "city": "Praha - Bubene\u010d"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2022-08-15"
+                        "DZA": {
+                            "date": "2022-08-15 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     },
                     "VF": {
-                        "DZA": "2022-08-15"
+                        "DZA": {
+                            "date": "2022-08-15 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             },
@@ -184,9 +252,13 @@
                     "KAN": "1",
                     "F": "P\u0159edseda p\u0159edstavenstva",
                     "FO": {
-                        "J": "ALE\u0160",
-                        "P": "ZAVORAL",
-                        "DN": "1976-10-24",
+                        "J": "Ale\u0161",
+                        "P": "Zavoral",
+                        "DN": {
+                            "date": "1976-10-24 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198618",
                             "KS": "203",
@@ -197,14 +269,30 @@
                             "CD": "809",
                             "TCD": "1",
                             "CO": "9",
-                            "PSC": "19000"
+                            "PSC": "19000",
+                            "optional": {
+                                "zip": "19000",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "\u010ceskomoravsk\u00e1",
+                                "house": "809\/9",
+                                "city": "Praha - Libe\u0148"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2022-11-09"
+                        "DZA": {
+                            "date": "2022-11-09 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     },
                     "VF": {
-                        "DZA": "2022-11-16"
+                        "DZA": {
+                            "date": "2022-11-16 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             }
@@ -219,9 +307,13 @@
                     "F": "\u010clen dozor\u010d\u00ed rady",
                     "FO": {
                         "TP": "Ing.",
-                        "J": "HANA",
-                        "P": "\u017d\u00c1KOV\u00c1 PETROV\u00c1",
-                        "DN": "1972-03-22",
+                        "J": "Hana",
+                        "P": "\u017d\u00e1kov\u00e1 Petrov\u00e1",
+                        "DN": {
+                            "date": "1972-03-22 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198637",
                             "KS": "203",
@@ -233,11 +325,23 @@
                             "CD": "524",
                             "TCD": "1",
                             "CO": "13",
-                            "PSC": "16100"
+                            "PSC": "16100",
+                            "optional": {
+                                "zip": "16100",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Nov\u00e1 \u0160\u00e1rka",
+                                "house": "524\/13",
+                                "city": "Praha - Liboc"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2018-11-28"
+                        "DZA": {
+                            "date": "2018-11-28 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             },
@@ -246,9 +350,13 @@
                     "KAN": "4",
                     "F": "P\u0159edseda dozor\u010d\u00ed rady",
                     "FO": {
-                        "J": "JAN",
-                        "P": "MOUD\u0158\u00cdK",
-                        "DN": "1980-02-20",
+                        "J": "Jan",
+                        "P": "Moud\u0159\u00edk",
+                        "DN": {
+                            "date": "1980-02-20 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198639",
                             "KS": "203",
@@ -259,14 +367,30 @@
                             "CD": "135",
                             "TCD": "1",
                             "CO": "60",
-                            "PSC": "19000"
+                            "PSC": "19000",
+                            "optional": {
+                                "zip": "19000",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "M\u011b\u0161ick\u00e1",
+                                "house": "135\/60",
+                                "city": "Praha - Prosek"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2022-08-15"
+                        "DZA": {
+                            "date": "2022-08-15 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     },
                     "VF": {
-                        "DZA": "2022-08-15"
+                        "DZA": {
+                            "date": "2022-08-15 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             },
@@ -276,9 +400,13 @@
                     "F": "\u010clen dozor\u010d\u00ed rady",
                     "FO": {
                         "TP": "Bc.",
-                        "J": "KATAR\u00cdNA",
-                        "P": "LEXOV\u00c1",
-                        "DN": "1979-10-05",
+                        "J": "Katar\u00edna",
+                        "P": "Lexov\u00e1",
+                        "DN": {
+                            "date": "1979-10-05 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
                         "B": {
                             "IDA": "50198640",
                             "KS": "203",
@@ -288,31 +416,53 @@
                             "NCO": "Popovice",
                             "CD": "6",
                             "TCD": "1",
-                            "PSC": "25001"
+                            "PSC": "25001",
+                            "optional": {
+                                "zip": "25001",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Popovice",
+                                "house": "6",
+                                "city": "Brand\u00fds nad Labem-Star\u00e1 Boleslav"
+                            }
                         }
                     },
                     "CLE": {
-                        "DZA": "2022-11-23"
+                        "DZA": {
+                            "date": "2022-11-23 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
                     }
                 }
             }
         ]
     },
     "AKI": {
-        "AKR": {
-            "KAN": "5",
-            "PO": {
-                "IZO": "HE 197294",
-                "OF": "L.S. INVESTMENTS LIMITED",
-                "SI": {
-                    "IDA": "50198644",
-                    "KS": "196",
-                    "NS": "Kypersk\u00e1 republika",
-                    "N": "Nik\u00f3sie",
-                    "NU": "CHAPO CENTRAL, 1st floor, Spyrou Kyprianou 20",
-                    "PSC": "1075"
+        "AKR": [
+            {
+                "KAN": "5",
+                "PO": {
+                    "IZO": "HE 197294",
+                    "OF": "L.S. INVESTMENTS LIMITED",
+                    "SI": {
+                        "IDA": "50198644",
+                        "KS": "196",
+                        "NS": "Kypersk\u00e1 republika",
+                        "N": "Nik\u00f3sie",
+                        "NU": "CHAPO CENTRAL, 1st floor, Spyrou Kyprianou 20",
+                        "PSC": "1075",
+                        "optional": {
+                            "zip": "1075",
+                            "ks": "196",
+                            "country": "Kypersk\u00e1 republika",
+                            "street": "CHAPO CENTRAL, 1st floor, Spyrou Kyprianou",
+                            "house": "20",
+                            "city": "Nik\u00f3sie"
+                        }
+                    }
                 }
             }
-        }
+        ]
     }
 }

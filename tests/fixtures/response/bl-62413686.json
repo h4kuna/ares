@@ -20,7 +20,7 @@
         "ICO": "62413686",
         "OF": "ISMAJLER komanditn\u00ed spole\u010dnost",
         "PFO": {
-            "KPF": "113",
+            "KPF": 113,
             "NPF": "Spole\u010dnost komanditn\u00ed",
             "PFO": "P",
             "TZU": "Tuzemsk\u00e1"
@@ -32,7 +32,15 @@
             "NOK": "Praha 8",
             "N": "Praha 8",
             "NU": "Lindnerova",
-            "CA": "2"
+            "CA": "2",
+            "optional": {
+                "zip": "",
+                "ks": "203",
+                "country": "\u010cesk\u00e1 republika",
+                "street": "Lindnerova",
+                "house": "",
+                "city": "Praha 8"
+            }
         },
         "DZOR": "1995-10-18"
     },
@@ -58,8 +66,270 @@
         "T": "Zp\u016fsob jedn\u00e1n\u00ed za spole\u010dnost:\n\nJm\u00e9nem spole\u010dnosti jedn\u00e1 a podepisuje se jako statut\u00e1rn\u00ed\n\nz\u00e1stupce komplement\u00e1\u0159 resp. jeho statut\u00e1rn\u00ed z\u00e1stupce ve funkci\n\njednatele a to samostatn\u011b."
     },
     "SOK": {
-        "CSK": {
-            "C": {
+        "CSK": [
+            {
+                "C": {
+                    "KAN": "9",
+                    "PO": {
+                        "ICO": "63667258",
+                        "OF": "L.E.V.,spol. s r.o. v likvidaci",
+                        "NPF": "Spole\u010dnost s ru\u010den\u00edm omezen\u00fdm",
+                        "SI": {
+                            "IDA": "44035440",
+                            "KS": "203",
+                            "NS": "\u010cesk\u00e1 republika",
+                            "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                            "N": "Praha",
+                            "NCO": "Libe\u0148",
+                            "NU": "Lindnerova",
+                            "CD": "1609",
+                            "TCD": "1",
+                            "CO": "2",
+                            "PSC": "18000",
+                            "optional": {
+                                "zip": "18000",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Lindnerova",
+                                "house": "1609\/2",
+                                "city": "Praha - Libe\u0148"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "KME": {
+        "KMA": [
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Oujakh",
+                    "P": "Ismailov",
+                    "DN": {
+                        "date": "1920-12-17 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035449",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                        "N": "Praha",
+                        "NCO": "Libe\u0148",
+                        "NU": "Pod Labu\u0165kou",
+                        "CD": "785",
+                        "TCD": "1",
+                        "CO": "19",
+                        "PSC": "18000",
+                        "optional": {
+                            "zip": "18000",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Pod Labu\u0165kou",
+                            "house": "785\/19",
+                            "city": "Praha - Libe\u0148"
+                        }
+                    }
+                }
+            },
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Ali",
+                    "P": "Ismailov",
+                    "DN": {
+                        "date": "1959-03-30 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035451",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                        "N": "Praha",
+                        "NCO": "Chodov",
+                        "NU": "Klap\u00e1lkova",
+                        "CD": "2242",
+                        "TCD": "1",
+                        "CO": "9",
+                        "PSC": "14900",
+                        "optional": {
+                            "zip": "14900",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Klap\u00e1lkova",
+                            "house": "2242\/9",
+                            "city": "Praha - Chodov"
+                        }
+                    }
+                }
+            },
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Marijat",
+                    "P": "Kadijeva",
+                    "DN": {
+                        "date": "1959-10-02 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035453",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                        "N": "Praha",
+                        "NCO": "Chodov",
+                        "NU": "Klap\u00e1lkova",
+                        "CD": "2242",
+                        "TCD": "1",
+                        "CO": "9",
+                        "PSC": "14900",
+                        "optional": {
+                            "zip": "14900",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Klap\u00e1lkova",
+                            "house": "2242\/9",
+                            "city": "Praha - Chodov"
+                        }
+                    }
+                }
+            },
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Bekchan",
+                    "P": "Ismailov",
+                    "DN": {
+                        "date": "1964-06-19 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035455",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Praha 5",
+                        "N": "Praha 5",
+                        "NU": "Ham\u0161\u00edkova",
+                        "CA": "21",
+                        "optional": {
+                            "zip": "",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Ham\u0161\u00edkova",
+                            "house": "",
+                            "city": "Praha 5"
+                        }
+                    }
+                }
+            },
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Zarema",
+                    "P": "Chacajeva",
+                    "DN": {
+                        "date": "1970-09-13 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035457",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Praha 5",
+                        "N": "Praha 5",
+                        "NU": "Ham\u0161\u00edkova",
+                        "CA": "21",
+                        "optional": {
+                            "zip": "",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Ham\u0161\u00edkova",
+                            "house": "",
+                            "city": "Praha 5"
+                        }
+                    }
+                }
+            },
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Taissija",
+                    "P": "Ismailova",
+                    "DN": {
+                        "date": "1958-11-13 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035459",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                        "N": "Praha",
+                        "NCO": "Hodkovi\u010dky",
+                        "NU": "Na lysin\u00e1ch",
+                        "CD": "455",
+                        "TCD": "1",
+                        "CO": "16",
+                        "PSC": "14700",
+                        "optional": {
+                            "zip": "14700",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Na lysin\u00e1ch",
+                            "house": "455\/16",
+                            "city": "Praha - Hodkovi\u010dky"
+                        }
+                    }
+                }
+            },
+            {
+                "KAN": "10",
+                "FO": {
+                    "J": "Kourtki",
+                    "P": "Tasoujeva",
+                    "DN": {
+                        "date": "1958-04-22 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
+                    "B": {
+                        "IDA": "44035461",
+                        "KS": "203",
+                        "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                        "N": "Praha",
+                        "NCO": "Stod\u016flky",
+                        "NU": "B\u011bhounkova",
+                        "CD": "2344",
+                        "TCD": "1",
+                        "CO": "27",
+                        "PSC": "15800",
+                        "optional": {
+                            "zip": "15800",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "B\u011bhounkova",
+                            "house": "2344\/27",
+                            "city": "Praha - Stod\u016flky"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "KPI": {
+        "KPR": [
+            {
                 "KAN": "9",
                 "PO": {
                     "ICO": "63667258",
@@ -76,176 +346,18 @@
                         "CD": "1609",
                         "TCD": "1",
                         "CO": "2",
-                        "PSC": "18000"
-                    }
-                }
-            }
-        }
-    },
-    "KME": {
-        "KMA": [
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "OUJAKH",
-                    "P": "ISMAILOV",
-                    "DN": "1920-12-17",
-                    "B": {
-                        "IDA": "44035449",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                        "N": "Praha",
-                        "NCO": "Libe\u0148",
-                        "NU": "Pod Labu\u0165kou",
-                        "CD": "785",
-                        "TCD": "1",
-                        "CO": "19",
-                        "PSC": "18000"
-                    }
-                }
-            },
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "ALI",
-                    "P": "ISMAILOV",
-                    "DN": "1959-03-30",
-                    "B": {
-                        "IDA": "44035451",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                        "N": "Praha",
-                        "NCO": "Chodov",
-                        "NU": "Klap\u00e1lkova",
-                        "CD": "2242",
-                        "TCD": "1",
-                        "CO": "9",
-                        "PSC": "14900"
-                    }
-                }
-            },
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "MARIJAT",
-                    "P": "KADIJEVA",
-                    "DN": "1959-10-02",
-                    "B": {
-                        "IDA": "44035453",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                        "N": "Praha",
-                        "NCO": "Chodov",
-                        "NU": "Klap\u00e1lkova",
-                        "CD": "2242",
-                        "TCD": "1",
-                        "CO": "9",
-                        "PSC": "14900"
-                    }
-                }
-            },
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "BEKCHAN",
-                    "P": "ISMAILOV",
-                    "DN": "1964-06-19",
-                    "B": {
-                        "IDA": "44035455",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Praha 5",
-                        "N": "Praha 5",
-                        "NU": "Ham\u0161\u00edkova",
-                        "CA": "21"
-                    }
-                }
-            },
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "ZAREMA",
-                    "P": "CHACAJEVA",
-                    "DN": "1970-09-13",
-                    "B": {
-                        "IDA": "44035457",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Praha 5",
-                        "N": "Praha 5",
-                        "NU": "Ham\u0161\u00edkova",
-                        "CA": "21"
-                    }
-                }
-            },
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "TAISSIJA",
-                    "P": "ISMAILOVA",
-                    "DN": "1958-11-13",
-                    "B": {
-                        "IDA": "44035459",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                        "N": "Praha",
-                        "NCO": "Hodkovi\u010dky",
-                        "NU": "Na lysin\u00e1ch",
-                        "CD": "455",
-                        "TCD": "1",
-                        "CO": "16",
-                        "PSC": "14700"
-                    }
-                }
-            },
-            {
-                "KAN": "10",
-                "FO": {
-                    "J": "KOURTKI",
-                    "P": "TASOUJEVA",
-                    "DN": "1958-04-22",
-                    "B": {
-                        "IDA": "44035461",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                        "N": "Praha",
-                        "NCO": "Stod\u016flky",
-                        "NU": "B\u011bhounkova",
-                        "CD": "2344",
-                        "TCD": "1",
-                        "CO": "27",
-                        "PSC": "15800"
+                        "PSC": "18000",
+                        "optional": {
+                            "zip": "18000",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Lindnerova",
+                            "house": "1609\/2",
+                            "city": "Praha - Libe\u0148"
+                        }
                     }
                 }
             }
         ]
-    },
-    "KPI": {
-        "KPR": {
-            "KAN": "9",
-            "PO": {
-                "ICO": "63667258",
-                "OF": "L.E.V.,spol. s r.o. v likvidaci",
-                "NPF": "Spole\u010dnost s ru\u010den\u00edm omezen\u00fdm",
-                "SI": {
-                    "IDA": "44035440",
-                    "KS": "203",
-                    "NS": "\u010cesk\u00e1 republika",
-                    "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                    "N": "Praha",
-                    "NCO": "Libe\u0148",
-                    "NU": "Lindnerova",
-                    "CD": "1609",
-                    "TCD": "1",
-                    "CO": "2",
-                    "PSC": "18000"
-                }
-            }
-        }
     }
 }

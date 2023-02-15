@@ -19,7 +19,7 @@
         "ICO": "02491427",
         "OF": "Z\u00e1pado\u010desk\u00e1 spole\u010dnost, o.s.",
         "PFO": {
-            "KPF": "706",
+            "KPF": 706,
             "NPF": "Spolek",
             "PFO": "P",
             "TZU": "Tuzemsk\u00e1"
@@ -35,7 +35,15 @@
             "CD": "105",
             "TCD": "1",
             "CO": "4",
-            "PSC": "39701"
+            "PSC": "39701",
+            "optional": {
+                "zip": "39701",
+                "ks": "203",
+                "country": "\u010cesk\u00e1 republika",
+                "street": "Budovcova",
+                "house": "105\/4",
+                "city": "P\u00edsek - Bud\u011bjovick\u00e9 P\u0159edm\u011bst\u00ed"
+            }
         },
         "DVOR": "2013-12-27",
         "DZOR": "2014-01-01",

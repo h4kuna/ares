@@ -15,7 +15,10 @@ parameters:
 			message: "#^Variable property access on \\$this\\(h4kuna\\\\Ares\\\\Basic\\\\Data\\)\\.$#"
 			count: 1
 			path: src/Basic/Data.php
-
+		-
+			message: "#^Call to an undefined method h4kuna\\\\Ares\\\\BusinessList\\\\ContentProvider\\:\\:onAfterContent\\(\\)\\.$#"
+			count: 1
+			path: src/BusinessList/ContentProvider.php
 
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon

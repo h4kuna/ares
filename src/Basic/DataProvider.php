@@ -4,12 +4,9 @@ namespace h4kuna\Ares\Basic;
 
 class DataProvider
 {
-	private Data $data;
 
-
-	public function __construct(Data $data)
+	public function __construct(private Data $data)
 	{
-		$this->data = $data;
 	}
 
 

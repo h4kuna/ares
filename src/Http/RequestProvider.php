@@ -18,22 +18,13 @@ class RequestProvider
 	protected const ONE_BL = self::BASE_URL . '/darv_or.cgi';
 	protected const MULTI_IN = self::BASE_URL . '/xar.cgi';
 
-	private RequestFactoryInterface $requestFactory;
-
-	private ClientInterface $client;
-
-	private StreamFactoryInterface $streamFactory;
-
 
 	public function __construct(
-		RequestFactoryInterface $requestFactory,
-		ClientInterface $client,
-		StreamFactoryInterface $streamFactory
+		private RequestFactoryInterface $requestFactory,
+		private ClientInterface $client,
+		private StreamFactoryInterface $streamFactory,
 	)
 	{
-		$this->requestFactory = $requestFactory;
-		$this->client = $client;
-		$this->streamFactory = $streamFactory;
 	}
 
 

@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+date_default_timezone_set('Europe/Prague');
+
 function loadResult(string $name, \stdClass $save = null): \stdClass
 {
 	$file = __DIR__ . "/fixtures/response/$name.json";

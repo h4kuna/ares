@@ -10,18 +10,12 @@ class Ares
 	public const RESULT_FAILED = Basic\ContentProvider::RESULT_FAILED;
 	public const RESULT_SUCCESS = Basic\ContentProvider::RESULT_SUCCESS;
 
-	protected Basic\ContentProvider $basicContentProvider;
-
-	protected BusinessList\ContentProvider $businessListContentProvider;
-
 
 	public function __construct(
-		Basic\ContentProvider $contentProvider,
-		BusinessList\ContentProvider $businessListContentProvider
+		private Basic\ContentProvider $basicContentProvider,
+		private BusinessList\ContentProvider $businessListContentProvider,
 	)
 	{
-		$this->basicContentProvider = $contentProvider;
-		$this->businessListContentProvider = $businessListContentProvider;
 	}
 
 

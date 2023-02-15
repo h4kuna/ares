@@ -20,7 +20,7 @@
         "ICO": "25110161",
         "OF": "Kaufland \u010cesk\u00e1 republika v.o.s.",
         "PFO": {
-            "KPF": "111",
+            "KPF": 111,
             "NPF": "Ve\u0159ejn\u00e1 obchodn\u00ed spole\u010dnost",
             "PFO": "P",
             "TZU": "Tuzemsk\u00e1"
@@ -36,7 +36,15 @@
             "CD": "2428",
             "TCD": "1",
             "CO": "203",
-            "PSC": "16900"
+            "PSC": "16900",
+            "optional": {
+                "zip": "16900",
+                "ks": "203",
+                "country": "\u010cesk\u00e1 republika",
+                "street": "B\u011blohorsk\u00e1",
+                "house": "2428\/203",
+                "city": "Praha - B\u0159evnov"
+            }
         },
         "DZOR": "1997-03-10"
     },
@@ -81,33 +89,47 @@
         }
     ],
     "SO": {
-        "CSO": {
-            "C": {
-                "KAN": "1",
-                "PO": {
-                    "ICO": "25080181",
-                    "OF": "Kaufland Management \u010cR s.r.o.",
-                    "NPF": "Spole\u010dnost s ru\u010den\u00edm omezen\u00fdm",
-                    "SI": {
-                        "IDA": "47412240",
-                        "KS": "203",
-                        "NS": "\u010cesk\u00e1 republika",
-                        "NOK": "Hlavn\u00ed m\u011bsto Praha",
-                        "N": "Praha",
-                        "NCO": "B\u0159evnov",
-                        "NU": "B\u011blohorsk\u00e1",
-                        "CD": "2428",
-                        "TCD": "1",
-                        "CO": "203",
-                        "PSC": "16900"
-                    }
-                },
-                "VF": {
-                    "DZA": "2018-01-31"
-                },
-                "T": "Kaufland Management \u010cR s.r.o. zastupuj\u00ed v\u017edy dva jednatel\u00e9 spole\u010dn\u011b. Jednateli Kaufland Management \u010cR s.r.o. jsou: \n\n- pan Stefan Hoppe, dat. nar. 12.02.1980, bytem \u0160tef\u00e1nikova 1\/65, Sm\u00edchov, 150 00 Praha 5, \n\n- pan Oliver Gschwendtner, dat. nar. 09.11.1972, bytem Pod ka\u0161tany 1106\/17, Bubene\u010d, 160 00 Praha 6, \n\n- pan Martin Piter\u00e1k, dat. nar. 06.03.1977, bytem U Rybn\u00ed\u010dka 767, 267 16 V\u00fdsok\u00fd \u00dajezd,\n\n- pan\u00ed Kl\u00e1ra Be\u0148a\u010dkov\u00e1, dat. nar. 16.05.1975, bytem Na Rym\u00e1ni 316\/13, Praha 5, 153 00, \n\n- pan Hans J\u00f6rg Bauer, dat. nar. 15.7.1974, bytem V p\u0159\u00edstavu 1585\/16, Hole\u0161ovice, 170 00 Praha 7."
+        "CSO": [
+            {
+                "C": {
+                    "KAN": "1",
+                    "PO": {
+                        "ICO": "25080181",
+                        "OF": "Kaufland Management \u010cR s.r.o.",
+                        "NPF": "Spole\u010dnost s ru\u010den\u00edm omezen\u00fdm",
+                        "SI": {
+                            "IDA": "47412240",
+                            "KS": "203",
+                            "NS": "\u010cesk\u00e1 republika",
+                            "NOK": "Hlavn\u00ed m\u011bsto Praha",
+                            "N": "Praha",
+                            "NCO": "B\u0159evnov",
+                            "NU": "B\u011blohorsk\u00e1",
+                            "CD": "2428",
+                            "TCD": "1",
+                            "CO": "203",
+                            "PSC": "16900",
+                            "optional": {
+                                "zip": "16900",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "B\u011blohorsk\u00e1",
+                                "house": "2428\/203",
+                                "city": "Praha - B\u0159evnov"
+                            }
+                        }
+                    },
+                    "VF": {
+                        "DZA": {
+                            "date": "2018-01-31 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
+                    },
+                    "T": "Kaufland Management \u010cR s.r.o. zastupuj\u00ed v\u017edy dva jednatel\u00e9 spole\u010dn\u011b. Jednateli Kaufland Management \u010cR s.r.o. jsou: \n\n- pan Stefan Hoppe, dat. nar. 12.02.1980, bytem \u0160tef\u00e1nikova 1\/65, Sm\u00edchov, 150 00 Praha 5, \n\n- pan Oliver Gschwendtner, dat. nar. 09.11.1972, bytem Pod ka\u0161tany 1106\/17, Bubene\u010d, 160 00 Praha 6, \n\n- pan Martin Piter\u00e1k, dat. nar. 06.03.1977, bytem U Rybn\u00ed\u010dka 767, 267 16 V\u00fdsok\u00fd \u00dajezd,\n\n- pan\u00ed Kl\u00e1ra Be\u0148a\u010dkov\u00e1, dat. nar. 16.05.1975, bytem Na Rym\u00e1ni 316\/13, Praha 5, 153 00, \n\n- pan Hans J\u00f6rg Bauer, dat. nar. 15.7.1974, bytem V p\u0159\u00edstavu 1585\/16, Hole\u0161ovice, 170 00 Praha 7."
+                }
             }
-        },
+        ],
         "T": "Statut\u00e1rn\u00edm org\u00e1nem spole\u010dnosti je spole\u010dn\u00edk - Kaufland Management \u010cR s.r.o., kter\u00fd je jako\u017eto statut\u00e1rn\u00ed org\u00e1n povinen a opr\u00e1vn\u011bn k obchodn\u00edmu veden\u00ed spole\u010dnosti."
     },
     "PRO": {
@@ -116,9 +138,13 @@
                 "KAN": "3",
                 "FO": {
                     "TP": "Ing.",
-                    "J": "JANA",
-                    "P": "KARNI\u0160OV\u00c1",
-                    "DN": "1970-09-24",
+                    "J": "Jana",
+                    "P": "Karni\u0161ov\u00e1",
+                    "DN": {
+                        "date": "1970-09-24 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
                         "IDA": "47412254",
                         "KS": "203",
@@ -130,16 +156,28 @@
                         "CD": "115",
                         "TCD": "1",
                         "CO": "6",
-                        "PSC": "12800"
+                        "PSC": "12800",
+                        "optional": {
+                            "zip": "12800",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Hostiv\u00edtova",
+                            "house": "115\/6",
+                            "city": "Praha - Vy\u0161ehrad"
+                        }
                     }
                 }
             },
             {
                 "KAN": "3",
                 "FO": {
-                    "J": "VLADIM\u00cdR",
-                    "P": "JANDA",
-                    "DN": "1966-02-19",
+                    "J": "Vladim\u00edr",
+                    "P": "Janda",
+                    "DN": {
+                        "date": "1966-02-19 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
                         "IDA": "47412271",
                         "KS": "203",
@@ -148,16 +186,28 @@
                         "NU": "Po\u010d\u00e1teck\u00e1",
                         "CD": "139",
                         "TCD": "1",
-                        "PSC": "37856"
+                        "PSC": "37856",
+                        "optional": {
+                            "zip": "37856",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Po\u010d\u00e1teck\u00e1",
+                            "house": "139",
+                            "city": "Studen\u00e1"
+                        }
                     }
                 }
             },
             {
                 "KAN": "3",
                 "FO": {
-                    "J": "\u0160\u00c1RKA",
-                    "P": "SOBOTKOV\u00c1",
-                    "DN": "1961-01-12",
+                    "J": "\u0160\u00e1rka",
+                    "P": "Sobotkov\u00e1",
+                    "DN": {
+                        "date": "1961-01-12 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
                         "IDA": "47412281",
                         "KS": "203",
@@ -167,16 +217,28 @@
                         "NU": "Mal\u00fd \u00dajezd",
                         "CD": "974",
                         "TCD": "1",
-                        "PSC": "69615"
+                        "PSC": "69615",
+                        "optional": {
+                            "zip": "69615",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Mal\u00fd \u00dajezd",
+                            "house": "974",
+                            "city": "\u010cejkovice"
+                        }
                     }
                 }
             },
             {
                 "KAN": "3",
                 "FO": {
-                    "J": "IGOR",
-                    "P": "KREMLA",
-                    "DN": "1973-09-25",
+                    "J": "Igor",
+                    "P": "Kremla",
+                    "DN": {
+                        "date": "1973-09-25 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
                         "IDA": "47412282",
                         "KS": "203",
@@ -188,31 +250,55 @@
                         "CD": "1904",
                         "TCD": "1",
                         "CO": "14",
-                        "PSC": "12800"
+                        "PSC": "12800",
+                        "optional": {
+                            "zip": "12800",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Trojick\u00e1",
+                            "house": "1904\/14",
+                            "city": "Praha - Nov\u00e9 M\u011bsto"
+                        }
                     }
                 }
             },
             {
                 "KAN": "3",
                 "FO": {
-                    "J": "JURAJ",
-                    "P": "BEND\u00cdK",
-                    "DN": "1975-12-10",
+                    "J": "Juraj",
+                    "P": "Bend\u00edk",
+                    "DN": {
+                        "date": "1975-12-10 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
                         "IDA": "47412283",
                         "KS": "703",
                         "NS": "Slovensk\u00e1 republika",
                         "N": "Dunajsk\u00e1 Lu\u017en\u00e1 - J\u00e1no\u0161\u00edkova",
-                        "NU": "Mandl'ov\u00e1 1998\/52"
+                        "NU": "Mandl'ov\u00e1 1998\/52",
+                        "optional": {
+                            "zip": "",
+                            "ks": "703",
+                            "country": "Slovensk\u00e1 republika",
+                            "street": "Mandl'ov\u00e1",
+                            "house": "1998\/52",
+                            "city": "Dunajsk\u00e1 Lu\u017en\u00e1 - J\u00e1no\u0161\u00edkova"
+                        }
                     }
                 }
             },
             {
                 "KAN": "3",
                 "FO": {
-                    "J": "MONIKA",
-                    "P": "BE\u010cV\u00c1\u0158OV\u00c1",
-                    "DN": "1976-10-28",
+                    "J": "Monika",
+                    "P": "Be\u010dv\u00e1\u0159ov\u00e1",
+                    "DN": {
+                        "date": "1976-10-28 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
                         "IDA": "47412286",
                         "KS": "203",
@@ -224,7 +310,15 @@
                         "CD": "1335",
                         "TCD": "1",
                         "CO": "5",
-                        "PSC": "14000"
+                        "PSC": "14000",
+                        "optional": {
+                            "zip": "14000",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Ohradn\u00ed",
+                            "house": "1335\/5",
+                            "city": "Praha - Michle"
+                        }
                     }
                 }
             }
@@ -244,7 +338,15 @@
                         "NS": "Spolkov\u00e1 republika N\u011bmecko",
                         "N": "Neckarsulm",
                         "NU": "R\u00f6telstr. 35",
-                        "PSC": "74172"
+                        "PSC": "74172",
+                        "optional": {
+                            "zip": "74172",
+                            "ks": "276",
+                            "country": "Spolkov\u00e1 republika N\u011bmecko",
+                            "street": "R\u00f6telstr.",
+                            "house": "35",
+                            "city": "Neckarsulm"
+                        }
                     }
                 }
             },
@@ -265,7 +367,15 @@
                         "CD": "2428",
                         "TCD": "1",
                         "CO": "203",
-                        "PSC": "16900"
+                        "PSC": "16900",
+                        "optional": {
+                            "zip": "16900",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "B\u011blohorsk\u00e1",
+                            "house": "2428\/203",
+                            "city": "Praha - B\u0159evnov"
+                        }
                     }
                 }
             }

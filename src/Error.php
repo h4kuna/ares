@@ -7,18 +7,9 @@ namespace h4kuna\Ares;
  */
 final class Error
 {
-	public string $in;
 
-	public int $code;
-
-	public string $message;
-
-
-	public function __construct(string $in, int $code, string $message)
+	public function __construct(public string $in, public int $code, public string $message)
 	{
-		$this->in = $in;
-		$this->code = $code;
-		$this->message = $message;
 	}
 
 

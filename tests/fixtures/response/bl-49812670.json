@@ -20,7 +20,7 @@
         "ICO": "49812670",
         "OF": "H. A. C. spol. s r.o.",
         "PFO": {
-            "KPF": "112",
+            "KPF": 112,
             "NPF": "Spole\u010dnost s ru\u010den\u00edm omezen\u00fdm",
             "PFO": "P",
             "TZU": "Tuzemsk\u00e1"
@@ -33,7 +33,15 @@
             "NCO": "Semt\u00edn",
             "CD": "97",
             "TCD": "1",
-            "PSC": "53353"
+            "PSC": "53353",
+            "optional": {
+                "zip": "53353",
+                "ks": "203",
+                "country": "\u010cesk\u00e1 republika",
+                "street": "Semt\u00edn",
+                "house": "97",
+                "city": "Pardubice"
+            }
         },
         "DZOR": "1993-09-06"
     },
@@ -70,64 +78,96 @@
         }
     },
     "SO": {
-        "CSO": {
-            "C": {
-                "KAN": "1",
-                "F": "jednatel",
+        "CSO": [
+            {
+                "C": {
+                    "KAN": "1",
+                    "F": "jednatel",
+                    "FO": {
+                        "J": "Ji\u0159\u00ed",
+                        "P": "Hor\u00e1k",
+                        "DN": {
+                            "date": "1967-01-21 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        },
+                        "B": {
+                            "IDA": "27582049",
+                            "KS": "203",
+                            "NS": "\u010cesk\u00e1 republika",
+                            "N": "Pardubice",
+                            "NCO": "B\u00edl\u00e9 P\u0159edm\u011bst\u00ed",
+                            "NU": "Labsk\u00e1",
+                            "CD": "1833",
+                            "TCD": "1",
+                            "PSC": "53002",
+                            "optional": {
+                                "zip": "53002",
+                                "ks": "203",
+                                "country": "\u010cesk\u00e1 republika",
+                                "street": "Labsk\u00e1",
+                                "house": "1833",
+                                "city": "Pardubice - B\u00edl\u00e9 P\u0159edm\u011bst\u00ed"
+                            }
+                        }
+                    },
+                    "VF": {
+                        "DZA": {
+                            "date": "1993-09-06 00:00:00.000000",
+                            "timezone_type": 3,
+                            "timezone": "Europe\/Prague"
+                        }
+                    }
+                }
+            }
+        ],
+        "T": "Statut\u00e1rn\u00edm org\u00e1nem spole\u010dnosti je jednatel a tento jedn\u00e1 jm\u00e9nem spole\u010dnosti samostatn\u011b."
+    },
+    "SSV": {
+        "SS": [
+            {
+                "KAN": "24",
                 "FO": {
-                    "J": "JI\u0158\u00cd",
-                    "P": "HOR\u00c1K",
-                    "DN": "1967-01-21",
+                    "J": "Ji\u0159\u00ed",
+                    "P": "Hor\u00e1k",
+                    "DN": {
+                        "date": "1967-01-21 00:00:00.000000",
+                        "timezone_type": 3,
+                        "timezone": "Europe\/Prague"
+                    },
                     "B": {
-                        "IDA": "27582049",
+                        "IDA": "27582052",
                         "KS": "203",
                         "NS": "\u010cesk\u00e1 republika",
+                        "NOK": "Pardubice",
                         "N": "Pardubice",
                         "NCO": "B\u00edl\u00e9 P\u0159edm\u011bst\u00ed",
                         "NU": "Labsk\u00e1",
                         "CD": "1833",
                         "TCD": "1",
-                        "PSC": "53002"
+                        "PSC": "53002",
+                        "optional": {
+                            "zip": "53002",
+                            "ks": "203",
+                            "country": "\u010cesk\u00e1 republika",
+                            "street": "Labsk\u00e1",
+                            "house": "1833",
+                            "city": "Pardubice - B\u00edl\u00e9 P\u0159edm\u011bst\u00ed"
+                        }
                     }
                 },
-                "VF": {
-                    "DZA": "1993-09-06"
+                "VKS": {
+                    "VK": {
+                        "KC": "100000;00"
+                    },
+                    "SPL": {
+                        "PRC": "100"
+                    },
+                    "OP": {
+                        "T": "100"
+                    }
                 }
             }
-        },
-        "T": "Statut\u00e1rn\u00edm org\u00e1nem spole\u010dnosti je jednatel a tento jedn\u00e1 jm\u00e9nem spole\u010dnosti samostatn\u011b."
-    },
-    "SSV": {
-        "SS": {
-            "KAN": "24",
-            "FO": {
-                "J": "JI\u0158\u00cd",
-                "P": "HOR\u00c1K",
-                "DN": "1967-01-21",
-                "B": {
-                    "IDA": "27582052",
-                    "KS": "203",
-                    "NS": "\u010cesk\u00e1 republika",
-                    "NOK": "Pardubice",
-                    "N": "Pardubice",
-                    "NCO": "B\u00edl\u00e9 P\u0159edm\u011bst\u00ed",
-                    "NU": "Labsk\u00e1",
-                    "CD": "1833",
-                    "TCD": "1",
-                    "PSC": "53002"
-                }
-            },
-            "VKS": {
-                "VK": {
-                    "KC": "100000;00"
-                },
-                "SPL": {
-                    "PRC": "100"
-                },
-                "OP": {
-                    "T": "100"
-                }
-            }
-        }
+        ]
     }
 }

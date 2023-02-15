@@ -16,7 +16,7 @@ class AresTest extends TestCase
 	/**
 	 * @dataProvider BusinessListData
 	 */
-	public function testBusinessListFreelancer(string $in): void
+	public function testBusinessList(string $in): void
 	{
 		$ares = (new Ares\AresFactory())->create();
 		try {
@@ -29,7 +29,8 @@ class AresTest extends TestCase
 
 		$data->UVOD = new \stdClass();
 		$data->ZAU->POD = '';
-		Assert::equal(loadResult("bl-$in"), $data);
+		$jsonData = json_decode(json_encode($data));
+		Assert::equal(loadResult("bl-$in"), $jsonData);
 	}
 
 
