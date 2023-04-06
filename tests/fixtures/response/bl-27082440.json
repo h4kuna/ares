@@ -1,7 +1,6 @@
 {
     "UVOD": {},
     "ZAU": {
-        "POD": "",
         "S": {
             "SSU": "Aktivn\u00ed",
             "KKZ": {
@@ -26,7 +25,7 @@
             "TZU": "Tuzemsk\u00e1"
         },
         "SI": {
-            "IDA": "50198600",
+            "IDA": "51441555",
             "KS": "203",
             "NS": "\u010cesk\u00e1 republika",
             "NOK": "Hlavn\u00ed m\u011bsto Praha",
@@ -46,7 +45,8 @@
                 "city": "Praha - Hole\u0161ovice"
             }
         },
-        "DZOR": "2003-08-26"
+        "DZOR": "2003-08-26",
+        "POD": ""
     },
     "REG": {
         "SZ": {
@@ -76,6 +76,9 @@
         },
         {
             "T": "V souvislosti s procesem f\u00faze slou\u010den\u00edm obchodn\u00ed spole\u010dnosti Alza.cz a.s., se s\u00eddlem Praha 7, Jate\u010dn\u00ed 33a, PS\u010c 170 00, I\u010c: 27082440, zapsan\u00e9 v obchodn\u00edm rejst\u0159\u00edku veden\u00e9m M\u011bstsk\u00fdm soudem v Praze, v odd\u00edlu B, vlo\u017ece 8573, pr\u00e1vn\u00ed forma: akciov\u00e1 spole\u010dnost,\nzalo\u017een\u00e9 a existuj\u00edc\u00ed podle pr\u00e1va \u010cesk\u00e9 republiky, jako n\u00e1stupnick\u00e9 spole\u010dnosti (d\u00e1le t\u00e9\u017e jen jako \"Alza.cz a.s.\"), s obchodn\u00ed spole\u010dnost\u00ed PUBLERO s.r.o., se s\u00eddlem Hn\u011bvkovsk\u00e9ho 30\/65, Kom\u00e1rov, 617 00 Brno, I\u010c: 24723771, zapsan\u00e9 v obchodn\u00edm rejst\u0159\u00edku vede\nn\u00e9m u Krajsk\u00e9ho soudu v Brn\u011b, v odd\u00edlu C, vlo\u017ece 80153, pr\u00e1vn\u00ed forma: spole\u010dnost s ru\u010den\u00fdm omezen\u00fdm, zalo\u017eenou a existuj\u00edc\u00ed podle pr\u00e1va \u010cesk\u00e9 republiky, jako zanikaj\u00edc\u00ed spole\u010dnost\u00ed (d\u00e1le t\u00e9\u017e jen jako \"PUBLERO s.r.o.\"), podle projektu f\u00faze slou\u010den\u00edm ze dne\n 23.11.2015 (dvac\u00e1t\u00e9ho t\u0159et\u00edho listopadu roku dva tis\u00edce patn\u00e1ct) do\u0161lo ke slou\u010den\u00ed spole\u010dnosti Alza.cz a.s. se spole\u010dnost\u00ed PUBLERO s.r.o., p\u0159i\u010dem\u017e zanikaj\u00edc\u00ed spole\u010dnost PUBLERO s.r.o. slou\u010den\u00edm zanikla bez likvidace a jej\u00ed jm\u011bn\u00ed p\u0159e\u0161lo na n\u00e1stupnickou sp\nole\u010dnost Alza.cz a.s."
+        },
+        {
+            "T": "Obchodn\u00ed spole\u010dnost Alza.cz a.s., se s\u00eddlem Jankovcova 1522\/53, Hole\u0161ovice, 170 00 Praha 7, I\u010cO: 270 82 440 (d\u00e1le jen Spole\u010dnost), t\u00edmto pln\u00ed svou povinnost ve smyslu ustanoven\u00ed \u00a7 529 z\u00e1kona \u010d. 89\/2012 Sb., ob\u010dansk\u00fd z\u00e1kon\u00edk, a zve\u0159ej\u0148uje, \u017ee jedin\u00fd akcion\n\u00e1\u0159 Spole\u010dnosti rozhodl v p\u016fsobnosti valn\u00e9 hromady Spole\u010dnosti dne 9.3.2023 o p\u0159em\u011bn\u011b podoby v\u0161ech 100 kmenov\u00fdch akci\u00ed na jm\u00e9no v listinn\u00e9 podob\u011b o jmenovit\u00e9 hodnot\u011b 20 000,- K\u010d jedn\u00e9 akcie na 100 kmenov\u00fdch akci\u00ed na jm\u00e9no v zaknihovan\u00e9 podob\u011b ve jmenovit\u00e9\nhodnot\u011b 20 000,- K\u010d jedn\u00e9 akcie. Akcion\u00e1\u0159 Spole\u010dnosti je povinen listinn\u00e9 akcie p\u0159edlo\u017eit ve lh\u016ft\u011b do 31.5.2023."
         }
     ],
     "KAP": {
@@ -92,7 +95,7 @@
                 "DA": "Kmenov\u00e9 akcie na jm\u00e9no",
                 "H": "20000",
                 "Pocet": "100",
-                "PD": "v listinn\u00e9 podob\u011b"
+                "PD": "v zaknihovan\u00e9 podob\u011b"
             }
         }
     },
@@ -112,7 +115,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198615",
+                            "IDA": "51441570",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "NOK": "Hlavn\u00ed m\u011bsto Praha",
@@ -162,7 +165,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198616",
+                            "IDA": "51441571",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -211,7 +214,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198617",
+                            "IDA": "51441572",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -260,7 +263,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198618",
+                            "IDA": "51441573",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -315,7 +318,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198637",
+                            "IDA": "51441592",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "NOK": "Hlavn\u00ed m\u011bsto Praha",
@@ -358,7 +361,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198639",
+                            "IDA": "51441594",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -408,7 +411,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "50198640",
+                            "IDA": "51441595",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "NOK": "Praha-v\u00fdchod",
@@ -446,7 +449,7 @@
                     "IZO": "HE 197294",
                     "OF": "L.S. INVESTMENTS LIMITED",
                     "SI": {
-                        "IDA": "50198644",
+                        "IDA": "51441599",
                         "KS": "196",
                         "NS": "Kypersk\u00e1 republika",
                         "N": "Nik\u00f3sie",

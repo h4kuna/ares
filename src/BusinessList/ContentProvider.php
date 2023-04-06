@@ -3,6 +3,7 @@
 namespace h4kuna\Ares\BusinessList;
 
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
+use h4kuna\Ares\Http\AresRequestProvider;
 use h4kuna\Ares\Http\RequestProvider;
 use h4kuna\Ares\Tools\Utils;
 use Nette\SmartObject;
@@ -19,7 +20,7 @@ final class ContentProvider
 	public array $onAfterContent = [];
 
 
-	public function __construct(private RequestProvider $requestProvider)
+	public function __construct(private AresRequestProvider $requestProvider)
 	{
 		$this->onAfterContent[] = fn (\stdClass $content) => self::fixContent($content);
 	}
@@ -32,8 +33,7 @@ final class ContentProvider
 	{
 		$answer = $this->requestProvider->businessList($in);
 
-		$data = Json::decode(Json::encode($answer));
-		assert($data instanceof \stdClass);
+		$data = RequestProvider::toJson($answer);
 
 		$this->onAfterContent($data);
 
@@ -41,7 +41,7 @@ final class ContentProvider
 			$data->Vypis_OR->ZAU->PFO->KPF = intval($data->Vypis_OR->ZAU->PFO->KPF);
 		}
 
-		return $data;
+		return $data->Vypis_OR;
 	}
 
 

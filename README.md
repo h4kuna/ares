@@ -1,5 +1,4 @@
-Ares
-====
+# Ares
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/h4kuna/ares.svg)](https://packagist.org/packages/h4kuna/ares)
 [![Latest Stable Version](https://poser.pugx.org/h4kuna/ares/v/stable?format=flat)](https://packagist.org/packages/h4kuna/ares)
@@ -9,8 +8,8 @@ Ares
 
 More information about versions is in [changelog](changelog.md).
 
-Installation to project
------------------------
+## Installation to project
+
 The best way to install h4kuna/ares is using Composer:
 ```sh
 $ composer require h4kuna/ares
@@ -18,8 +17,7 @@ $ composer require h4kuna/ares
 
 Download information about customer via his IN.
 
-Example
--------
+## Example
 
 Load data by one identification number
 
@@ -47,5 +45,17 @@ if ($res[$ares::RESULT_FAILED] !== []) {
 
 foreach ($res[$ares::RESULT_SUCCESS] as $r) {
     var_dump($r->company);
+}
+```
+
+## Data Box
+
+```php
+/** @var h4kuna\Ares\Ares $ares */
+try {
+    $response = $ares->loadDataBox('87744473');
+    var_dump($response->ISDS);
+} catch (h4kuna\Ares\Exceptions\ConnectionException $e) {
+    // catch error
 }
 ```

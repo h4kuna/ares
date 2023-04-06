@@ -26,10 +26,10 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-simplexml": "*",
-    "nette/utils": "^3.0",
+    "nette/utils": "^3.0 || ^4.0",
     "psr/http-client": "^1.0",
     "psr/http-factory": "^1.0",
-    "psr/http-message": "^1.0"
+    "psr/http-message": "^1.0 || ^2.0"
   },
   "require-dev": {
     "guzzlehttp/guzzle": "^7.5",
@@ -43,7 +43,7 @@
   },
   "scripts": {
     "phpstan": "vendor/bin/phpstan analyse",
-    "tests": "vendor/bin/tester -s -j 4 --colors 1 -s -C tests/src"
+    "tests": "vendor/bin/tester -s -j 6 --colors 1 -s -C tests/src"
   },
   "suggest": {
     "guzzlehttp/guzzle": "As default implementation for PSR standards."

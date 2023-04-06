@@ -5,7 +5,7 @@ namespace h4kuna\Ares\Basic;
 use h4kuna\Ares\Error;
 use h4kuna\Ares\Exceptions\ConnectionException;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
-use h4kuna\Ares\Http\RequestProvider;
+use h4kuna\Ares\Http\AresRequestProvider;
 
 final class ContentProvider
 {
@@ -17,7 +17,7 @@ final class ContentProvider
 
 	public function __construct(
 		private DataProviderFactory $dataProviderFactory,
-		private RequestProvider $requestProvider,
+		private AresRequestProvider $requestProvider,
 	)
 	{
 	}

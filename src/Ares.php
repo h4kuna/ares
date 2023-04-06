@@ -14,6 +14,7 @@ class Ares
 	public function __construct(
 		private Basic\ContentProvider $basicContentProvider,
 		private BusinessList\ContentProvider $businessListContentProvider,
+		private DataBox\ContentProvider $dataBoxContentProvider,
 	)
 	{
 	}
@@ -64,7 +65,13 @@ class Ares
 	 */
 	public function loadBusinessList(string $in): \stdClass
 	{
-		return $this->businessListContentProvider->load($in)->Vypis_OR;
+		return $this->businessListContentProvider->load($in);
+	}
+
+
+	public function loadDataBox(string $in): \stdClass
+	{
+		return $this->dataBoxContentProvider->load($in);
 	}
 
 }

@@ -4,6 +4,7 @@ namespace h4kuna\Ares\Tests;
 
 use h4kuna\Ares;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
+use Nette\Utils\Json;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -13,6 +14,14 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class AresTest extends TestCase
 {
+	public function testDataBox(): void
+	{
+		$ares = (new Ares\AresFactory())->create();
+		$data = $ares->loadDataBox('27082440');
+		Assert::same('xtkcrkz', $data->ISDS);
+	}
+
+
 	/**
 	 * @dataProvider BusinessListData
 	 */
@@ -29,7 +38,7 @@ class AresTest extends TestCase
 
 		$data->UVOD = new \stdClass();
 		$data->ZAU->POD = '';
-		$jsonData = json_decode(json_encode($data));
+		$jsonData = Json::decode(Json::encode($data));
 		Assert::equal(loadResult("bl-$in"), $jsonData);
 	}
 

@@ -2,7 +2,9 @@
 
 namespace h4kuna\Ares\Exceptions;
 
-final class ConnectionException extends \RuntimeException
+use Psr\Http\Client\ClientExceptionInterface;
+
+final class ConnectionException extends \RuntimeException implements ClientExceptionInterface
 {
 
 	/**
@@ -12,7 +14,7 @@ final class ConnectionException extends \RuntimeException
 	public function __construct(
 		$message = 'The Ares probably is overloaded. Repeat request after few minutes.',
 		$code = 0,
-		\Throwable $previous = null
+		\Throwable $previous = null,
 	)
 	{
 		parent::__construct($message, $code, $previous);
