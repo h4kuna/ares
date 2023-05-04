@@ -202,8 +202,9 @@ class DataProvider
 	 */
 	public function setTIN(string $s)
 	{
-		$this->data->tin = self::toNull($s);
-		$this->data->vat_payer = (bool) $this->data->tin;
+        $tin = self::toNull($s);
+		$this->data->tin = $tin === 'Skupinove_DPH' ? null : $tin;
+		$this->data->vat_payer = (bool) $tin;
 
 		return $this;
 	}

@@ -131,7 +131,8 @@ class AresTest extends TestCase
 		$in = '02319918';
 		$data = $ares->loadBasic($in);
 		Assert::true($data->isGroupVat());
-		Assert::equal('Skupinove_DPH', $data->tin);
+		Assert::null($data->tin);
+        Assert::true($data->vat_payer);
 	}
 
 

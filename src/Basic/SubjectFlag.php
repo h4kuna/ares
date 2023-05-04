@@ -3,7 +3,8 @@
 namespace h4kuna\Ares\Basic;
 
 /**
- * Indexation is from 0
+ * Indexation is from 0 for substr()
+ * @see https://wwwinfo.mfcr.cz/ares/ares_xml_standard.html.cz
  */
 final class SubjectFlag
 {

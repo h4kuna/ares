@@ -8,6 +8,7 @@ v2.0.0
 - PSR-7, PSR-17 and PSR-18 ready
 - remove dependency on guzzlehttp/guzzle
 - prepared AresFactory::create() for instance Ares class
+- Data::$tin is null if value is Skupinove_DPH
 
 v1.4.0
 ======
