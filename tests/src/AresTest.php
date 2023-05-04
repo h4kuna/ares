@@ -233,6 +233,13 @@ class AresTest extends TestCase
 		Assert::same('Chyba 61 - subjekt zanikl', $results[Ares\Ares::RESULT_FAILED][3]->message);
 	}
 
+
+    public function testBackCompatibilityClass(): void
+    {
+        Assert::type(Ares\Basic\Data::class, new Ares\Data\Data());
+        Assert::same(Ares\Basic\SubjectFlag::VR_2, Ares\Data\SubjectFlag::VR_2);
+    }
+
 }
 
 (new AresTest)->run();

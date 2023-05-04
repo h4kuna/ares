@@ -12,6 +12,9 @@
     }
   ],
   "autoload": {
+    "files": [
+      "src/aliases.php"
+    ],
     "psr-4": {
       "h4kuna\\Ares\\": "src/"
     }
