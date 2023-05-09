@@ -219,16 +219,17 @@ class AresTest extends TestCase
 
 		Assert::same([
 			'in' => '123',
-			'code' => 0,
+			'code' => 71,
 			'message' => 'Chyba 71 - nenalezeno 123',
 		], $results[Ares\Ares::RESULT_FAILED][1]->toArray());
 		Assert::same([
 			'in' => '25596641',
-			'code' => 0,
+			'code' => 61,
 			'message' => 'Chyba 61 - subjekt zanikl',
 		], $results[Ares\Ares::RESULT_FAILED][3]->toArray());
 
-		Assert::same(0, $results[Ares\Ares::RESULT_FAILED][3]->code);
+		Assert::same(61, $results[Ares\Ares::RESULT_FAILED][3]->code);
+		Assert::true($results[Ares\Ares::RESULT_FAILED][3]->disappeared());
 		Assert::same('25596641', $results[Ares\Ares::RESULT_FAILED][3]->in);
 		Assert::same('Chyba 61 - subjekt zanikl', $results[Ares\Ares::RESULT_FAILED][3]->message);
 	}

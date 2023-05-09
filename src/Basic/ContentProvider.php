@@ -49,7 +49,7 @@ final class ContentProvider
 				try {
 					if ($D->E->asXML() !== false) {
 						$DE = $D->E->children('D', true);
-						throw new IdentificationNumberNotFoundException(trim($DE->ET->__toString()), $DE->EK->__toString());
+						throw new IdentificationNumberNotFoundException(trim($DE->ET->__toString()), (string) $identificationNumbers[$pid]);
 					}
 
 					$provider = $this->dataProviderFactory->create();

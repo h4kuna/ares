@@ -13,6 +13,12 @@ final class Error
 	}
 
 
+    public function disappeared(): bool
+    {
+        return $this->code === 61;
+    }
+
+
 	/**
 	 * @return array{in: string, code: int, message: string}
 	 */
