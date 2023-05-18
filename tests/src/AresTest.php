@@ -132,7 +132,7 @@ class AresTest extends TestCase
 		$data = $ares->loadBasic($in);
 		Assert::true($data->isGroupVat());
 		Assert::null($data->tin);
-        Assert::true($data->vat_payer);
+		Assert::true($data->vat_payer);
 	}
 
 
@@ -235,11 +235,22 @@ class AresTest extends TestCase
 	}
 
 
-    public function testBackCompatibilityClass(): void
-    {
-        Assert::type(Ares\Basic\Data::class, new Ares\Data\Data());
-        Assert::same(Ares\Basic\SubjectFlag::VR_2, Ares\Data\SubjectFlag::VR_2);
-    }
+	public function testLoadBasicMultiEmpty(): void
+	{
+		$identificationNumbers = [];
+		$results = (new Ares\AresFactory())->create()->loadBasicMulti([]);
+		Assert::same([
+			Ares\Basic\ContentProvider::RESULT_FAILED => [],
+			Ares\Basic\ContentProvider::RESULT_SUCCESS => [],
+		], $results);
+	}
+
+
+	public function testBackCompatibilityClass(): void
+	{
+		Assert::type(Ares\Basic\Data::class, new Ares\Data\Data());
+		Assert::same(Ares\Basic\SubjectFlag::VR_2, Ares\Data\SubjectFlag::VR_2);
+	}
 
 }
 
