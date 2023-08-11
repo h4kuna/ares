@@ -3,9 +3,9 @@
 namespace h4kuna\Ares;
 
 use GuzzleHttp;
-use h4kuna\Ares\Basic;
 use h4kuna\Ares\DataBox\Client;
 use h4kuna\Ares\Http\AresRequestProvider;
+use h4kuna\Ares\Http\HttpFactory;
 use h4kuna\Ares\Http\RequestProvider;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -13,7 +13,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 final class AresFactory
 {
-	private ?GuzzleHttp\Psr7\HttpFactory $httpFactory = null;
+	private null|GuzzleHttp\Psr7\HttpFactory|HttpFactory $httpFactory = null;
 
 
 	public function create(): Ares
@@ -38,7 +38,7 @@ final class AresFactory
 	{
 		self::checkGuzzle();
 
-		return $this->httpFactory ??= new GuzzleHttp\Psr7\HttpFactory();
+		return $this->httpFactory ??= class_exists(GuzzleHttp\Psr7\HttpFactory::class) ? new GuzzleHttp\Psr7\HttpFactory() : new HttpFactory();
 	}
 
 
@@ -53,7 +53,7 @@ final class AresFactory
 	protected function createStreamFactory(): StreamFactoryInterface
 	{
 		$factory = $this->createRequestFactory();
-		assert($factory instanceof GuzzleHttp\Psr7\HttpFactory);
+		assert($factory instanceof StreamFactoryInterface);
 
 		return $factory;
 	}
