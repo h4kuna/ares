@@ -25,7 +25,7 @@
             "TZU": "Tuzemsk\u00e1"
         },
         "SI": {
-            "IDA": "51441555",
+            "IDA": "53142326",
             "KS": "203",
             "NS": "\u010cesk\u00e1 republika",
             "NOK": "Hlavn\u00ed m\u011bsto Praha",
@@ -115,7 +115,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441570",
+                            "IDA": "53142341",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "NOK": "Hlavn\u00ed m\u011bsto Praha",
@@ -165,23 +165,23 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441571",
+                            "IDA": "53142343",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
-                            "NCO": "\u017di\u017ekov",
-                            "NU": "Ke kapslovn\u011b",
-                            "CD": "2855",
+                            "NCO": "B\u0159evnov",
+                            "NU": "B\u011blohorsk\u00e1",
+                            "CD": "209",
                             "TCD": "1",
-                            "CO": "7",
-                            "PSC": "13000",
+                            "CO": "133",
+                            "PSC": "16900",
                             "optional": {
-                                "zip": "13000",
+                                "zip": "16900",
                                 "ks": "203",
                                 "country": "\u010cesk\u00e1 republika",
-                                "street": "Ke kapslovn\u011b",
-                                "house": "2855\/7",
-                                "city": "Praha - \u017di\u017ekov"
+                                "street": "B\u011blohorsk\u00e1",
+                                "house": "209\/133",
+                                "city": "Praha - B\u0159evnov"
                             }
                         }
                     },
@@ -214,7 +214,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441572",
+                            "IDA": "53142344",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -263,7 +263,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441573",
+                            "IDA": "53142345",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -318,7 +318,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441592",
+                            "IDA": "53142364",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "NOK": "Hlavn\u00ed m\u011bsto Praha",
@@ -361,7 +361,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441594",
+                            "IDA": "53142366",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "N": "Praha",
@@ -411,7 +411,7 @@
                             "timezone": "Europe\/Prague"
                         },
                         "B": {
-                            "IDA": "51441595",
+                            "IDA": "53142367",
                             "KS": "203",
                             "NS": "\u010cesk\u00e1 republika",
                             "NOK": "Praha-v\u00fdchod",
@@ -449,7 +449,7 @@
                     "IZO": "HE 197294",
                     "OF": "L.S. INVESTMENTS LIMITED",
                     "SI": {
-                        "IDA": "51441599",
+                        "IDA": "53142371",
                         "KS": "196",
                         "NS": "Kypersk\u00e1 republika",
                         "N": "Nik\u00f3sie",
