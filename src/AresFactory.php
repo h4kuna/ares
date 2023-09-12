@@ -3,10 +3,11 @@
 namespace h4kuna\Ares;
 
 use GuzzleHttp;
-use h4kuna\Ares\DataBox\Client;
-use h4kuna\Ares\Http\AresRequestProvider;
+use h4kuna\Ares\Adis\StatusBusinessSubjects\StatusBusinessSubjectsTransformer;
+use h4kuna\Ares\DataBox;
+use h4kuna\Ares\Exceptions\InvalidStateException;
 use h4kuna\Ares\Http\HttpFactory;
-use h4kuna\Ares\Http\RequestProvider;
+use h4kuna\Ares\Http\TransportProvider;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -18,23 +19,19 @@ final class AresFactory
 
 	public function create(): Ares
 	{
-		$requestFactory = $this->createRequestFactory();
-		$client = $this->createClient();
 		$streamFactory = $this->createStreamFactory();
-		$requestProvider = new RequestProvider($requestFactory, $client);
-		$aresContentProvider = new AresRequestProvider($requestProvider, $streamFactory, $client);
+		$transportProvider = $this->createTransportProvider($streamFactory);
+		$adisContentProvider = $this->adisContentProvider($transportProvider);
+		$aresClient = new Ares\Client($transportProvider);
 
-		$basicContent = new Basic\ContentProvider(new Basic\DataProviderFactory(), $aresContentProvider);
-		$businessListProvider = new BusinessList\ContentProvider($aresContentProvider);
-
-		$dataBoxClient = new Client($requestProvider);
+		$dataBoxClient = new DataBox\Client($transportProvider);
 		$dataBoxContentProvider = new DataBox\ContentProvider($dataBoxClient, $streamFactory);
 
-		return new Ares($basicContent, $businessListProvider, $dataBoxContentProvider);
+		return new Ares($aresClient, $dataBoxContentProvider, $adisContentProvider);
 	}
 
 
-	protected function createRequestFactory(): RequestFactoryInterface
+	public function createRequestFactory(): RequestFactoryInterface
 	{
 		self::checkGuzzle();
 
@@ -42,7 +39,7 @@ final class AresFactory
 	}
 
 
-	protected function createClient(): ClientInterface
+	public function createClient(): ClientInterface
 	{
 		self::checkGuzzle();
 
@@ -50,7 +47,7 @@ final class AresFactory
 	}
 
 
-	protected function createStreamFactory(): StreamFactoryInterface
+	public function createStreamFactory(): StreamFactoryInterface
 	{
 		$factory = $this->createRequestFactory();
 		assert($factory instanceof StreamFactoryInterface);
@@ -59,10 +56,24 @@ final class AresFactory
 	}
 
 
+	protected function adisContentProvider(TransportProvider $transportProvider): Adis\ContentProvider
+	{
+		return new Adis\ContentProvider(new Adis\Client($transportProvider), new StatusBusinessSubjectsTransformer());
+	}
+
+
+	public function createTransportProvider(StreamFactoryInterface $streamFactory): TransportProvider
+	{
+		$client = $this->createClient();
+		$requestFactory = $this->createRequestFactory();
+		return new TransportProvider($requestFactory, $client, $streamFactory);
+	}
+
+
 	private static function checkGuzzle(): void
 	{
 		if (!class_exists(GuzzleHttp\Client::class)) {
-			throw new \RuntimeException('Guzzle not found, let implement own solution or install guzzle by: composer require guzzlehttp/guzzle');
+			throw new InvalidStateException('Guzzle not found, let implement own solution or install guzzle by: composer require guzzlehttp/guzzle');
 		}
 	}
 

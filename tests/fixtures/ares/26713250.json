@@ -1,0 +1,40 @@
+{
+    "active": true,
+    "city": "Praha",
+    "company": "BARVY FRAMAR s.r.o.",
+    "created": "2022-02-27T00:00:00+01:00",
+    "dissolved": null,
+    "city_district": "Mod\u0159any",
+    "city_post": "Praha 12",
+    "in": "26713250",
+    "is_person": false,
+    "legal_form_code": 112,
+    "house_number": "1213\/4",
+    "street": "Barrandova",
+    "tin": "CZ26713250",
+    "vat_payer": true,
+    "zip": "14300",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "4778",
+        "46380",
+        "433",
+        "20120",
+        "68320"
+    ],
+    "sources": {
+        "stavZdrojeVr": true,
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": true,
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": true,
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

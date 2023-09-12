@@ -1,0 +1,42 @@
+{
+    "active": true,
+    "city": "Brand\u00fds n\/L. - Star\u00e1 Boleslav",
+    "company": "101 Cestovn\u00ed kancel\u00e1\u0159 Zemek, s.r.o.",
+    "created": "2015-10-24T00:00:00+02:00",
+    "dissolved": null,
+    "city_district": null,
+    "city_post": null,
+    "in": "61682039",
+    "is_person": false,
+    "legal_form_code": 112,
+    "house_number": "31",
+    "street": "M\u011blnick\u00e1",
+    "tin": "CZ61682039",
+    "vat_payer": true,
+    "zip": "25002",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "731",
+        "581",
+        "471",
+        "46900",
+        "931",
+        "79120",
+        "741"
+    ],
+    "sources": {
+        "stavZdrojeVr": true,
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": true,
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": true,
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}
