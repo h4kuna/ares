@@ -1,0 +1,40 @@
+{
+    "active": true,
+    "city": "Doln\u00ed Bousov",
+    "company": "Milan Mat\u011bj\u010dek",
+    "created": "2011-04-04T00:00:00+02:00",
+    "dissolved": null,
+    "city_district": "Mlad\u00e1 Boleslav",
+    "city_post": null,
+    "in": "87744473",
+    "is_person": true,
+    "legal_form_code": 101,
+    "house_number": "765",
+    "street": "Dubov\u00e1",
+    "tin": "CZ8612301071",
+    "vat_payer": true,
+    "zip": "29404",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "73110",
+        "620",
+        "471",
+        "461",
+        "7490"
+    ],
+    "sources": {
+        "stavZdrojeVr": "NEEXISTUJICI",
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": true,
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": true,
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

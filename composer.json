@@ -12,16 +12,16 @@
     }
   ],
   "autoload": {
-    "files": [
-      "src/aliases.php"
-    ],
     "psr-4": {
       "h4kuna\\Ares\\": "src/"
-    }
+    },
+    "files": [
+      "src/aliases.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
-      "h4kuna\\Ares\\Tests\\": "tests/src/"
+      "h4kuna\\Ares\\Tests\\": "tests/src"
     }
   },
   "require": {
@@ -29,10 +29,10 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-simplexml": "*",
-    "nette/utils": "^3.0 || ^4.0",
-    "psr/http-client": "^1.0",
+    "h4kuna/memoize": "^0.1.4",
+    "nette/utils": "^2.0 || ^3.0 || ^4.0",
     "psr/http-factory": "^1.0",
-    "psr/http-message": "^1.0 || ^2.0"
+    "psr/http-message": "^1.0.1 || ^2.0"
   },
   "require-dev": {
     "guzzlehttp/guzzle": "^7.5",
@@ -42,11 +42,15 @@
     "tracy/tracy": "^2.9"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
   },
   "scripts": {
     "phpstan": "vendor/bin/phpstan analyse",
-    "tests": "vendor/bin/tester -s -j 6 --colors 1 -s -C tests/src"
+    "tests": "vendor/bin/tester -s --colors 1 -s -C tests/src",
+    "coverage": "vendor/bin/tester --coverage coverage.html --coverage-src src/ --colors 1 -s -C tests/src"
   },
   "suggest": {
     "guzzlehttp/guzzle": "As default implementation for PSR standards."

@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use h4kuna\Ares;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$ares = (new Ares\AresFactory())->create();
+$result = $ares->getAresClient()->searchEndpoint(Ares\Ares\Sources::DIAL, [
+	'kodCiselniku' => 'PravniForma',
+	'zdrojCiselniku' => 'res',
+])->ciselniky[0]->polozkyCiselniku;
+
+foreach ($result as $item) {
+	dump($item);
+}

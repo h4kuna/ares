@@ -1,0 +1,15 @@
+{
+    "exists": true,
+    "type": "IDENTIFIKOVANA_OSOBA",
+    "tin": "CZ8702080024",
+    "reliable": null,
+    "isVatPayer": false,
+    "taxOfficeNumber": "452",
+    "address": {
+        "uliceCislo": "Na Dlaskov\u011b 94",
+        "castObce": "BRTNICE                                         ",
+        "mesto": "VELK\u00c9 POPOVICE",
+        "psc": "25169",
+        "stat": "\u010cesk\u00e1 republika"
+    }
+}

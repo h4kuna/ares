@@ -1,0 +1,36 @@
+{
+    "active": true,
+    "city": "Praha",
+    "company": "Raiffeisenbank a.s.",
+    "created": "2023-06-02T00:00:00+02:00",
+    "dissolved": null,
+    "city_district": "Nusle",
+    "city_post": "Praha 4",
+    "in": "49240901",
+    "is_person": false,
+    "legal_form_code": 121,
+    "house_number": "1716\/2b",
+    "street": "Hv\u011bzdova",
+    "tin": null,
+    "vat_payer": true,
+    "zip": "14000",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "64190"
+    ],
+    "sources": {
+        "stavZdrojeVr": true,
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": "HISTORICKY",
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": true,
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

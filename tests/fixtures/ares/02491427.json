@@ -1,0 +1,36 @@
+{
+    "active": true,
+    "city": "P\u00edsek",
+    "company": "Z\u00e1pado\u010desk\u00e1 spole\u010dnost, o.s.",
+    "created": "2015-10-24T00:00:00+02:00",
+    "dissolved": null,
+    "city_district": "P\u00edsek",
+    "city_post": null,
+    "in": "02491427",
+    "is_person": false,
+    "legal_form_code": 706,
+    "house_number": "105\/4",
+    "street": "Budovcova",
+    "tin": null,
+    "vat_payer": false,
+    "zip": "39701",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "9499"
+    ],
+    "sources": {
+        "stavZdrojeVr": true,
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": "NEEXISTUJICI",
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": "NEEXISTUJICI",
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

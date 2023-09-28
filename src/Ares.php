@@ -2,76 +2,73 @@
 
 namespace h4kuna\Ares;
 
-use h4kuna\Ares\Basic;
+use Generator;
+use h4kuna\Ares\Adis;
+use h4kuna\Ares\Ares\Core\Data;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
+use h4kuna\Memoize\MemoryStorage;
+use stdClass;
 
 class Ares
 {
-	public const RESULT_FAILED = Basic\ContentProvider::RESULT_FAILED;
-	public const RESULT_SUCCESS = Basic\ContentProvider::RESULT_SUCCESS;
-
+	use MemoryStorage;
 
 	public function __construct(
-		private Basic\ContentProvider $basicContentProvider,
-		private BusinessList\ContentProvider $businessListContentProvider,
+		private Ares\Client $aresClient,
 		private DataBox\ContentProvider $dataBoxContentProvider,
+		private Adis\ContentProvider $adisContentProvider,
 	)
 	{
 	}
 
 
-	/**
-	 * @param array<string|int> $identificationNumbers
-	 * @return array{failed: array<Error>, success: array<Basic\Data>}
-	 * @deprecated use loadBasicMulti()
-	 */
-	public function loadByIdentificationNumbers(array $identificationNumbers): array
+	public function getAdis(): Adis\ContentProvider
 	{
-		return $this->basicContentProvider->loadByIdentificationNumbers($identificationNumbers);
+		return $this->adisContentProvider;
+	}
+
+
+	public function getAresClient(): Ares\Client
+	{
+		return $this->aresClient;
 	}
 
 
 	/**
-	 * @param array<string|int> $identificationNumbers
-	 * @return array{failed: array<Error>, success: array<Basic\Data>}
+	 * @template KeyName
+	 * @param array<KeyName, string|int> $identificationNumbers
+	 * @return Generator<(int&KeyName)|(KeyName&string), Data>
 	 */
-	public function loadBasicMulti(array $identificationNumbers): array
+	public function loadBasicMulti(array $identificationNumbers): Generator
 	{
-		return $this->basicContentProvider->loadByIdentificationNumbers($identificationNumbers);
-	}
-
-
-	/**
-	 * @throws IdentificationNumberNotFoundException
-	 * @deprecated use loadBasic()
-	 */
-	public function loadData(string $in): Basic\Data
-	{
-		return $this->basicContentProvider->load($in);
+		return $this->aresContentProviderCache()->loadByIdentificationNumbers($identificationNumbers);
 	}
 
 
 	/**
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadBasic(string $in): Basic\Data
+	public function loadBasic(string $in): Data
 	{
-		return $this->basicContentProvider->load($in);
+		return $this->aresContentProviderCache()->load($in);
 	}
 
 
-	/**
-	 * @throws IdentificationNumberNotFoundException
-	 */
-	public function loadBusinessList(string $in): \stdClass
-	{
-		return $this->businessListContentProvider->load($in);
-	}
-
-
-	public function loadDataBox(string $in): \stdClass
+	public function loadDataBox(string $in): stdClass
 	{
 		return $this->dataBoxContentProvider->load($in);
+	}
+
+
+	protected function aresContentProvider(): Ares\Core\ContentProvider
+	{
+		return new Ares\Core\ContentProvider(new Ares\Core\JsonToDataTransformer(), $this->getAresClient(), $this->adisContentProvider);
+	}
+
+
+	private function aresContentProviderCache(): Ares\Core\ContentProvider
+	{
+		return $this->memoize(__METHOD__, fn () => $this->aresContentProvider());
 	}
 
 }

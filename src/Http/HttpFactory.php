@@ -12,7 +12,9 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * fallback for guzzlehttp/psr7
+ * @deprecated only for guzzle/psr7 < 2.0
+ * Copy from see
+ * @see https://github.com/guzzle/psr7/blob/2.6/src/HttpFactory.php
  */
 final class HttpFactory implements RequestFactoryInterface, StreamFactoryInterface
 {

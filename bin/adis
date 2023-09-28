@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use h4kuna\Ares;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$TIN = trim($argv[1] ?? 'CZ27082440');
+
+$adis = (new Ares\AresFactory())->create()->getAdis();
+
+$subject = $adis->statusBusinessSubject($TIN);
+
+dump($subject);
+dump('Nalezen', $subject->exists);
+dump('Je spolehlivý plátce', $subject->reliable);
+dump('Je plátce DPH', $subject->isVatPayer);

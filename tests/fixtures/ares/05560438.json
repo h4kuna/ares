@@ -1,0 +1,37 @@
+{
+    "active": true,
+    "city": "Velk\u00e9 Popovice",
+    "company": "Ond\u0159ej Soch\u016frek",
+    "created": "2016-11-11T00:00:00+01:00",
+    "dissolved": null,
+    "city_district": "Praha-v\u00fdchod",
+    "city_post": null,
+    "in": "05560438",
+    "is_person": true,
+    "legal_form_code": 101,
+    "house_number": "94",
+    "street": "Na Dlaskov\u011b",
+    "tin": "CZ8702080024",
+    "vat_payer": false,
+    "zip": "25169",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "43320",
+        "620"
+    ],
+    "sources": {
+        "stavZdrojeVr": "NEEXISTUJICI",
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": true,
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": true,
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

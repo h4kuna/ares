@@ -1,0 +1,15 @@
+{
+    "exists": true,
+    "type": "PLATCE_DPH",
+    "tin": "CZ27445798",
+    "reliable": false,
+    "isVatPayer": true,
+    "taxOfficeNumber": "451",
+    "address": {
+        "uliceCislo": "Var\u0161avsk\u00e1 715\/36",
+        "castObce": "VINOHRADY (PRAHA 2)                             ",
+        "mesto": "PRAHA 2",
+        "psc": "12000",
+        "stat": "\u010cesk\u00e1 republika"
+    }
+}

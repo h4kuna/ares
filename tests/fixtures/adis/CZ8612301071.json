@@ -1,0 +1,15 @@
+{
+    "exists": true,
+    "type": "PLATCE_DPH",
+    "tin": "CZ8612301071",
+    "reliable": true,
+    "isVatPayer": true,
+    "taxOfficeNumber": "452",
+    "address": {
+        "uliceCislo": "Dubov\u00e1 765",
+        "castObce": "DOLN\u00cd BOUSOV                                    ",
+        "mesto": "DOLN\u00cd BOUSOV",
+        "psc": "29404",
+        "stat": "\u010cesk\u00e1 republika"
+    }
+}

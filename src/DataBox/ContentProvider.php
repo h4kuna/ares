@@ -4,7 +4,7 @@ namespace h4kuna\Ares\DataBox;
 
 use Psr\Http\Message\StreamFactoryInterface;
 
-final class ContentProvider
+class ContentProvider
 {
 	public function __construct(
 		private Client $client,
@@ -20,7 +20,7 @@ final class ContentProvider
 	}
 
 
-	private function xml(string $parameter, string $value): \stdClass
+	protected function xml(string $parameter, string $value): \stdClass
 	{
 		$xml = <<<XML
 		<GetInfoRequest xmlns="http://seznam.gov.cz/ovm/ws/v1">

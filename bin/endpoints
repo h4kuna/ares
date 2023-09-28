@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use h4kuna\Ares;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$IN = trim($argv[1] ?? '27082440');
+
+$ares = (new Ares\AresFactory())->create();
+try {
+	$response = $ares->loadBasic($IN);
+	/* @var $response Ares\Ares\Core\Data */
+	$response->original = null;
+	dump($response);
+} catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
+	dumpe($e->getMessage());
+	// log identification number, why is bad? Or make nothing.
+} catch (Ares\Exceptions\ServerResponseException $e) {
+	// no response from server or broken json
+	dumpe($e->getMessage());
+}
+
+foreach ($response->sources as $name => $exists) {
+	if ($exists !== true || Ares\Ares\Helper::endpointExists($name) === false) {
+		continue;
+	}
+	dump(Ares\Ares\Helper::prepareUrl($name, $IN));
+
+	try {
+		$result = $ares->getAresClient()->useEndpoint($name, $IN);
+		dump($result);
+	} catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
+		// log identification number, why is bad? Or make nothing.
+	} catch (Ares\Exceptions\ServerResponseException $e) {
+		// no response from server or broken json
+	}
+}

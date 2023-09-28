@@ -1,23 +1,18 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
-// keep up to v3.0
-namespace h4kuna\Ares\Data {
-    if (false) {
-        /** @deprecated use h4kuna\Ares\Basic\Data */
-        class Data
-        {
-        }
+// keep up to v3.1
+namespace h4kuna\Ares\Basic
+{
 
-        /** @deprecated use h4kuna\Ares\Basic\SubjectFlag */
-        class SubjectFlag
-        {
-        }
-    }
+	if (false) {
+		/** @deprecated use h4kuna\Ares\Ares\Core\Data */
+		class Data
+		{
+		}
+	}
 }
 
-namespace {
-    use h4kuna\Ares;
-    class_alias(Ares\Basic\Data::class, 'h4kuna\Ares\Data\Data');
-    class_alias(Ares\Basic\SubjectFlag::class, 'h4kuna\Ares\Data\SubjectFlag');
+namespace h4kuna\Ares
+{
+	class_alias(Ares\Core\Data::class, 'h4kuna\Ares\Basic\Data');
 }
-// --

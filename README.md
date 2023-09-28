@@ -1,5 +1,3 @@
-# Ares
-
 [![Downloads this Month](https://img.shields.io/packagist/dm/h4kuna/ares.svg)](https://packagist.org/packages/h4kuna/ares)
 [![Latest Stable Version](https://poser.pugx.org/h4kuna/ares/v/stable?format=flat)](https://packagist.org/packages/h4kuna/ares)
 [![Coverage Status](https://coveralls.io/repos/github/h4kuna/ares/badge.svg?branch=master)](https://coveralls.io/github/h4kuna/ares?branch=master)
@@ -8,54 +6,72 @@
 
 More information about versions is in [changelog](changelog.md).
 
+## Support development by QR code
+
+Use QR code or sponsor button where is link on my revolut.
+
+Thank you :)
+
+![QR payment](./.doc/payment.png)
+
+
 ## Installation to project
 
 The best way to install h4kuna/ares is using Composer:
+
 ```sh
-$ composer require h4kuna/ares
+composer require h4kuna/ares
 ```
 
 Download information about customer via his IN.
 
-## Example
+## ARES
 
-Load data by one identification number
+[Homepage](https://ares.gov.cz/) and official [ARES documentation](https://www.mfcr.cz/assets/attachments/2023-08-01_ARES-Technicka-dokumentace-Katalog-verejnych-sluzeb.pdf). And json [API](https://www.mfcr.cz/assets/attachments/2023-08-01_AresRestApi-verejne.json)
+
+Load data by one identification number.
 
 ```php
-$ares = (new h4kuna\Ares\AresFactory())->create();
+use h4kuna\Ares;
+$ares = (new Ares\AresFactory())->create();
 try {
     $response = $ares->loadBasic('87744473');
-    /* @var $response h4kuna\Ares\Basic\Data */
+    /* @var $response Ares\Ares\Core\Data */
     var_dump($response);
-} catch (h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException $e) {
+} catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
     // log identification number, why is bad? Or make nothing.
+} catch (Ares\Exceptions\ServerResponseException $e) {
+    // no response from server or broken json
 }
 ```
 
-Load data by many identification numbers
+Load data by many identification numbers. Limit by ARES service is set to 100 items, but library chunk it and check duplicity.
 
 ```php
-/** @var h4kuna\Ares\Ares $ares */
-$numbers = ['25596641', '26713250', '27082440', '11111111'];
-$res = $ares->loadBasicMulti($numbers);
+use h4kuna\Ares;
+/** @var Ares\Ares $ares */
+$numbers = ['one' => '25596641', 'two' => '26713250', 'three' => '27082440', 'four' => '11111111'];
 
-if ($res[$ares::RESULT_FAILED] !== []) {
-    var_dump($res[$ares::RESULT_FAILED]);
-}
-
-foreach ($res[$ares::RESULT_SUCCESS] as $r) {
-    var_dump($r->company);
+try { 
+    foreach ($ares->loadBasicMulti($numbers) as $name => $r) {
+        var_dump($name, $r->company);
+    }
+} catch (Ares\Exceptions\ServerResponseException $e) {
+    // no response from server or broken json
 }
 ```
 
-## Data Box
+## Data Box (datavá schánka)
+
+[Manual](https://www.mojedatovaschranka.cz/sds/p/download/sds_webove_sluzby.pdf#view=Fit)
 
 ```php
-/** @var h4kuna\Ares\Ares $ares */
+use h4kuna\Ares;
+/** @var Ares\Ares $ares */
 try {
     $response = $ares->loadDataBox('87744473');
     var_dump($response->ISDS);
-} catch (h4kuna\Ares\Exceptions\ConnectionException $e) {
+} catch (h4kuna\Ares\Exceptions\ServerResponseException $e) {
     // catch error
 }
 ```
