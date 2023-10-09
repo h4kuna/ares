@@ -42,12 +42,14 @@ Přidal jsem ADIS, služba která ověří zda se jedná o plátce DPH, identifi
 
 ### Chování validace pomocí ADIS
 
-|                      | ARES      | ADIS (Data::$adis::$exists) | Data::$vat_payer | Data::$tin | Spolehlivý plátce DPH Data::$adis::$reliable |
-|----------------------|-----------|-----------------------------|------------------|------------|----------------------------------------------|
-| Plátce DPH           | vrací DIČ | Existuje (true)             | true             | vyplněno   | true/false                                   |
-| Skupinové DPH        | vrátí DIČ | Neexistuje (false)          | true             | null       | null                                         |
-| Identifikovaná osoba | vrátí DIČ | Existuje (true)             | false            | vyplněno   | null                                         |
-| neplátce             | null      | null                        | false            | null       | null                                         |
+|                                     | ARES      | ADIS (Data::$adis::$exists) | Data::$vat_payer | Data::$tin | Spolehlivý plátce DPH Data::$adis::$reliable |
+|-------------------------------------|-----------|-----------------------------|------------------|------------|----------------------------------------------|
+| Plátce DPH                          | vrací DIČ | Existuje (true)             | true             | vyplněno   | true/false                                   |
+| Skupinové DPH / již není plátce DPH | vrátí DIČ | Neexistuje (false)          | null *           | null       | null                                         |
+| Identifikovaná osoba                | vrátí DIČ | Existuje (true)             | false            | vyplněno   | null                                         |
+| neplátce                            | null      | null                        | false            | null       | null                                         |
+
+> * Nelze určit, zda se jedná o Skupinové DPH nebo společnost již není plátce DPH
 
 # v2.0.0
 

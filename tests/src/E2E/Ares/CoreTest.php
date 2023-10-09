@@ -63,7 +63,7 @@ final class CoreTest extends TestCase
 		$in = '2319918';
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
 		Assert::null($data->tin);
-		Assert::true($data->vat_payer);
+		Assert::null($data->vat_payer);
 	}
 
 

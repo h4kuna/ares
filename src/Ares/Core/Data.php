@@ -45,7 +45,7 @@ class Data implements JsonSerializable, Stringable
 	 */
 	public ?string $tin;
 
-	public bool $vat_payer;
+	public ?bool $vat_payer;
 
 	public ?string $zip;
 
@@ -74,6 +74,7 @@ class Data implements JsonSerializable, Stringable
 			$this->vat_payer = $adis->isVatPayer;
 			$this->tin = $adis->tin;
 		} else {
+			$this->vat_payer = null;
 			$this->tin = null;
 		}
 
