@@ -53,6 +53,6 @@
     "coverage": "vendor/bin/tester --coverage coverage.html --coverage-src src/ --colors 1 -s -C tests/src"
   },
   "suggest": {
-    "guzzlehttp/guzzle": "As default implementation for PSR standards."
+    "guzzlehttp/guzzle": "As default implementation for PSR-7, PSR-17 and PSR-18 standards."
   }
 }

@@ -27,7 +27,7 @@ Download information about customer via his IN.
 
 ## ARES
 
-[Homepage](https://ares.gov.cz/) and official [ARES documentation](https://www.mfcr.cz/assets/attachments/2023-08-01_ARES-Technicka-dokumentace-Katalog-verejnych-sluzeb.pdf). And json [API](https://www.mfcr.cz/assets/attachments/2023-08-01_AresRestApi-verejne.json)
+[Homepage](https://ares.gov.cz/stranky/vyvojar-info) documentation for developers.
 
 Load data by one identification number.
 
