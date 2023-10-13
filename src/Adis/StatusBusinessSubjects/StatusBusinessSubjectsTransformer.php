@@ -13,6 +13,14 @@ class StatusBusinessSubjectsTransformer
 
 		$exists = $data->$attributes->typSubjektu !== 'NENALEZEN';
 		$isVatPayer = $data->$attributes->typSubjektu === 'PLATCE_DPH';
+		$address = null;
+		if (isset($data->adresa)) {
+			$address = $data->adresa;
+			if (isset($address->castObce)) {
+				$address->castObce = rtrim($address->castObce);
+			}
+		}
+
 		return new Subject(
 			$exists,
 			$data->$attributes->typSubjektu,
@@ -20,7 +28,7 @@ class StatusBusinessSubjectsTransformer
 			$exists && $isVatPayer ? $data->$attributes->nespolehlivyPlatce !== 'ANO' : null,
 			$isVatPayer,
 			$data->$attributes->cisloFu ?? '',
-			$data->adresa ?? null
+			$address
 		);
 	}
 }
