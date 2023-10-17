@@ -45,7 +45,7 @@ final class DataTest extends TestCase
 		$data = self::createData();
 		$encode = json_encode($data);
 		Assert::same((string) $data, $encode);
-		Assert::same('{"active":true,"city":"a","company":"b","created":"2020-12-13T04:05:06+01:00","dissolved":"2021-01-14T05:06:07+01:00","city_district":"c","city_post":"d","in":"e","is_person":false,"legal_form_code":102,"house_number":"f","street":"g","tin":null,"vat_payer":false,"zip":"h","country":"j","country_code":"k","nace":["465"],"sources":{"stavZdrojeRes":true}}', $encode);
+		Assert::same('{"active":true,"city":"a","company":"b","created":"2020-12-13T04:05:06+01:00","dissolved":"2021-01-14T05:06:07+01:00","city_district":"c","city_post":"d","in":"e","is_person":false,"legal_form_code":102,"house_number":"f","street":"g","district":null,"tin":null,"vat_payer":false,"zip":"h","country":"j","country_code":"k","nace":["465"],"sources":{"stavZdrojeRes":true}}', $encode);
 	}
 
 
@@ -82,6 +82,7 @@ final class DataTest extends TestCase
 		$data->house_number = 'f';
 		$data->street = 'g';
 		$data->tin = null;
+		$data->district = null;
 		$data->vat_payer = false;
 		$data->zip = 'h';
 		$data->nace = ['465'];
