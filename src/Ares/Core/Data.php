@@ -39,6 +39,8 @@ class Data implements JsonSerializable, Stringable
 
 	public ?string $street;
 
+	public ?string $district;
+
 	/**
 	 * <prefix>DIČ
 	 * @todo https://github.com/h4kuna/ares/issues/30#issuecomment-1719170527

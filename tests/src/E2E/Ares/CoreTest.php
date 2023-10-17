@@ -21,6 +21,8 @@ final class CoreTest extends TestCase
 	protected function provideCore(): array
 	{
 		return [
+			['61682039'],
+			['08975884'], // address
 			['2445344'], // Skanska Residential a.s., DIČ CZ699004845
 			['2491427'],  // o.s.
 			['5560438'],
@@ -30,7 +32,6 @@ final class CoreTest extends TestCase
 			['27082440'], // a.s.
 			['49240901'], // Raiffeisenbank a.s., DIČ CZ699003154
 			['49812670'], // s.r.o.
-			['61682039'],
 			['62413686'], // k.s.
 			['87744473'], // freelancer
 		];

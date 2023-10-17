@@ -29,7 +29,8 @@ class JsonToDataTransformer
 		$data->street = Strings::trimNull($json->sidlo->nazevUlice ?? null);
 		$data->city = Strings::trimNull($json->sidlo->nazevObce ?? null);
 		$data->city_post = Strings::trimNull($json->sidlo->nazevMestskeCastiObvodu ?? null);
-		$data->city_district = Strings::trimNull($json->sidlo->nazevOkresu ?? $json->sidlo->nazevCastiObce ?? null);
+		$data->city_district = Strings::trimNull($json->sidlo->nazevCastiObce ?? null);
+		$data->district = Strings::trimNull($json->sidlo->nazevOkresu ?? null);
 		$data->house_number = Helper::houseNumber((string) ($json->sidlo->cisloDomovni ?? ''), (string) ($json->sidlo->cisloOrientacni ?? ''), $json->sidlo->cisloOrientacniPismeno ?? '');
 
 		if ($data->zip === null && $data->street === null && $data->house_number === null && $data->city === null && isset($json->sidlo->textovaAdresa)) {
