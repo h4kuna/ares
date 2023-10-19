@@ -3,7 +3,6 @@
 namespace h4kuna\Ares;
 
 use Generator;
-use h4kuna\Ares\Adis;
 use h4kuna\Ares\Ares\Core\Data;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 use h4kuna\Memoize\MemoryStorage;

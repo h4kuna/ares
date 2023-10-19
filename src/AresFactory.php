@@ -4,7 +4,6 @@ namespace h4kuna\Ares;
 
 use GuzzleHttp;
 use h4kuna\Ares\Adis\StatusBusinessSubjects\StatusBusinessSubjectsTransformer;
-use h4kuna\Ares\DataBox;
 use h4kuna\Ares\Exceptions\InvalidStateException;
 use h4kuna\Ares\Http\HttpFactory;
 use h4kuna\Ares\Http\TransportProvider;

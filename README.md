@@ -61,6 +61,40 @@ try {
 }
 ```
 
+### Other endpoints
+
+Choose endpoint from class [Sources](./src/Ares/Sources.php).
+- SERVICE_* - available other endpoints
+- CORE - is main endpoint this is used in method `$ares->loadBasic()`
+- DIAL - use if you want list of value for example `PravniForma`
+- SER_NO_* are not exists 
+
+```php
+use h4kuna\Ares;
+
+/** @var Ares\Ares $ares */
+$result = $ares->getAresClient()->useEndpoint(Ares\Ares\Sources::SERVICE_VR, '27082440');
+var_dump($result);
+```
+
+#### Dials
+
+Parameters `kodCiselniku` and `zdrojCiselniku` you can find in json file, on this page [AresRestApi-verejne_v*.json](https://ares.gov.cz/stranky/vyvojar-info), like a `ciselnikKod: PravniForma, zdroj: res`.
+
+```php
+use h4kuna\Ares;
+
+/** @var Ares\Ares $ares */
+$result = $ares->getAresClient()->searchEndpoint(Ares\Ares\Sources::DIAL, [
+	'kodCiselniku' => 'PravniForma',
+	'zdrojCiselniku' => 'res',
+])->ciselniky[0]->polozkyCiselniku;
+
+foreach ($result as $item) {
+	var_dump($item);
+}
+```
+
 ## Data Box (datavá schánka)
 
 [Manual](https://www.mojedatovaschranka.cz/sds/p/download/sds_webove_sluzby.pdf#view=Fit)

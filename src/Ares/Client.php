@@ -22,7 +22,7 @@ class Client
 
 
 	/**
-	 * @param Sources::SERVICE_*|Sources::CORE $key
+	 * @param Sources::SERVICE_*|Sources::CORE|Sources::DIAL $key
 	 * @param array<string, mixed> $data
 	 */
 	public function searchEndpoint(string $key, array $data = []): stdClass
