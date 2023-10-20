@@ -1,13 +1,17 @@
 name: Tests
 
-on: [push, pull_request]
+on:
+  schedule:
+    - cron: "0 19 * * *"
+  push:
+  pull_request:
 
 jobs:
   tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.0', '8.1', '8.2']
+        php: ['8.0', '8.1', '8.2', '8.3']
 
       fail-fast: false
 
