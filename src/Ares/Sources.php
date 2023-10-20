@@ -31,10 +31,16 @@ final class Sources
 	// not supported but note
 	// https://adisspr.mfcr.cz/pmd/dokumentace/webove-sluzby-spolehlivost-platcu
 	public const SER_NO_DPH = 'stavZdrojeDph';
+
 	// https://isir.justice.cz/isir/common/index.do
 	public const SER_NO_IR = 'stavZdrojeIr';
+
 	// https://opendata.mfcr.cz/topics/dotace
 	public const SER_NO_RED = 'stavZdrojeRed';
+
+	// Spotřební daň a eko daň
+	// https://www.celnisprava.cz/cz/aplikace/Stranky/SpdInternet.aspx?act=findspd
+	public const SER_NO_SD = 'stavZdrojeSd';
 	public const DIAL = 'ciselnikyNazevniky';
 
 }

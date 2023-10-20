@@ -41,6 +41,7 @@ final class Helper
 		Sources::SER_NO_DPH => 'NEEXISTUJICI',
 		Sources::SER_NO_IR => 'NEEXISTUJICI',
 		Sources::SER_NO_RED => 'NEEXISTUJICI',
+		Sources::SER_NO_SD => 'NEEXISTUJICI',
 	];
 
 
