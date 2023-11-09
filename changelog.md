@@ -3,53 +3,68 @@
 - podpora nového API ARES2
 - v [bin](./bin) jsou spustitelné ukázky, jak se dostat na číselníky a jak na ostatní endpointy
 - pro IČO je vyžadován formát \d{8}, pokud je kratší, knihovna sama doplní nuly zleva
-- očekávám že se změní url API, pro tento případ je připravená `public static h4kuna\Ares\Ares\Helper::$baseUrl`, kterou lze nahradit, bez nutnosti vyčkávat na nový release
-- podobně lze dopnit nebo upravit url adresy endpointů
+- očekávám že se změní url API, pro tento případ je připravená `public static h4kuna\Ares\Ares\Helper::$baseUrl`, kterou
+  lze nahradit, bez nutnosti vyčkávat na nový release
+- podobně lze doplnit nebo upravit url adresy endpointů
 - php 8.0+
 
 ### Třidy
 
 - h4kuna\Ares\Ares
-  - metoda `loadBasic()` stále vrací [Data](./src/Ares/Core/Data.php)
-  - metoda `loadBasicMulti()` 
-    - nově vrací Generator nikoliv pole 
-    - vrací jen existující záznamy, třída Error byla smazána, nemá náhradu
-    - počet IČO není omezen, interně se rozdělí na dávky po 100, záznamech a ještě před tím se odeberou duplicity, při iteraci duplicity zůstanou, jen objekty budou mít stejné reference
-    - bylo zachováno pojmenování, vstupem je `['foo' => 123456]`, název `foo` bude jako klíč při iteraci
+    - metoda `loadBasic()` stále vrací [Data](./src/Ares/Core/Data.php)
+    - metoda `loadBasicMulti()`
+        - nově vrací Generator nikoliv pole
+        - vrací jen existující záznamy, třída Error byla smazána, nemá náhradu
+        - počet IČO není omezen, interně se rozdělí na dávky po 100, záznamech a ještě před tím se odeberou duplicity,
+          při iteraci duplicity zůstanou, jen objekty budou mít stejné reference
+        - bylo zachováno pojmenování, vstupem je `['foo' => 123456]`, název `foo` bude jako klíč při iteraci
 
 
 - h4kuna\Ares\Ares\Core\Data
-  - zmizela metoda `psu()` bez náhrady, podobné informace jsou ve vlastnosti `$sources`
-  - zmizela metoda `isGroupVat()`, skupinové DPH nelze zjistit. Co se týče správnosti DIČ, [chystá se náprava](https://github.com/h4kuna/ares/issues/30#issuecomment-1719170527)
-  - odstraněné vlastnosti `$court`, `$file_number`, `$court_all` jsou dostupné na jiném endpointu, `Sources::SERVICE_VR`
-  - ~~DIČ je nově bez prefixu `CZ`~~, vlastnost `$tin` z důvodu zpětné kompatibility, prefix nese, ~~nová vlastnost `$vat_id` prefix nemá~~, vlastnost jsem odebral, `CZ` opět přidali
-  - ~~vlastnost `$created` je podle mě momentálně rozbitá, pro [Alzu](https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/27082440) datumVzniku vrací `2023-09-04`, v registru ekonomických subjektů vrací [2003-08-26](https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-res/27082440) (nahlášeno)~~ (opraveno)
-  - byl změněn namespace pro `h4kuna\Ares\Basic\Data`, ale [aliases.php](./src/aliases.php) zajistí zpětnou kompatibilitu a bude hlásit aby jste si třídu přejmnovali, nicméně stará třída bude fungovat
-  - už není možnost do metody `toArray()` předat vlastní pole pro úpravu mapování
-  - přidané vlastnosti `$country` a `$country_code`
+    - zmizela metoda `psu()` bez náhrady, podobné informace jsou ve vlastnosti `$sources`
+    - zmizela metoda `isGroupVat()`, skupinové DPH nelze zjistit. Co se týče správnosti
+      DIČ, [chystá se náprava](https://github.com/h4kuna/ares/issues/30#issuecomment-1719170527)
+    - odstraněné vlastnosti `$court`, `$file_number`, `$court_all` jsou dostupné na jiném
+      endpointu, `Sources::SERVICE_VR`
+    - ~~DIČ je nově bez prefixu `CZ`~~, vlastnost `$tin` z důvodu zpětné kompatibility, prefix nese, ~~nová
+      vlastnost `$vat_id` prefix nemá~~, vlastnost jsem odebral, `CZ` opět přidali
+    - ~~vlastnost `$created` je podle mě momentálně rozbitá,
+      pro [Alzu](https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/27082440) datumVzniku
+      vrací `2023-09-04`, v registru ekonomických subjektů
+      vrací [2003-08-26](https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-res/27082440) (
+      nahlášeno)~~ (opraveno)
+    - byl změněn namespace pro `h4kuna\Ares\Basic\Data`, ale [aliases.php](./src/aliases.php) zajistí zpětnou
+      kompatibilitu a bude hlásit aby jste si třídu přejmnovali, nicméně stará třída bude fungovat
+    - už není možnost do metody `toArray()` předat vlastní pole pro úpravu mapování
+    - přidané vlastnosti `$country` a `$country_code`
 
 - h4kuna\Ares\Exceptions\ConnectionException
-  - nastavena jako deprecated, zpětně funkční
-  - nahrazena h4kuna\Ares\Exceptions\ServerResponseException
+    - nastavena jako deprecated, zpětně funkční
+    - nahrazena h4kuna\Ares\Exceptions\ServerResponseException
 
 ### Závěrem
 
-`Ares::loadBasic()` pokud si pohlídáte s jakými vlastnostmi pracujete a nebudou tam ty smazané, tak je to zpětně kompatibilní. Vstup je zpětně kompatibilní.
+`Ares::loadBasic()` pokud si pohlídáte s jakými vlastnostmi pracujete a nebudou tam ty smazané, tak je to zpětně
+kompatibilní. Vstup je zpětně kompatibilní.
 
-`Ares::loadBasicMulti()` je potřeba vzít v potaz že to je zpětně nekompatibilní a nově se vrací Generator. Vstup je zpětně kompatibilní.
+`Ares::loadBasicMulti()` je potřeba vzít v potaz že to je zpětně nekompatibilní a nově se vrací Generator. Vstup je
+zpětně kompatibilní.
 
-Přidal jsem ADIS, služba která ověří zda se jedná o plátce DPH, identifikovanou osobu nebo neplátce DPH. U plátce vrátí, zda se jedná o spolehlivého plátce DPH. Ukázka je v [bin/adis](./bin/adis).
+Přidal jsem ADIS, služba která ověří zda se jedná o plátce DPH, identifikovanou osobu nebo neplátce DPH. U plátce vrátí,
+zda se jedná o spolehlivého plátce DPH. Ukázka je v [bin/adis](./bin/adis).
 
 ### Chování validace pomocí ADIS
 
-|                                     | ARES      | ADIS (Data::$adis::$exists) | Data::$vat_payer | Data::$tin | Spolehlivý plátce DPH Data::$adis::$reliable |
-|-------------------------------------|-----------|-----------------------------|------------------|------------|----------------------------------------------|
-| Plátce DPH                          | vrací DIČ | Existuje (true)             | true             | vyplněno   | true/false                                   |
-| Skupinové DPH / již není plátce DPH | vrátí DIČ | Neexistuje (false)          | null *           | null       | null                                         |
-| Identifikovaná osoba                | vrátí DIČ | Existuje (true)             | false            | vyplněno   | null                                         |
-| neplátce                            | null      | null                        | false            | null       | null                                         |
+Třída [Data](./src/Ares/Core/Data.php) a třída vyplněná pomocí [ADIS](./src/Adis/StatusBusinessSubjects/Subject.php).
 
-> * Nelze určit, zda se jedná o Skupinové DPH nebo společnost již není plátce DPH
+|                                     | ARES      | ADIS <br> Data::$adis::$exists | Data::$vat_payer | Data::$tin | Spolehlivý plátce DPH <br> Data::$adis::$reliable |
+|-------------------------------------|-----------|--------------------------------|------------------|------------|---------------------------------------------------|
+| Plátce DPH                          | vrací DIČ | true                           | true             | vyplněno   | true/false                                        |
+| Skupinové DPH / již není plátce DPH | vrátí DIČ | false                          | null *           | null       | null                                              |
+| Identifikovaná osoba                | vrátí DIČ | true                           | false            | vyplněno   | null                                              |
+| Neplátce                            | null      | null                           | false            | null       | null                                              |
+
+> \* Nelze určit, zda se jedná o Skupinové DPH nebo společnost již není plátce DPH
 
 # v2.0.0
 
@@ -77,10 +92,10 @@ Přidal jsem ADIS, služba která ověří zda se jedná o plátce DPH, identifi
 
 - interface IData was removed
 - change data keys:
-   - person -> is_person 
-   - add house_number
-   - add city_post
-   - add city_district
+    - person -> is_person
+    - add house_number
+    - add city_post
+    - add city_district
 - all data keys are visible every time (court, file_number)
 - class Data extends Messenger
 - class Data suggest property
