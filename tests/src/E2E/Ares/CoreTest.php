@@ -61,7 +61,7 @@ final class CoreTest extends TestCase
 
 	public function testGroupVAT(): void
 	{
-		$in = '2319918';
+		$in = '2445344';
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
 		Assert::null($data->tin);
 		Assert::null($data->vat_payer);
