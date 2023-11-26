@@ -53,7 +53,10 @@ class Ares
 	}
 
 
-	public function loadDataBox(string $in): stdClass
+	/**
+	 * @return array<stdClass>
+	 */
+	public function loadDataBox(string $in): array
 	{
 		return $this->dataBoxContentProvider->load($in);
 	}

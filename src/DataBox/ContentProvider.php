@@ -3,6 +3,7 @@
 namespace h4kuna\Ares\DataBox;
 
 use Psr\Http\Message\StreamFactoryInterface;
+use stdClass;
 
 class ContentProvider
 {
@@ -14,13 +15,17 @@ class ContentProvider
 	}
 
 
-	public function load(string $in): \stdClass
+	/**
+	 * @return array<stdClass>
+	 */
+	public function load(string $in): array
 	{
-		return $this->xml('Ico', $in)->Osoba;
+		$content = $this->xml('Ico', $in)->Osoba;
+		return is_array($content) ? $content : [$content];
 	}
 
 
-	protected function xml(string $parameter, string $value): \stdClass
+	protected function xml(string $parameter, string $value): stdClass
 	{
 		$xml = <<<XML
 		<GetInfoRequest xmlns="http://seznam.gov.cz/ovm/ws/v1">
