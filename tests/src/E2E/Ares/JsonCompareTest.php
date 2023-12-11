@@ -12,8 +12,8 @@ final class JsonCompareTest extends TestCase
 {
 	public function testCompareJson(): void
 	{
-		$remote = Json::decode(file_get_contents('https://www.mfcr.cz/assets/attachments/2023-08-01_AresRestApi-verejne_v03.json'));
-		$local = Json::decode(file_get_contents(__DIR__ . '/../../../AresRestApi-verejne.json'));
+		$remote = Json::decode((string) file_get_contents('https://www.mfcr.cz/assets/attachments/2023-08-01_AresRestApi-verejne_v03.json'));
+		$local = Json::decode((string) file_get_contents(__DIR__ . '/../../../AresRestApi-verejne.json'));
 		Assert::equal($local, $remote);
 	}
 }
