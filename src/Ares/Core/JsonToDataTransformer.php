@@ -39,7 +39,9 @@ class JsonToDataTransformer
 				'street' => $data->street,
 				'house_number' => $data->house_number,
 				'city' => $data->city,
+				'country' => $country,
 			] = Helper::parseAddress($json->sidlo->textovaAdresa);
+			$data->country ??= $country;
 		}
 
 		$data->nace = (array) ($json->czNace ?? []);

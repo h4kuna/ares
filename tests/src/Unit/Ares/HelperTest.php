@@ -20,12 +20,13 @@ final class HelperTest extends TestCase
 	{
 		return [
 			[
-				'Mělnická 31, 25002 Brandýs n/L. - Stará Boleslav',
+				'Mělnická 31, 25002 Brandýs n/L. - Stará Boleslav, Česká republika',
 				[
 					'zip' => '25002',
 					'city' => 'Brandýs n/L. - Stará Boleslav',
 					'street' => 'Mělnická',
 					'house_number' => '31',
+					'country' => 'Česká republika',
 				],
 			],
 			[
@@ -35,6 +36,7 @@ final class HelperTest extends TestCase
 					'city' => 'Liberec',
 					'street' => 'Ruprechtická',
 					'house_number' => '319/16a',
+					'country' => null,
 				],
 			],
 			[
@@ -44,6 +46,7 @@ final class HelperTest extends TestCase
 					'city' => 'Praha 1',
 					'street' => 'Jankovcova',
 					'house_number' => '1522/53',
+					'country' => null,
 				],
 			],
 			[
@@ -53,6 +56,7 @@ final class HelperTest extends TestCase
 					'city' => 'Praha 6',
 					'street' => 'Bělohorská',
 					'house_number' => '2428/203',
+					'country' => null,
 				],
 			],
 			[
@@ -62,6 +66,7 @@ final class HelperTest extends TestCase
 					'city' => 'Písek',
 					'street' => 'Budovcova',
 					'house_number' => '105/4',
+					'country' => null,
 				],
 			],
 			[
@@ -71,6 +76,7 @@ final class HelperTest extends TestCase
 					'city' => 'Brno',
 					'street' => 'Křídlovická',
 					'house_number' => '24a',
+					'country' => null,
 				],
 			],
 		];

@@ -126,25 +126,25 @@ final class Helper
 
 
 	/**
-	 * @return array{street: ?string, zip: ?string, city: ?string, house_number: ?string}
+	 * @return array{street: ?string, zip: ?string, city: ?string, house_number: ?string, country: ?string}
 	 */
 	public static function parseAddress(string $address): array
 	{
-		$results = NetteStrings::match($address, '~^(?<street>.+) (?<house_number>\d+(?:/\d+)?(?:\w)?)(?:, (?<district>.+?))?, (?<zip>\d{5}) (?<city>.+)$~');
+		$results = NetteStrings::match($address, '~^(?<street>.+) (?<house_number>\d+(?:/\d+)?(\w)?)(?:, (?<district>.+?))?, (?<zip>\d{5}) (?<city>.+?)(, (?<country>.+))?$~');
 
 		if ($results !== null) {
 			return self::prepareAddressData($results);
 		}
 
-		$results = NetteStrings::match($address, '~^(?<city>.+), (?<zip>\d{5})(?:, (?<district>.+?))?, (?<street>.+), (?<house_number>\d+(?:/\d+)?(?:\w)?)$~');
+		$results = NetteStrings::match($address, '~^(?<city>.+), (?<zip>\d{5})(?:, (?<district>.+?))?, (?<street>.+), (?<house_number>\d+(?:/\d+)?(\w)?)$~');
 
 		return self::prepareAddressData($results ?? []);
 	}
 
 
 	/**
-	 * @param array{street?: string, zip?: string, city?: string, house_number?: string} $results
-	 * @return array{street: ?string, zip: ?string, city: ?string, house_number: ?string}
+	 * @param array{street?: string, zip?: string, city?: string, house_number?: string, country?: string} $results
+	 * @return array{street: ?string, zip: ?string, city: ?string, house_number: ?string, country: ?string}
 	 */
 	private static function prepareAddressData(array $results): array
 	{
@@ -153,6 +153,7 @@ final class Helper
 			'street' => $results['street'] ?? null,
 			'house_number' => $results['house_number'] ?? null,
 			'city' => $results['city'] ?? null,
+			'country' => $results['country'] ?? null,
 		];
 	}
 
