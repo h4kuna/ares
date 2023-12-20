@@ -18,10 +18,10 @@
     "country": "\u010cesk\u00e1 republika",
     "country_code": "CZ",
     "nace": [
-        "73110",
-        "620",
-        "471",
         "461",
+        "471",
+        "620",
+        "73110",
         "7490"
     ],
     "sources": {

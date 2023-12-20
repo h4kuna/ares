@@ -18,11 +18,11 @@
     "country": "\u010cesk\u00e1 republika",
     "country_code": "CZ",
     "nace": [
-        "55",
         "471",
-        "79110",
+        "55",
+        "620",
         "7112",
-        "620"
+        "79110"
     ],
     "sources": {
         "stavZdrojeVr": "NEEXISTUJICI",

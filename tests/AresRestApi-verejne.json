@@ -2,8 +2,8 @@
     "openapi" : "3.0.0",
     "info" : {
         "title" : "ARES: REST API - veřejné",
-        "description" : "generováno: středa 1. listopadu 2023 14:21:13, použité package:<<REST_COMMON>> DTO_COMMON,<<REST_COMMON_STRANKOVANI>> Řazení a stránkování,<<REST_COMMON_TEC>> Technické,<<REST_COMMON_TYPY>> DATOVE_TYPY_COMMON,<<REST_RUIAN>> StandardizovaneAdresySluzba,<<REST_RUIAN_DTO_COMMON>> DTO_RUIAN_COMMON,<<REST_CIS>> CiselnikyNazevnikySluzba,<<REST_CIS_DTO_COMMON>> DTO_CIS_COMMON,<<REST_DETAIL>> DTO_COMMON_DETAIL,<<REST_ARES>> EkonomickeSubjektySluzba,<<REST_ARES_DTO_COMMON>> DTO_ARES_COMMON,<<REST_VR>> EkonomickeSubjektyVrSluzba,<<REST_VR_DTO>> DTO_VR,<<REST_VR_DTO_COMMON>> DTO_VR_COMMON,<<REST_RES>> EkonomickeSubjektyResSluzba,<<REST_RES_DTO_COMMON>> DTO_RES_COMMON,<<REST_RZP>> EkonomickeSubjektyRzpSluzba,<<REST_RZP_DTO_COMMON>> DTO_RZP_COMMON,<<REST_RZP_DTO>> DTO_RZP,<<REST_NRPZS>> EkonomickeSubjektyNrpzsSluzba,<<REST_NRPZS_DTO_COMMON>> DTO_NRPZS_COMMON,<<REST_RCNS>> EkonomickeSubjektyRcnsSluzba,<<REST_RCNS_DTO_COMMON>> DTO_RCNS_COMMON,<<REST_RCNS_DTO>> DTO_RCNS,<<REST_RPSH>> EkonomickeSubjektyRpshSluzba,<<REST_RPSH_DTO_COMMON>> DTO_RPSH_COMMON,<<REST_RS>> EkonomickeSubjektyRsSluzba,<<REST_RS_DTO_COMMON>> DTO_RS_COMMON,<<REST_RS_DTO>> DTO_RS,<<REST_SZR>> EkonomickeSubjektySzrSluzba,<<REST_SZR_DTO_COMMON>> REST_SZR_DTO_COMMON,<<REST_SZR_DTO>> DTO_SZR,<<REST_CEU>> EkonomickeSubjektyCeuSluzba,<<REST_CEU_DTO_COMMON>> REST_CEU_DTO_COMMON,<<REST_CEU_DTO>> DTO_CEU,<<REST_NOTIFIKACE>> EkonomickeSubjektyNotifikaceSluzba,<<REST_NOTIFIKACE_DTO_COMMON>> REST_NOTIFIKACE_DTO_COMMON,<<REST_DETAIL>> DTO_COMMON_DETAIL_NEV",
-        "version" : "0.7.1"
+        "description" : "generováno: čtvrtek 14. prosince 2023 14:19:28, použité package:<<REST_COMMON>> DTO_COMMON,<<REST_COMMON_STRANKOVANI>> Řazení a stránkování,<<REST_COMMON_TEC>> Technické,<<REST_COMMON_TYPY>> DATOVE_TYPY_COMMON,<<REST_ARES>> EkonomickeSubjektySluzba,<<REST_ARES_DTO_COMMON>> DTO_ARES_COMMON,<<REST_VR>> EkonomickeSubjektyVrSluzba,<<REST_VR_DTO>> DTO_VR,<<REST_VR_DTO_COMMON>> DTO_VR_COMMON,<<REST_RES>> EkonomickeSubjektyResSluzba,<<REST_RES_DTO_COMMON>> DTO_RES_COMMON,<<REST_RZP>> EkonomickeSubjektyRzpSluzba,<<REST_RZP_DTO_COMMON>> DTO_RZP_COMMON,<<REST_RZP_DTO>> DTO_RZP,<<REST_NRPZS>> EkonomickeSubjektyNrpzsSluzba,<<REST_NRPZS_DTO_COMMON>> DTO_NRPZS_COMMON,<<REST_RPSH>> EkonomickeSubjektyRpshSluzba,<<REST_RPSH_DTO_COMMON>> DTO_RPSH_COMMON,<<REST_RCNS>> EkonomickeSubjektyRcnsSluzba,<<REST_RCNS_DTO_COMMON>> DTO_RCNS_COMMON,<<REST_RCNS_DTO>> DTO_RCNS,<<REST_SZR>> EkonomickeSubjektySzrSluzba,<<REST_SZR_DTO_COMMON>> REST_SZR_DTO_COMMON,<<REST_SZR_DTO>> DTO_SZR,<<REST_RS>> EkonomickeSubjektyRsSluzba,<<REST_RS_DTO_COMMON>> DTO_RS_COMMON,<<REST_RS_DTO>> DTO_RS,<<REST_CIS>> CiselnikyNazevnikySluzba,<<REST_CIS_DTO_COMMON>> DTO_CIS_COMMON,<<REST_DETAIL>> DTO_COMMON_DETAIL,<<REST_RUIAN>> StandardizovaneAdresySluzba,<<REST_RUIAN_DTO_COMMON>> DTO_RUIAN_COMMON,<<REST_CEU>> EkonomickeSubjektyCeuSluzba,<<REST_CEU_DTO_COMMON>> REST_CEU_DTO_COMMON,<<REST_CEU_DTO>> DTO_CEU,<<REST_NOTIFIKACE>> EkonomickeSubjektyNotifikaceSluzba,<<REST_NOTIFIKACE_DTO_COMMON>> REST_NOTIFIKACE_DTO_COMMON,<<REST_DETAIL>> DTO_COMMON_DETAIL_NEV",
+        "version" : "1.0.0"
     },
     "security" : [
         {
@@ -16,170 +16,6 @@
         }
     ],
     "paths" : {
-        "/standardizovane-adresy/vyhledat" : {
-            "post" : {
-                "description" : "Vyhledání seznamu standardizovaných adres RÚIAN podle komplexního filtru",
-                "operationId" : "vyhledejStandardizovaneAdresy",
-                "responses" : {
-                    "200" : {
-                        "description" : "OK",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/StandardizovaneAdresySeznam"
-                                }
-                            }
-                        }
-                    },
-                    "400" : {
-                        "description" : "Chyba vstupu",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "401" : {
-                        "description" : "Chyba autentizace",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "403" : {
-                        "description" : "Přístup zamítnut",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "404" : {
-                        "description" : "Zdroj nenalezen",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "500" : {
-                        "description" : "Neočekávaná chyba",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters" : [
-                ],
-                "requestBody" : {
-                    "content" : {
-                        "application/json" : {
-                            "schema" : {
-                                "$ref" : "#/components/schemas/StandardizovanaAdresaFiltr"
-                            }
-                        }
-                    }
-                },
-                "tags" : [
-                    "standardizovane-adresy"
-                ]
-            }
-        },
-        "/ciselniky-nazevniky/vyhledat" : {
-            "post" : {
-                "description" : "Vyhledání číselníků používaných v IS ARES podle komplexního filtru",
-                "operationId" : "vyhledejCiselnik",
-                "responses" : {
-                    "200" : {
-                        "description" : "OK",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/CiselnikyNazevnikSeznam"
-                                }
-                            }
-                        }
-                    },
-                    "400" : {
-                        "description" : "Chyba vstupu",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "401" : {
-                        "description" : "Chyba autentizace",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "403" : {
-                        "description" : "Přístup zamítnut",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "404" : {
-                        "description" : "Zdroj nenalezen",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "500" : {
-                        "description" : "Neočekávaná chyba",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters" : [
-                ],
-                "requestBody" : {
-                    "content" : {
-                        "application/json" : {
-                            "schema" : {
-                                "$ref" : "#/components/schemas/CiselnikyZakladniFiltr"
-                            }
-                        }
-                    }
-                },
-                "tags" : [
-                    "ciselniky-nazevniky"
-                ]
-            }
-        },
         "/ekonomicke-subjekty/vyhledat" : {
             "post" : {
                 "description" : "Vyhledání seznamu ekonomických subjektů ARES podle komplexního filtru",
@@ -1007,6 +843,171 @@
                 ]
             }
         },
+        "/ekonomicke-subjekty-rpsh/{ico}" : {
+            "get" : {
+                "description" : "Vyhledání konkrétního ekonomického subjektu ze zdroje RPSH",
+                "operationId" : "vratEkonomickySubjektRpsh",
+                "responses" : {
+                    "200" : {
+                        "description" : "OK",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/EkonomickySubjektRpsh"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Chyba vstupu",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "401" : {
+                        "description" : "Chyba autentizace",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "403" : {
+                        "description" : "Přístup zamítnut",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "Zdroj nenalezen",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Neočekávaná chyba",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters" : [
+                    {
+                        "in" : "path",
+                        "name" : "ico",
+                        "required" : true,
+                        "schema" : {
+                            "maxLength" : 32,
+                            "pattern" : "^(ARES_)?\\d{8}$",
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "tags" : [
+                    "ekonomicke-subjekty-rpsh"
+                ]
+            }
+        },
+        "/ekonomicke-subjekty-rpsh/vyhledat" : {
+            "post" : {
+                "description" : "Vyhledání seznamu ekonomických subjektu ze zdroje RPSH",
+                "operationId" : "vyhledejSeznamEkonomickychSubjektuRpsh",
+                "responses" : {
+                    "200" : {
+                        "description" : "OK",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/EkonomickeSubjektyRpshSeznam"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Chyba vstupu",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "401" : {
+                        "description" : "Chyba autentizace",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "403" : {
+                        "description" : "Přístup zamítnut",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "Zdroj nenalezen",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Neočekávaná chyba",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters" : [
+                ],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/EkonomickeSubjektyRegistraceFiltr"
+                            }
+                        }
+                    }
+                },
+                "tags" : [
+                    "ekonomicke-subjekty-rpsh"
+                ]
+            }
+        },
         "/ekonomicke-subjekty-rcns/{ico}" : {
             "get" : {
                 "description" : "Vyhledání konkrétního ekonomického subjektu ze zdroje RCNS",
@@ -1172,17 +1173,17 @@
                 ]
             }
         },
-        "/ekonomicke-subjekty-rpsh/{ico}" : {
+        "/ekonomicke-subjekty-szr/{ico}" : {
             "get" : {
-                "description" : "Vyhledání konkrétního ekonomického subjektu ze zdroje RPSH",
-                "operationId" : "vratEkonomickySubjektRpsh",
+                "description" : "Vyhledání konkrétního ekonomického subjektu ze zdroje SZR - subregistr EZP",
+                "operationId" : "vratEkonomickySubjektSzr",
                 "responses" : {
                     "200" : {
                         "description" : "OK",
                         "content" : {
                             "application/json" : {
                                 "schema" : {
-                                    "$ref" : "#/components/schemas/EkonomickySubjektRpsh"
+                                    "$ref" : "#/components/schemas/EkonomickySubjektSzr"
                                 }
                             }
                         }
@@ -1251,21 +1252,21 @@
                     }
                 ],
                 "tags" : [
-                    "ekonomicke-subjekty-rpsh"
+                    "ekonomicke-subjekty-szr"
                 ]
             }
         },
-        "/ekonomicke-subjekty-rpsh/vyhledat" : {
+        "/ekonomicke-subjekty-szr/vyhledat" : {
             "post" : {
-                "description" : "Vyhledání seznamu ekonomických subjektu ze zdroje RPSH",
-                "operationId" : "vyhledejSeznamEkonomickychSubjektuRpsh",
+                "description" : "Vyhledání seznamu ekonomických subjektu ze zdroje SZR - subregistr EZP",
+                "operationId" : "vyhledejSeznamEkonomickychSubjektuSzr",
                 "responses" : {
                     "200" : {
                         "description" : "OK",
                         "content" : {
                             "application/json" : {
                                 "schema" : {
-                                    "$ref" : "#/components/schemas/EkonomickeSubjektyRpshSeznam"
+                                    "$ref" : "#/components/schemas/EkonomickeSubjektySzrSeznam"
                                 }
                             }
                         }
@@ -1333,7 +1334,7 @@
                     }
                 },
                 "tags" : [
-                    "ekonomicke-subjekty-rpsh"
+                    "ekonomicke-subjekty-szr"
                 ]
             }
         },
@@ -1502,100 +1503,17 @@
                 ]
             }
         },
-        "/ekonomicke-subjekty-szr/{ico}" : {
-            "get" : {
-                "description" : "Vyhledání konkrétního ekonomického subjektu ze zdroje SZR - subregistr EZP",
-                "operationId" : "vratEkonomickySubjektSzr",
-                "responses" : {
-                    "200" : {
-                        "description" : "OK",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/EkonomickySubjektSzr"
-                                }
-                            }
-                        }
-                    },
-                    "400" : {
-                        "description" : "Chyba vstupu",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "401" : {
-                        "description" : "Chyba autentizace",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "403" : {
-                        "description" : "Přístup zamítnut",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "404" : {
-                        "description" : "Zdroj nenalezen",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    },
-                    "500" : {
-                        "description" : "Neočekávaná chyba",
-                        "content" : {
-                            "application/json" : {
-                                "schema" : {
-                                    "$ref" : "#/components/schemas/Chyba"
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters" : [
-                    {
-                        "in" : "path",
-                        "name" : "ico",
-                        "required" : true,
-                        "schema" : {
-                            "maxLength" : 32,
-                            "pattern" : "^(ARES_)?\\d{8}$",
-                            "type" : "string"
-                        }
-                    }
-                ],
-                "tags" : [
-                    "ekonomicke-subjekty-szr"
-                ]
-            }
-        },
-        "/ekonomicke-subjekty-szr/vyhledat" : {
+        "/ciselniky-nazevniky/vyhledat" : {
             "post" : {
-                "description" : "Vyhledání seznamu ekonomických subjektu ze zdroje SZR - subregistr EZP",
-                "operationId" : "vyhledejSeznamEkonomickychSubjektuSzr",
+                "description" : "Vyhledání číselníků používaných v IS ARES podle komplexního filtru",
+                "operationId" : "vyhledejCiselnik",
                 "responses" : {
                     "200" : {
                         "description" : "OK",
                         "content" : {
                             "application/json" : {
                                 "schema" : {
-                                    "$ref" : "#/components/schemas/EkonomickeSubjektySzrSeznam"
+                                    "$ref" : "#/components/schemas/CiselnikyNazevnikSeznam"
                                 }
                             }
                         }
@@ -1657,13 +1575,95 @@
                     "content" : {
                         "application/json" : {
                             "schema" : {
-                                "$ref" : "#/components/schemas/EkonomickeSubjektyRegistraceFiltr"
+                                "$ref" : "#/components/schemas/CiselnikyZakladniFiltr"
                             }
                         }
                     }
                 },
                 "tags" : [
-                    "ekonomicke-subjekty-szr"
+                    "ciselniky-nazevniky"
+                ]
+            }
+        },
+        "/standardizovane-adresy/vyhledat" : {
+            "post" : {
+                "description" : "Vyhledání seznamu standardizovaných adres RÚIAN podle komplexního filtru",
+                "operationId" : "vyhledejStandardizovaneAdresy",
+                "responses" : {
+                    "200" : {
+                        "description" : "OK",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/StandardizovaneAdresySeznam"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Chyba vstupu",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "401" : {
+                        "description" : "Chyba autentizace",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "403" : {
+                        "description" : "Přístup zamítnut",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "Zdroj nenalezen",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Neočekávaná chyba",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters" : [
+                ],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/StandardizovanaAdresaFiltr"
+                            }
+                        }
+                    }
+                },
+                "tags" : [
+                    "standardizovane-adresy"
                 ]
             }
         },
@@ -1835,7 +1835,7 @@
         },
         "/ekonomicke-subjekty-notifikace/vyhledat" : {
             "post" : {
-                "description" : "Vyhledání seznamu notifikačních dávek ekonomických subjektů ARES podle typu zdroje ",
+                "description" : "Vyhledání seznamu notifikačních dávek ekonomických subjektů ARES podle zvoleného filtru ",
                 "operationId" : "vyhledejSeznamNotifikacnichDavek",
                 "responses" : {
                     "200" : {
@@ -1918,7 +1918,7 @@
         },
         "/ekonomicke-subjekty-notifikace/datovy-zdroj/{datovyZdroj}/cislo-davky/{cisloDavky}" : {
             "get" : {
-                "description" : "Vyhledání  notifikační dávky zdroje ARES podle komplexního filtru ",
+                "description" : "Vyhledání  konkrétní notifikační dávky zdroje ARES podle vstupcách parametrů (zdroj, číslo notifikační dávky) ",
                 "operationId" : "vratNotifikacniDavku",
                 "responses" : {
                     "200" : {
@@ -2159,14 +2159,33 @@
                         "description" : "Kód adresního místa"
                     },
                     "psc" : {
-                        "maximum" : 99999,
                         "type" : "integer",
                         "description" : "Poštovní směrovací číslo adresní pošty"
                     },
                     "textovaAdresa" : {
                         "maxLength" : 1500,
                         "type" : "string",
-                        "description" : "Nestrukturovaná adresa"
+                        "description" : "Nestrukturovaná adresa (formátovaná adresa)"
+                    },
+                    "cisloDoAdresy" : {
+                        "maxLength" : 255,
+                        "type" : "string",
+                        "description" : "Nestrukturované číslo/a použíté v adrese"
+                    },
+                    "typCisloDomovni" : {
+                        "maxLength" : 64,
+                        "minLength" : 1,
+                        "type" : "string",
+                        "description" : "Typ čísla domu (ciselnikKod: TypCislaDomovniho) "
+                    },
+                    "standardizaceAdresy" : {
+                        "type" : "boolean",
+                        "description" : "Stav standardizace adresy dle RÚIAN"
+                    },
+                    "pscTxt" : {
+                        "maximum" : 255,
+                        "type" : "string",
+                        "description" : "Psč zahraničních nebo nestandardně definovaných čísel"
                     }
                 }
             },
@@ -2343,524 +2362,6 @@
                     }
                 }
             },
-            "StandardizovaneAdresySeznam" : {
-                "type" : "object",
-                "description" : "Seznam nalezených standardizovaných adres",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/Seznam"
-                    },
-                    {
-                        "properties" : {
-                            "standardizovaneAdresy" : {
-                                "type" : "array",
-                                "items" : {
-                                    "$ref" : "#/components/schemas/StandardizovanaAdresa"
-                                }
-                            },
-                            "stavStandardizace" : {
-                                "type" : "string",
-                                "description" : "Stav standardizace adresy - kod (Číselník kod:StavStandardizaceAdresy) UPLNA, CASTECNA_OBEC/..., NEUSPESNA"
-                            },
-                            "request" : {
-                                "$ref" : "#/components/schemas/StandardizovanaAdresaFiltr"
-                            }
-                        }
-                    }
-                ]
-            },
-            "StandardizovanaAdresa" : {
-                "type" : "object",
-                "description" : "Standardizovaná adresa",
-                "properties" : {
-                    "typStavebnihoObjektu" : {
-                        "type" : "string",
-                        "description" : "Typ stavebního objektu - kód (Číselník kod:TypStavebnihoObjektu, zdroj:ruian) "
-                    },
-                    "cisloDomovni" : {
-                        "maximum" : 9999,
-                        "type" : "integer",
-                        "description" : "Číslo domovní"
-                    },
-                    "cisloOrientacni" : {
-                        "maximum" : 999,
-                        "type" : "integer",
-                        "description" : "Číslo orientační - číselná část"
-                    },
-                    "cisloOrientacniPismeno" : {
-                        "maxLength" : 1,
-                        "type" : "string",
-                        "description" : "Číslo orientační - písmenná část"
-                    },
-                    "kodAdresnihoMista" : {
-                        "maximum" : 999999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód adresního místa"
-                    },
-                    "kodCastiObce" : {
-                        "format" : "int32",
-                        "maximum" : 999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód časti obce"
-                    },
-                    "kodKraje" : {
-                        "maximum" : 999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód kraje"
-                    },
-                    "kodMestskeCastiObvodu" : {
-                        "format" : "int32",
-                        "maximum" : 999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód městské části statutárního města"
-                    },
-                    "kodMestskehoObvoduP" : {
-                        "maximum" : 999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód městského obvodu Prahy"
-                    },
-                    "kodObce" : {
-                        "format" : "int32",
-                        "maximum" : 999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód obce"
-                    },
-                    "kodOkresu" : {
-                        "format" : "int32",
-                        "maximum" : 9999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód okresu"
-                    },
-                    "kodSpravnihoObvoduP" : {
-                        "maximum" : 999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód správního obvodu Prahy"
-                    },
-                    "kodStavebnihoObjektu" : {
-                        "maximum" : 999999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód stavebního objektu"
-                    },
-                    "kodUlice" : {
-                        "format" : "int32",
-                        "maximum" : 9999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód ulice, veřejného prostranství ze zdroje"
-                    },
-                    "nazevCastiObce" : {
-                        "maxLength" : 48,
-                        "type" : "string",
-                        "description" : "Název části obce"
-                    },
-                    "nazevKraje" : {
-                        "maxLength" : 32,
-                        "type" : "string",
-                        "description" : "Název kraje"
-                    },
-                    "nazevMestskeCastiObvodu" : {
-                        "maxLength" : 48,
-                        "type" : "string",
-                        "description" : "Název městské části statutárního města "
-                    },
-                    "nazevMestskehoObvoduP" : {
-                        "maxLength" : 32,
-                        "type" : "string",
-                        "description" : "Název městského obvodu Prahy"
-                    },
-                    "nazevObce" : {
-                        "maxLength" : 48,
-                        "type" : "string",
-                        "description" : "Název obce"
-                    },
-                    "nazevOkresu" : {
-                        "maxLength" : 32,
-                        "type" : "string",
-                        "description" : "Název okresu"
-                    },
-                    "nazevSpravnihoObvoduP" : {
-                        "maxLength" : 32,
-                        "type" : "string",
-                        "description" : "Název správního obvodu Prahy "
-                    },
-                    "nazevUlice" : {
-                        "maxLength" : 48,
-                        "type" : "string",
-                        "description" : "Název ulice, veřejného prostranství "
-                    },
-                    "psc" : {
-                        "maximum" : 99999,
-                        "type" : "integer",
-                        "description" : "Poštovní směrovací číslo adresní pošty"
-                    },
-                    "textovaAdresa" : {
-                        "maxLength" : 1500,
-                        "type" : "string",
-                        "description" : "Textová podoba adresy"
-                    }
-                }
-            },
-            "StandardizovanaAdresaFiltr" : {
-                "type" : "object",
-                "description" : "Komplexní filtr pro standardizaci adresy RÚIAN ",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/StrankovaniARazeni"
-                    },
-                    {
-                        "properties" : {
-                            "kodObce" : {
-                                "format" : "int32",
-                                "maximum" : 999999,
-                                "minimum" : 0,
-                                "type" : "integer",
-                                "description" : "Kód obce"
-                            },
-                            "nazevObce" : {
-                                "maxLength" : 48,
-                                "type" : "string",
-                                "description" : "Název obce"
-                            },
-                            "kodCastiObce" : {
-                                "format" : "int32",
-                                "maximum" : 999999,
-                                "minimum" : 0,
-                                "type" : "integer",
-                                "description" : "Kód části obce"
-                            },
-                            "nazevCastiObce" : {
-                                "maxLength" : 48,
-                                "type" : "string",
-                                "description" : "Název části obce"
-                            },
-                            "kodMestskehoCastiObvodu" : {
-                                "format" : "int32",
-                                "maximum" : 999999,
-                                "minimum" : 0,
-                                "type" : "integer",
-                                "description" : "Kód městské části statutárního města nebo Prahy "
-                            },
-                            "nazevMestskehoCastiObvodu" : {
-                                "maxLength" : 32,
-                                "type" : "string",
-                                "description" : "Název městské části statutárního města nebo Prahy"
-                            },
-                            "kodUlice" : {
-                                "format" : "int32",
-                                "maximum" : 9999999,
-                                "minimum" : 0,
-                                "type" : "integer",
-                                "description" : "Kód ulice, veřejného prostranství "
-                            },
-                            "nazevUlice" : {
-                                "maxLength" : 48,
-                                "type" : "string",
-                                "description" : "Název ulice, veřejného prostranství "
-                            },
-                            "cisloDomovni" : {
-                                "maximum" : 9999,
-                                "type" : "integer",
-                                "description" : "Číslo domovní"
-                            },
-                            "cisloOrientacni" : {
-                                "maximum" : 999,
-                                "type" : "integer",
-                                "description" : "Číslo orientační - číselná část"
-                            },
-                            "cisloOrientacniPismeno" : {
-                                "maxLength" : 1,
-                                "type" : "string",
-                                "description" : "Číslo orientační - písmenná část"
-                            },
-                            "kodAdresnihoMista" : {
-                                "maximum" : 999999999,
-                                "minimum" : 0,
-                                "type" : "integer",
-                                "description" : "Kód adresního místa"
-                            },
-                            "textovaAdresa" : {
-                                "maxLength" : 1500,
-                                "type" : "string",
-                                "description" : "Nestrukturovaná adresa"
-                            },
-                            "typStandardizaceAdresy" : {
-                                "type" : "string",
-                                "description" : "Typ požadované standardizace - kód (číselník kod:TypStandardizaceAdresy) UPLNA_STANDARDIZACE, VYHOVUJICI_ADRESY"
-                            }
-                        }
-                    }
-                ]
-            },
-            "CiselnikyNazevnikSeznam" : {
-                "type" : "object",
-                "description" : "Seznam číselníků",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/Seznam"
-                    },
-                    {
-                        "properties" : {
-                            "ciselniky" : {
-                                "type" : "array",
-                                "items" : {
-                                    "$ref" : "#/components/schemas/Ciselnik",
-                                    "description" : "Seznam číselníků"
-                                }
-                            }
-                        }
-                    }
-                ]
-            },
-            "Ciselnik" : {
-                "type" : "object",
-                "description" : "Číselník",
-                "properties" : {
-                    "kodCiselniku" : {
-                        "maxLength" : 64,
-                        "minLength" : 1,
-                        "type" : "string",
-                        "description" : "Kód číselníku"
-                    },
-                    "nazevCiselniku" : {
-                        "maxLength" : 255,
-                        "type" : "string",
-                        "description" : "Název číselníku"
-                    },
-                    "polozkyCiselniku" : {
-                        "type" : "array",
-                        "items" : {
-                            "$ref" : "#/components/schemas/PolozkaCiselniku",
-                            "description" : "Položky číselníku"
-                        }
-                    },
-                    "zdrojCiselniku" : {
-                        "maxLength" : 64,
-                        "minLength" : 1,
-                        "type" : "string",
-                        "description" : "Zdroj číselníku (ciselnikKod: StavZdroje) "
-                    }
-                }
-            },
-            "CiselnikyZakladniFiltr" : {
-                "type" : "object",
-                "description" : "Filtr pro vyhledávání číselníků",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/StrankovaniARazeni"
-                    },
-                    {
-                        "properties" : {
-                            "zdrojCiselniku" : {
-                                "maxLength" : 64,
-                                "minLength" : 1,
-                                "type" : "string",
-                                "description" : "Zdroj/oblast číselníku - kód (ciselnikKod: TypZdrojeAres, zdroj:com) "
-                            },
-                            "kodCiselniku" : {
-                                "maxLength" : 64,
-                                "minLength" : 1,
-                                "type" : "string",
-                                "description" : "Kód číselníku"
-                            }
-                        }
-                    }
-                ]
-            },
-            "NazevPolozky" : {
-                "type" : "object",
-                "description" : "Seznam názvů položky číselníků z ohledem na jazykovou mutaci",
-                "properties" : {
-                    "kodJazyka" : {
-                        "type" : "string",
-                        "description" : "Kód jazyka položky číselníku"
-                    },
-                    "nazev" : {
-                        "maxLength" : 255,
-                        "type" : "string",
-                        "description" : "Název položky číselníku"
-                    }
-                }
-            },
-            "PolozkaCiselniku" : {
-                "type" : "object",
-                "description" : "Položka číselníku",
-                "properties" : {
-                    "kod" : {
-                        "maxLength" : 64,
-                        "minLength" : 1,
-                        "type" : "string",
-                        "description" : "Kód položky číselníku"
-                    },
-                    "nazev" : {
-                        "type" : "array",
-                        "items" : {
-                            "$ref" : "#/components/schemas/NazevPolozky",
-                            "description" : "Názvy položky číselníku"
-                        }
-                    },
-                    "platnostOd" : {
-                        "format" : "date",
-                        "type" : "string",
-                        "description" : "Platnost položky od data"
-                    },
-                    "platnostDo" : {
-                        "format" : "date",
-                        "type" : "string",
-                        "description" : "Platnost položky do data "
-                    },
-                    "kodNadrizeny" : {
-                        "maxLength" : 64,
-                        "minLength" : 1,
-                        "type" : "string",
-                        "description" : "Nadřízený záznam položky číselníku"
-                    }
-                }
-            },
-            "AdresaFiltr" : {
-                "type" : "object",
-                "description" : "Adresa ",
-                "properties" : {
-                    "kodCastiObce" : {
-                        "format" : "int32",
-                        "maximum" : 999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód časti obce"
-                    },
-                    "kodSpravnihoObvodu" : {
-                        "maximum" : 999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód správního obvodu Prahy"
-                    },
-                    "kodMestskeCastiObvodu" : {
-                        "format" : "int32",
-                        "maximum" : 999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód městské části statutárního města"
-                    },
-                    "kodUlice" : {
-                        "format" : "int32",
-                        "maximum" : 9999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód ulice, veřejného prostranství ze zdroje"
-                    },
-                    "cisloDomovni" : {
-                        "maximum" : 9999,
-                        "type" : "integer",
-                        "description" : "Číslo domovní"
-                    },
-                    "kodObce" : {
-                        "format" : "int32",
-                        "maximum" : 999999,
-                        "minimum" : 0,
-                        "type" : "integer",
-                        "description" : "Kód obce"
-                    },
-                    "cisloOrientacni" : {
-                        "maximum" : 999,
-                        "type" : "integer",
-                        "description" : "Číslo orientační - číselná část"
-                    },
-                    "cisloOrientacniPismeno" : {
-                        "maxLength" : 1,
-                        "type" : "string",
-                        "description" : "Číslo orientační - písmenná část"
-                    },
-                    "textovaAdresa" : {
-                        "maxLength" : 1500,
-                        "type" : "string",
-                        "description" : "Nestrukturovaná adresa"
-                    }
-                }
-            },
-            "EkonomickeSubjektyRegistraceFiltr" : {
-                "type" : "object",
-                "description" : "Filtr pro vyhledání seznamu ekonomických subjektů podle parametru IČO. ",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/StrankovaniARazeni"
-                    },
-                    {
-                        "properties" : {
-                            "ico" : {
-                                "type" : "array",
-                                "items" : {
-                                    "maxLength" : 8,
-                                    "minLength" : 8,
-                                    "pattern" : "^\\d{8}$",
-                                    "type" : "string",
-                                    "description" : "Ičo ekonomického subjektu"
-                                }
-                            }
-                        }
-                    }
-                ]
-            },
-            "EkonomickeSubjektyZakladFiltr" : {
-                "type" : "object",
-                "description" : "Obecný filtr pro vyhledání seznamu ekonomických subjektů",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/StrankovaniARazeni"
-                    },
-                    {
-                        "properties" : {
-                            "ico" : {
-                                "type" : "array",
-                                "items" : {
-                                    "maxLength" : 8,
-                                    "minLength" : 8,
-                                    "pattern" : "^\\d{8}$",
-                                    "type" : "string",
-                                    "description" : "Ičo ekonomického subjektu"
-                                }
-                            },
-                            "obchodniJmeno" : {
-                                "maxLength" : 2000,
-                                "minLength" : 1,
-                                "type" : "string",
-                                "description" : "Obchodní jméno ekonomického subjektu"
-                            },
-                            "sidlo" : {
-                                "$ref" : "#/components/schemas/AdresaFiltr",
-                                "description" : "Adresa sídla ekonomického subjektu"
-                            },
-                            "pravniForma" : {
-                                "type" : "array",
-                                "items" : {
-                                    "maxLength" : 3,
-                                    "minLength" : 3,
-                                    "pattern" : "^\\d{3}$",
-                                    "type" : "string",
-                                    "description" : "Právní forma ekonomického subjektu - kód (ciselnikKod: PravniForma, zdroj:res, com)"
-                                }
-                            },
-                            "financniUrad" : {
-                                "type" : "array",
-                                "items" : {
-                                    "maxLength" : 3,
-                                    "minLength" : 3,
-                                    "pattern" : "^\\d{3}$",
-                                    "type" : "string",
-                                    "description" : "Správně příslušný finanční úřad - kód (ciselnikKod: FinancniUrad, zdroj:ufo)"
-                                }
-                            }
-                        }
-                    }
-                ]
-            },
             "AdresaAres" : {
                 "type" : "object",
                 "description" : "Adresa s platností",
@@ -2868,6 +2369,10 @@
                     "sidlo" : {
                         "$ref" : "#/components/schemas/Adresa",
                         "description" : "Sídlo"
+                    },
+                    "primarniZaznam" : {
+                        "type" : "boolean",
+                        "description" : "Primární záznam"
                     },
                     "platnostOd" : {
                         "format" : "date",
@@ -2899,6 +2404,18 @@
                             "description" : "Sídlo ekonomického subjektu "
                         }
                     },
+                    "pravniForma" : {
+                        "maxLength" : 3,
+                        "minLength" : 3,
+                        "pattern" : "^\\d{3}$",
+                        "type" : "string",
+                        "description" : "Právní forma - kód (ciselnikKod: PravniForma, zdroj: res, com)"
+                    },
+                    "spisovaZnacka" : {
+                        "maxLength" : 32,
+                        "type" : "string",
+                        "description" : "Aktuální spisová značka ve tvaru ODDIL xx/SOUD (např. B 100/MSPH) - poskytováno pouze pro zdroj: Veřejné rejstříky "
+                    },
                     "datovyZdroj" : {
                         "maxLength" : 30,
                         "type" : "string",
@@ -2925,6 +2442,10 @@
                         "minLength" : 1,
                         "type" : "string",
                         "description" : "Obchodní jméno ekonomického subjektu"
+                    },
+                    "primarniZaznam" : {
+                        "type" : "boolean",
+                        "description" : "Primární záznam "
                     }
                 }
             },
@@ -3100,6 +2621,10 @@
                             "subRegistrSzr" : {
                                 "type" : "string",
                                 "description" : "Indeftifikátor sub-registru zdroje SZR - kód (ciselnikKod: SubRegistrSzr, zdroj:com) "
+                            },
+                            "dicSkDph" : {
+                                "type" : "string",
+                                "description" : "Daňové identifikační číslo skupiny plátce DPH ve formátu CZNNNNNNNNNN "
                             }
                         }
                     }
@@ -3121,6 +2646,17 @@
                             "fyzickaOsoba" : {
                                 "$ref" : "#/components/schemas/FyzickaOsobaVr",
                                 "description" : "Fyzická osoba"
+                            },
+                            "nazevAngazma" : {
+                                "maxLength" : 255,
+                                "type" : "string",
+                                "description" : "Název angažmá - nestandardní"
+                            },
+                            "typAngazma" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ angažmá  - kód (ciselnikKod: TypAngazma, zdroj: vr) "
                             }
                         }
                     }
@@ -3139,9 +2675,20 @@
                                 "$ref" : "#/components/schemas/ObecnyTextVr",
                                 "description" : "Skrytý údaj"
                             },
+                            "typAngazma" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ angažmá  - kód (ciselnikKod: TypAngazma, zdroj: vr) "
+                            },
                             "clenstvi" : {
                                 "$ref" : "#/components/schemas/AngazmaClenstviVr",
                                 "description" : "Členství"
+                            },
+                            "nazevAngazma" : {
+                                "maxLength" : 255,
+                                "type" : "string",
+                                "description" : "Název angažmá - nestandardní"
                             },
                             "pravnickaOsoba" : {
                                 "$ref" : "#/components/schemas/PravnickaOsobaVr",
@@ -3333,10 +2880,15 @@
                 "description" : "Řídící orgán - obecný předek",
                 "allOf" : [
                     {
-                        "$ref" : "#/components/schemas/AngazmaVr"
+                        "$ref" : "#/components/schemas/DatumZapisuVymazuUdajeVr"
                     },
                     {
                         "properties" : {
+                            "nazevOrganu" : {
+                                "maxLength" : 255,
+                                "type" : "string",
+                                "description" : "Název orgánu - nestandardní"
+                            },
                             "pocetClenu" : {
                                 "type" : "array",
                                 "items" : {
@@ -3348,6 +2900,23 @@
                                 "items" : {
                                     "$ref" : "#/components/schemas/AngazmaOsobaVr"
                                 }
+                            },
+                            "typOrganu" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ orgánu - kód (ciselnikKod: TypOrganu, zdroj: vr) "
+                            },
+                            "nazevAngazma" : {
+                                "maxLength" : 255,
+                                "type" : "string",
+                                "description" : "Název orgánu - nestandardní"
+                            },
+                            "typAngazma" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ orgánu - kód (ciselnikKod: TypOrganu, zdroj: vr) "
                             }
                         }
                     }
@@ -3358,7 +2927,7 @@
                 "description" : "Podnikatel",
                 "allOf" : [
                     {
-                        "$ref" : "#/components/schemas/AngazmaVr"
+                        "$ref" : "#/components/schemas/DatumZapisuVymazuUdajeVr"
                     },
                     {
                         "properties" : {
@@ -3379,6 +2948,17 @@
                                     "$ref" : "#/components/schemas/AdresaVr",
                                     "description" : "Adresa pobytu podnikatele"
                                 }
+                            },
+                            "typAngazma" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ angažmá  - kód (ciselnikKod: TypAngazma, zdroj: vr) "
+                            },
+                            "nazevAngazma" : {
+                                "maxLength" : 255,
+                                "type" : "string",
+                                "description" : "Název angažmá - nestandardní"
                             }
                         }
                     }
@@ -3433,9 +3013,10 @@
                     },
                     {
                         "properties" : {
-                            "nazev" : {
+                            "nazevOrganu" : {
                                 "maxLength" : 255,
-                                "type" : "string"
+                                "type" : "string",
+                                "description" : "Název orgánu - nestandardní"
                             },
                             "spolecnik" : {
                                 "type" : "array",
@@ -3450,11 +3031,22 @@
                                     "description" : "Společný podíl společníků"
                                 }
                             },
+                            "typOrganu" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ orgánu - kód (ciselnikKod: TypOrganu, zdroj: vr) "
+                            },
                             "uvolnenyPodil" : {
                                 "type" : "array",
                                 "items" : {
                                     "$ref" : "#/components/schemas/UvolnenyPodilVr"
                                 }
+                            },
+                            "nazev" : {
+                                "maxLength" : 255,
+                                "type" : "string",
+                                "description" : "Název orgánu - nestandardní"
                             }
                         }
                     }
@@ -3623,30 +3215,6 @@
                         "description" : "Doplňující text k zrušení  osoby"
                     }
                 }
-            },
-            "AngazmaVr" : {
-                "type" : "object",
-                "description" : "Angažmá - obecný předek",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/DatumZapisuVymazuUdajeVr"
-                    },
-                    {
-                        "properties" : {
-                            "nazevAngazma" : {
-                                "maxLength" : 255,
-                                "type" : "string",
-                                "description" : "Název angažmá - nestandardní"
-                            },
-                            "typAngazma" : {
-                                "maxLength" : 64,
-                                "minLength" : 1,
-                                "type" : "string",
-                                "description" : "Typ angažmá orgánu - kód (ciselnikKod: TypOrganu, zdroj: vr) "
-                            }
-                        }
-                    }
-                ]
             },
             "CinnostiVr" : {
                 "type" : "object",
@@ -4732,7 +4300,8 @@
                                 "description" : "Stav provozovny - kód (ciselnikKod: StavProvozovny) "
                             },
                             "primarniZaznam" : {
-                                "type" : "boolean"
+                                "type" : "boolean",
+                                "description" : "Identifikace primárního záznamu  pozn.: U multiplicitních registrací je pouze jedna registrace primární"
                             },
                             "kodStatu" : {
                                 "maxLength" : 3,
@@ -4959,7 +4528,7 @@
                                 "maxLength" : 3,
                                 "minLength" : 3,
                                 "type" : "string",
-                                "description" : "Státní občanství osoby - kod (ciselnikKod: Stat)"
+                                "description" : "Státní občanství osoby - kód (ciselnikKod: Stat)"
                             },
                             "typAngazma" : {
                                 "maxLength" : 64,
@@ -5262,6 +4831,197 @@
                     }
                 }
             },
+            "AngazovanaOsobaRpsh" : {
+                "type" : "object",
+                "description" : "Identifikace fyzické osoby statutárního orgánu subjektu. ",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/AngazovanaOsoba"
+                    },
+                    {
+                        "properties" : {
+                            "funkce" : {
+                                "maxLength" : 120,
+                                "type" : "string",
+                                "description" : "Název fukce"
+                            },
+                            "platnostOd" : {
+                                "format" : "date",
+                                "type" : "string",
+                                "description" : "Platnost záznamu od data"
+                            },
+                            "platnostDo" : {
+                                "format" : "date",
+                                "type" : "string",
+                                "description" : "Platnost záznamu do data "
+                            },
+                            "adresa" : {
+                                "$ref" : "#/components/schemas/Adresa",
+                                "description" : "adresa angažované osoby"
+                            },
+                            "kod" : {
+                                "maxLength" : 10,
+                                "type" : "string",
+                                "description" : "Kód fukce"
+                            },
+                            "typAngazma" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ angažmá osoby  - kód (ciselnikKod: TypAngazma) "
+                            }
+                        }
+                    }
+                ]
+            },
+            "StatutarniOrgan" : {
+                "type" : "object",
+                "description" : "Informace o způsobu jednání právnické osoby. ",
+                "properties" : {
+                    "platnostOd" : {
+                        "format" : "date",
+                        "type" : "string",
+                        "description" : "Platnost záznamu od data "
+                    },
+                    "popis" : {
+                        "maxLength" : 1000,
+                        "type" : "string",
+                        "description" : "Texty způsobu jednání právnické osoby. "
+                    }
+                }
+            },
+            "StavSubjektu" : {
+                "type" : "object",
+                "description" : "Stav, ve kterém se subjekt nachází, s udáním počátku platnosti. ",
+                "properties" : {
+                    "popis" : {
+                        "maxLength" : 1000,
+                        "type" : "string",
+                        "description" : "Popis stavu subjektu"
+                    },
+                    "platnostOd" : {
+                        "format" : "date",
+                        "type" : "string",
+                        "description" : "Platnost záznamu od data "
+                    },
+                    "stavSubjektu" : {
+                        "maxLength" : 64,
+                        "minLength" : 1,
+                        "type" : "string",
+                        "description" : "Stav ekonomického subjektu - kód (ciselnikKod: StavSubjektu(zdroj:rpsh) "
+                    }
+                }
+            },
+            "ZaznamRpsh" : {
+                "type" : "object",
+                "description" : "Detailní informace o ekonomickém subjektu ze zdroje RPSH",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/EkonomickySubjektZaklad"
+                    },
+                    {
+                        "properties" : {
+                            "cisloRegistrace" : {
+                                "maxLength" : 20,
+                                "type" : "string",
+                                "description" : "Číslo registrace"
+                            },
+                            "typSubjektu" : {
+                                "maximum" : 1,
+                                "minimum" : 1,
+                                "pattern" : "^\\d{1}$",
+                                "type" : "string",
+                                "description" : "Typ subjektu - strana/hnutí - kód (ciselnikKod: TypSubjektuRpsh) "
+                            },
+                            "obchodniJmenoZkratka" : {
+                                "maxLength" : 1000,
+                                "type" : "string",
+                                "description" : "Obchodní jméno zkrácené"
+                            },
+                            "angazovaneOsoby" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/AngazovanaOsobaRpsh",
+                                    "description" : "Seznam angažovaných osob"
+                                }
+                            },
+                            "primarniZaznam" : {
+                                "type" : "boolean"
+                            },
+                            "zmenaStanov" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/ZmenaStanov",
+                                    "description" : "Seznam období změny stavov"
+                                }
+                            },
+                            "statutarniOrgan" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/StatutarniOrgan",
+                                    "description" : "Statutární orgán"
+                                }
+                            },
+                            "stavSubjektu" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/StavSubjektu",
+                                    "description" : "Stav subjektu"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "ZmenaStanov" : {
+                "type" : "object",
+                "description" : "Seznam datumů změn stanov. ",
+                "properties" : {
+                    "datumZmeny" : {
+                        "format" : "date",
+                        "type" : "string",
+                        "description" : "Datum změny stanov."
+                    }
+                }
+            },
+            "EkonomickeSubjektyRpshSeznam" : {
+                "type" : "object",
+                "description" : "Seznam ekonomických subjektů ze zdroje RPSH",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/Seznam"
+                    },
+                    {
+                        "properties" : {
+                            "ekonomickeSubjekty" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/EkonomickySubjektRpsh",
+                                    "description" : "Seznam ekonomických subjektů zdroje RŽP "
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "EkonomickySubjektRpsh" : {
+                "type" : "object",
+                "properties" : {
+                    "icoId" : {
+                        "maxLength" : 32,
+                        "pattern" : "^(ARES_)?\\d{8}$",
+                        "type" : "string",
+                        "description" : "ičo/id ekonomického subjektu "
+                    },
+                    "zaznamy" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/ZaznamRpsh",
+                            "description" : "Seznam záznamů daného iča"
+                        }
+                    }
+                }
+            },
             "AdresaRcns" : {
                 "type" : "object",
                 "allOf" : [
@@ -5284,7 +5044,7 @@
                                 "maxLength" : 64,
                                 "minLength" : 1,
                                 "type" : "string",
-                                "description" : "Typ adresy  - kód (ciselnikKod: TypAdresyAres) "
+                                "description" : "Typ adresy  - kód (ciselnikKod: TypAdresy, zdroj: rcns) "
                             }
                         }
                     }
@@ -5345,15 +5105,18 @@
                         "maxLength" : 8,
                         "minLength" : 8,
                         "pattern" : "^\\d{8}$",
-                        "type" : "string"
+                        "type" : "string",
+                        "description" : "IČO člana svazu"
                     },
                     "platnostOd" : {
                         "format" : "date",
-                        "type" : "string"
+                        "type" : "string",
+                        "description" : "Platnost členství od data "
                     },
                     "platnostDo" : {
                         "format" : "date",
-                        "type" : "string"
+                        "type" : "string",
+                        "description" : "Platnost členství do data"
                     }
                 }
             },
@@ -5364,16 +5127,16 @@
                     "platnostOd" : {
                         "format" : "date",
                         "type" : "string",
-                        "description" : "začátek platnosti zvláštního práva subjektu "
+                        "description" : "Začátek platnosti zvláštního práva subjektu "
                     },
                     "platnostDo" : {
                         "format" : "date",
                         "type" : "string",
-                        "description" : "konec platnosti zvláštního práva subjektu"
+                        "description" : "Konec platnosti zvláštního práva subjektu"
                     },
                     "kodPravo" : {
                         "type" : "integer",
-                        "description" : "Kód oprávnění pro výkon církve "
+                        "description" : "Oprávnění pro výkon církve - kód (ciselnikKod: Pravo, zdroj: rcns) "
                     }
                 }
             },
@@ -5455,6 +5218,11 @@
                                 "maxLength" : 100,
                                 "type" : "string",
                                 "description" : "Identifikátor záznamu ve zdrojovém registru."
+                            },
+                            "platnostOd" : {
+                                "format" : "date",
+                                "type" : "string",
+                                "description" : "Platnost subjekt v registru od"
                             }
                         }
                     }
@@ -5482,6 +5250,7 @@
             },
             "AngazovanaOsobaRcns" : {
                 "type" : "object",
+                "description" : "Název vykonávané statutární(církevní) funkce ",
                 "allOf" : [
                     {
                         "$ref" : "#/components/schemas/AngazovanaOsoba"
@@ -5500,11 +5269,24 @@
                             },
                             "nazevAngazma" : {
                                 "maxLength" : 100,
-                                "type" : "string"
+                                "type" : "string",
+                                "description" : "Název orgánu"
                             },
                             "poznamka" : {
                                 "maxLength" : 100,
-                                "type" : "string"
+                                "type" : "string",
+                                "description" : "Dodatečná informace jako 'funkce neobsazena'"
+                            },
+                            "typAngazma" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Typ angažmá osoby  - kód (ciselnikKod: TypAngazma, zdroj: rcns) "
+                            },
+                            "nazevOrganu" : {
+                                "maxLength" : 100,
+                                "type" : "string",
+                                "description" : "Název orgánu"
                             },
                             "kodStatu" : {
                                 "maxLength" : 3,
@@ -5783,39 +5565,14 @@
                     }
                 ]
             },
-            "AngazovanaOsobaRpsh" : {
+            "AngazovanaOsobaSzrZaklad" : {
                 "type" : "object",
-                "description" : "Identifikace fyzické osoby statutárního orgánu subjektu. ",
                 "allOf" : [
                     {
                         "$ref" : "#/components/schemas/AngazovanaOsoba"
                     },
                     {
                         "properties" : {
-                            "funkce" : {
-                                "maxLength" : 120,
-                                "type" : "string",
-                                "description" : "Název fukce"
-                            },
-                            "platnostOd" : {
-                                "format" : "date",
-                                "type" : "string",
-                                "description" : "Platnost záznamu od data"
-                            },
-                            "platnostDo" : {
-                                "format" : "date",
-                                "type" : "string",
-                                "description" : "Platnost záznamu do data "
-                            },
-                            "adresa" : {
-                                "$ref" : "#/components/schemas/Adresa",
-                                "description" : "adresa angažované osoby"
-                            },
-                            "kod" : {
-                                "maxLength" : 10,
-                                "type" : "string",
-                                "description" : "Kód fukce"
-                            },
                             "typAngazma" : {
                                 "maxLength" : 64,
                                 "minLength" : 1,
@@ -5826,119 +5583,26 @@
                     }
                 ]
             },
-            "StatutarniOrgan" : {
+            "EkonomickySubjektEzpZaklad" : {
                 "type" : "object",
-                "description" : "Informace o způsobu jednání právnické osoby. ",
-                "properties" : {
-                    "platnostOd" : {
-                        "format" : "date",
-                        "type" : "string",
-                        "description" : "Platnost záznamu od data "
-                    },
-                    "popis" : {
-                        "maxLength" : 1000,
-                        "type" : "string",
-                        "description" : "Texty způsobu jednání právnické osoby. "
-                    }
-                }
-            },
-            "StavSubjektu" : {
-                "type" : "object",
-                "description" : "Stav, ve kterém se subjekt nachází, s udáním počátku platnosti. ",
-                "properties" : {
-                    "popis" : {
-                        "maxLength" : 1000,
-                        "type" : "string",
-                        "description" : "Popis stavu subjektu"
-                    },
-                    "platnostOd" : {
-                        "format" : "date",
-                        "type" : "string",
-                        "description" : "Platnost záznamu od data "
-                    },
-                    "stavSubjektu" : {
-                        "maxLength" : 64,
-                        "minLength" : 1,
-                        "type" : "string",
-                        "description" : "Stav ekonomického subjektu - kód (ciselnikKod: StavSubjektu(zdroj:rpsh) "
-                    }
-                }
-            },
-            "ZaznamRpsh" : {
-                "type" : "object",
-                "description" : "Detailní informace o ekonomickém subjektu ze zdroje RPSH",
                 "allOf" : [
                     {
                         "$ref" : "#/components/schemas/EkonomickySubjektZaklad"
                     },
                     {
                         "properties" : {
-                            "cisloRegistrace" : {
-                                "maxLength" : 20,
+                            "odkaz" : {
+                                "maxLength" : 255,
                                 "type" : "string",
-                                "description" : "Číslo registrace"
-                            },
-                            "typSubjektu" : {
-                                "maximum" : 1,
-                                "minimum" : 1,
-                                "pattern" : "^\\d{1}$",
-                                "type" : "string",
-                                "description" : "Typ subjektu - strana/hnutí - kód (ciselnikKod: TypSubjektuRpsh) "
-                            },
-                            "obchodniJmenoZkratka" : {
-                                "maxLength" : 1000,
-                                "type" : "string",
-                                "description" : "Obchodní jméno zkrácené"
-                            },
-                            "angazovaneOsoby" : {
-                                "type" : "array",
-                                "items" : {
-                                    "$ref" : "#/components/schemas/AngazovanaOsobaRpsh",
-                                    "description" : "Seznam angažovaných osob"
-                                }
-                            },
-                            "primarniZaznam" : {
-                                "type" : "boolean"
-                            },
-                            "zmenaStanov" : {
-                                "type" : "array",
-                                "items" : {
-                                    "$ref" : "#/components/schemas/ZmenaStanov",
-                                    "description" : "Seznam období změny stavov"
-                                }
-                            },
-                            "statutarniOrgan" : {
-                                "type" : "array",
-                                "items" : {
-                                    "$ref" : "#/components/schemas/StatutarniOrgan",
-                                    "description" : "Statutární orgán"
-                                }
-                            },
-                            "stavSubjektu" : {
-                                "type" : "array",
-                                "items" : {
-                                    "$ref" : "#/components/schemas/StavSubjektu",
-                                    "description" : "Stav subjektu"
-                                }
+                                "description" : "URL odkaz na záznam zdrojového IS."
                             }
                         }
                     }
                 ]
             },
-            "ZmenaStanov" : {
+            "EkonomickeSubjektySzrSeznam" : {
                 "type" : "object",
-                "description" : "Seznam datumů změn stanov. ",
-                "properties" : {
-                    "datumZmeny" : {
-                        "format" : "date",
-                        "type" : "string",
-                        "description" : "Datum změny stanov."
-                    }
-                }
-            },
-            "EkonomickeSubjektyRpshSeznam" : {
-                "type" : "object",
-                "description" : "Seznam ekonomických subjektů ze zdroje RPSH",
+                "description" : "Seznam ekonomických subjektů ze zdroje SZR",
                 "allOf" : [
                     {
                         "$ref" : "#/components/schemas/Seznam"
@@ -5948,7 +5612,7 @@
                             "ekonomickeSubjekty" : {
                                 "type" : "array",
                                 "items" : {
-                                    "$ref" : "#/components/schemas/EkonomickySubjektRpsh",
+                                    "$ref" : "#/components/schemas/EkonomickySubjektSzr",
                                     "description" : "Seznam ekonomických subjektů zdroje RŽP "
                                 }
                             }
@@ -5956,8 +5620,9 @@
                     }
                 ]
             },
-            "EkonomickySubjektRpsh" : {
+            "EkonomickySubjektSzr" : {
                 "type" : "object",
+                "description" : "Seznam ekonomických subjektů ze zdroje SZR (část EZP) ",
                 "properties" : {
                     "icoId" : {
                         "maxLength" : 32,
@@ -5968,9 +5633,31 @@
                     "zaznamy" : {
                         "type" : "array",
                         "items" : {
-                            "$ref" : "#/components/schemas/ZaznamRpsh",
+                            "$ref" : "#/components/schemas/ZaznamSzr",
                             "description" : "Seznam záznamů daného iča"
                         }
+                    }
+                }
+            },
+            "Ezp" : {
+                "type" : "object",
+                "properties" : {
+                    "osobaEzp" : {
+                        "$ref" : "#/components/schemas/AngazovanaOsobaSzrZaklad",
+                        "description" : "Osoba podnikatele EZP"
+                    },
+                    "subjektEzp" : {
+                        "$ref" : "#/components/schemas/EkonomickySubjektEzpZaklad",
+                        "description" : "Ekonomický subjekt EZP"
+                    }
+                }
+            },
+            "ZaznamSzr" : {
+                "type" : "object",
+                "properties" : {
+                    "ezp" : {
+                        "$ref" : "#/components/schemas/Ezp",
+                        "description" : "Evidence zemědělského podnikatele"
                     }
                 }
             },
@@ -6226,101 +5913,522 @@
                     }
                 ]
             },
-            "AngazovanaOsobaSzrZaklad" : {
+            "CiselnikyNazevnikSeznam" : {
                 "type" : "object",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/AngazovanaOsoba"
-                    },
-                    {
-                        "properties" : {
-                            "typAngazma" : {
-                                "maxLength" : 64,
-                                "minLength" : 1,
-                                "type" : "string",
-                                "description" : "Typ angažmá osoby  - kód (ciselnikKod: TypAngazma) "
-                            }
-                        }
-                    }
-                ]
-            },
-            "EkonomickySubjektEzpZaklad" : {
-                "type" : "object",
-                "allOf" : [
-                    {
-                        "$ref" : "#/components/schemas/EkonomickySubjektZaklad"
-                    },
-                    {
-                        "properties" : {
-                            "odkaz" : {
-                                "maxLength" : 255,
-                                "type" : "string",
-                                "description" : "URL odkaz na záznam zdrojového IS."
-                            }
-                        }
-                    }
-                ]
-            },
-            "EkonomickeSubjektySzrSeznam" : {
-                "type" : "object",
-                "description" : "Seznam ekonomických subjektů ze zdroje SZR",
+                "description" : "Seznam číselníků",
                 "allOf" : [
                     {
                         "$ref" : "#/components/schemas/Seznam"
                     },
                     {
                         "properties" : {
-                            "ekonomickeSubjekty" : {
+                            "ciselniky" : {
                                 "type" : "array",
                                 "items" : {
-                                    "$ref" : "#/components/schemas/EkonomickySubjektSzr",
-                                    "description" : "Seznam ekonomických subjektů zdroje RŽP "
+                                    "$ref" : "#/components/schemas/Ciselnik",
+                                    "description" : "Seznam číselníků"
                                 }
                             }
                         }
                     }
                 ]
             },
-            "EkonomickySubjektSzr" : {
+            "Ciselnik" : {
                 "type" : "object",
-                "description" : "Seznam ekonomických subjektů ze zdroje SZR (část EZP) ",
+                "description" : "Číselník",
                 "properties" : {
-                    "icoId" : {
-                        "maxLength" : 32,
-                        "pattern" : "^(ARES_)?\\d{8}$",
+                    "kodCiselniku" : {
+                        "maxLength" : 64,
+                        "minLength" : 1,
                         "type" : "string",
-                        "description" : "ičo/id ekonomického subjektu "
+                        "description" : "Kód číselníku"
                     },
-                    "zaznamy" : {
+                    "nazevCiselniku" : {
+                        "maxLength" : 255,
+                        "type" : "string",
+                        "description" : "Název číselníku"
+                    },
+                    "polozkyCiselniku" : {
                         "type" : "array",
                         "items" : {
-                            "$ref" : "#/components/schemas/ZaznamSzr",
-                            "description" : "Seznam záznamů daného iča"
+                            "$ref" : "#/components/schemas/PolozkaCiselniku",
+                            "description" : "Položky číselníku"
+                        }
+                    },
+                    "zdrojCiselniku" : {
+                        "maxLength" : 64,
+                        "minLength" : 1,
+                        "type" : "string",
+                        "description" : "Zdroj číselníku (ciselnikKod: StavZdroje) "
+                    }
+                }
+            },
+            "CiselnikyZakladniFiltr" : {
+                "type" : "object",
+                "description" : "Filtr pro vyhledávání číselníků",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/StrankovaniARazeni"
+                    },
+                    {
+                        "properties" : {
+                            "zdrojCiselniku" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Zdroj/oblast číselníku - kód (ciselnikKod: TypZdrojeAres, zdroj:com) "
+                            },
+                            "kodCiselniku" : {
+                                "maxLength" : 64,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Kód číselníku"
+                            }
                         }
                     }
-                }
+                ]
             },
-            "Ezp" : {
+            "NazevPolozky" : {
                 "type" : "object",
+                "description" : "Seznam názvů položky číselníků z ohledem na jazykovou mutaci",
                 "properties" : {
-                    "osobaEzp" : {
-                        "$ref" : "#/components/schemas/AngazovanaOsobaSzrZaklad",
-                        "description" : "Osoba podnikatele EZP"
+                    "kodJazyka" : {
+                        "type" : "string",
+                        "description" : "Kód jazyka položky číselníku"
                     },
-                    "subjektEzp" : {
-                        "$ref" : "#/components/schemas/EkonomickySubjektEzpZaklad",
-                        "description" : "Ekonomický subjekt EZP"
+                    "nazev" : {
+                        "maxLength" : 255,
+                        "type" : "string",
+                        "description" : "Název položky číselníku"
                     }
                 }
             },
-            "ZaznamSzr" : {
+            "PolozkaCiselniku" : {
                 "type" : "object",
+                "description" : "Položka číselníku",
                 "properties" : {
-                    "ezp" : {
-                        "$ref" : "#/components/schemas/Ezp",
-                        "description" : "Evidence zemědělského podnikatele"
+                    "kod" : {
+                        "maxLength" : 64,
+                        "minLength" : 1,
+                        "type" : "string",
+                        "description" : "Kód položky číselníku"
+                    },
+                    "nazev" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/NazevPolozky",
+                            "description" : "Názvy položky číselníku"
+                        }
+                    },
+                    "platnostOd" : {
+                        "format" : "date",
+                        "type" : "string",
+                        "description" : "Platnost položky od data"
+                    },
+                    "platnostDo" : {
+                        "format" : "date",
+                        "type" : "string",
+                        "description" : "Platnost položky do data "
+                    },
+                    "kodNadrizeny" : {
+                        "maxLength" : 64,
+                        "minLength" : 1,
+                        "type" : "string",
+                        "description" : "Nadřízený záznam položky číselníku"
                     }
                 }
+            },
+            "AdresaFiltr" : {
+                "type" : "object",
+                "description" : "Adresa ",
+                "properties" : {
+                    "kodCastiObce" : {
+                        "format" : "int32",
+                        "maximum" : 999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód časti obce"
+                    },
+                    "kodSpravnihoObvodu" : {
+                        "maximum" : 999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód správního obvodu Prahy"
+                    },
+                    "kodMestskeCastiObvodu" : {
+                        "format" : "int32",
+                        "maximum" : 999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód městské části statutárního města"
+                    },
+                    "kodUlice" : {
+                        "format" : "int32",
+                        "maximum" : 9999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód ulice, veřejného prostranství ze zdroje"
+                    },
+                    "cisloDomovni" : {
+                        "maximum" : 9999,
+                        "type" : "integer",
+                        "description" : "Číslo domovní"
+                    },
+                    "kodObce" : {
+                        "format" : "int32",
+                        "maximum" : 999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód obce"
+                    },
+                    "cisloOrientacni" : {
+                        "maximum" : 999,
+                        "type" : "integer",
+                        "description" : "Číslo orientační - číselná část"
+                    },
+                    "cisloOrientacniPismeno" : {
+                        "maxLength" : 1,
+                        "type" : "string",
+                        "description" : "Číslo orientační - písmenná část"
+                    },
+                    "textovaAdresa" : {
+                        "maxLength" : 1500,
+                        "type" : "string",
+                        "description" : "Nestrukturovaná adresa"
+                    }
+                }
+            },
+            "EkonomickeSubjektyRegistraceFiltr" : {
+                "type" : "object",
+                "description" : "Filtr pro vyhledání seznamu ekonomických subjektů podle parametru IČO. ",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/StrankovaniARazeni"
+                    },
+                    {
+                        "properties" : {
+                            "ico" : {
+                                "type" : "array",
+                                "items" : {
+                                    "maxLength" : 8,
+                                    "minLength" : 8,
+                                    "pattern" : "^\\d{8}$",
+                                    "type" : "string",
+                                    "description" : "Ičo ekonomického subjektu"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "EkonomickeSubjektyZakladFiltr" : {
+                "type" : "object",
+                "description" : "Obecný filtr pro vyhledání seznamu ekonomických subjektů",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/StrankovaniARazeni"
+                    },
+                    {
+                        "properties" : {
+                            "ico" : {
+                                "type" : "array",
+                                "items" : {
+                                    "maxLength" : 8,
+                                    "minLength" : 8,
+                                    "pattern" : "^\\d{8}$",
+                                    "type" : "string",
+                                    "description" : "Ičo ekonomického subjektu"
+                                }
+                            },
+                            "obchodniJmeno" : {
+                                "maxLength" : 2000,
+                                "minLength" : 1,
+                                "type" : "string",
+                                "description" : "Obchodní jméno ekonomického subjektu"
+                            },
+                            "sidlo" : {
+                                "$ref" : "#/components/schemas/AdresaFiltr",
+                                "description" : "Adresa sídla ekonomického subjektu"
+                            },
+                            "pravniForma" : {
+                                "type" : "array",
+                                "items" : {
+                                    "maxLength" : 3,
+                                    "minLength" : 3,
+                                    "pattern" : "^\\d{3}$",
+                                    "type" : "string",
+                                    "description" : "Právní forma ekonomického subjektu - kód (ciselnikKod: PravniForma, zdroj:res, com)"
+                                }
+                            },
+                            "financniUrad" : {
+                                "type" : "array",
+                                "items" : {
+                                    "maxLength" : 3,
+                                    "minLength" : 3,
+                                    "pattern" : "^\\d{3}$",
+                                    "type" : "string",
+                                    "description" : "Správně příslušný finanční úřad - kód (ciselnikKod: FinancniUrad, zdroj:ufo)"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "StandardizovaneAdresySeznam" : {
+                "type" : "object",
+                "description" : "Seznam nalezených standardizovaných adres",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/Seznam"
+                    },
+                    {
+                        "properties" : {
+                            "standardizovaneAdresy" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/StandardizovanaAdresa"
+                                }
+                            },
+                            "stavStandardizace" : {
+                                "type" : "string",
+                                "description" : "Stav standardizace adresy - kod (Číselník kod:StavStandardizaceAdresy) UPLNA, CASTECNA_OBEC/..., NEUSPESNA"
+                            },
+                            "request" : {
+                                "$ref" : "#/components/schemas/StandardizovanaAdresaFiltr"
+                            }
+                        }
+                    }
+                ]
+            },
+            "StandardizovanaAdresa" : {
+                "type" : "object",
+                "description" : "Standardizovaná adresa",
+                "properties" : {
+                    "typStavebnihoObjektu" : {
+                        "type" : "string",
+                        "description" : "Typ stavebního objektu - kód (Číselník kod:TypStavebnihoObjektu, zdroj:ruian) "
+                    },
+                    "cisloDomovni" : {
+                        "maximum" : 9999,
+                        "type" : "integer",
+                        "description" : "Číslo domovní"
+                    },
+                    "cisloOrientacni" : {
+                        "maximum" : 999,
+                        "type" : "integer",
+                        "description" : "Číslo orientační - číselná část"
+                    },
+                    "cisloOrientacniPismeno" : {
+                        "maxLength" : 1,
+                        "type" : "string",
+                        "description" : "Číslo orientační - písmenná část"
+                    },
+                    "kodAdresnihoMista" : {
+                        "maximum" : 999999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód adresního místa"
+                    },
+                    "kodCastiObce" : {
+                        "format" : "int32",
+                        "maximum" : 999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód časti obce"
+                    },
+                    "kodKraje" : {
+                        "maximum" : 999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód kraje"
+                    },
+                    "kodMestskeCastiObvodu" : {
+                        "format" : "int32",
+                        "maximum" : 999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód městské části statutárního města"
+                    },
+                    "kodMestskehoObvoduP" : {
+                        "maximum" : 999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód městského obvodu Prahy"
+                    },
+                    "kodObce" : {
+                        "format" : "int32",
+                        "maximum" : 999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód obce"
+                    },
+                    "kodOkresu" : {
+                        "format" : "int32",
+                        "maximum" : 9999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód okresu"
+                    },
+                    "kodSpravnihoObvoduP" : {
+                        "maximum" : 999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód správního obvodu Prahy"
+                    },
+                    "kodStavebnihoObjektu" : {
+                        "maximum" : 999999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód stavebního objektu"
+                    },
+                    "kodUlice" : {
+                        "format" : "int32",
+                        "maximum" : 9999999,
+                        "minimum" : 0,
+                        "type" : "integer",
+                        "description" : "Kód ulice, veřejného prostranství ze zdroje"
+                    },
+                    "nazevCastiObce" : {
+                        "maxLength" : 48,
+                        "type" : "string",
+                        "description" : "Název části obce"
+                    },
+                    "nazevKraje" : {
+                        "maxLength" : 32,
+                        "type" : "string",
+                        "description" : "Název kraje"
+                    },
+                    "nazevMestskeCastiObvodu" : {
+                        "maxLength" : 48,
+                        "type" : "string",
+                        "description" : "Název městské části statutárního města "
+                    },
+                    "nazevMestskehoObvoduP" : {
+                        "maxLength" : 32,
+                        "type" : "string",
+                        "description" : "Název městského obvodu Prahy"
+                    },
+                    "nazevObce" : {
+                        "maxLength" : 48,
+                        "type" : "string",
+                        "description" : "Název obce"
+                    },
+                    "nazevOkresu" : {
+                        "maxLength" : 32,
+                        "type" : "string",
+                        "description" : "Název okresu"
+                    },
+                    "nazevSpravnihoObvoduP" : {
+                        "maxLength" : 32,
+                        "type" : "string",
+                        "description" : "Název správního obvodu Prahy "
+                    },
+                    "nazevUlice" : {
+                        "maxLength" : 48,
+                        "type" : "string",
+                        "description" : "Název ulice, veřejného prostranství "
+                    },
+                    "psc" : {
+                        "type" : "integer",
+                        "description" : "Poštovní směrovací číslo adresní pošty"
+                    },
+                    "textovaAdresa" : {
+                        "maxLength" : 1500,
+                        "type" : "string",
+                        "description" : "Textová podoba adresy"
+                    }
+                }
+            },
+            "StandardizovanaAdresaFiltr" : {
+                "type" : "object",
+                "description" : "Komplexní filtr pro standardizaci adresy RÚIAN ",
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/StrankovaniARazeni"
+                    },
+                    {
+                        "properties" : {
+                            "kodObce" : {
+                                "format" : "int32",
+                                "maximum" : 999999,
+                                "minimum" : 0,
+                                "type" : "integer",
+                                "description" : "Kód obce"
+                            },
+                            "nazevObce" : {
+                                "maxLength" : 48,
+                                "type" : "string",
+                                "description" : "Název obce"
+                            },
+                            "kodCastiObce" : {
+                                "format" : "int32",
+                                "maximum" : 999999,
+                                "minimum" : 0,
+                                "type" : "integer",
+                                "description" : "Kód části obce"
+                            },
+                            "nazevCastiObce" : {
+                                "maxLength" : 48,
+                                "type" : "string",
+                                "description" : "Název části obce"
+                            },
+                            "kodMestskehoCastiObvodu" : {
+                                "format" : "int32",
+                                "maximum" : 999999,
+                                "minimum" : 0,
+                                "type" : "integer",
+                                "description" : "Kód městské části statutárního města nebo Prahy "
+                            },
+                            "nazevMestskehoCastiObvodu" : {
+                                "maxLength" : 32,
+                                "type" : "string",
+                                "description" : "Název městské části statutárního města nebo Prahy"
+                            },
+                            "kodUlice" : {
+                                "format" : "int32",
+                                "maximum" : 9999999,
+                                "minimum" : 0,
+                                "type" : "integer",
+                                "description" : "Kód ulice, veřejného prostranství "
+                            },
+                            "nazevUlice" : {
+                                "maxLength" : 48,
+                                "type" : "string",
+                                "description" : "Název ulice, veřejného prostranství "
+                            },
+                            "cisloDomovni" : {
+                                "maximum" : 9999,
+                                "type" : "integer",
+                                "description" : "Číslo domovní"
+                            },
+                            "cisloOrientacni" : {
+                                "maximum" : 999,
+                                "type" : "integer",
+                                "description" : "Číslo orientační - číselná část"
+                            },
+                            "cisloOrientacniPismeno" : {
+                                "maxLength" : 1,
+                                "type" : "string",
+                                "description" : "Číslo orientační - písmenná část"
+                            },
+                            "kodAdresnihoMista" : {
+                                "maximum" : 999999999,
+                                "minimum" : 0,
+                                "type" : "integer",
+                                "description" : "Kód adresního místa"
+                            },
+                            "textovaAdresa" : {
+                                "maxLength" : 1500,
+                                "type" : "string",
+                                "description" : "Nestrukturovaná adresa"
+                            },
+                            "typStandardizaceAdresy" : {
+                                "type" : "string",
+                                "description" : "Typ požadované standardizace - kód (číselník kod:TypStandardizaceAdresy) UPLNA_STANDARDIZACE, VYHOVUJICI_ADRESY"
+                            }
+                        }
+                    }
+                ]
             },
             "AdresaCeu" : {
                 "type" : "object",

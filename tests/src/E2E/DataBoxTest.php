@@ -21,9 +21,11 @@ final class DataBoxTest extends TestCase
 	{
 		$ares = (new AresFactory())->create();
 		$data = $ares->loadDataBox($in);
-		$expected = unserialize(trim((string) file_get_contents(__DIR__ . "/../E2E/DataBox/$in.ser")));
+		$file = __DIR__ . "/../E2E/DataBox/$in.ser";
+		$expected = unserialize(trim((string) file_get_contents($file)));
 		assert(is_array($expected));
 		foreach ($expected as $k => $v) {
+			// file_put_contents($file, serialize($data));
 			Assert::equal($v, $data[$k]);
 		}
 	}
