@@ -1,0 +1,39 @@
+{
+    "active": true,
+    "city": "Plze\u0148",
+    "company": "Yaroslav Boychuk",
+    "created": null,
+    "dissolved": null,
+    "city_district": "Lobzy",
+    "city_post": "Plze\u0148 4",
+    "in": "27735753",
+    "is_person": true,
+    "legal_form_code": 101,
+    "house_number": "805\/12",
+    "street": "Partyz\u00e1nsk\u00e1",
+    "district": "Plze\u0148-m\u011bsto",
+    "tin": "CZ8305253869",
+    "vat_payer": true,
+    "zip": "31200",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "00",
+        "25"
+    ],
+    "sources": {
+        "stavZdrojeVr": "HISTORICKY",
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": true,
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": true,
+        "stavZdrojeSd": "NEEXISTUJICI",
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

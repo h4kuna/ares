@@ -1,0 +1,41 @@
+{
+    "active": true,
+    "city": "P\u0159\u00edbram",
+    "company": "Natalia \u0160uljakov\u00e1",
+    "created": null,
+    "dissolved": null,
+    "city_district": "P\u0159\u00edbram VII",
+    "city_post": null,
+    "in": "67909442",
+    "is_person": true,
+    "legal_form_code": 101,
+    "house_number": "498",
+    "street": "Jana Drdy",
+    "district": "P\u0159\u00edbram",
+    "tin": null,
+    "vat_payer": false,
+    "zip": "26101",
+    "country": "\u010cesk\u00e1 republika",
+    "country_code": "CZ",
+    "nace": [
+        "00",
+        "433",
+        "49410",
+        "96020"
+    ],
+    "sources": {
+        "stavZdrojeVr": "HISTORICKY",
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": true,
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": "NEEXISTUJICI",
+        "stavZdrojeSd": "NEEXISTUJICI",
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": "NEEXISTUJICI"
+    }
+}

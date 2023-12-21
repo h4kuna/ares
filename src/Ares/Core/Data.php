@@ -21,7 +21,7 @@ class Data implements JsonSerializable, Stringable
 
 	public ?string $company;
 
-	public DateTimeImmutable $created;
+	public ?DateTimeImmutable $created;
 
 	public ?DateTimeImmutable $dissolved;
 
@@ -90,10 +90,12 @@ class Data implements JsonSerializable, Stringable
 	public function jsonSerialize(): mixed
 	{
 		$data = $this->toArray();
-		$data['created'] = Strings::exportDate($this->created);
 
-		if ($this->dissolved !== null) {
-			$data['dissolved'] = Strings::exportDate($this->dissolved);
+		// export dates
+		foreach (['created', 'dissolved'] as $item) {
+			if ($this->$item !== null) {
+				$data[$item] = Strings::exportDate($this->$item);
+			}
 		}
 
 		/** @var  array<string, scalar|array<string>> $data */

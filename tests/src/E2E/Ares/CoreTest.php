@@ -21,6 +21,8 @@ final class CoreTest extends TestCase
 	protected function provideCore(): array
 	{
 		return [
+			['67909442'], // create date does not exist
+			['27735753'], // create date does not exist
 			['61682039'],
 			['08975884'], // address
 			['2445344'], // Skanska Residential a.s., DIČ CZ699004845

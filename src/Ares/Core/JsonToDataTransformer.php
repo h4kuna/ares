@@ -48,8 +48,7 @@ class JsonToDataTransformer
 		$data->legal_form_code = (int) $json->pravniForma;
 		$data->is_person = Helper::isPerson($data->legal_form_code);
 
-		assert($json->datumVzniku !== null);
-		$data->created = Strings::createDateTime($json->datumVzniku);
+		$data->created = Strings::createDateTime($json->datumVzniku ?? null);
 		$data->dissolved = Strings::createDateTime($json->datumZaniku ?? null);
 		$data->active = $data->dissolved === null;
 
