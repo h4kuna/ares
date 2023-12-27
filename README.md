@@ -21,6 +21,9 @@ The best way to install h4kuna/ares is using Composer:
 
 ```sh
 composer require h4kuna/ares
+
+# optional and default support
+composer require guzzlehttp/guzzle
 ```
 
 Download information about customer via his IN.
