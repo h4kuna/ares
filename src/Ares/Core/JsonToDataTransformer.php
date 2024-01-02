@@ -16,7 +16,9 @@ class JsonToDataTransformer
 		$data->original = $json;
 
 		$data->in = (string) $json->ico;
-		$data->tin = Strings::trimNull($json->dic ?? null);
+		$tinGroup = Strings::trimNull($json->dicSkDph ?? null);
+		$tinGroup = $tinGroup === 'N/A' ? null : $tinGroup;
+		$data->tin = Strings::trimNull($tinGroup ?? $json->dic ?? null);
 		$data->sources = Helper::services((array) ($json->seznamRegistraci ?? []));
 
 		$data->vat_payer = $data->sources[Sources::SER_NO_DPH] === true;
