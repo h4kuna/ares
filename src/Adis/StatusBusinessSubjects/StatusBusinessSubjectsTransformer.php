@@ -12,7 +12,10 @@ class StatusBusinessSubjectsTransformer
 		$attributes = '@attributes';
 
 		$exists = $data->$attributes->typSubjektu !== 'NENALEZEN';
-		$isVatPayer = $data->$attributes->typSubjektu === 'PLATCE_DPH';
+		$isVatPayer = match ($data->$attributes->typSubjektu) {
+			'PLATCE_DPH', 'SKUPINA_DPH' => true,
+			default => false,
+		};
 		$address = null;
 		if (isset($data->adresa)) {
 			$address = $data->adresa;

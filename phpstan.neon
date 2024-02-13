@@ -8,7 +8,7 @@ parameters:
 	ignoreErrors:
 		-
 			message: "#^Variable property access on \\$this\\(h4kuna\\\\Ares\\\\Ares\\\\Core\\\\Data\\)\\.$#"
-			count: 1
+			count: 3
 			path: src/Ares/Core/Data.php
 		-
 			message: "#^If condition is always false\\.$#"

@@ -47,6 +47,7 @@ final class CoreTest extends TestCase
 	{
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
 		$json = Json::decode(Json::encode($data));
+		sort($json->nace, SORT_NUMERIC); // @phpstan-ignore-line
 		Assert::equal(loadResult("ares/$data->in"), $json);
 	}
 
@@ -65,8 +66,8 @@ final class CoreTest extends TestCase
 	{
 		$in = '2445344';
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
-		Assert::null($data->tin);
-		Assert::null($data->vat_payer);
+		Assert::same('CZ699004845', $data->tin);
+		Assert::true($data->vat_payer);
 	}
 
 

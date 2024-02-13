@@ -18,10 +18,10 @@
     "country": "\u010cesk\u00e1 republika",
     "country_code": "CZ",
     "nace": [
-        "20120",
         "433",
-        "46380",
         "4778",
+        "20120",
+        "46380",
         "68320"
     ],
     "sources": {
@@ -37,6 +37,6 @@
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",
         "stavZdrojeRs": "NEEXISTUJICI",
-        "stavZdrojeRed": "NEEXISTUJICI"
+        "stavZdrojeRed": true
     }
 }
