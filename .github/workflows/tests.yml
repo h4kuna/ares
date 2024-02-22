@@ -1,4 +1,6 @@
 name: Tests
+env:
+  GITHUB_RUN: 1
 
 on:
   schedule:
@@ -36,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.0', '8.1', '8.2']
+        php: ['8.0', '8.1', '8.2', '8.3']
     name: PHP Lowest Dependencies ${{ matrix.php }}
     steps:
       - uses: actions/checkout@v3
