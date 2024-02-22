@@ -98,7 +98,7 @@ foreach ($result as $item) {
 }
 ```
 
-## Data Box (datavá schánka)
+## Data Box (datová schánka)
 
 [Manual](https://www.mojedatovaschranka.cz/sds/p/download/sds_webove_sluzby.pdf#view=Fit)
 
