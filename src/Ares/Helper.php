@@ -130,14 +130,13 @@ final class Helper
 	 */
 	public static function parseAddress(string $address): array
 	{
-		$results = NetteStrings::match($address, '~^(?<street>.+) (?<house_number>\d+(?:/\d+)?(\w)?)(?:, (?<district>.+?))?, (?<zip>\d{5}) (?<city>.+?)(, (?<country>.+))?$~');
+		$results = NetteStrings::match($address, '~^(?<street>.+) (?<house_number>\d+(?:/\d+)?(\w)?)(?:, (?<district>.+?))?, (?<zip>\d{5}|PSČ \d{3} \d{2}) (?<city>.+?)(, (?<country>.+))?$~');
 
 		if ($results !== null) {
 			return self::prepareAddressData($results);
 		}
 
 		$results = NetteStrings::match($address, '~^(?<city>.+), (?<zip>\d{5})(?:, (?<district>.+?))?, (?<street>.+), (?<house_number>\d+(?:/\d+)?(\w)?)$~');
-
 		return self::prepareAddressData($results ?? []);
 	}
 
@@ -149,7 +148,7 @@ final class Helper
 	private static function prepareAddressData(array $results): array
 	{
 		return [
-			'zip' => $results['zip'] ?? null,
+			'zip' => self::fixZip($results['zip'] ?? null),
 			'street' => $results['street'] ?? null,
 			'house_number' => $results['house_number'] ?? null,
 			'city' => $results['city'] ?? null,
@@ -166,5 +165,15 @@ final class Helper
 		}
 
 		return $upper;
+	}
+
+
+	private static function fixZip(?string $zip): ?string
+	{
+		if ($zip === null || $zip === '') {
+			return null;
+		}
+
+		return strtr($zip, ['PSČ' => '', ' ' => '']);
 	}
 }

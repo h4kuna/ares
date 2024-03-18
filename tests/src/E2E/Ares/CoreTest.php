@@ -21,6 +21,7 @@ final class CoreTest extends TestCase
 	protected function provideCore(): array
 	{
 		return [
+			['26005492'], // company from small city
 			['67909442'], // create date does not exist
 			['27735753'], // create date does not exist
 			['61682039'],
@@ -48,7 +49,7 @@ final class CoreTest extends TestCase
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
 		$json = Json::decode(Json::encode($data));
 		sort($json->nace, SORT_NUMERIC); // @phpstan-ignore-line
-		Assert::equal(loadResult("ares/$data->in"), $json);
+		Assert::equal(loadResult("ares/$data->in", $json), $json);
 	}
 
 
