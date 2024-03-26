@@ -23,7 +23,7 @@ final class AdisTest extends TestCase
 			['CZ06303927'],
 			['CZ27082440'],
 			['CZ49240901'],
-			['CZ27445798'],
+			['CZ44932553'],
 		];
 	}
 
