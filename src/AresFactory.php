@@ -11,16 +11,31 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-final class AresFactory
+/**
+ * @phpstan-type multiFactory RequestFactoryInterface&StreamFactoryInterface
+ */
+class AresFactory
 {
-	private null|GuzzleHttp\Psr7\HttpFactory|HttpFactory $httpFactory = null;
+	/**
+	 * @var multiFactory|null
+	 */
+	private null|RequestFactoryInterface|StreamFactoryInterface $multiFactory = null;
+
+
+	public function __construct(
+		private ?ClientInterface $client = null,
+		private ?StreamFactoryInterface $streamFactory = null,
+		private ?RequestFactoryInterface $requestFactory = null,
+	)
+	{
+	}
 
 
 	public function create(): Ares
 	{
-		$streamFactory = $this->createStreamFactory();
+		$streamFactory = $this->getStreamFactory();
 		$transportProvider = $this->createTransportProvider($streamFactory);
-		$adisContentProvider = $this->adisContentProvider($transportProvider);
+		$adisContentProvider = $this->createAdisContentProvider($transportProvider);
 		$aresClient = new Ares\Client($transportProvider);
 
 		$dataBoxClient = new DataBox\Client($transportProvider);
@@ -30,32 +45,30 @@ final class AresFactory
 	}
 
 
-	public function createRequestFactory(): RequestFactoryInterface
+	public function getRequestFactory(): RequestFactoryInterface
 	{
+		return $this->requestFactory ??= $this->getMultiFactory();
+	}
+
+
+	public function getClient(): ClientInterface
+	{
+		if ($this->client !== null) {
+			return $this->client;
+		}
 		self::checkGuzzle();
 
-		return $this->httpFactory ??= class_exists(GuzzleHttp\Psr7\HttpFactory::class) ? new GuzzleHttp\Psr7\HttpFactory() : new HttpFactory();
+		return $this->client = new GuzzleHttp\Client();
 	}
 
 
-	public function createClient(): ClientInterface
+	public function getStreamFactory(): StreamFactoryInterface
 	{
-		self::checkGuzzle();
-
-		return new GuzzleHttp\Client();
+		return $this->streamFactory ??= $this->getMultiFactory();
 	}
 
 
-	public function createStreamFactory(): StreamFactoryInterface
-	{
-		$factory = $this->createRequestFactory();
-		assert($factory instanceof StreamFactoryInterface);
-
-		return $factory;
-	}
-
-
-	protected function adisContentProvider(TransportProvider $transportProvider): Adis\ContentProvider
+	protected function createAdisContentProvider(TransportProvider $transportProvider): Adis\ContentProvider
 	{
 		return new Adis\ContentProvider(new Adis\Client($transportProvider), new StatusBusinessSubjectsTransformer());
 	}
@@ -63,9 +76,20 @@ final class AresFactory
 
 	public function createTransportProvider(StreamFactoryInterface $streamFactory): TransportProvider
 	{
-		$client = $this->createClient();
-		$requestFactory = $this->createRequestFactory();
+		$client = $this->getClient();
+		$requestFactory = $this->getRequestFactory();
 		return new TransportProvider($requestFactory, $client, $streamFactory);
+	}
+
+
+	/**
+	 * @return multiFactory
+	 */
+	protected function getMultiFactory(): RequestFactoryInterface|StreamFactoryInterface
+	{
+		self::checkGuzzle();
+
+		return $this->multiFactory ??= class_exists(GuzzleHttp\Psr7\HttpFactory::class) ? new GuzzleHttp\Psr7\HttpFactory() : new HttpFactory();
 	}
 
 

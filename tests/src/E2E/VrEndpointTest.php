@@ -18,7 +18,7 @@ final class VrEndpointTest extends TestCase
 	public function testBasic(): void
 	{
 		$aresFactory = new Ares\AresFactory();
-		$transportProvider = $aresFactory->createTransportProvider($aresFactory->createStreamFactory());
+		$transportProvider = $aresFactory->createTransportProvider($aresFactory->getStreamFactory());
 
 		$provider = new Ares\Ares\Client($transportProvider);
 
