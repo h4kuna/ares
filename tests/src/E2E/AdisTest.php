@@ -33,7 +33,7 @@ final class AdisTest extends TestCase
 	 */
 	public function testOneTin(string $tin): void
 	{
-		$adis = (new Ares\AresFactory())->create()->getAdis();
+		$adis = (new Ares\AresFactory())->create()->adisContentProvider;
 
 		$subject = $adis->statusBusinessSubject($tin);
 		Assert::type(Ares\Adis\StatusBusinessSubjects\Subject::class, $subject);
@@ -43,7 +43,7 @@ final class AdisTest extends TestCase
 
 	public function testMulti(): void
 	{
-		$adis = (new Ares\AresFactory())->create()->getAdis();
+		$adis = (new Ares\AresFactory())->create()->adisContentProvider;
 
 		$tins = [
 			'a' => '8702080024',

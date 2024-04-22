@@ -29,7 +29,6 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-simplexml": "*",
-    "h4kuna/memoize": "^0.1.4",
     "nette/utils": "^2.0 || ^3.0 || ^4.0",
     "psr/http-factory": "^1.0",
     "psr/http-message": "^1.0.1 || ^2.0"

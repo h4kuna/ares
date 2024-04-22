@@ -70,7 +70,7 @@ Choose endpoint from class [Sources](./src/Ares/Sources.php).
 - SERVICE_* - available other endpoints
 - CORE - is main endpoint this is used in method `$ares->loadBasic()`
 - DIAL - use if you want list of value for example `PravniForma`
-- SER_NO_* are not exists 
+- SER_NO_* are not exists
 
 ```php
 use h4kuna\Ares;
@@ -110,5 +110,21 @@ try {
     var_dump($response->ISDS);
 } catch (h4kuna\Ares\Exceptions\ServerResponseException $e) {
     // catch error
+}
+```
+
+## VIES
+
+Support [base check](https://ec.europa.eu/taxation_customs/vies/).
+
+```php
+use h4kuna\Ares;
+/** @var Ares\Ares $ares */
+
+try {
+    $response = $ares->checkVatVies($vatNumber);
+    var_dump($response->valid); // true / false
+} catch (Ares\Exceptions\ServerResponseException $e) {
+    // invalid VAT
 }
 ```

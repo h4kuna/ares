@@ -4,6 +4,7 @@ namespace h4kuna\Ares\Http;
 
 use h4kuna\Ares\Exceptions\ServerResponseException;
 use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -11,6 +12,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use stdClass;
 
 final class TransportProvider
 {
@@ -33,6 +35,19 @@ final class TransportProvider
 		}
 
 		return $response;
+	}
+
+
+	public function toJson(ResponseInterface $response): stdClass
+	{
+		try {
+			$json = Json::decode($response->getBody()->getContents());
+			assert($json instanceof stdClass);
+		} catch (JsonException $e) {
+			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+		}
+
+		return $json;
 	}
 
 

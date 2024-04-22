@@ -54,12 +54,7 @@ class Client
 
 	protected function responseToStdClass(ResponseInterface $response): stdClass
 	{
-		try {
-			$json = Json::decode($response->getBody()->getContents());
-			assert($json instanceof stdClass);
-		} catch (JsonException $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
-		}
+		$json = $this->transportProvider->toJson($response);
 
 		if ($response->getStatusCode() !== 200) {
 			throw new ResultException(sprintf('%s%s: %s.', $json->kod ?? 0, isset($json->subKod) ? " ($json->subKod)" : '', $json->popis ?? ''));

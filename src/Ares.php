@@ -3,24 +3,31 @@
 namespace h4kuna\Ares;
 
 use Generator;
+use h4kuna\Ares\Ares\Core;
 use h4kuna\Ares\Ares\Core\Data;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
-use h4kuna\Memoize\MemoryStorage;
+use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Vies\ViesEntity;
 use stdClass;
 
+/**
+ * properties become readonly
+ */
 class Ares
 {
-	use MemoryStorage;
-
 	public function __construct(
-		private Ares\Client $aresClient,
-		private DataBox\ContentProvider $dataBoxContentProvider,
-		private Adis\ContentProvider $adisContentProvider,
+		public Core\ContentProvider $aresContentProvider,
+		public DataBox\ContentProvider $dataBoxContentProvider,
+		public Adis\ContentProvider $adisContentProvider,
+		public Vies\ContentProvider $viesContentProvider,
 	)
 	{
 	}
 
 
+	/**
+	 * @deprecated use property
+	 */
 	public function getAdis(): Adis\ContentProvider
 	{
 		return $this->adisContentProvider;
@@ -29,7 +36,7 @@ class Ares
 
 	public function getAresClient(): Ares\Client
 	{
-		return $this->aresClient;
+		return $this->aresContentProvider->getClient();
 	}
 
 
@@ -40,7 +47,7 @@ class Ares
 	 */
 	public function loadBasicMulti(array $identificationNumbers): Generator
 	{
-		return $this->aresContentProviderCache()->loadByIdentificationNumbers($identificationNumbers);
+		return $this->aresContentProvider->loadByIdentificationNumbers($identificationNumbers);
 	}
 
 
@@ -49,7 +56,7 @@ class Ares
 	 */
 	public function loadBasic(string $in): Data
 	{
-		return $this->aresContentProviderCache()->load($in);
+		return $this->aresContentProvider->load($in);
 	}
 
 
@@ -62,15 +69,14 @@ class Ares
 	}
 
 
-	protected function aresContentProvider(): Ares\Core\ContentProvider
+	/**
+	 * @return object{countryCode: string, vatNumber: string, requestDate: string, valid: bool, requestIdentifier: string, name: string, address: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string, traderCompanyType: string, traderNameMatch: string, traderStreetMatch: string, traderPostalCodeMatch: string, traderCityMatch: string, traderCompanyTypeMatch: string}
+	 *
+	 * @throws ServerResponseException
+	 */
+	public function checkVatVies(string|ViesEntity $viesEntityOrTin): object
 	{
-		return new Ares\Core\ContentProvider(new Ares\Core\JsonToDataTransformer(), $this->getAresClient(), $this->adisContentProvider);
-	}
-
-
-	private function aresContentProviderCache(): Ares\Core\ContentProvider
-	{
-		return $this->memoize(__METHOD__, fn () => $this->aresContentProvider());
+		return $this->viesContentProvider->checkVat($viesEntityOrTin);
 	}
 
 }

@@ -24,6 +24,12 @@ final class ContentProvider
 	}
 
 
+	public function getClient(): Client
+	{
+		return $this->client;
+	}
+
+
 	/**
 	 * @template KeyName
 	 * @param array<KeyName, string|int> $identificationNumbers

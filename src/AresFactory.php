@@ -7,6 +7,8 @@ use h4kuna\Ares\Adis\StatusBusinessSubjects\StatusBusinessSubjectsTransformer;
 use h4kuna\Ares\Exceptions\InvalidStateException;
 use h4kuna\Ares\Http\HttpFactory;
 use h4kuna\Ares\Http\TransportProvider;
+use h4kuna\Ares\Vies\Client;
+use h4kuna\Ares\Vies\ContentProvider;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -41,7 +43,11 @@ class AresFactory
 		$dataBoxClient = new DataBox\Client($transportProvider);
 		$dataBoxContentProvider = new DataBox\ContentProvider($dataBoxClient, $streamFactory);
 
-		return new Ares($aresClient, $dataBoxContentProvider, $adisContentProvider);
+		$aresContentProvider = new Ares\Core\ContentProvider(new Ares\Core\JsonToDataTransformer(), $aresClient, $adisContentProvider);
+
+		$viesContentProvider = new ContentProvider(new Client($transportProvider));
+
+		return new Ares($aresContentProvider, $dataBoxContentProvider, $adisContentProvider, $viesContentProvider);
 	}
 
 
