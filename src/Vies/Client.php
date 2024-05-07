@@ -31,7 +31,11 @@ final class Client
 
 		$data = $this->transportProvider->toJson($response);
 		if (isset($data->errorWrappers[0], $data->errorWrappers[0]->error)) {
-			throw new ServerResponseException(sprintf('%s: %s', $data->errorWrappers[0]->error, $data->errorWrappers[0]->message ?? ''));
+			if (isset($data->errorWrappers[0]->message)) {
+				throw new ServerResponseException(sprintf('%s: %s', $data->errorWrappers[0]->error, $data->errorWrappers[0]->message));
+			}
+
+			throw new ServerResponseException($data->errorWrappers[0]->error);
 		}
 
 		/** @var ViesResponse $data */

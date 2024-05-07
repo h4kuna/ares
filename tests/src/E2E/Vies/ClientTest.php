@@ -9,6 +9,7 @@ require_once __DIR__ . '/../../../bootstrap.php';
 use Closure;
 use h4kuna\Ares;
 use Tester\Assert;
+use Tester\Environment;
 use Tester\TestCase;
 use Throwable;
 
@@ -65,7 +66,13 @@ final class ClientTest extends TestCase
 			return;
 		}
 
-		$response = $aresFactory->checkVatVies($vatNumber);
+		try {
+			$response = $aresFactory->checkVatVies($vatNumber);
+		} catch (Ares\Exceptions\ServerResponseException $e) {
+			Assert::same('MS_UNAVAILABLE', $e->getMessage());
+			Environment::skip('VIES service is unavailable');
+			return;
+		}
 		Assert::same($expected, $response->valid);
 	}
 
