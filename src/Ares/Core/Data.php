@@ -103,7 +103,7 @@ class Data implements JsonSerializable, Stringable
 	}
 
 
-	public function __toString()
+	public function __toString(): string
 	{
 		return (string) json_encode($this);
 	}
