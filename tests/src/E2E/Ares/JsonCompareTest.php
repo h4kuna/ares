@@ -17,7 +17,7 @@ final class JsonCompareTest extends TestCase
 			Environment::skip('Forbidden for github.');
 		}
 
-		$remote = Json::decode((string) file_get_contents('https://www.mfcr.cz/assets/attachments/2023-08-01_AresRestApi-verejne_v04.json'));
+		$remote = Json::decode((string) file_get_contents('https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/v3/api-docs'));
 		$local = Json::decode((string) file_get_contents(__DIR__ . '/../../../AresRestApi-verejne.json'));
 		Assert::equal($local, $remote);
 	}
