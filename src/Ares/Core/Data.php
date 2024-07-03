@@ -84,6 +84,12 @@ class Data implements JsonSerializable, Stringable
 	}
 
 
+	public function isValidByAdis(): bool
+	{
+		return $this->adis !== null;
+	}
+
+
 	/**
 	 * @return array<string, scalar|array<string>>
 	 */
