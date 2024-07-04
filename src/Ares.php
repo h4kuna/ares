@@ -5,6 +5,7 @@ namespace h4kuna\Ares;
 use Generator;
 use h4kuna\Ares\Ares\Core;
 use h4kuna\Ares\Ares\Core\Data;
+use h4kuna\Ares\Exceptions\AdisResponseException;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 use h4kuna\Ares\Exceptions\ServerResponseException;
 use h4kuna\Ares\Vies\ViesEntity;
@@ -53,6 +54,7 @@ class Ares
 
 	/**
 	 * @throws IdentificationNumberNotFoundException
+	 * @throws AdisResponseException
 	 */
 	public function loadBasic(string $in): Data
 	{

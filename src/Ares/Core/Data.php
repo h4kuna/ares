@@ -67,6 +67,9 @@ class Data implements JsonSerializable, Stringable
 
 	public ?stdClass $original = null;
 
+	/**
+	 * if value is null, then validation failed, tin and vat_payer are not checked
+	 */
 	public ?Subject $adis = null;
 
 
@@ -81,12 +84,6 @@ class Data implements JsonSerializable, Stringable
 		}
 
 		$this->adis = $adis;
-	}
-
-
-	public function isValidByAdis(): bool
-	{
-		return $this->adis !== null;
 	}
 
 

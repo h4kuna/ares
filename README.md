@@ -43,6 +43,12 @@ try {
     var_dump($response);
 } catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
     // log identification number, why is bad? Or make nothing.
+} catch (Ares\Exceptions\AdisResponseException $e) {
+    // if validation by adis failed, but data from ares returned
+    /* @var $response Ares\Ares\Core\Data */
+    $response = $e->data;
+    $response->adis === null; // true
+    var_dump($e->getMessage());
 } catch (Ares\Exceptions\ServerResponseException $e) {
     // no response from server or broken json
 }

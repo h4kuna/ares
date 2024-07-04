@@ -13,10 +13,11 @@ try {
 	/* @var $response Ares\Ares\Core\Data */
 	$response->original = null;
 	dump($response);
-	dump($response->isValidByAdis());
 } catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
 	dumpe($e->getMessage());
 	// log identification number, why is bad? Or make nothing.
+} catch (Ares\Exceptions\AdisResponseException $e) {
+	dumpe($e->getMessage(), $e->data);
 } catch (Ares\Exceptions\ServerResponseException $e) {
 	// no response from server or broken json
 	dumpe($e->getMessage());

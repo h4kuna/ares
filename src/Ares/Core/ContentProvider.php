@@ -7,6 +7,7 @@ use h4kuna\Ares\Adis;
 use h4kuna\Ares\Ares\Client;
 use h4kuna\Ares\Ares\Helper;
 use h4kuna\Ares\Ares\Sources;
+use h4kuna\Ares\Exceptions\AdisResponseException;
 use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
 use h4kuna\Ares\Exceptions\ServerResponseException;
 use h4kuna\Ares\Tools\Batch;
@@ -56,7 +57,11 @@ final class ContentProvider
 				}
 			}
 
-			$subjects = iterator_to_array($this->adisContentProvider->statusBusinessSubjects($map));
+			try {
+				$subjects = iterator_to_array($this->adisContentProvider->statusBusinessSubjects($map));
+			} catch (ServerResponseException) {
+				$subjects = [];
+			}
 
 			foreach ($results as $data) {
 				foreach ($duplicity[$data->in] as $name) {
@@ -72,6 +77,7 @@ final class ContentProvider
 
 	/**
 	 * @throws IdentificationNumberNotFoundException
+	 * @throws AdisResponseException
 	 */
 	public function load(string $in): Data
 	{
@@ -81,11 +87,11 @@ final class ContentProvider
 		if ($data->tin !== null) {
 			try {
 				$adis = $this->adisContentProvider->statusBusinessSubject($data->tin);
-				$data->setAdis($adis);
-			} catch (ServerResponseException) {
-				// intentionally silent
-				// @see $data->isValidByAdis()
+			} catch (ServerResponseException $e) {
+				throw new AdisResponseException($data, previous: $e);
 			}
+
+			$data->setAdis($adis);
 		}
 
 		return $data;
