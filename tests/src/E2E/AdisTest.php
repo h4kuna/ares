@@ -5,13 +5,20 @@ namespace h4kuna\Ares\Tests\E2E;
 use h4kuna;
 use h4kuna\Ares;
 use h4kuna\Ares\Tests\TestCase;
-use Nette\Utils\Json;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 final class AdisTest extends TestCase
 {
+	use Ares\Tests\UseStoredFile;
+
+	protected static function getMask(): string
+	{
+		return __DIR__ . '/../../fixtures/adis/%file%.json';
+	}
+
+
 	/**
 	 * @return array<mixed>
 	 */
@@ -37,7 +44,7 @@ final class AdisTest extends TestCase
 
 		$subject = $adis->statusBusinessSubject($tin);
 		Assert::type(Ares\Adis\StatusBusinessSubjects\Subject::class, $subject);
-		Assert::equal(loadResult("adis/$subject->tin"), Json::decode(Json::encode($subject)));
+		$this->assertFile($subject->tin, $subject);
 	}
 
 
@@ -57,7 +64,7 @@ final class AdisTest extends TestCase
 		$results = [];
 		foreach ($adis->statusBusinessSubjects($tins) as $name => $subject) {
 			Assert::type(Ares\Adis\StatusBusinessSubjects\Subject::class, $subject);
-			Assert::equal(loadResult("adis/$subject->tin"), Json::decode(Json::encode($subject)));
+			$this->assertFile($subject->tin, $subject);
 			$results[$name] = $subject;
 		}
 

@@ -4,7 +4,7 @@ namespace h4kuna\Ares\Tests\E2E;
 
 use h4kuna\Ares\AresFactory;
 use h4kuna\Ares\Tests\TestCase;
-use Tester\Assert;
+use h4kuna\Ares\Tests\UseStoredFile;
 
 require __DIR__ . '/../../bootstrap.php';
 
@@ -13,6 +13,13 @@ require __DIR__ . '/../../bootstrap.php';
  */
 final class DataBoxTest extends TestCase
 {
+	use UseStoredFile;
+
+	protected static function getMask(): string
+	{
+		return __DIR__ . '/../../fixtures/databox/%file%.json';
+	}
+
 
 	/**
 	 * @dataProvider provideBasic
@@ -21,13 +28,7 @@ final class DataBoxTest extends TestCase
 	{
 		$ares = (new AresFactory())->create();
 		$data = $ares->loadDataBox($in);
-		$file = __DIR__ . "/../E2E/DataBox/$in.ser";
-		$expected = unserialize(trim((string) file_get_contents($file)));
-		assert(is_array($expected));
-		foreach ($expected as $k => $v) {
-			// file_put_contents($file, serialize($data));
-			Assert::equal($v, $data[$k]);
-		}
+		$this->assertFile($in, $data);
 	}
 
 

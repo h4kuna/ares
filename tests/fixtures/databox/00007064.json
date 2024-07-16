@@ -1,0 +1,274 @@
+[
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Ministerstvo vnitra",
+        "ISDS": "6bnaawp",
+        "PDZ": "false",
+        "TypSubjektu": "OVM",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad štolou 936/3, Holešovice, 17000, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Nad štolou",
+            "PostaKod": "17000",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "P.O.Box 35, Praha 616 (Ministerstvo vnitra)",
+        "ISDS": "265vfsh",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad štolou 936/3, Holešovice, 17000, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Nad štolou",
+            "PostaKod": "17000",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "sekce pro státní službu (Ministerstvo vnitra)",
+        "ISDS": "9iutsan",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Jindřišská 967/34, Nové Město, 11000, Praha 1",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 1",
+            "CastObceNazev": "Nové Město",
+            "UliceNazev": "Jindřišská",
+            "PostaKod": "11000",
+            "CisloDomovni": "967",
+            "CisloOrientacni": "34"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "sekce státního tajemníka (Ministerstvo vnitra)",
+        "ISDS": "krk34e3",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad štolou 936/3, Holešovice, 17000, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Nad štolou",
+            "PostaKod": "17000",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Komunikace mezi EKIS MV a ISoSS (Ministerstvo vnitra)",
+        "ISDS": "t88358j",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Na Pankráci 1623/72, 14000, Praha",
+            "OkresNazev": {},
+            "ObecNazev": "Praha",
+            "CastObceNazev": {},
+            "UliceNazev": "Na Pankráci",
+            "PostaKod": "14000",
+            "CisloDomovni": "1623",
+            "CisloOrientacni": "72"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Odbor provozu a rozvoje EKIS (Ministerstvo vnitra)",
+        "ISDS": "v522hjw",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Na Pankráci 1623/72, Nusle, 14000, Praha 4",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
+            "UliceNazev": "Na Pankráci",
+            "PostaKod": "14000",
+            "CisloDomovni": "1623",
+            "CisloOrientacni": "72"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "P.O.BOX 69, Praha 4 (Ministerstvo vnitra)",
+        "ISDS": "eck76yk",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Na strži 1709/42, Krč, 14000, Praha",
+            "OkresNazev": {},
+            "ObecNazev": "Praha",
+            "CastObceNazev": "Krč",
+            "UliceNazev": "Na strži",
+            "PostaKod": "14000",
+            "CisloDomovni": "1709",
+            "CisloOrientacni": "42"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Centrum zajištěných aktiv Ministerstva vnitra (Ministerstvo vnitra)",
+        "ISDS": "v3p745b",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Na Pankráci 1623/72, Nusle, 14000, Praha 4",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
+            "UliceNazev": "Na Pankráci",
+            "PostaKod": "14000",
+            "CisloDomovni": "1623",
+            "CisloOrientacni": "72"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "P.O.BOX 92, Praha 74 (Ministerstvo vnitra)",
+        "ISDS": "tvz75mf",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Dělnická 213/8, Holešovice, 17000, Praha",
+            "OkresNazev": {},
+            "ObecNazev": "Praha",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Dělnická",
+            "PostaKod": "17000",
+            "CisloDomovni": "213",
+            "CisloOrientacni": "8"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Dotační program na měkké cíle - Odbor bezpečnostní politiky (Ministerstvo vnitra)",
+        "ISDS": "f6wh3w8",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad štolou 936/3, Holešovice, 17000, Praha",
+            "OkresNazev": {},
+            "ObecNazev": "Praha",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Nad štolou",
+            "PostaKod": "17000",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Bezpečnostní sbory ČR (Ministerstvo vnitra)",
+        "ISDS": "g2jdsfa",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad štolou 936/3, Holešovice, 17000, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Nad štolou",
+            "PostaKod": "17000",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "P.O.Box 36 (Ministerstvo vnitra)",
+        "ISDS": "ujndxxk",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad Štolou 3, 17034, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": {},
+            "UliceNazev": "Nad Štolou",
+            "PostaKod": "17034",
+            "CisloDomovni": "3",
+            "CisloOrientacni": {}
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Automat pro Sbírku právních předpisů územních samosprávných celků (Ministerstvo vnitra)",
+        "ISDS": "ci2xihx",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "náměstí Hrdinů 1634/3, Nusle, 14000, Praha 4",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
+            "UliceNazev": "náměstí Hrdinů",
+            "PostaKod": "14000",
+            "CisloDomovni": "1634",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "P.O.Box 10 (Ministerstvo vnitra)",
+        "ISDS": "wgunyb8",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad Štolou 936/3, 17034, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": {},
+            "UliceNazev": "Nad Štolou",
+            "PostaKod": "17034",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "P.O.Box 2 (Ministerstvo vnitra)",
+        "ISDS": "fxpufij",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad Štolou 936/3, 17031, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": {},
+            "UliceNazev": "Nad Štolou",
+            "PostaKod": "17031",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "přihrádka 21/38 (Ministerstvo vnitra)",
+        "ISDS": "xdaun57",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Nad štolou 936/3, 17034, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": {},
+            "UliceNazev": "Nad štolou",
+            "PostaKod": "17034",
+            "CisloDomovni": "936",
+            "CisloOrientacni": "3"
+        }
+    }
+]

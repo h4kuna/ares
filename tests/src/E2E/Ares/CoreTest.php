@@ -5,7 +5,6 @@ namespace h4kuna\Ares\Tests\E2E\Ares;
 use h4kuna;
 use h4kuna\Ares;
 use h4kuna\Ares\Tests\TestCase;
-use Nette\Utils\Json;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../../bootstrap.php';
@@ -15,6 +14,14 @@ require_once __DIR__ . '/../../../bootstrap.php';
  */
 final class CoreTest extends TestCase
 {
+	use Ares\Tests\UseStoredFile;
+
+	protected static function getMask(): string
+	{
+		return __DIR__ . '/../../../fixtures/ares/%file%.json';
+	}
+
+
 	/**
 	 * @return array<array<string>>
 	 */
@@ -46,9 +53,8 @@ final class CoreTest extends TestCase
 	public function testCore(string $in): void
 	{
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
-		$json = Json::decode(Json::encode($data));
-		sort($json->nace, SORT_NUMERIC); // @phpstan-ignore-line
-		Assert::equal(loadResult("ares/$data->in"), $json);
+		sort($data->nace, SORT_NUMERIC); // @phpstan-ignore-line
+		$this->assertFile($data->in, $data);
 	}
 
 

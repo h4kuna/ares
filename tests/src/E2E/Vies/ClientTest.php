@@ -69,7 +69,7 @@ final class ClientTest extends TestCase
 		try {
 			$response = $aresFactory->checkVatVies($vatNumber);
 		} catch (Ares\Exceptions\ServerResponseException $e) {
-			Assert::same('MS_UNAVAILABLE', $e->getMessage());
+			Assert::true(in_array($e->getMessage(), ['MS_UNAVAILABLE', 'MS_MAX_CONCURRENT_REQ'], true));
 			Environment::skip('VIES service is unavailable');
 			return;
 		}

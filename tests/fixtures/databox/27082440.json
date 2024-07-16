@@ -1,0 +1,19 @@
+[
+    {
+        "Ico": "27082440",
+        "NazevOsoby": "Alza.cz a.s.",
+        "ISDS": "xtkcrkz",
+        "PDZ": "true",
+        "TypSubjektu": "PO",
+        "AdresaSidla": {
+            "AdresaTextem": "Jankovcova 1522/53, Holešovice, 17000, Praha 7",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 7",
+            "CastObceNazev": "Holešovice",
+            "UliceNazev": "Jankovcova",
+            "PostaKod": "17000",
+            "CisloDomovni": "1522",
+            "CisloOrientacni": "53"
+        }
+    }
+]

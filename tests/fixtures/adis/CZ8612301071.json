@@ -6,10 +6,10 @@
     "isVatPayer": true,
     "taxOfficeNumber": "452",
     "address": {
-        "uliceCislo": "Dubov\u00e1 765",
-        "castObce": "DOLN\u00cd BOUSOV",
-        "mesto": "DOLN\u00cd BOUSOV",
+        "uliceCislo": "Dubová 765",
+        "castObce": "DOLNÍ BOUSOV",
+        "mesto": "DOLNÍ BOUSOV",
         "psc": "29404",
-        "stat": "\u010cesk\u00e1 republika"
+        "stat": "Česká republika"
     }
 }

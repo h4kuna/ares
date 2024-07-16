@@ -4,7 +4,7 @@
     "company": "H. A. C. spol. s r.o.",
     "created": "1993-09-06T00:00:00+02:00",
     "dissolved": null,
-    "city_district": "Semt\u00edn",
+    "city_district": "Semtín",
     "city_post": "Pardubice VII",
     "in": "49812670",
     "is_person": false,
@@ -15,7 +15,7 @@
     "tin": "CZ49812670",
     "vat_payer": true,
     "zip": "53353",
-    "country": "\u010cesk\u00e1 republika",
+    "country": "Česká republika",
     "country_code": "CZ",
     "nace": [
         "74",
