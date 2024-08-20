@@ -24,16 +24,15 @@ class JsonToDataTransformer
 		$data->vat_payer = $data->sources[Sources::SER_NO_DPH] === true;
 		$data->company = Strings::trimNull($json->obchodniJmeno ?? null);
 
-		$data->zip = Strings::trimNull((string) ($json->sidlo->psc ?? '')); // input is int
+		$data->zip = Strings::trimNull(Strings::replaceSpace((string) ($json->sidlo->psc ?? $json->sidlo->pscTxt ?? ''))); // input is int
 		$data->street = Strings::trimNull($json->sidlo->nazevUlice ?? null);
 		$data->country = Strings::trimNull($json->sidlo->nazevStatu ?? null);
 		$data->country_code = Strings::trimNull($json->sidlo->kodStatu ?? null);
-		$data->street = Strings::trimNull($json->sidlo->nazevUlice ?? null);
 		$data->city = Strings::trimNull($json->sidlo->nazevObce ?? null);
 		$data->city_post = Strings::trimNull($json->sidlo->nazevMestskeCastiObvodu ?? null);
 		$data->city_district = Strings::trimNull($json->sidlo->nazevCastiObce ?? null);
 		$data->district = Strings::trimNull($json->sidlo->nazevOkresu ?? null);
-		$data->house_number = Helper::houseNumber((string) ($json->sidlo->cisloDomovni ?? ''), (string) ($json->sidlo->cisloOrientacni ?? ''), $json->sidlo->cisloOrientacniPismeno ?? '');
+		$data->house_number = Helper::houseNumber((string) ($json->sidlo->cisloDomovni ?? $json->sidlo->cisloDoAdresy ?? ''), (string) ($json->sidlo->cisloOrientacni ?? ''), $json->sidlo->cisloOrientacniPismeno ?? '');
 
 		if ($data->zip === null && $data->street === null && $data->house_number === null && $data->city === null && isset($json->sidlo->textovaAdresa)) {
 			[

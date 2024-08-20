@@ -1,30 +1,32 @@
 {
     "active": true,
-    "city": "Brandýs n/L. - Stará Boleslav",
-    "company": "101 Cestovní kancelář Zemek, s.r.o.",
-    "created": "1995-07-28T00:00:00+02:00",
+    "city": "Trnava",
+    "company": "KOMSOL CZ, s.r.o.",
+    "created": "1998-05-11T00:00:00+02:00",
     "dissolved": null,
     "city_district": null,
     "city_post": null,
-    "in": "61682039",
+    "in": "25528351",
     "is_person": false,
     "legal_form_code": 112,
-    "house_number": "31",
-    "street": "Mělnická",
-    "district": null,
-    "tin": "CZ61682039",
+    "house_number": "32",
+    "street": null,
+    "district": "Třebíč",
+    "tin": "CZ25528351",
     "vat_payer": true,
-    "zip": "25002",
+    "zip": "67401",
     "country": "Česká republika",
     "country_code": "CZ",
     "nace": [
+        "00",
+        "022",
+        "024",
+        "461",
         "471",
-        "581",
-        "731",
-        "741",
         "931",
-        "46900",
-        "79120"
+        "7490",
+        "63910",
+        "82110"
     ],
     "sources": {
         "stavZdrojeVr": true,
@@ -39,6 +41,6 @@
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",
         "stavZdrojeRs": "NEEXISTUJICI",
-        "stavZdrojeRed": true
+        "stavZdrojeRed": "NEEXISTUJICI"
     }
 }

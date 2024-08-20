@@ -24,6 +24,12 @@ final class Strings
 	}
 
 
+	public static function replaceSpace(string $string): string
+	{
+		return str_replace(' ', '', $string);
+	}
+
+
 	/**
 	 * @return ($date is null ? null : DateTimeImmutable)
 	 */

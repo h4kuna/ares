@@ -28,6 +28,7 @@ final class CoreTest extends TestCase
 	protected function provideCore(): array
 	{
 		return [
+			['25528351'], // diff address
 			['67909442'], // create date does not exist
 			['27735753'], // create date does not exist
 			['61682039'],
@@ -43,6 +44,7 @@ final class CoreTest extends TestCase
 			['49812670'], // s.r.o.
 			['62413686'], // k.s.
 			['87744473'], // freelancer
+			['00841811'], // Němčice
 		];
 	}
 
@@ -53,7 +55,7 @@ final class CoreTest extends TestCase
 	public function testCore(string $in): void
 	{
 		$data = (new Ares\AresFactory())->create()->loadBasic($in);
-		sort($data->nace, SORT_NUMERIC); // @phpstan-ignore-line
+		sort($data->nace, SORT_NUMERIC);
 		$this->assertFile($data->in, $data);
 	}
 

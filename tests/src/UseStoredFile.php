@@ -10,7 +10,7 @@ trait UseStoredFile
 
 	protected function assertFile(string $filename, mixed $content): void
 	{
-		$filename = strtr($this->getMask(), ['%file%' => $filename]);
+		$filename = strtr(static::getMask(), ['%file%' => $filename]);
 		$extension = pathinfo($filename, PATHINFO_EXTENSION);
 		if (is_file($filename) === false) {
 			file_put_contents($filename, self::saveContent($content, $extension));
