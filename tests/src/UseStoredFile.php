@@ -2,6 +2,7 @@
 
 namespace h4kuna\Ares\Tests;
 
+use Composer\InstalledVersions;
 use Nette\Utils\Json;
 use Tester\Assert;
 
@@ -47,6 +48,7 @@ trait UseStoredFile
 
 	private static function jsonToString(mixed $content, bool $isOld): string
 	{
-		return $isOld ? strtr(Json::encode($content, Json::PRETTY), ['\\/' => '/']) : Json::encode($content, true);
+		$param = InstalledVersions::getVersion('nette/utils') < '4.0.0.0' ? Json::PRETTY : true;
+		return $isOld ? strtr(Json::encode($content, $param), ['\\/' => '/']) : Json::encode($content, true);
 	}
 }
