@@ -3,7 +3,7 @@
     "info": {
         "title": "ARES: REST API - veřejné",
         "description": "REST rozhraní systému ARES",
-        "version": "1.1.0"
+        "version": "1.2.0"
     },
     "security": [
         {
@@ -2560,6 +2560,12 @@
                         "minLength": 1,
                         "type": "string",
                         "description": "Stav ekonomického subjektu ve zdroji RED(Registr evidence dotací) - kód (ciselnikKod: StavZdroje, zdroj: com) "
+                    },
+                    "stavZdrojeMonitor": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Stav ekonomického subjektu ve zdroji MONITOR(Monitor účetních jednotek státu) - kód (ciselnikKod: StavZdroje, zdroj: com) "
                     }
                 }
             },
@@ -2614,7 +2620,8 @@
                             "dalsiUdaje": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/EkonomickySubjektDalsiUdaje"
+                                    "$ref": "#/components/schemas/EkonomickySubjektDalsiUdaje",
+                                    "description": "Seznam dalších údajů o ekonomickém subjektu"
                                 }
                             },
                             "czNace": {
@@ -2761,13 +2768,15 @@
                             "spravce": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/AngazmaOsobaVr"
+                                    "$ref": "#/components/schemas/AngazmaOsobaVr",
+                                    "description": "Seznam insolvenčních správců - právnické nebo fyzické osoby"
                                 }
                             },
                             "insolvencniZapis": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/InsolvencniZapisVr"
+                                    "$ref": "#/components/schemas/InsolvencniZapisVr",
+                                    "description": "Seznam insolvenčních zápisů"
                                 }
                             }
                         }
@@ -2807,7 +2816,8 @@
                             },
                             "spisZnOs": {
                                 "maxLength": 255,
-                                "type": "string"
+                                "type": "string",
+                                "description": "Spisová značka konkurzního řízení"
                             },
                             "text": {
                                 "type": "string",
@@ -2900,13 +2910,15 @@
                             "pocetClenu": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/PocetClenuVr"
+                                    "$ref": "#/components/schemas/PocetClenuVr",
+                                    "description": "Seznam počtu členů orgánu"
                                 }
                             },
                             "clenoveOrganu": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/AngazmaOsobaVr"
+                                    "$ref": "#/components/schemas/AngazmaOsobaVr",
+                                    "description": "Seznam členů orgánu "
                                 }
                             },
                             "typOrganu": {
@@ -2918,7 +2930,7 @@
                             "nazevAngazma": {
                                 "maxLength": 255,
                                 "type": "string",
-                                "description": "Název orgánu - nestandardní"
+                                "description": "Název angažmá - nestandardní"
                             },
                             "typAngazma": {
                                 "maxLength": 64,
@@ -3029,14 +3041,15 @@
                             "spolecnik": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/SpolecnikVr"
+                                    "$ref": "#/components/schemas/SpolecnikVr",
+                                    "description": "Seznam společníků"
                                 }
                             },
                             "spolecnyPodil": {
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/SpolecnyPodilVr",
-                                    "description": "Společný podíl společníků"
+                                    "description": "Seznam společný podíl společníků"
                                 }
                             },
                             "typOrganu": {
@@ -3048,7 +3061,8 @@
                             "uvolnenyPodil": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/UvolnenyPodilVr"
+                                    "$ref": "#/components/schemas/UvolnenyPodilVr",
+                                    "description": "Seznam uvolněných podílů"
                                 }
                             },
                             "nazev": {
@@ -3072,11 +3086,13 @@
                             "podil": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/PodilVr"
+                                    "$ref": "#/components/schemas/PodilVr",
+                                    "description": "Seznam podílů"
                                 }
                             },
                             "osoba": {
-                                "$ref": "#/components/schemas/AngazmaOsobaVr"
+                                "$ref": "#/components/schemas/AngazmaOsobaVr",
+                                "description": "Právnická nebo fyzická osoba v angažmá společník"
                             }
                         }
                     }
@@ -3094,13 +3110,15 @@
                             "podilnik": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/AngazmaOsobaVr"
+                                    "$ref": "#/components/schemas/AngazmaOsobaVr",
+                                    "description": "Seznam podílníků - pravnické nebo fyzické osoby"
                                 }
                             },
                             "podil": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/PodilVr"
+                                    "$ref": "#/components/schemas/PodilVr",
+                                    "description": "Seznam podílů"
                                 }
                             }
                         }
@@ -3139,25 +3157,29 @@
                             "ostatniOrgany": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/OrganVr"
+                                    "$ref": "#/components/schemas/OrganVr",
+                                    "description": "Ostatní orgány"
                                 }
                             },
                             "statutarniOrgany": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/StatutarniOrganVr"
+                                    "$ref": "#/components/schemas/StatutarniOrganVr",
+                                    "description": "Informace o statutárních orgánech"
                                 }
                             },
                             "podnikatel": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/PodnikatelVr"
+                                    "$ref": "#/components/schemas/PodnikatelVr",
+                                    "description": "Informace o podnikateli"
                                 }
                             },
                             "spolecnici": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/SpolecniciVr"
+                                    "$ref": "#/components/schemas/SpolecniciVr",
+                                    "description": "Informace o společnících"
                                 }
                             },
                             "odstepneZavody": {
@@ -3270,11 +3292,13 @@
                 "properties": {
                     "vznikClenstvi": {
                         "format": "date",
-                        "type": "string"
+                        "type": "string",
+                        "description": "Datum vzniku členství"
                     },
                     "zanikClenstvi": {
                         "format": "date",
-                        "type": "string"
+                        "type": "string",
+                        "description": "Datum zániku členství"
                     }
                 }
             },
@@ -3289,7 +3313,8 @@
                         "properties": {
                             "hodnota": {
                                 "format": "date",
-                                "type": "string"
+                                "type": "string",
+                                "description": "Datum"
                             }
                         }
                     }
@@ -3371,7 +3396,7 @@
             },
             "FyzickaOsobaVr": {
                 "type": "object",
-                "description": "Fyzická osoba",
+                "description": "Fyzická osoba - obecný předek",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/OsobaVr"
@@ -3447,7 +3472,8 @@
                     {
                         "properties": {
                             "text": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Text insolvenčního zápisu"
                             },
                             "typZapisu": {
                                 "maxLength": 50,
@@ -3486,7 +3512,8 @@
                     {
                         "properties": {
                             "hodnota": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Obecný text"
                             }
                         }
                     }
@@ -3580,12 +3607,14 @@
                             "pocetClenu": {
                                 "format": "int32",
                                 "minimum": 0,
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Počet členů orgánu"
                             },
                             "maxPocetClenu": {
                                 "format": "int32",
                                 "minimum": 0,
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Maximální počet členů orgánu "
                             },
                             "typ": {
                                 "maxLength": 15,
@@ -3606,21 +3635,26 @@
                     {
                         "properties": {
                             "text": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Text k podílu"
                             },
                             "vklad": {
-                                "$ref": "#/components/schemas/ObnosVr"
+                                "$ref": "#/components/schemas/ObnosVr",
+                                "description": "Vklad"
                             },
                             "velikostPodilu": {
-                                "$ref": "#/components/schemas/ObnosVr"
+                                "$ref": "#/components/schemas/ObnosVr",
+                                "description": "Velikost podílu"
                             },
                             "splaceni": {
-                                "$ref": "#/components/schemas/ObnosVr"
+                                "$ref": "#/components/schemas/ObnosVr",
+                                "description": "Splacenost podílu"
                             },
                             "zastavniPravo": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/ZastavniPravoVr"
+                                    "$ref": "#/components/schemas/ZastavniPravoVr",
+                                    "description": "Zástavní právo"
                                 }
                             }
                         }
@@ -3690,7 +3724,8 @@
                             "podil": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/PodilVr"
+                                    "$ref": "#/components/schemas/PodilVr",
+                                    "description": " Uvolněný podíl"
                                 }
                             }
                         }
@@ -3707,10 +3742,12 @@
                     {
                         "properties": {
                             "vklad": {
-                                "$ref": "#/components/schemas/ObnosVr"
+                                "$ref": "#/components/schemas/ObnosVr",
+                                "description": "Vklad"
                             },
                             "text": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Text k vkladu"
                             },
                             "typVkladu": {
                                 "maxLength": 50,
@@ -3761,15 +3798,18 @@
                     {
                         "properties": {
                             "text": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Text zástavního práva"
                             },
                             "vznikZastavnihoPrava": {
                                 "format": "date",
-                                "type": "string"
+                                "type": "string",
+                                "description": "Vznik zástavního práva"
                             },
                             "zanikZastavnihoPrava": {
                                 "format": "date",
-                                "type": "string"
+                                "type": "string",
+                                "description": "Zánik zástavního práva"
                             }
                         }
                     }
@@ -4031,7 +4071,7 @@
                             "okresNutsLau": {
                                 "maxLength": 6,
                                 "type": "string",
-                                "description": "Okres sídla - kód NUTS/LAU (ciselnikKod: kodOkresu, zdroj:res) "
+                                "description": "Okres sídla - kód NUTS/LAU (ciselnikKod: okresLau, zdroj:res) "
                             }
                         }
                     }
@@ -4059,6 +4099,7 @@
             },
             "EkonomickySubjektRes": {
                 "type": "object",
+                "description": "Ekonomický subjekt ",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -4077,6 +4118,7 @@
             },
             "AngazovanySubjektAdresa": {
                 "type": "object",
+                "description": "Adresa ",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/Adresa"
@@ -4202,6 +4244,7 @@
             },
             "ProvozovnaZaklad": {
                 "type": "object",
+                "description": "Provozovna - obecný předek",
                 "properties": {
                     "icp": {
                         "maxLength": 10,
@@ -4251,6 +4294,7 @@
             },
             "ProvozovnyRzpStav": {
                 "type": "object",
+                "description": "Stav provozovny",
                 "properties": {
                     "pocetCelkem": {
                         "format": "int32",
@@ -4312,7 +4356,7 @@
                             "zivnostenskyUrad": {
                                 "pattern": "^\\d{6}$",
                                 "type": "string",
-                                "description": "Živnostenský úřadu - kód"
+                                "description": "Živnostenský úřad – kód (ciselnikKod: ZivnostenskyUrad, zdroj: rzp)"
                             },
                             "organizacniSlozka": {
                                 "maxLength": 2000,
@@ -4349,6 +4393,7 @@
             },
             "ZivnostBezOZ": {
                 "type": "object",
+                "description": "Živnost bez odpovědného zástupce",
                 "properties": {
                     "platnostOd": {
                         "format": "date",
@@ -4364,6 +4409,7 @@
             },
             "ZivnostiRzpStav": {
                 "type": "object",
+                "description": "Stav živnosti",
                 "properties": {
                     "pocetAktivnich": {
                         "format": "int32",
@@ -4381,13 +4427,13 @@
                         "format": "int32",
                         "minimum": 0,
                         "type": "integer",
-                        "description": "Celkový počet zaniklých živností"
+                        "description": "Celkový počet pozastavených živností"
                     },
                     "pocetPrerusenych": {
                         "format": "int32",
                         "minimum": 0,
                         "type": "integer",
-                        "description": "Celkový počet zaniklých živností"
+                        "description": "Celkový počet přerušených živností"
                     },
                     "pocetCelkem": {
                         "format": "int32",
@@ -4399,6 +4445,7 @@
             },
             "ZivnostOborCinnosti": {
                 "type": "object",
+                "description": "Živnost - obor činnosti",
                 "properties": {
                     "platnostOd": {
                         "format": "date",
@@ -4440,6 +4487,7 @@
             },
             "ZivnostPreruseni": {
                 "type": "object",
+                "description": "Přerušení živnosti",
                 "properties": {
                     "platnostOd": {
                         "format": "date",
@@ -4455,6 +4503,7 @@
             },
             "ZivnostProvozovnaPozastaveni": {
                 "type": "object",
+                "description": "Pozastavení provozovny nebo živnosti",
                 "properties": {
                     "platnostOd": {
                         "format": "date",
@@ -4475,7 +4524,7 @@
             },
             "ZivnostZaklad": {
                 "type": "object",
-                "description": "Živnosti, které ekonomický subjekt provozuje nebo provozoval",
+                "description": "Živnosti, které ekonomický subjekt provozuje nebo provozoval - obecný předek",
                 "properties": {
                     "datumVzniku": {
                         "format": "date",
@@ -4616,6 +4665,7 @@
             },
             "EkonomickySubjektRzp": {
                 "type": "object",
+                "description": "Ekonomický subjekt ",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -4634,6 +4684,7 @@
             },
             "Provozovna": {
                 "type": "object",
+                "description": "Provozovna",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/ProvozovnaZaklad"
@@ -4725,6 +4776,7 @@
             },
             "AngazovanaOsobaNrpzs": {
                 "type": "object",
+                "description": "Angažovaná osoba",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/AngazovanaOsoba"
@@ -4743,6 +4795,7 @@
             },
             "Kontakty": {
                 "type": "object",
+                "description": "Kontaktní údaje",
                 "properties": {
                     "email": {
                         "maxLength": 50,
@@ -4752,7 +4805,8 @@
                     "fax": {
                         "maxLength": 25,
                         "minLength": 1,
-                        "type": "string"
+                        "type": "string",
+                        "description": "Fax"
                     },
                     "telefon": {
                         "maxLength": 25,
@@ -4770,6 +4824,7 @@
             },
             "ZaznamNrpzs": {
                 "type": "object",
+                "description": "Detailní informace o ekonomickém subjektu ze zdroje NRPZS ",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/EkonomickySubjektZaklad"
@@ -4804,7 +4859,8 @@
                                 "description": "Druh zdravotnického zařízení - kód (ciselnikKod: DruhZarizeni, zdroj: nrpzs)"
                             },
                             "primarniZaznam": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Primární záznam"
                             },
                             "typZrizovatele": {
                                 "maxLength": 1,
@@ -4849,6 +4905,7 @@
             },
             "EkonomickySubjektNrpzs": {
                 "type": "object",
+                "description": "Ekonomický subjekt ",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -4902,7 +4959,7 @@
                                 "maxLength": 64,
                                 "minLength": 1,
                                 "type": "string",
-                                "description": "Typ angažmá osoby  - kód (ciselnikKod: TypAngazma) "
+                                "description": "Typ angažmá osoby - kód (ciselnikKod: TypAngazma, zdroj: rpsh)"
                             }
                         }
                     }
@@ -4980,7 +5037,8 @@
                                 }
                             },
                             "primarniZaznam": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Primární záznam"
                             },
                             "zmenaStanov": {
                                 "type": "array",
@@ -5040,6 +5098,7 @@
             },
             "EkonomickySubjektRpsh": {
                 "type": "object",
+                "description": "Ekonomický subjekt ",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -5058,6 +5117,7 @@
             },
             "AdresaRcns": {
                 "type": "object",
+                "description": "Adresa",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/Adresa"
@@ -5086,12 +5146,14 @@
             },
             "AngazovanySubjektRcnsZaklad": {
                 "type": "object",
+                "description": "Angažovaný subjekt",
                 "properties": {
                     "ico": {
                         "maxLength": 8,
                         "minLength": 8,
                         "pattern": "^\\d{8}$",
-                        "type": "string"
+                        "type": "string",
+                        "description": "IČO"
                     },
                     "dic": {
                         "type": "string",
@@ -5134,6 +5196,7 @@
             },
             "ClenSvazu": {
                 "type": "object",
+                "description": "Člen svazu církví",
                 "properties": {
                     "ico": {
                         "maxLength": 8,
@@ -5176,6 +5239,7 @@
             },
             "RegistraceRcns": {
                 "type": "object",
+                "description": "Informace o registraci církve",
                 "properties": {
                     "cisloRegistrace": {
                         "maxLength": 30,
@@ -5211,6 +5275,7 @@
             },
             "ZaznamRcnsZaklad": {
                 "type": "object",
+                "description": "Základní informace o ekonomickém subjektu - obecný předek zdroje RCNS ",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/EkonomickySubjektZaklad"
@@ -5226,13 +5291,16 @@
                             "stat": {
                                 "maxLength": 3,
                                 "minLength": 3,
-                                "type": "string"
+                                "type": "string",
+                                "description": "Stát"
                             },
                             "primarniZaznam": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Primární záznam"
                             },
                             "registrace": {
-                                "$ref": "#/components/schemas/RegistraceRcns"
+                                "$ref": "#/components/schemas/RegistraceRcns",
+                                "description": "Registrace"
                             },
                             "zpusobJednani": {
                                 "type": "array",
@@ -5341,6 +5409,7 @@
             },
             "SubjektCirkevZaklad": {
                 "type": "object",
+                "description": "Církev - základ - obecný předek ",
                 "properties": {
                     "datumRegistracePrav": {
                         "format": "date",
@@ -5380,6 +5449,7 @@
             },
             "SubjektPravnickaOsobaZaklad": {
                 "type": "object",
+                "description": "Právnická osoba církve - základ - obecný předek ",
                 "properties": {
                     "icoZrizovatel": {
                         "maxLength": 8,
@@ -5397,12 +5467,13 @@
                     },
                     "zpusobZruseniRegistrace": {
                         "type": "integer",
-                        "description": "Způsob zruseni registrace - kód"
+                        "description": "Způsob zrušení registrace – kód (ciselnikKod: ZpusobZruseni, zdroj: rcns)"
                     }
                 }
             },
             "SubjektSvazCirkviZaklad": {
                 "type": "object",
+                "description": "Svaz církví - základ - obecný předek",
                 "properties": {
                     "clenoveSvazu": {
                         "type": "array",
@@ -5422,17 +5493,21 @@
             },
             "AngazmaRcns": {
                 "type": "object",
+                "description": "Angažmá",
                 "properties": {
                     "osobaPravnicka": {
-                        "$ref": "#/components/schemas/AngazovanySubjektRcns"
+                        "$ref": "#/components/schemas/AngazovanySubjektRcns",
+                        "description": "Právnická osoba"
                     },
                     "osobaFyzicka": {
-                        "$ref": "#/components/schemas/AngazovanaOsobaRcns"
+                        "$ref": "#/components/schemas/AngazovanaOsobaRcns",
+                        "description": "Fyzická osoba"
                     }
                 }
             },
             "AngazovanySubjektRcns": {
                 "type": "object",
+                "description": "Angažovaný subjekt",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/AngazovanySubjektRcnsZaklad"
@@ -5442,7 +5517,8 @@
                             "statutarniOrgany": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/AngazovanaOsobaRcns"
+                                    "$ref": "#/components/schemas/AngazovanaOsobaRcns",
+                                    "description": "Statutární orgány"
                                 }
                             }
                         }
@@ -5471,6 +5547,7 @@
             },
             "StatutatniOrganRcns": {
                 "type": "object",
+                "description": "Stautární orgány církve",
                 "properties": {
                     "subjektCirkev": {
                         "$ref": "#/components/schemas/SubjektCirkev",
@@ -5488,6 +5565,7 @@
             },
             "EkonomickySubjektRcns": {
                 "type": "object",
+                "description": "Ekonomický subjekt ",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -5506,6 +5584,7 @@
             },
             "SubjektCirkev": {
                 "type": "object",
+                "description": "Církev",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/SubjektCirkevZaklad"
@@ -5525,6 +5604,7 @@
             },
             "SubjektPravnickaOsoba": {
                 "type": "object",
+                "description": "Právnická osoba církve",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/SubjektPravnickaOsobaZaklad"
@@ -5544,6 +5624,7 @@
             },
             "SubjektSvazCirkvi": {
                 "type": "object",
+                "description": "Svaz církví",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/SubjektSvazCirkviZaklad"
@@ -5601,6 +5682,7 @@
             },
             "AngazovanaOsobaSzrZaklad": {
                 "type": "object",
+                "description": "Angažovaná osoba - obecný předek",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/AngazovanaOsoba"
@@ -5619,6 +5701,7 @@
             },
             "EkonomickySubjektEzpZaklad": {
                 "type": "object",
+                "description": "Ekonomický subjekt zdroje EZP - obecný předek",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/EkonomickySubjektZaklad"
@@ -5656,7 +5739,7 @@
             },
             "EkonomickySubjektSzr": {
                 "type": "object",
-                "description": "Seznam ekonomických subjektů ze zdroje SZR (část EZP) ",
+                "description": "Ekonomický subjekt ",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -5675,6 +5758,7 @@
             },
             "Ezp": {
                 "type": "object",
+                "description": "Detailní infromace o ekonomickém subjektu ze subzdroje EZP",
                 "properties": {
                     "osobaEzp": {
                         "$ref": "#/components/schemas/AngazovanaOsobaSzrZaklad",
@@ -5688,6 +5772,7 @@
             },
             "ZaznamSzr": {
                 "type": "object",
+                "description": "Detailní informace o ekonomickém subjektu ze zdroje SZR - část EZP ",
                 "properties": {
                     "ezp": {
                         "$ref": "#/components/schemas/Ezp",
@@ -5697,6 +5782,7 @@
             },
             "AngazovanaOsobaRs": {
                 "type": "object",
+                "description": "Angažovaná osoba",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/AngazovanaOsoba"
@@ -5706,7 +5792,8 @@
                             "typAngazma": {
                                 "maxLength": 64,
                                 "minLength": 1,
-                                "type": "string"
+                                "type": "string",
+                                "description": "Typ angažmá osoby - kód (ciselnikKod: TypAngazma, zdroj: rs)"
                             }
                         }
                     }
@@ -5737,7 +5824,8 @@
                     "typAngazma": {
                         "maxLength": 64,
                         "minLength": 1,
-                        "type": "string"
+                        "type": "string",
+                        "description": "Typ angažmá osoby - kód (ciselnikKod: TypAngazma, zdroj: rs)"
                     },
                     "adresa": {
                         "$ref": "#/components/schemas/Adresa",
@@ -5797,9 +5885,11 @@
             },
             "SkolaZarizeni": {
                 "type": "object",
+                "description": "Škola",
                 "properties": {
                     "kontakty": {
-                        "$ref": "#/components/schemas/KontaktyRs"
+                        "$ref": "#/components/schemas/KontaktyRs",
+                        "description": "Kontakty"
                     },
                     "izo": {
                         "maxLength": 9,
@@ -5863,15 +5953,18 @@
                                 "description": "Zkrácené obchodní jméno"
                             },
                             "kontakty": {
-                                "$ref": "#/components/schemas/KontaktyRs"
+                                "$ref": "#/components/schemas/KontaktyRs",
+                                "description": "Kontakty"
                             },
                             "primarniZaznam": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Primární záznam"
                             },
                             "skolyAZarizeni": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/SkolaZarizeni"
+                                    "$ref": "#/components/schemas/SkolaZarizeni",
+                                    "description": "Školy a zařízení"
                                 }
                             },
                             "typSubjektu": {
@@ -5906,6 +5999,7 @@
             },
             "EkonomickySubjektRs": {
                 "type": "object",
+                "description": "Ekonomický subjekt",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -5924,6 +6018,7 @@
             },
             "ZaznamRs": {
                 "type": "object",
+                "description": "Záznam RŠ",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/ZaznamRsZaklad"
@@ -5940,7 +6035,8 @@
                             "angazovanaOsoba": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/AngazovanaOsobaRs"
+                                    "$ref": "#/components/schemas/AngazovanaOsobaRs",
+                                    "description": "Angažovaná osoba"
                                 }
                             }
                         }
@@ -6220,7 +6316,8 @@
                             "standardizovaneAdresy": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/StandardizovanaAdresa"
+                                    "$ref": "#/components/schemas/StandardizovanaAdresa",
+                                    "description": "Seznam standardizovaných adres"
                                 }
                             },
                             "stavStandardizace": {
@@ -6228,7 +6325,8 @@
                                 "description": "Stav standardizace adresy - kod (Číselník kod:StavStandardizaceAdresy) UPLNA, CASTECNA_OBEC/..., NEUSPESNA"
                             },
                             "request": {
-                                "$ref": "#/components/schemas/StandardizovanaAdresaFiltr"
+                                "$ref": "#/components/schemas/StandardizovanaAdresaFiltr",
+                                "description": "Podmínka dotazu"
                             }
                         }
                     }
@@ -6471,6 +6569,7 @@
             },
             "AdresaCeu": {
                 "type": "object",
+                "description": "Adresa",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/Adresa"
@@ -6506,6 +6605,7 @@
             },
             "EkonomickySubjektCeuZaklad": {
                 "type": "object",
+                "description": "Ekonomický subjekt zdroje CEÚ - obecný předek ",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/EkonomickySubjektZaklad"
@@ -6536,19 +6636,20 @@
             },
             "UpadekCeu": {
                 "type": "object",
+                "description": "Úpadek - obecný předek",
                 "properties": {
                     "podnet": {
                         "type": "string",
-                        "description": "Podnět "
+                        "description": "Textace podnětu úpadku "
                     },
                     "spisZn": {
                         "type": "string",
-                        "description": "Spisová značka"
+                        "description": "Spisová značka řízení úpadku"
                     },
                     "datum": {
                         "format": "date",
                         "type": "string",
-                        "description": "Datum"
+                        "description": "Datum zápisu"
                     },
                     "detail": {
                         "maxLength": 255,
@@ -6604,6 +6705,7 @@
             },
             "EkonomickySubjektCeu": {
                 "type": "object",
+                "description": "Ekonomický subjekt",
                 "properties": {
                     "icoId": {
                         "maxLength": 32,
@@ -6649,7 +6751,8 @@
                             "upadek": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/UpadekCeuVerejny"
+                                    "$ref": "#/components/schemas/UpadekCeuVerejny",
+                                    "description": "Seznam řízení - úpadků"
                                 }
                             }
                         }
@@ -6743,7 +6846,7 @@
             },
             "AngazovanaOsobaFiltr": {
                 "type": "object",
-                "description": "Angažovaná osoba",
+                "description": "Angažovaná osoba - filtr",
                 "properties": {
                     "jmeno": {
                         "maxLength": 100,

@@ -39,6 +39,7 @@
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",
         "stavZdrojeRs": "NEEXISTUJICI",
-        "stavZdrojeRed": true
+        "stavZdrojeRed": true,
+        "stavZdrojeMonitor": "NEEXISTUJICI"
     }
 }
