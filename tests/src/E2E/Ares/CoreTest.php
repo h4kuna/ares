@@ -28,6 +28,7 @@ final class CoreTest extends TestCase
 	protected function provideCore(): array
 	{
 		return [
+			['26577321'], // address from dalsiUdaje[0]->sidlo[0]->sidlo
 			['25528351'], // diff address
 			['67909442'], // create date does not exist
 			['27735753'], // create date does not exist

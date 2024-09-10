@@ -1,0 +1,39 @@
+{
+    "active": true,
+    "city": "Teplice",
+    "company": "Sportovní klub PRO SPORT Teplice spolek",
+    "created": "2008-11-25T00:00:00+01:00",
+    "dissolved": null,
+    "city_district": "Teplice",
+    "city_post": null,
+    "in": "26577321",
+    "is_person": false,
+    "legal_form_code": 706,
+    "house_number": "2959",
+    "street": "U Panoramy",
+    "district": "Teplice",
+    "tin": null,
+    "vat_payer": false,
+    "zip": "41501",
+    "country": "Česká republika",
+    "country_code": "CZ",
+    "nace": [
+        "93120"
+    ],
+    "sources": {
+        "stavZdrojeVr": true,
+        "stavZdrojeRes": true,
+        "stavZdrojeRzp": "NEEXISTUJICI",
+        "stavZdrojeNrpzs": "NEEXISTUJICI",
+        "stavZdrojeRpsh": "NEEXISTUJICI",
+        "stavZdrojeRcns": "NEEXISTUJICI",
+        "stavZdrojeSzr": "NEEXISTUJICI",
+        "stavZdrojeDph": "NEEXISTUJICI",
+        "stavZdrojeSd": "NEEXISTUJICI",
+        "stavZdrojeIr": "NEEXISTUJICI",
+        "stavZdrojeCeu": "NEEXISTUJICI",
+        "stavZdrojeRs": "NEEXISTUJICI",
+        "stavZdrojeRed": true,
+        "stavZdrojeMonitor": "NEEXISTUJICI"
+    }
+}

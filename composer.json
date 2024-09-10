@@ -47,9 +47,10 @@
     }
   },
   "scripts": {
-    "phpstan": "vendor/bin/phpstan analyse",
-    "tests": "vendor/bin/tester -s --colors 1 -s -C tests/src",
-    "coverage": "vendor/bin/tester --coverage coverage.html --coverage-src src/ --colors 1 -s -C tests/src"
+    "coverage": "vendor/bin/tester --coverage coverage.html --coverage-src src/ --colors 1 -s -C tests/src",
+    "qa": "composer stan && composer tests",
+    "stan": "vendor/bin/phpstan analyse",
+    "tests": "vendor/bin/tester --colors 1 -s -C tests/src"
   },
   "suggest": {
     "guzzlehttp/guzzle": "As default implementation for PSR-7, PSR-17 and PSR-18 standards."

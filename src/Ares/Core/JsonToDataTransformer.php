@@ -24,17 +24,13 @@ class JsonToDataTransformer
 		$data->vat_payer = $data->sources[Sources::SER_NO_DPH] === true;
 		$data->company = Strings::trimNull($json->obchodniJmeno ?? null);
 
-		$data->zip = Strings::trimNull(Strings::replaceSpace((string) ($json->sidlo->psc ?? $json->sidlo->pscTxt ?? ''))); // input is int
-		$data->street = Strings::trimNull($json->sidlo->nazevUlice ?? null);
-		$data->country = Strings::trimNull($json->sidlo->nazevStatu ?? null);
-		$data->country_code = Strings::trimNull($json->sidlo->kodStatu ?? null);
-		$data->city = Strings::trimNull($json->sidlo->nazevObce ?? null);
-		$data->city_post = Strings::trimNull($json->sidlo->nazevMestskeCastiObvodu ?? null);
-		$data->city_district = Strings::trimNull($json->sidlo->nazevCastiObce ?? null);
-		$data->district = Strings::trimNull($json->sidlo->nazevOkresu ?? null);
-		$data->house_number = Helper::houseNumber((string) ($json->sidlo->cisloDomovni ?? $json->sidlo->cisloDoAdresy ?? ''), (string) ($json->sidlo->cisloOrientacni ?? ''), $json->sidlo->cisloOrientacniPismeno ?? '');
+		$addressExists = isset($json->sidlo) && self::updateAddress($data, $json->sidlo);
 
-		if ($data->zip === null && $data->street === null && $data->house_number === null && $data->city === null && isset($json->sidlo->textovaAdresa)) {
+		if ($addressExists === false && isset($json->dalsiUdaje[0]->sidlo[0]->sidlo)) {
+			$addressExists = self::updateAddress($data, $json->dalsiUdaje[0]->sidlo[0]->sidlo);
+		}
+
+		if ($addressExists === false && isset($json->sidlo->textovaAdresa)) {
 			[
 				'zip' => $data->zip,
 				'street' => $data->street,
@@ -54,6 +50,36 @@ class JsonToDataTransformer
 		$data->active = $data->dissolved === null;
 
 		return $data;
+	}
+
+
+	private static function updateAddress(Data $data, stdClass $sidlo): bool
+	{
+		$data->zip = Strings::trimNull(Strings::replaceSpace((string) ($sidlo->psc ?? $sidlo->pscTxt ?? ''))); // input is int
+		$data->street = Strings::trimNull($sidlo->nazevUlice ?? null);
+		$data->country = Strings::trimNull($sidlo->nazevStatu ?? null);
+		$data->country_code = Strings::trimNull($sidlo->kodStatu ?? null);
+		$data->city = Strings::trimNull($sidlo->nazevObce ?? null);
+		$data->city_post = Strings::trimNull($sidlo->nazevMestskeCastiObvodu ?? null);
+		$data->city_district = Strings::trimNull($sidlo->nazevCastiObce ?? null);
+		$data->district = Strings::trimNull($sidlo->nazevOkresu ?? null);
+		$data->house_number = Helper::houseNumber((string) ($sidlo->cisloDomovni ?? $sidlo->cisloDoAdresy ?? ''), (string) ($sidlo->cisloOrientacni ?? ''), $sidlo->cisloOrientacniPismeno ?? '');
+
+		return self::isAddressFilled($data);
+	}
+
+
+	private static function isAddressFilled(Data $data): bool
+	{
+		return $data->zip !== null
+			|| $data->street !== null
+			|| $data->country !== null
+			|| $data->country_code !== null
+			|| $data->city !== null
+			|| $data->city_post !== null
+			|| $data->city_district !== null
+			|| $data->district !== null
+			|| $data->house_number !== null;
 	}
 
 }
