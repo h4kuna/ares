@@ -35,40 +35,6 @@
     },
     {
         "Ico": "00007064",
-        "NazevOsoby": "Komunikace mezi EKIS MV a ISoSS (Ministerstvo vnitra)",
-        "ISDS": "t88358j",
-        "PDZ": "false",
-        "TypSubjektu": "OVM_REQ",
-        "AdresaSidla": {
-            "AdresaTextem": "Na Pankráci 1623/72, 14000, Praha",
-            "OkresNazev": {},
-            "ObecNazev": "Praha",
-            "CastObceNazev": {},
-            "UliceNazev": "Na Pankráci",
-            "PostaKod": "14000",
-            "CisloDomovni": "1623",
-            "CisloOrientacni": "72"
-        }
-    },
-    {
-        "Ico": "00007064",
-        "NazevOsoby": "Odbor provozu a rozvoje EKIS (Ministerstvo vnitra)",
-        "ISDS": "v522hjw",
-        "PDZ": "false",
-        "TypSubjektu": "OVM_REQ",
-        "AdresaSidla": {
-            "AdresaTextem": "Na Pankráci 1623/72, Nusle, 14000, Praha 4",
-            "OkresNazev": {},
-            "ObecNazev": "Praha 4",
-            "CastObceNazev": "Nusle",
-            "UliceNazev": "Na Pankráci",
-            "PostaKod": "14000",
-            "CisloDomovni": "1623",
-            "CisloOrientacni": "72"
-        }
-    },
-    {
-        "Ico": "00007064",
         "NazevOsoby": "sekce pro státní službu (Ministerstvo vnitra)",
         "ISDS": "9iutsan",
         "PDZ": "false",
@@ -99,6 +65,40 @@
             "PostaKod": "17000",
             "CisloDomovni": "936",
             "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Komunikace mezi EKIS MV a ISoSS (Ministerstvo vnitra)",
+        "ISDS": "t88358j",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Na Pankráci 1623/72, 14000, Praha",
+            "OkresNazev": {},
+            "ObecNazev": "Praha",
+            "CastObceNazev": {},
+            "UliceNazev": "Na Pankráci",
+            "PostaKod": "14000",
+            "CisloDomovni": "1623",
+            "CisloOrientacni": "72"
+        }
+    },
+    {
+        "Ico": "00007064",
+        "NazevOsoby": "Odbor provozu a rozvoje EKIS (Ministerstvo vnitra)",
+        "ISDS": "v522hjw",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "Na Pankráci 1623/72, Nusle, 14000, Praha 4",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
+            "UliceNazev": "Na Pankráci",
+            "PostaKod": "14000",
+            "CisloDomovni": "1623",
+            "CisloOrientacni": "72"
         }
     },
     {
