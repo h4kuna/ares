@@ -9,6 +9,8 @@ use stdClass;
 
 class JsonToDataTransformer
 {
+	private const RegisterPriority = ['rzp', 'res', 'vr'];
+
 
 	public function transform(stdClass $json): Data
 	{
@@ -24,22 +26,7 @@ class JsonToDataTransformer
 		$data->vat_payer = $data->sources[Sources::SER_NO_DPH] === true;
 		$data->company = Strings::trimNull($json->obchodniJmeno ?? null);
 
-		$addressExists = isset($json->sidlo) && self::updateAddress($data, $json->sidlo);
-
-		if ($addressExists === false && isset($json->dalsiUdaje[0]->sidlo[0]->sidlo)) {
-			$addressExists = self::updateAddress($data, $json->dalsiUdaje[0]->sidlo[0]->sidlo);
-		}
-
-		if ($addressExists === false && isset($json->sidlo->textovaAdresa)) {
-			[
-				'zip' => $data->zip,
-				'street' => $data->street,
-				'house_number' => $data->house_number,
-				'city' => $data->city,
-				'country' => $country,
-			] = Helper::parseAddress($json->sidlo->textovaAdresa);
-			$data->country ??= $country;
-		}
+		self::resolveAddress($data, $json);
 
 		$data->nace = (array) ($json->czNace ?? []);
 		$data->legal_form_code = (int) $json->pravniForma;
@@ -69,10 +56,45 @@ class JsonToDataTransformer
 	}
 
 
+	private static function resolveAddress(Data $data, stdClass $json): void
+	{
+		$addressExists = isset($json->sidlo) && self::updateAddress($data, $json->sidlo);
+
+		if ($addressExists === false) {
+			$additionalData = isset($json->dalsiUdaje) ? self::prepareForAddress($json->dalsiUdaje) : [];
+			if ($additionalData !== []) {
+				foreach (self::RegisterPriority as $register) {
+					$key = self::keyForAddress($register, $json->pravniForma);
+					if (isset($additionalData[$key])) {
+						$addressExists = self::updateAddress($data, $additionalData[$key]);
+						if ($addressExists === true) {
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		if ($addressExists === false && isset($json->sidlo->textovaAdresa)) {
+			[
+				'zip' => $data->zip,
+				'street' => $data->street,
+				'house_number' => $data->house_number,
+				'city' => $data->city,
+				'country' => $country,
+			] = Helper::parseAddress($json->sidlo->textovaAdresa);
+			$data->country ??= $country;
+		}
+	}
+
+
 	private static function isAddressFilled(Data $data): bool
 	{
-		return $data->zip !== null
-			|| $data->street !== null
+		if ($data->zip === null) {
+			return false;
+		}
+
+		return $data->street !== null
 			|| $data->country !== null
 			|| $data->country_code !== null
 			|| $data->city !== null
@@ -80,6 +102,33 @@ class JsonToDataTransformer
 			|| $data->city_district !== null
 			|| $data->district !== null
 			|| $data->house_number !== null;
+	}
+
+
+	/**
+	 * @param array<stdClass> $dalsiUdaje
+	 * @return array<stdClass>
+	 */
+	private static function prepareForAddress(array $dalsiUdaje): array
+	{
+		$out = [];
+		foreach ($dalsiUdaje as $record) {
+			$x = self::keyForAddress($record->datovyZdroj, $record->pravniForma);
+			foreach ($record->sidlo ?? [] as $sidlo) {
+				if ($sidlo?->primarniZaznam === true && isset($sidlo->sidlo)) {
+					$out[$x] = $sidlo->sidlo;
+					break;
+				}
+			}
+		}
+
+		return $out;
+	}
+
+
+	private static function keyForAddress(string $datovyZdroj, string $pravniForma): string
+	{
+		return "$datovyZdroj|$pravniForma";
 	}
 
 }
