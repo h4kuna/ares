@@ -28,6 +28,9 @@ final class DataBoxTest extends TestCase
 	{
 		$ares = (new AresFactory())->create();
 		$data = $ares->loadDataBox($in);
+		usort($data, function ($a, $b) {
+			return $a->ISDS <=> $b->ISDS;
+		});
 		$this->assertFile($in, $data);
 	}
 
