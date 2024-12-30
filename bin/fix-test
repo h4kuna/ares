@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+$file = __DIR__ . '/../tests/fixtures/databox/00007064.json';
+unlink($file);
+
+chdir(__DIR__ . '/..');
+exec('composer tests');
+exec(sprintf('git add "%s"', $file));
+exec('git commit -m "fix(tests)"');
