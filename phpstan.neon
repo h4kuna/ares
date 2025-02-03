@@ -14,10 +14,6 @@ parameters:
 			message: "#^If condition is always false\\.$#"
 			count: 1
 			path: src/aliases.php
-		-
-			message: "#^Variable property access on SimpleXMLElement\\.$#"
-			count: 2
-			path: src/Adis/Client.php
 
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
