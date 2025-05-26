@@ -12,7 +12,7 @@ final class ServerResponseException extends ConnectionException
 	public function __construct(
 		$message = 'The service is probably overloaded. Repeat request after a few minutes.',
 		$code = 0,
-		\Throwable $previous = null,
+		?\Throwable $previous = null,
 	)
 	{
 		parent::__construct($message, $code, $previous);
