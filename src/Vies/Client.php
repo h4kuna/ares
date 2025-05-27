@@ -42,7 +42,9 @@ final class Client
 		return $data;
 	}
 
-
+	/**
+	 * @throws ServerResponseException
+	 */
 	public function status(): stdClass
 	{
 		$request = $this->transportProvider->createRequest(static::$url . '/check-status');

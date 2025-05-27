@@ -7,6 +7,10 @@ use h4kuna\Ares\Exception\LogicException;
 use h4kuna\Ares\Tool\Strings;
 use Nette\Utils\Strings as NetteStrings;
 
+/**
+ * @phpstan-type addressTypeRaw array{street?: string, zip?: string, city?: string, house_number?: string, country?: string}
+ * @phpstan-type addressType array{street: ?string, zip: ?string, city: ?string, house_number: ?string, country: ?string}
+ */
 final class Helper
 {
 	public static string $baseUrl = 'https://ares.gov.cz/ekonomicke-subjekty-v-be/rest';
@@ -126,16 +130,18 @@ final class Helper
 
 
 	/**
-	 * @return array{street: ?string, zip: ?string, city: ?string, house_number: ?string, country: ?string}
+	 * @return addressType
 	 */
 	public static function parseAddress(string $address): array
 	{
+		/** @var ?addressTypeRaw $results */
 		$results = NetteStrings::match($address, '~^(?<street>.+) (?<house_number>\d+(?:/\d+)?(\w)?)(?:, (?<district>.+?))?, (?<zip>\d{5}) (?<city>.+?)(, (?<country>.+))?$~');
 
 		if ($results !== null) {
 			return self::prepareAddressData($results);
 		}
 
+		/** @var ?addressTypeRaw $results */
 		$results = NetteStrings::match($address, '~^(?<city>.+), (?<zip>\d{5})(?:, (?<district>.+?))?, (?<street>.+), (?<house_number>\d+(?:/\d+)?(\w)?)$~');
 
 		return self::prepareAddressData($results ?? []);
@@ -143,8 +149,8 @@ final class Helper
 
 
 	/**
-	 * @param array{street?: string, zip?: string, city?: string, house_number?: string, country?: string} $results
-	 * @return array{street: ?string, zip: ?string, city: ?string, house_number: ?string, country: ?string}
+	 * @param addressTypeRaw $results
+	 * @return addressType
 	 */
 	private static function prepareAddressData(array $results): array
 	{

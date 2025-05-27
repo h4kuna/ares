@@ -9,9 +9,13 @@ final class AdisResponseException extends RuntimeException implements ClientExce
 {
 	public function __construct(
 		public Data $data,
-		ServerResponseException $previous
-	)
-	{
+		ServerResponseException $previous,
+	) {
 		parent::__construct('Validation by Adis failed, you can use $data from ARES only. Fields vat_payer and tin are not valid.', $previous);
+	}
+
+	public static function fromServerException(Data $data, ServerResponseException $e): self
+	{
+		return new self($data, $e);
 	}
 }

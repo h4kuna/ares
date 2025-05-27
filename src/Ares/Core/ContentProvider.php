@@ -9,6 +9,7 @@ use h4kuna\Ares\Ares\Helper;
 use h4kuna\Ares\Ares\Sources;
 use h4kuna\Ares\Exception\AdisResponseException;
 use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
+use h4kuna\Ares\Exception\ResultException;
 use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Tool\Batch;
 
@@ -16,26 +17,25 @@ final class ContentProvider
 {
 	private const BATCH = 100; // max identification numbers per request
 
-
 	public function __construct(
 		private JsonToDataTransformer $jsonTransformer,
 		private Client $client,
 		private Adis\ContentProvider $adisContentProvider,
-	)
-	{
+	) {
 	}
-
 
 	public function getClient(): Client
 	{
 		return $this->client;
 	}
 
-
 	/**
 	 * @template KeyName
 	 * @param array<KeyName, string|int> $identificationNumbers
 	 * @return Generator<(int&KeyName)|(KeyName&string), Data>
+	 *
+	 * @throws ResultException
+	 * @throws ServerResponseException
 	 */
 	public function loadByIdentificationNumbers(array $identificationNumbers): Generator
 	{
@@ -74,10 +74,10 @@ final class ContentProvider
 		}
 	}
 
-
 	/**
-	 * @throws IdentificationNumberNotFoundException
 	 * @throws AdisResponseException
+	 * @throws IdentificationNumberNotFoundException
+	 * @throws ServerResponseException
 	 */
 	public function load(string $in): Data
 	{
@@ -88,7 +88,7 @@ final class ContentProvider
 			try {
 				$adis = $this->adisContentProvider->statusBusinessSubject($data->tin);
 			} catch (ServerResponseException $e) {
-				throw new AdisResponseException($data, previous: $e);
+				throw AdisResponseException::fromServerException($data, $e);
 			}
 
 			$data->setAdis($adis);

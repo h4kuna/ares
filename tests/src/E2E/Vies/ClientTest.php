@@ -33,7 +33,7 @@ final class ClientTest extends TestCase
 			],
 			[
 				function (self $self) {
-					$self->assertCheckVat('CZ-27082440', new Ares\Exception\ServerResponseException('VOW-ERR-1: An unexpected error occurred. Please retry later or contact the support team.'));
+					$self->assertCheckVat('CZ-27082440', new Ares\Exception\ServerResponseException('VOW-ERR-2600: The VAT number does not match the following regular expression : "{0}".'));
 				},
 			],
 			[

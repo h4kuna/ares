@@ -4,6 +4,7 @@ namespace h4kuna\Ares\Ares;
 
 use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
 use h4kuna\Ares\Exception\ResultException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
@@ -13,14 +14,15 @@ class Client
 
 	public function __construct(
 		private TransportProvider $transportProvider,
-	)
-	{
+	) {
 	}
-
 
 	/**
 	 * @param Sources::SERVICE_*|Sources::CORE|Sources::DIAL $key
 	 * @param array<string, mixed> $data
+	 *
+	 * @throws ResultException
+	 * @throws ServerResponseException
 	 */
 	public function searchEndpoint(string $key, array $data = []): stdClass
 	{
@@ -30,9 +32,10 @@ class Client
 		return $this->responseToStdClass($response);
 	}
 
-
 	/**
 	 * @param Sources::SERVICE_*|Sources::CORE $key
+	 * @throws IdentificationNumberNotFoundException
+	 * @throws ServerResponseException
 	 */
 	public function useEndpoint(string $key, string $in): stdClass
 	{
@@ -48,7 +51,10 @@ class Client
 		return $json;
 	}
 
-
+	/**
+	 * @throws ResultException
+	 * @throws ServerResponseException
+	 */
 	protected function responseToStdClass(ResponseInterface $response): stdClass
 	{
 		$json = $this->transportProvider->toJson($response);

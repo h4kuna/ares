@@ -7,6 +7,7 @@ use h4kuna\Ares\Ares\Core;
 use h4kuna\Ares\Ares\Core\Data;
 use h4kuna\Ares\Exception\AdisResponseException;
 use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
+use h4kuna\Ares\Exception\ResultException;
 use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Vies\ViesEntity;
 use stdClass;
@@ -21,10 +22,8 @@ class Ares
 		public DataBox\ContentProvider $dataBoxContentProvider,
 		public Adis\ContentProvider $adisContentProvider,
 		public Vies\ContentProvider $viesContentProvider,
-	)
-	{
+	) {
 	}
-
 
 	/**
 	 * @deprecated use property
@@ -34,42 +33,43 @@ class Ares
 		return $this->adisContentProvider;
 	}
 
-
 	public function getAresClient(): Ares\Client
 	{
 		return $this->aresContentProvider->getClient();
 	}
 
-
 	/**
 	 * @template KeyName
 	 * @param array<KeyName, string|int> $identificationNumbers
 	 * @return Generator<(int&KeyName)|(KeyName&string), Data>
+	 *
+	 * @throws ResultException
+	 * @throws ServerResponseException
 	 */
 	public function loadBasicMulti(array $identificationNumbers): Generator
 	{
 		return $this->aresContentProvider->loadByIdentificationNumbers($identificationNumbers);
 	}
 
-
 	/**
-	 * @throws IdentificationNumberNotFoundException
 	 * @throws AdisResponseException
+	 * @throws IdentificationNumberNotFoundException
+	 * @throws ServerResponseException
 	 */
 	public function loadBasic(string $in): Data
 	{
 		return $this->aresContentProvider->load($in);
 	}
 
-
 	/**
 	 * @return array<stdClass>
+	 * @throws ResultException
+	 * @throws ServerResponseException
 	 */
 	public function loadDataBox(string $in): array
 	{
 		return $this->dataBoxContentProvider->load($in);
 	}
-
 
 	/**
 	 * @return object{countryCode: string, vatNumber: string, requestDate: string, valid: bool, requestIdentifier: string, name: string, address: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string, traderCompanyType: string, traderNameMatch: string, traderStreetMatch: string, traderPostalCodeMatch: string, traderCityMatch: string, traderCompanyTypeMatch: string}

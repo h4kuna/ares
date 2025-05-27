@@ -3,7 +3,7 @@
 namespace h4kuna\Ares\Vies;
 
 /**
- * @phpstan-type viesParam array{vatNumber: string,countryCode: string,requesterMemberStateCode: string,requesterNumber: string,traderName: string,traderStreet: string,traderPostalCode: string,traderCity: string,traderCompanyType: string}
+ * @phpstan-type viesParam array{vatNumber: string, countryCode: string, requesterMemberStateCode: string, requesterNumber: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string,traderCompanyType: string}
  */
 class ViesEntity
 {

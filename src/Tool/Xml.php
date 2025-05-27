@@ -11,6 +11,9 @@ use stdClass;
 
 final class Xml
 {
+	/**
+	 * @throws ServerResponseException
+	 */
 	public static function toJson(SimpleXMLElement|ResponseInterface $response): stdClass
 	{
 		if ($response instanceof ResponseInterface) {
@@ -19,14 +22,14 @@ final class Xml
 			$xml = $response;
 		}
 		if ($xml === false) {
-			throw new ServerResponseException();
+			throw ServerResponseException::brokenXml();
 		}
 
 		try {
 			$data = Json::decode(Json::encode($xml));
 			assert($data instanceof stdClass);
 		} catch (JsonException $e) {
-			throw new ServerResponseException($e->getMessage(), (int) $e->getCode(), $e);
+			throw ServerResponseException::fromException($e);
 		}
 
 		return $data;
