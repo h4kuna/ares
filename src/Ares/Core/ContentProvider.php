@@ -7,10 +7,10 @@ use h4kuna\Ares\Adis;
 use h4kuna\Ares\Ares\Client;
 use h4kuna\Ares\Ares\Helper;
 use h4kuna\Ares\Ares\Sources;
-use h4kuna\Ares\Exceptions\AdisResponseException;
-use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
-use h4kuna\Ares\Exceptions\ServerResponseException;
-use h4kuna\Ares\Tools\Batch;
+use h4kuna\Ares\Exception\AdisResponseException;
+use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
+use h4kuna\Ares\Exception\ServerResponseException;
+use h4kuna\Ares\Tool\Batch;
 
 final class ContentProvider
 {

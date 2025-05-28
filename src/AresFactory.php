@@ -4,7 +4,7 @@ namespace h4kuna\Ares;
 
 use GuzzleHttp;
 use h4kuna\Ares\Adis\StatusBusinessSubjects\StatusBusinessSubjectsTransformer;
-use h4kuna\Ares\Exceptions\InvalidStateException;
+use h4kuna\Ares\Exception\LogicException;
 use h4kuna\Ares\Http\HttpFactory;
 use h4kuna\Ares\Http\TransportProvider;
 use h4kuna\Ares\Vies\Client;
@@ -102,7 +102,7 @@ class AresFactory
 	private static function checkGuzzle(): void
 	{
 		if (!class_exists(GuzzleHttp\Client::class)) {
-			throw new InvalidStateException('Guzzle not found, let implement own solution or install guzzle by: composer require guzzlehttp/guzzle');
+			throw new LogicException('Guzzle not found, let implement own solution or install guzzle by: composer require guzzlehttp/guzzle');
 		}
 	}
 

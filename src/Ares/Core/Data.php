@@ -5,7 +5,7 @@ namespace h4kuna\Ares\Ares\Core;
 use DateTimeImmutable;
 use h4kuna\Ares\Adis\StatusBusinessSubjects\Subject;
 use h4kuna\Ares\Ares\Sources;
-use h4kuna\Ares\Tools\Strings;
+use h4kuna\Ares\Tool\Strings;
 use JsonSerializable;
 use stdClass;
 use Stringable;

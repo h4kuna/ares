@@ -6,8 +6,8 @@ use Generator;
 use h4kuna\Ares\Adis\StatusBusinessSubjects\StatusBusinessSubjectsTransformer;
 use h4kuna\Ares\Adis\StatusBusinessSubjects\Subject;
 use h4kuna\Ares\Ares\Helper;
-use h4kuna\Ares\Exceptions\InvalidStateException;
-use h4kuna\Ares\Tools\Batch;
+use h4kuna\Ares\Exception\LogicException;
+use h4kuna\Ares\Tool\Batch;
 
 final class ContentProvider
 {
@@ -22,7 +22,7 @@ final class ContentProvider
 			return $subject;
 		}
 
-		throw new InvalidStateException('ADIS must return anything.');
+		throw new LogicException('ADIS must return anything.');
 	}
 
 

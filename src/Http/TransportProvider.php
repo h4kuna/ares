@@ -2,7 +2,7 @@
 
 namespace h4kuna\Ares\Http;
 
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -31,7 +31,7 @@ final class TransportProvider
 		try {
 			$response = $this->client->sendRequest($request);
 		} catch (ClientExceptionInterface $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+			throw new ServerResponseException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
 		return $response;
@@ -44,7 +44,7 @@ final class TransportProvider
 			$json = Json::decode($response->getBody()->getContents());
 			assert($json instanceof stdClass);
 		} catch (JsonException $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+			throw new ServerResponseException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
 		return $json;

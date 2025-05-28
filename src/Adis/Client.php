@@ -3,9 +3,9 @@
 namespace h4kuna\Ares\Adis;
 
 use h4kuna\Ares\Adis\Soap\Envelope;
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
-use h4kuna\Ares\Tools\Xml;
+use h4kuna\Ares\Tool\Xml;
 use stdClass;
 
 final class Client

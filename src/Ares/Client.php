@@ -2,12 +2,9 @@
 
 namespace h4kuna\Ares\Ares;
 
-use h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException;
-use h4kuna\Ares\Exceptions\ResultException;
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
+use h4kuna\Ares\Exception\ResultException;
 use h4kuna\Ares\Http\TransportProvider;
-use Nette\Utils\Json;
-use Nette\Utils\JsonException;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 

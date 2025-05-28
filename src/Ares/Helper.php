@@ -3,8 +3,8 @@
 namespace h4kuna\Ares\Ares;
 
 use h4kuna\Ares\Ares\Core\SubjectType;
-use h4kuna\Ares\Exceptions\InvalidStateException;
-use h4kuna\Ares\Tools\Strings;
+use h4kuna\Ares\Exception\LogicException;
+use h4kuna\Ares\Tool\Strings;
 use Nette\Utils\Strings as NetteStrings;
 
 final class Helper
@@ -66,7 +66,7 @@ final class Helper
 	public static function prepareUrl(string $source, string $in): string
 	{
 		if (self::endpointExists($source) === false) {
-			throw new InvalidStateException(sprintf('Endpoint %s does not exists.', $source));
+			throw new LogicException(sprintf('Endpoint %s does not exists.', $source));
 		}
 
 		return str_replace(

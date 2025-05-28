@@ -2,10 +2,10 @@
 
 namespace h4kuna\Ares\DataBox;
 
-use h4kuna\Ares\Exceptions\ResultException;
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ResultException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
-use h4kuna\Ares\Tools\Xml;
+use h4kuna\Ares\Tool\Xml;
 use Psr\Http\Message\StreamInterface;
 use stdClass;
 

@@ -15,5 +15,13 @@ parameters:
 			count: 1
 			path: src/aliases.php
 
+	exceptions: #see https://www.youtube.com/watch?v=UQsP1U0sVZM
+		check:
+			missingCheckedExceptionInThrows: true
+			tooWideThrowType: true
+		implicitThrows: false
+		checkedExceptionClasses:
+			- h4kuna\Ares\Exception\RuntimeException
+
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon

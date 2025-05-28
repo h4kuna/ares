@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace h4kuna\Ares\Tools;
+namespace h4kuna\Ares\Tool;
 
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use JsonException;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
@@ -26,7 +26,7 @@ final class Xml
 			$data = Json::decode(Json::encode($xml));
 			assert($data instanceof stdClass);
 		} catch (JsonException $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+			throw new ServerResponseException($e->getMessage(), (int) $e->getCode(), $e);
 		}
 
 		return $data;

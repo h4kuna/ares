@@ -2,8 +2,7 @@
 
 namespace h4kuna\Ares\Vies;
 
-use h4kuna\Ares\Exceptions\InvalidStateException;
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use Nette\Utils\Strings;
 use stdClass;
 

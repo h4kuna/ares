@@ -2,7 +2,7 @@
 
 namespace h4kuna\Ares\Vies;
 
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
 use stdClass;
 

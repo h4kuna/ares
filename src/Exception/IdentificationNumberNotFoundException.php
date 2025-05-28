@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace h4kuna\Ares\Exceptions;
+namespace h4kuna\Ares\Exception;
 
 use Throwable;
 
-final class IdentificationNumberNotFoundException extends AresException
+final class IdentificationNumberNotFoundException extends RuntimeException
 {
 
 	private string $in;
@@ -12,7 +12,7 @@ final class IdentificationNumberNotFoundException extends AresException
 
 	public function __construct(string $message = '', string $in = '', ?Throwable $previous = null)
 	{
-		parent::__construct($message, $previous === null ? 0 : $previous->getCode(), $previous);
+		parent::__construct($message, $previous);
 		$this->in = $in;
 	}
 
