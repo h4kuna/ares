@@ -7,7 +7,7 @@ use h4kuna\Ares\Http\TransportProvider;
 use stdClass;
 
 /**
- * @phpstan-type ViesResponse object{countryCode: string, vatNumber: string, requestDate: string, valid: bool, requestIdentifier: string, name: string, address: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string, traderCompanyType: string, traderNameMatch: string, traderStreetMatch: string, traderPostalCodeMatch: string, traderCityMatch: string, traderCompanyTypeMatch: string}
+ * @phpstan-type ViesResponse object{countryCode: string, vatNumber: string, requestDate: string, valid: bool, requestIdentifier: string, name: string, address: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string, traderCompanyType: string, traderNameMatch: string, traderStreetMatch: string, traderPostalCodeMatch: string, traderCityMatch: string, traderCompanyTypeMatch: string}&\stdClass
  */
 final class Client
 {
@@ -30,8 +30,8 @@ final class Client
 		$response = $this->transportProvider->response($request);
 
 		$data = $this->transportProvider->toJson($response);
-		if (isset($data->errorWrappers[0], $data->errorWrappers[0]->error)) {
-			if (isset($data->errorWrappers[0]->message)) {
+		if (array_key_exists(0, $data->errorWrappers) && property_exists($data->errorWrappers[0], 'error')) {
+			if (property_exists($data->errorWrappers[0], 'message')) {
 				throw new ServerResponseException(sprintf('%s: %s', $data->errorWrappers[0]->error, $data->errorWrappers[0]->message));
 			}
 
