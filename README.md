@@ -41,15 +41,15 @@ try {
     $response = $ares->loadBasic('87744473');
     /* @var $response Ares\Ares\Core\Data */
     var_dump($response);
-} catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
+} catch (Ares\Exception\IdentificationNumberNotFoundException $e) {
     // log identification number, why is bad? Or make nothing.
-} catch (Ares\Exceptions\AdisResponseException $e) {
+} catch (Ares\Exception\AdisResponseException $e) {
     // if validation by adis failed, but data from ares returned
     /* @var $response Ares\Ares\Core\Data */
     $response = $e->data;
     $response->adis === null; // true
     var_dump($e->getMessage());
-} catch (Ares\Exceptions\ServerResponseException $e) {
+} catch (Ares\Exception\ServerResponseException $e) {
     // no response from server or broken json
 }
 ```
@@ -65,7 +65,7 @@ try {
     foreach ($ares->loadBasicMulti($numbers) as $name => $r) {
         var_dump($name, $r->company);
     }
-} catch (Ares\Exceptions\ServerResponseException $e) {
+} catch (Ares\Exception\ServerResponseException $e) {
     // no response from server or broken json
 }
 ```
@@ -114,7 +114,7 @@ use h4kuna\Ares;
 try {
     $response = $ares->loadDataBox('87744473');
     var_dump($response->ISDS);
-} catch (h4kuna\Ares\Exceptions\ServerResponseException $e) {
+} catch (h4kuna\Ares\Exception\ServerResponseException $e) {
     // catch error
 }
 ```
@@ -130,7 +130,7 @@ use h4kuna\Ares;
 try {
     $response = $ares->checkVatVies($vatNumber);
     var_dump($response->valid); // true / false
-} catch (Ares\Exceptions\ServerResponseException $e) {
+} catch (Ares\Exception\ServerResponseException $e) {
     // invalid VAT
 }
 ```

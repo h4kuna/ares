@@ -2,7 +2,7 @@
 
 namespace h4kuna\Ares\Vies;
 
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
 use stdClass;
 
@@ -42,7 +42,9 @@ final class Client
 		return $data;
 	}
 
-
+	/**
+	 * @throws ServerResponseException
+	 */
 	public function status(): stdClass
 	{
 		$request = $this->transportProvider->createRequest(static::$url . '/check-status');

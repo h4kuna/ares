@@ -10,10 +10,15 @@ parameters:
 			message: "#^Variable property access on \\$this\\(h4kuna\\\\Ares\\\\Ares\\\\Core\\\\Data\\)\\.$#"
 			count: 3
 			path: src/Ares/Core/Data.php
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/aliases.php
+		- '/Method h4kuna\\Ares\\Tests\\.*? throws checked exception .*? but it.s missing from the PHPDoc @throws tag\./'
+
+	exceptions: #see https://www.youtube.com/watch?v=UQsP1U0sVZM
+		check:
+			missingCheckedExceptionInThrows: true
+			tooWideThrowType: true
+		implicitThrows: false
+		checkedExceptionClasses:
+			- h4kuna\Ares\Exception\RuntimeException
 
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon

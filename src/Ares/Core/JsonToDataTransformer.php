@@ -4,7 +4,7 @@ namespace h4kuna\Ares\Ares\Core;
 
 use h4kuna\Ares\Ares\Helper;
 use h4kuna\Ares\Ares\Sources;
-use h4kuna\Ares\Tools\Strings;
+use h4kuna\Ares\Tool\Strings;
 use stdClass;
 
 class JsonToDataTransformer

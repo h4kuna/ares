@@ -2,6 +2,9 @@
 
 namespace h4kuna\Ares\DataBox;
 
+use h4kuna\Ares\Exception\ResultException;
+use h4kuna\Ares\Exception\ServerResponseException;
+use h4kuna\Ares\Tool\Arrays;
 use Psr\Http\Message\StreamFactoryInterface;
 use stdClass;
 
@@ -10,21 +13,25 @@ class ContentProvider
 	public function __construct(
 		private Client $client,
 		private StreamFactoryInterface $streamFactory,
-	)
-	{
+	) {
 	}
 
-
 	/**
-	 * @return array<stdClass>
+	 * @return list<stdClass>
+	 * @throws ResultException
+	 * @throws ServerResponseException
 	 */
 	public function load(string $in): array
 	{
 		$content = $this->xml('Ico', $in)->Osoba;
-		return is_array($content) ? $content : [$content];
+
+		return Arrays::fromStdClass($content);
 	}
 
-
+	/**
+	 * @throws ResultException
+	 * @throws ServerResponseException
+	 */
 	protected function xml(string $parameter, string $value): stdClass
 	{
 		$xml = <<<XML

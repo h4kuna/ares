@@ -2,8 +2,8 @@
 
 namespace h4kuna\Ares\Vies;
 
-use h4kuna\Ares\Exceptions\InvalidStateException;
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\LogicException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use Nette\Utils\Strings;
 use stdClass;
 
@@ -28,7 +28,7 @@ final class ContentProvider
 		if (is_string($vatNumber)) {
 			$match = Strings::match($vatNumber, '/(?<country>[A-Z]{2})/');
 			if (isset($match['country']) === false) {
-				throw new InvalidStateException('Use class ViesEntity instead of string.');
+				throw new LogicException('Use class ViesEntity instead of string.');
 			}
 
 			$viesEntity = new ViesEntity(substr($vatNumber, 2), $match['country']);
@@ -40,6 +40,9 @@ final class ContentProvider
 	}
 
 
+	/**
+	 * @throws ServerResponseException
+	 */
 	public function status(): stdClass
 	{
 		return $this->client->status();

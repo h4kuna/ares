@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace h4kuna\Ares\Tools;
+namespace h4kuna\Ares\Tool;
 
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use JsonException;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
@@ -11,6 +11,9 @@ use stdClass;
 
 final class Xml
 {
+	/**
+	 * @throws ServerResponseException
+	 */
 	public static function toJson(SimpleXMLElement|ResponseInterface $response): stdClass
 	{
 		if ($response instanceof ResponseInterface) {
@@ -19,14 +22,14 @@ final class Xml
 			$xml = $response;
 		}
 		if ($xml === false) {
-			throw new ServerResponseException();
+			throw ServerResponseException::brokenXml();
 		}
 
 		try {
 			$data = Json::decode(Json::encode($xml));
 			assert($data instanceof stdClass);
 		} catch (JsonException $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+			throw ServerResponseException::fromException($e);
 		}
 
 		return $data;

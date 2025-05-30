@@ -2,7 +2,7 @@
 
 namespace h4kuna\Ares\Http;
 
-use h4kuna\Ares\Exceptions\ServerResponseException;
+use h4kuna\Ares\Exception\ServerResponseException;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -20,43 +20,44 @@ final class TransportProvider
 		private RequestFactoryInterface $requestFactory,
 		private ClientInterface $client,
 		private StreamFactoryInterface $streamFactory,
-	)
-	{
+	) {
 	}
 
-
+	/**
+	 * @throws ServerResponseException
+	 */
 	public function response(RequestInterface|string $url): ResponseInterface
 	{
 		$request = $url instanceof RequestInterface ? $url : $this->createRequest($url);
 		try {
 			$response = $this->client->sendRequest($request);
 		} catch (ClientExceptionInterface $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+			throw ServerResponseException::fromException($e);
 		}
 
 		return $response;
 	}
 
-
+	/**
+	 * @throws ServerResponseException
+	 */
 	public function toJson(ResponseInterface $response): stdClass
 	{
 		try {
 			$json = Json::decode($response->getBody()->getContents());
 			assert($json instanceof stdClass);
 		} catch (JsonException $e) {
-			throw new ServerResponseException($e->getMessage(), $e->getCode(), $e);
+			throw ServerResponseException::fromException($e);
 		}
 
 		return $json;
 	}
-
 
 	public function createRequest(string $url, string $method = 'GET'): RequestInterface
 	{
 		return $this->requestFactory->createRequest($method, $url)
 			->withHeader('X-Powered-By', 'h4kuna/ares');
 	}
-
 
 	/**
 	 * @param array<string, mixed> $data
@@ -71,7 +72,6 @@ final class TransportProvider
 		return $request;
 	}
 
-
 	public function createXmlRequest(string $url, string|StreamInterface $body): RequestInterface
 	{
 		if (is_string($body)) {
@@ -81,7 +81,6 @@ final class TransportProvider
 		return $this->createPost($url, 'application/xml')
 			->withBody($body);
 	}
-
 
 	private function createPost(string $url, string $contentType): RequestInterface
 	{

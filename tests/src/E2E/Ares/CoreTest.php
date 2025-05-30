@@ -63,7 +63,7 @@ final class CoreTest extends TestCase
 
 
 	/**
-	 * @throws h4kuna\Ares\Exceptions\IdentificationNumberNotFoundException
+	 * @throws h4kuna\Ares\Exception\IdentificationNumberNotFoundException
 	 */
 	public function testInactive(): void
 	{
@@ -141,10 +141,10 @@ final class CoreTest extends TestCase
 		try {
 			(new Ares\AresFactory())->create()->loadBasic($in);
 			Assert::fail('Must throw exception');
-		} catch (Ares\Exceptions\IdentificationNumberNotFoundException $e) {
+		} catch (Ares\Exception\IdentificationNumberNotFoundException $e) {
 			Assert::same($in, $e->getIn());
 		} catch (\Throwable $e) {
-			Assert::fail('Must throw ' . Ares\Exceptions\IdentificationNumberNotFoundException::class);
+			Assert::fail('Must throw ' . Ares\Exception\IdentificationNumberNotFoundException::class);
 		}
 	}
 
