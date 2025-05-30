@@ -2,6 +2,7 @@
 
 namespace h4kuna\Ares\Vies;
 
+use h4kuna\Ares\Exceptions\InvalidStateException;
 use h4kuna\Ares\Exceptions\ServerResponseException;
 use Nette\Utils\Strings;
 use stdClass;
@@ -25,14 +26,12 @@ final class ContentProvider
 	public function checkVat(string|ViesEntity $vatNumber): object
 	{
 		if (is_string($vatNumber)) {
-			$match = Strings::match($vatNumber, '/(?<country>[A-Z]+)(?<number>\d+)/');
-			if (isset($match['country'], $match['number'])) {
-				['country' => $country, 'number' => $number] = $match;
-			} else {
-				$country = '';
-				$number = $vatNumber;
+			$match = Strings::match($vatNumber, '/(?<country>[A-Z]{2})/');
+			if (isset($match['country']) === false) {
+				throw new InvalidStateException('Use class ViesEntity instead of string.');
 			}
-			$viesEntity = new ViesEntity($number, $country);
+
+			$viesEntity = new ViesEntity(substr($vatNumber, 2), $match['country']);
 		} else {
 			$viesEntity = $vatNumber;
 		}

@@ -23,6 +23,11 @@ final class ClientTest extends TestCase
 		return [
 			[
 				function (self $self) {
+					$self->assertCheckVat('ATU73528319', true);
+				},
+			],
+			[
+				function (self $self) {
 					$self->assertCheckVat('CZ27082440', true);
 				},
 			],

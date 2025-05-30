@@ -30,8 +30,8 @@ final class Client
 		$response = $this->transportProvider->response($request);
 
 		$data = $this->transportProvider->toJson($response);
-		if (array_key_exists(0, $data->errorWrappers) && property_exists($data->errorWrappers[0], 'error')) {
-			if (property_exists($data->errorWrappers[0], 'message')) {
+		if (isset($data->errorWrappers[0]->error) && $data->errorWrappers[0] instanceof stdClass) {
+			if (isset($data->errorWrappers[0]->message)) {
 				throw new ServerResponseException(sprintf('%s: %s', $data->errorWrappers[0]->error, $data->errorWrappers[0]->message));
 			}
 
