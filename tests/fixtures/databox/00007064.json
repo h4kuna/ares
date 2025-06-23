@@ -193,10 +193,10 @@
         "PDZ": "false",
         "TypSubjektu": "OVM_REQ",
         "AdresaSidla": {
-            "AdresaTextem": "Na Pankráci 1623/72, 14000, Praha",
+            "AdresaTextem": "Na Pankráci 1623/72, Nusle, 14000, Praha 4",
             "OkresNazev": {},
-            "ObecNazev": "Praha",
-            "CastObceNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
             "UliceNazev": "Na Pankráci",
             "PostaKod": "14000",
             "CisloDomovni": "1623",
