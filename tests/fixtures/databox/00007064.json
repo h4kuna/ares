@@ -18,6 +18,23 @@
     },
     {
         "Ico": "00007064",
+        "NazevOsoby": "Informační systém správy voleb (Ministerstvo vnitra)",
+        "ISDS": "3tzth2u",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "náměstí Hrdinů 1634/3, Nusle, 14000, Praha 4",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
+            "UliceNazev": "náměstí Hrdinů",
+            "PostaKod": "14000",
+            "CisloDomovni": "1634",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
         "NazevOsoby": "Elektronický podací portál MV (Ministerstvo vnitra)",
         "ISDS": "5f3u78d",
         "PDZ": "false",
