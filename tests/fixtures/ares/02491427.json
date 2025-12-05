@@ -9,6 +9,7 @@
     "in": "02491427",
     "is_person": false,
     "legal_form_code": 706,
+    "legal_form_code_ros": 706,
     "house_number": "105/4",
     "street": "Budovcova",
     "district": "Písek",
@@ -21,6 +22,7 @@
         "9499"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": true,
         "stavZdrojeRes": true,
         "stavZdrojeRzp": "NEEXISTUJICI",
@@ -29,6 +31,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": "NEEXISTUJICI",
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

@@ -9,6 +9,7 @@
     "in": "26577321",
     "is_person": false,
     "legal_form_code": 706,
+    "legal_form_code_ros": 706,
     "house_number": "2959",
     "street": "U Panoramy",
     "district": "Teplice",
@@ -21,6 +22,7 @@
         "93120"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": true,
         "stavZdrojeRes": true,
         "stavZdrojeRzp": "NEEXISTUJICI",
@@ -29,6 +31,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": "NEEXISTUJICI",
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

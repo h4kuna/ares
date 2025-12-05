@@ -9,6 +9,7 @@
     "in": "49240901",
     "is_person": false,
     "legal_form_code": 121,
+    "legal_form_code_ros": 121,
     "house_number": "1716/2b",
     "street": "Hvězdova",
     "district": null,
@@ -21,6 +22,7 @@
         "64190"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": true,
         "stavZdrojeRes": true,
         "stavZdrojeRzp": "HISTORICKY",
@@ -28,7 +30,8 @@
         "stavZdrojeRpsh": "NEEXISTUJICI",
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
-        "stavZdrojeDph": true,
+        "stavZdrojeDph": "ZANIKLY",
+        "stavZdrojeSkDph": true,
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

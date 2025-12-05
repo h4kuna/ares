@@ -9,6 +9,7 @@
     "in": "00841811",
     "is_person": false,
     "legal_form_code": 801,
+    "legal_form_code_ros": 801,
     "house_number": "151",
     "street": null,
     "district": "Blansko",
@@ -21,6 +22,7 @@
         "84110"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": "NEEXISTUJICI",
         "stavZdrojeRes": true,
         "stavZdrojeRzp": "NEEXISTUJICI",
@@ -29,6 +31,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": "ZANIKLY",
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

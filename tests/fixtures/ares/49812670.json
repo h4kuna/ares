@@ -9,6 +9,7 @@
     "in": "49812670",
     "is_person": false,
     "legal_form_code": 112,
+    "legal_form_code_ros": 112,
     "house_number": "97",
     "street": null,
     "district": "Pardubice",
@@ -33,6 +34,7 @@
         "93110"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": true,
         "stavZdrojeRes": true,
         "stavZdrojeRzp": true,
@@ -41,6 +43,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": true,
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

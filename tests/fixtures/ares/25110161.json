@@ -9,6 +9,7 @@
     "in": "25110161",
     "is_person": false,
     "legal_form_code": 111,
+    "legal_form_code_ros": 111,
     "house_number": "2428/203",
     "street": "Bělohorská",
     "district": null,
@@ -43,6 +44,7 @@
         "73120"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": true,
         "stavZdrojeRes": true,
         "stavZdrojeRzp": true,
@@ -51,6 +53,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": true,
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "ZANIKLY",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

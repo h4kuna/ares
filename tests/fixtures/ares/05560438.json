@@ -9,6 +9,7 @@
     "in": "05560438",
     "is_person": true,
     "legal_form_code": 101,
+    "legal_form_code_ros": 100,
     "house_number": "94",
     "street": "Na Dlaskově",
     "district": "Praha-východ",
@@ -22,6 +23,7 @@
         "43320"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": "NEEXISTUJICI",
         "stavZdrojeRes": true,
         "stavZdrojeRzp": true,
@@ -30,6 +32,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": true,
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

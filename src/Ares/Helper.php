@@ -27,6 +27,7 @@ final class Helper
 		Sources::SERVICE_RPSH => '/ekonomicke-subjekty-rpsh/{ico}',
 		Sources::SERVICE_RS => '/ekonomicke-subjekty-rs/{ico}',
 		Sources::SERVICE_SZR => '/ekonomicke-subjekty-szr/{ico}',
+		Sources::SERVICE_ROS => '/ekonomicke-subjekty-ros/{ico}',
 		Sources::SERVICE_CEU => '/ekonomicke-subjekty-ceu/{ico}',
 		Sources::CORE => '/ekonomicke-subjekty/{ico}',
 		Sources::DIAL => '/ciselniky-nazevniky/{ico}',

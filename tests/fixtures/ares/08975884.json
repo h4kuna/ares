@@ -9,6 +9,7 @@
     "in": "08975884",
     "is_person": true,
     "legal_form_code": 101,
+    "legal_form_code_ros": 100,
     "house_number": "530/41",
     "street": "Letná",
     "district": "Liberec",
@@ -21,6 +22,7 @@
         "620"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": "NEEXISTUJICI",
         "stavZdrojeRes": true,
         "stavZdrojeRzp": true,
@@ -29,6 +31,7 @@
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
         "stavZdrojeDph": "NEEXISTUJICI",
+        "stavZdrojeSkDph": "NEEXISTUJICI",
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

@@ -9,6 +9,7 @@
     "in": "02445344",
     "is_person": false,
     "legal_form_code": 121,
+    "legal_form_code_ros": 121,
     "house_number": "682/34a",
     "street": "Křižíkova",
     "district": null,
@@ -36,6 +37,7 @@
         "82920"
     ],
     "sources": {
+        "stavZdrojeRos": true,
         "stavZdrojeVr": true,
         "stavZdrojeRes": true,
         "stavZdrojeRzp": true,
@@ -43,7 +45,8 @@
         "stavZdrojeRpsh": "NEEXISTUJICI",
         "stavZdrojeRcns": "NEEXISTUJICI",
         "stavZdrojeSzr": "NEEXISTUJICI",
-        "stavZdrojeDph": true,
+        "stavZdrojeDph": "ZANIKLY",
+        "stavZdrojeSkDph": true,
         "stavZdrojeSd": "NEEXISTUJICI",
         "stavZdrojeIr": "NEEXISTUJICI",
         "stavZdrojeCeu": "NEEXISTUJICI",

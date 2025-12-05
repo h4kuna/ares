@@ -47,6 +47,7 @@ final class CoreTest extends TestCase
 			['62413686'], // k.s.
 			['87744473'], // freelancer
 			['00841811'], // Němčice
+			['17686091'], // Svěřenecký fond
 		];
 	}
 

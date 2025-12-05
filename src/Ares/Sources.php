@@ -25,6 +25,8 @@ final class Sources
 	public const SERVICE_SZR = 'stavZdrojeSzr';
 	// Záznamy Centrální evidence úpadců
 	public const SERVICE_CEU = 'stavZdrojeCeu';
+	// Registr oznámení statutárních orgánů a úředníků "Registr oznámení podle zákona o střetu zájmů"
+	public const SERVICE_ROS = 'stavZdrojeRos';
 	// Data ekonomického subjektu z Jádra ARES
 	public const CORE = 'ares';
 

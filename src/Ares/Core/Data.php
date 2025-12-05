@@ -33,7 +33,9 @@ class Data implements JsonSerializable, Stringable
 
 	public bool $is_person;
 
-	public int $legal_form_code;
+	public ?int $legal_form_code;
+
+	public ?int $legal_form_code_ros;
 
 	public ?string $house_number;
 

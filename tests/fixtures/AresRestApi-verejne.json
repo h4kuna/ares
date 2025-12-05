@@ -3,16 +3,8 @@
     "info": {
         "title": "ARES: REST API - veřejné",
         "description": "REST rozhraní systému ARES",
-        "version": "1.2.0"
+        "version": "1.3.0"
     },
-    "security": [
-        {
-            "BasicAuth": []
-        },
-        {
-            "BearerAuth": []
-        }
-    ],
     "paths": {
         "/ekonomicke-subjekty/vyhledat": {
             "post": {
@@ -1592,6 +1584,172 @@
                 "summary": ""
             }
         },
+        "/ekonomicke-subjekty-ros/{ico}": {
+            "get": {
+                "description": "Vyhledání konkrétního ekonomického subjektu ze zdroje ROS",
+                "operationId": "vratEkonomickySubjektRos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EkonomickySubjektRos"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Chyba vstupu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Chyba autentizace",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Přístup zamítnut",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Zdroj nenalezen",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Neočekávaná chyba",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ico",
+                        "required": true,
+                        "schema": {
+                            "maxLength": 32,
+                            "pattern": "^(ARES_)?\\d{8}$",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "ekonomicke-subjekty-ros"
+                ],
+                "summary": ""
+            }
+        },
+        "/ekonomicke-subjekty-ros/vyhledat": {
+            "post": {
+                "description": "Vyhledání seznamu ekonomických subjektu ze zdroje ROS",
+                "operationId": "vyhledejSeznamEkonomickychSubjektuRos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EkonomickeSubjektyRosSeznam"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Chyba vstupu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Chyba autentizace",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Přístup zamítnut",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Zdroj nenalezen",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Neočekávaná chyba",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Chyba"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EkonomickeSubjektyRegistraceFiltr"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "ekonomicke-subjekty-ros"
+                ],
+                "summary": ""
+            }
+        },
         "/standardizovane-adresy/vyhledat": {
             "post": {
                 "description": "Vyhledání seznamu standardizovaných adres RÚIAN podle komplexního filtru",
@@ -2038,8 +2196,6 @@
                 "description": "Adresa - obecný předek ",
                 "properties": {
                     "kodStatu": {
-                        "maxLength": 3,
-                        "minLength": 3,
                         "type": "string",
                         "description": "Kód státu (ciselnikKod: Stat) "
                     },
@@ -2256,6 +2412,13 @@
                         "type": "string",
                         "description": "Právní forma - kód (ciselnikKod: PravniForma, zdroj: res, com) "
                     },
+                    "pravniFormaRos": {
+                        "maxLength": 3,
+                        "minLength": 3,
+                        "pattern": "^\\d{3}$",
+                        "type": "string",
+                        "description": "Právní forma ekonomického subjektu - kód (ciselnikKod: PravniFormaRos, zdroj:ros)"
+                    },
                     "financniUrad": {
                         "maxLength": 3,
                         "minLength": 3,
@@ -2419,6 +2582,13 @@
                         "type": "string",
                         "description": "Právní forma - kód (ciselnikKod: PravniForma, zdroj: res, com)"
                     },
+                    "pravniFormaRos": {
+                        "maxLength": 3,
+                        "minLength": 3,
+                        "pattern": "^\\d{3}$",
+                        "type": "string",
+                        "description": "Právní forma ekonomického subjektu - kód (ciselnikKod: PravniFormaRos, zdroj:res)"
+                    },
                     "spisovaZnacka": {
                         "maxLength": 32,
                         "type": "string",
@@ -2466,13 +2636,23 @@
                     },
                     {
                         "properties": {
+                            "pravniFormaRos": {
+                                "type": "array",
+                                "items": {
+                                    "maxLength": 3,
+                                    "minLength": 3,
+                                    "pattern": "^\\d{3}$",
+                                    "type": "string",
+                                    "description": "Právní forma ekonomického subjektu - kód (ciselnikKod: PravniFormaRos, zdroj:ros)"
+                                }
+                            },
                             "czNace": {
                                 "type": "array",
                                 "items": {
                                     "maxLength": 5,
                                     "minLength": 1,
                                     "type": "string",
-                                    "description": "CZ-NACE ekonomického subjektu - kód (ciselnikKod: CzNace, zdroj:res)"
+                                    "description": "CZ-NACE_2025 ekonomického subjektu - kód (ciselnikKod: CzNace, zdroj:res)"
                                 }
                             }
                         }
@@ -2483,6 +2663,12 @@
                 "type": "object",
                 "description": "Seznam registrací ekonomického subjektu v jednotlivých zdrojích",
                 "properties": {
+                    "stavZdrojeRos": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Stav ekonomického subjektu ve zdroji ROS (Základní registr - Registr osob) - kód (ciselnikKod: StavZdroje, zdroj: com) "
+                    },
                     "stavZdrojeVr": {
                         "maxLength": 64,
                         "minLength": 1,
@@ -2530,6 +2716,12 @@
                         "minLength": 1,
                         "type": "string",
                         "description": "Stav ekonomického subjektu ve zdroji DPH(Registr plátců daně s přidané hodnoty) - kód (ciselnikKod: StavZdroje, zdroj: com) "
+                    },
+                    "stavZdrojeSkDph": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Stav ekonomického subjektu ve zdroji DPH(Registr plátců daně s přidané hodnoty - skupinové DPH) - kód (ciselnikKod: StavZdroje, zdroj: com) "
                     },
                     "stavZdrojeSd": {
                         "maxLength": 64,
@@ -2608,6 +2800,15 @@
                                 "$ref": "#/components/schemas/AdresaDorucovaci",
                                 "description": "Doručovací adresa sídla ekonomického subjektu"
                             },
+                            "czNace2008": {
+                                "type": "array",
+                                "items": {
+                                    "maxLength": 5,
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "description": "CZ-NACE_2008 ekonomického subjektu - kód (ciselnikKod: CzNace2008, zdroj:res) "
+                                }
+                            },
                             "seznamRegistraci": {
                                 "$ref": "#/components/schemas/SeznamRegistraci",
                                 "description": "Seznam registraci ekonomického subjektu v jednotlivých datových zdrojích"
@@ -2630,7 +2831,7 @@
                                     "maxLength": 5,
                                     "minLength": 1,
                                     "type": "string",
-                                    "description": "Seznam CZ-NACE - seznam ekonomické činnosti - kód (ciselnikKod: CzNace, zdroj:res) "
+                                    "description": "Seznam CZ-NACE_2025 - seznam ekonomické činnosti - kód (ciselnikKod: CzNace, zdroj:res) "
                                 }
                             },
                             "subRegistrSzr": {
@@ -2645,9 +2846,28 @@
                     }
                 ]
             },
+            "AkcionarVr": {
+                "type": "object",
+                "description": "Akcionáři",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/OrganVr"
+                    },
+                    {
+                        "properties": {
+                            "typAkcionare": {
+                                "maxLength": 64,
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Typ akcionáře - kód (ciselnikKod: TypAkcionare, zdroj: vr) "
+                            }
+                        }
+                    }
+                ]
+            },
             "AngazmaFyzickaOsobaVr": {
                 "type": "object",
-                "description": "Angažná - fyzická osoba",
+                "description": "Angažmá - fyzická osoba",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/DatumZapisuVymazuUdajeVr"
@@ -2926,17 +3146,6 @@
                                 "minLength": 1,
                                 "type": "string",
                                 "description": "Typ orgánu - kód (ciselnikKod: TypOrganu, zdroj: vr) "
-                            },
-                            "nazevAngazma": {
-                                "maxLength": 255,
-                                "type": "string",
-                                "description": "Název angažmá - nestandardní"
-                            },
-                            "typAngazma": {
-                                "maxLength": 64,
-                                "minLength": 1,
-                                "type": "string",
-                                "description": "Typ orgánu - kód (ciselnikKod: TypOrganu, zdroj: vr) "
                             }
                         }
                     }
@@ -3064,11 +3273,6 @@
                                     "$ref": "#/components/schemas/UvolnenyPodilVr",
                                     "description": "Seznam uvolněných podílů"
                                 }
-                            },
-                            "nazev": {
-                                "maxLength": 255,
-                                "type": "string",
-                                "description": "Název orgánu - nestandardní"
                             }
                         }
                     }
@@ -3168,6 +3372,13 @@
                                     "description": "Informace o statutárních orgánech"
                                 }
                             },
+                            "akcionari": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AkcionarVr",
+                                    "description": "Akcionáři společnosti"
+                                }
+                            },
                             "podnikatel": {
                                 "type": "array",
                                 "items": {
@@ -3224,7 +3435,7 @@
                                 "maxLength": 64,
                                 "minLength": 1,
                                 "type": "string",
-                                "description": "Typ typu adresy - kód (ciselnikKod: TypAdresy, zdroj:vr) "
+                                "description": "Typ typu adresy - kód (ciselnikKod: TypAdresy) "
                             }
                         }
                     }
@@ -3423,8 +3634,6 @@
                                 "description": "Příjmení"
                             },
                             "statniObcanstvi": {
-                                "maxLength": 3,
-                                "minLength": 3,
                                 "type": "string",
                                 "description": "Státní občanství osoby - kod (ciselnikKod: Stat)"
                             },
@@ -3444,7 +3653,7 @@
             },
             "IcoVr": {
                 "type": "object",
-                "description": "Ićo",
+                "description": "Ičo",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/DatumZapisuVymazuUdajeVr"
@@ -4021,20 +4230,22 @@
                     },
                     {
                         "properties": {
-                            "pravniFormaRos": {
-                                "maxLength": 3,
-                                "minLength": 3,
-                                "pattern": "^\\d{3}$",
-                                "type": "string",
-                                "description": "Právní forma ROS - kód (ciselnikKod: PravniFormaRos, zdroj:res) "
-                            },
                             "czNace": {
                                 "type": "array",
                                 "items": {
                                     "maxLength": 5,
                                     "minLength": 1,
                                     "type": "string",
-                                    "description": "CZ-NACE ekonomického subjektu - kód (ciselnikKod: CzNace, zdroj:res) "
+                                    "description": "CZ-NACE_2025 ekonomického subjektu - kód (ciselnikKod: CzNace, zdroj:res) "
+                                }
+                            },
+                            "czNace2008": {
+                                "type": "array",
+                                "items": {
+                                    "maxLength": 5,
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "description": "CZ-NACE_2008 ekonomického subjektu - kód (ciselnikKod: CzNace2008, zdroj:res) "
                                 }
                             },
                             "doplnkovePravniFormy": {
@@ -4066,7 +4277,13 @@
                                 "maxLength": 5,
                                 "minLength": 1,
                                 "type": "string",
-                                "description": "Převažující CZ-NACE ekonomického subjektu - kód (ciselnikKod: CzNace, zdroj:res) "
+                                "description": "Převažující CZ-NACE_2025 ekonomického subjektu - kód (ciselnikKod: CzNace2025, zdroj:res) "
+                            },
+                            "czNacePrevazujici2008": {
+                                "maxLength": 5,
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Převažující CZ-NACE_2008 ekonomického subjektu - kód (ciselnikKod: CzNace2008, zdroj:res) "
                             },
                             "okresNutsLau": {
                                 "maxLength": 6,
@@ -4190,8 +4407,6 @@
                         "description": "Právní forma - kód (ciselnikKod: PravniForma, zdroj:com, res) "
                     },
                     "kodStatu": {
-                        "maxLength": 3,
-                        "minLength": 3,
                         "type": "string",
                         "description": "Kód státu (ciselnikKod: Stat, zdroj:com) "
                     }
@@ -4382,8 +4597,6 @@
                                 "description": "Identifikace primárního záznamu  pozn.: U multiplicitních registrací je pouze jedna registrace primární"
                             },
                             "kodStatu": {
-                                "maxLength": 3,
-                                "minLength": 3,
                                 "type": "string",
                                 "description": "Kód státu  (ciselnikKod: Stat, zdroj:com) "
                             }
@@ -4608,8 +4821,6 @@
                                 "description": "Platnost angažmá osoby do data "
                             },
                             "statniObcanstvi": {
-                                "maxLength": 3,
-                                "minLength": 3,
                                 "type": "string",
                                 "description": "Státní občanství osoby - kód (ciselnikKod: Stat, zdroj:com) "
                             },
@@ -5180,8 +5391,6 @@
                         "description": "Obchodní jméno subjektu"
                     },
                     "kodStatu": {
-                        "maxLength": 3,
-                        "minLength": 3,
                         "type": "string",
                         "description": "Kód státu  (ciselnikKod: Stat) "
                     },
@@ -5289,8 +5498,6 @@
                                 "description": "Typ subjektu - kód (ciselnikKod: TypSubjektuRcns) "
                             },
                             "stat": {
-                                "maxLength": 3,
-                                "minLength": 3,
                                 "type": "string",
                                 "description": "Stát"
                             },
@@ -5341,12 +5548,12 @@
                     "platnostOd": {
                         "format": "date",
                         "type": "string",
-                        "description": "počátek platnosti způsobu jednání dle popisu"
+                        "description": "Počátek platnosti způsobu jednání dle popisu"
                     },
                     "platnostDo": {
                         "format": "date",
                         "type": "string",
-                        "description": "konec platnosti způsobu jednání dle popisu "
+                        "description": "Konec platnosti způsobu jednání dle popisu "
                     }
                 }
             },
@@ -5369,11 +5576,6 @@
                                 "type": "string",
                                 "description": "Platnost angažované osoby od data"
                             },
-                            "nazevAngazma": {
-                                "maxLength": 100,
-                                "type": "string",
-                                "description": "Název orgánu"
-                            },
                             "poznamka": {
                                 "maxLength": 100,
                                 "type": "string",
@@ -5391,8 +5593,6 @@
                                 "description": "Název orgánu"
                             },
                             "kodStatu": {
-                                "maxLength": 3,
-                                "minLength": 3,
                                 "type": "string",
                                 "description": "Kód státu  (ciselnikKod: Stat) "
                             },
@@ -5913,7 +6113,7 @@
                         "maxLength": 64,
                         "minLength": 1,
                         "type": "string",
-                        "description": "Typ školy"
+                        "description": "Typ školy - kód (ciselnikKod: TypASkoly, zdroj: rs) "
                     },
                     "adresa": {
                         "$ref": "#/components/schemas/Adresa",
@@ -6029,7 +6229,7 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/AngazovanySubjektRs",
-                                    "description": "Angažovaný subjekt - například "
+                                    "description": "Angažovaný subjekt"
                                 }
                             },
                             "angazovanaOsoba": {
@@ -6298,6 +6498,594 @@
                                     "pattern": "^\\d{3}$",
                                     "type": "string",
                                     "description": "Správně příslušný finanční úřad - kód (ciselnikKod: FinancniUrad, zdroj:ufo)"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdresaRos": {
+                "type": "object",
+                "description": "Adresa ROS - obecný předek",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Adresa"
+                    },
+                    {
+                        "properties": {
+                            "typAdresy": {
+                                "maxLength": 64,
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Typ adresy - kód (ciselnikKod: TypAdresyAres) "
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdresaStavRos": {
+                "type": "object",
+                "description": "Adresa ",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/AdresaRos"
+                    },
+                    {
+                        "properties": {
+                            "platnostUdajeRos": {
+                                "maxLength": 15,
+                                "type": "string",
+                                "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                            }
+                        }
+                    }
+                ]
+            },
+            "AngazovanySubjektRos": {
+                "type": "object",
+                "description": "Angažovaný subjekt ROS - obecný předek",
+                "properties": {
+                    "ico": {
+                        "maxLength": 8,
+                        "minLength": 8,
+                        "pattern": "^\\d{8}$",
+                        "type": "string",
+                        "description": "Ičo právnické osoby"
+                    },
+                    "obchodniJmeno": {
+                        "maxLength": 2000,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Obchodní jméno právnické osoby"
+                    },
+                    "adresy": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AdresaRos",
+                            "description": "Adresy právnické osoby "
+                        }
+                    }
+                }
+            },
+            "DatovaSchrankaStavRos": {
+                "type": "object",
+                "description": "Datová schránka",
+                "properties": {
+                    "identifikatorDs": {
+                        "maxLength": 7,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Identifikátor DS"
+                    },
+                    "typDatoveSchranky": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Typ datové schránky (ROS) - kód (ciselnikKod: typDatoveSchrankyRos) "
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "DatumStavRob": {
+                "type": "object",
+                "description": "Datum osoby ROB",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/StavUdajeRob"
+                    },
+                    {
+                        "properties": {
+                            "datum": {
+                                "format": "date",
+                                "type": "string",
+                                "description": "Datum"
+                            }
+                        }
+                    }
+                ]
+            },
+            "DatumStavRos": {
+                "type": "object",
+                "description": "Datum",
+                "properties": {
+                    "datum": {
+                        "format": "date",
+                        "type": "string",
+                        "description": "Datum"
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "EvidenceAgendaRos": {
+                "type": "object",
+                "description": "Evidence agendy",
+                "properties": {
+                    "datumVznikuOpravneni": {
+                        "$ref": "#/components/schemas/DatumStavRos",
+                        "description": "Datum vzniku oprávnění"
+                    },
+                    "datumZanikuOpravneni": {
+                        "$ref": "#/components/schemas/DatumStavRos",
+                        "description": "Datum zániku oprávnění"
+                    },
+                    "agenda": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Agenda - kód (ciselnikKod: Agenda) "
+                    },
+                    "ovm": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Orgán veřejné moci - kód (ciselnikKod: Ovm) "
+                    },
+                    "obchodniJmeno": {
+                        "$ref": "#/components/schemas/ObchodniJmenoStavRos",
+                        "description": "Obchodní jméno"
+                    },
+                    "pozastaveniPreruseni": {
+                        "$ref": "#/components/schemas/PozastaveniPreruseniStavRos",
+                        "description": "Pozastavení nebo přerušení činnosti "
+                    },
+                    "adresySidla": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AdresaStavRos",
+                            "description": "Adresa sídla (popř. adresa doručovací)"
+                        }
+                    }
+                }
+            },
+            "JmenoStavRob": {
+                "type": "object",
+                "description": "Jméno osoby ROB",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/StavUdajeRob"
+                    },
+                    {
+                        "properties": {
+                            "hodnota": {
+                                "maxLength": 100,
+                                "type": "string",
+                                "description": "Hodnota jména osoby ROB"
+                            }
+                        }
+                    }
+                ]
+            },
+            "KontaktniUdajeStavRos": {
+                "type": "object",
+                "description": "Kontaktní údaje",
+                "properties": {
+                    "telefon": {
+                        "maxLength": 25,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Telefonní kontakt"
+                    },
+                    "email": {
+                        "maxLength": 50,
+                        "type": "string",
+                        "description": "Emailový kontakt"
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "ObchodniJmenoStavRos": {
+                "type": "object",
+                "description": "Obchodní jméno",
+                "properties": {
+                    "hodnota": {
+                        "maxLength": 2000,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Obchodní název (jméno)"
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "OsobaRobZaklad": {
+                "type": "object",
+                "description": "Osoba ROB",
+                "properties": {
+                    "jmeno": {
+                        "$ref": "#/components/schemas/JmenoStavRob",
+                        "description": "Jméno osoby ROB"
+                    },
+                    "datumNarozeni": {
+                        "$ref": "#/components/schemas/DatumStavRob",
+                        "description": "Datum narození osoby ROB"
+                    },
+                    "prijmeni": {
+                        "$ref": "#/components/schemas/PrijmeniStavRob",
+                        "description": "Příjmení osoby ROB"
+                    }
+                }
+            },
+            "OsobaRos": {
+                "type": "object",
+                "description": "Osoba ROS ",
+                "properties": {
+                    "osobaTextem": {
+                        "maxLength": 256,
+                        "type": "string",
+                        "description": "Osoba textem"
+                    },
+                    "datumNarozeni": {
+                        "format": "date",
+                        "type": "string",
+                        "description": "Datum narození"
+                    }
+                }
+            },
+            "PozastaveniPreruseniStavRos": {
+                "type": "object",
+                "description": "Pozastavení nebo přerušení činnosti",
+                "properties": {
+                    "hodnota": {
+                        "type": "boolean",
+                        "description": "Hodnota údaje pozastavení přerušení činnosti "
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "PravniFormaStavRos": {
+                "type": "object",
+                "description": "Právní forma",
+                "properties": {
+                    "hodnota": {
+                        "maxLength": 3,
+                        "minLength": 3,
+                        "pattern": "^\\d{3}$",
+                        "type": "string",
+                        "description": "Kód právní formy (ROS) - kód (ciselnikKod: PravniFormaRos) "
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "PravniStavStavRos": {
+                "type": "object",
+                "description": "Právní stav ",
+                "properties": {
+                    "hodnota": {
+                        "pattern": "^\\d{2}$",
+                        "type": "string",
+                        "description": "Právní stav - kód (ciselnikKod: pravniStavRos) "
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS) - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "PrijmeniStavRob": {
+                "type": "object",
+                "description": "Příjmení osoby ROB",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/StavUdajeRob"
+                    },
+                    {
+                        "properties": {
+                            "hodnota": {
+                                "maxLength": 100,
+                                "type": "string",
+                                "description": "Hodnota příjmení osoby ROB"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ProvozovnaRos": {
+                "type": "object",
+                "description": "Provozovna ",
+                "properties": {
+                    "icp": {
+                        "maximum": 9999999999,
+                        "minimum": 1000000000,
+                        "type": "integer",
+                        "description": "Identifikátor provozovny"
+                    },
+                    "datumUkonceniCinnosti": {
+                        "$ref": "#/components/schemas/DatumStavRos",
+                        "description": "Datum ukončení činnosti"
+                    },
+                    "datumZahajeniCinnosti": {
+                        "$ref": "#/components/schemas/DatumStavRos",
+                        "description": "Datum zahájení činnosti"
+                    },
+                    "adresaProvozovny": {
+                        "$ref": "#/components/schemas/AdresaStavRos",
+                        "description": "Adresa provozovny"
+                    }
+                }
+            },
+            "StavUdajeRob": {
+                "type": "object",
+                "description": "Stav údaje ROB - obecný předek",
+                "properties": {
+                    "zmenaUdaje": {
+                        "format": "date",
+                        "type": "string",
+                        "description": "Datum změny údaje"
+                    },
+                    "platnostUdajeRob": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROB) - kód (ciselnikKod: stavUdajeRob) "
+                    }
+                }
+            },
+            "ZaznamRosZaklad": {
+                "type": "object",
+                "description": "Detailní informace o ekonomickém subjektu ze zdroje ROS - základní informace",
+                "properties": {
+                    "ico": {
+                        "maxLength": 8,
+                        "minLength": 8,
+                        "pattern": "^\\d{8}$",
+                        "type": "string",
+                        "description": "Identifikační číslo ekonomického subjektu "
+                    },
+                    "datumVzniku": {
+                        "format": "date",
+                        "type": "string",
+                        "description": "Datum vzniku subjektu.  Vypočítaná hodnota dle platnosti evidence. "
+                    },
+                    "datumZaniku": {
+                        "format": "date",
+                        "type": "string",
+                        "description": "Datum zániku subjektu. Vypočítaná hodnota dle platnosti evidence. "
+                    },
+                    "pravniFormaRos": {
+                        "$ref": "#/components/schemas/PravniFormaStavRos",
+                        "description": "Právní forma - ROS"
+                    },
+                    "pravniStavRos": {
+                        "$ref": "#/components/schemas/PravniStavStavRos",
+                        "description": "Právní stav"
+                    },
+                    "datumAktualizace": {
+                        "format": "date",
+                        "type": "string",
+                        "description": "Datum poslední změny subjektu "
+                    },
+                    "provozovny": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProvozovnaRos",
+                            "description": "Provozovny"
+                        }
+                    },
+                    "kontaktniUdaje": {
+                        "$ref": "#/components/schemas/KontaktniUdajeStavRos",
+                        "description": "Kontaktní údaje"
+                    },
+                    "datoveSchranky": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatovaSchrankaStavRos",
+                            "description": "Datové schránky"
+                        }
+                    },
+                    "evidenceAgendy": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EvidenceAgendaRos",
+                            "description": "Evidence agendy"
+                        }
+                    },
+                    "stavSubjektu": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Stav ekonomického subjektu v ARES - kód (ciselnikKod: StavZdroje) "
+                    }
+                }
+            },
+            "AngazmaRos": {
+                "type": "object",
+                "description": "Angažmá",
+                "properties": {
+                    "osobaPravnicka": {
+                        "$ref": "#/components/schemas/AngazovanySubjektRos",
+                        "description": "Právnická osoba"
+                    },
+                    "osobaFyzicka": {
+                        "$ref": "#/components/schemas/AngazovanaOsobaRos",
+                        "description": "Fyzická osoba"
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS)  - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "AngazovanaOsobaRos": {
+                "type": "object",
+                "description": "Angažovaná osoba ROS - obecný předek",
+                "properties": {
+                    "osobaRos": {
+                        "$ref": "#/components/schemas/OsobaRos",
+                        "description": "Osoba z ROS"
+                    },
+                    "osobaRob": {
+                        "$ref": "#/components/schemas/OsobaRobZaklad",
+                        "description": "Osoba ROB"
+                    }
+                }
+            },
+            "EkonomickeSubjektyRosSeznam": {
+                "type": "object",
+                "description": "Seznam ekonomických subjektů ze zdroje ROS - neveřejná část ",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Seznam"
+                    },
+                    {
+                        "properties": {
+                            "ekonomickeSubjekty": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/EkonomickySubjektRos",
+                                    "description": "Seznam ekonomických subjektů zdroje ROS "
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "EkonomickySubjektRos": {
+                "type": "object",
+                "description": "Ekonomických subjekt ze zdroje ROS ",
+                "properties": {
+                    "icoId": {
+                        "maxLength": 32,
+                        "pattern": "^(ARES_)?\\d{8}$",
+                        "type": "string",
+                        "description": "ičo/id ekonomického subjektu"
+                    },
+                    "zaznamy": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ZaznamRos",
+                            "description": "Seznam záznamů daného iča"
+                        }
+                    }
+                }
+            },
+            "StatutarniOrganRos": {
+                "type": "object",
+                "description": "Statutární orgán",
+                "properties": {
+                    "osobaFyzicka": {
+                        "$ref": "#/components/schemas/AngazovanaOsobaRos",
+                        "description": "Fyzická osoba"
+                    },
+                    "osobaPravnicka": {
+                        "$ref": "#/components/schemas/StatutarniOrganZastupciRos",
+                        "description": "Právnická osoba"
+                    },
+                    "platnostUdajeRos": {
+                        "maxLength": 15,
+                        "type": "string",
+                        "description": "Stav údaje (ROS)  - kód (ciselnikKod: stavUdajeRos) "
+                    }
+                }
+            },
+            "StatutarniOrganZastupciRos": {
+                "type": "object",
+                "description": "Statutární orgán - zástupci",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/AngazovanySubjektRos"
+                    },
+                    {
+                        "properties": {
+                            "zastupci": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AngazovanaOsobaRos",
+                                    "description": "Zástupce statutárního orgánu"
+                                }
+                            },
+                            "platnostUdajeRos": {
+                                "maxLength": 15,
+                                "type": "string",
+                                "description": "Stav údaje (ROS)  - kód (ciselnikKod: stavUdajeRos) "
+                            }
+                        }
+                    }
+                ]
+            },
+            "ZaznamRos": {
+                "type": "object",
+                "description": "Detailní informace o ekonomickém subjektu ze zdroje ROS",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ZaznamRosZaklad"
+                    },
+                    {
+                        "properties": {
+                            "statutarniOrgany": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/StatutarniOrganRos",
+                                    "description": "Statutární orgán firmy"
+                                }
+                            },
+                            "likvidatori": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AngazmaRos",
+                                    "description": "Likvidátoři firmy"
+                                }
+                            },
+                            "opatrovnici": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AngazmaRos",
+                                    "description": "Opatrovníci firmy"
+                                }
+                            },
+                            "nuceniSpravci": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AngazmaRos",
+                                    "description": "Nucení správci firmy"
+                                }
+                            },
+                            "insolvencniSpravci": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AngazmaRos",
+                                    "description": "Insolvenční správci firmy"
                                 }
                             }
                         }
@@ -6766,7 +7554,7 @@
                     "datovyZdroj": {
                         "maxLength": 30,
                         "type": "string",
-                        "description": "Datový zdroj notifikační dávky - kód (ciselnikKod: TypZdrojeAres, zdroj:com) Podporované zdroje:  vr - Věřejný rejstřík res - Registr ekonomických subjektů rzp - Registr živnostenského podnikání nrpzs - Národní registr poskytovatelů zdravotnických služeb rcns - Registr církvní a náboženských společenství rpsh - Registr politických stran a hnutí rs - Registr škol szr - Společný zemědělský registr "
+                        "description": "Datový zdroj notifikační dávky - kód (ciselnikKod: TypZdrojeAres, zdroj:com) Podporované zdroje:  vr - Veřejný rejstřík res - Registr ekonomických subjektů ros - Registr osob rzp - Registr živnostenského podnikání nrpzs - Národní registr poskytovatelů zdravotnických služeb rcns - Registr církvní a náboženských společenství rpsh - Registr politických stran a hnutí rs - Registr škol szr - Společný zemědělský registr "
                     }
                 }
             },
@@ -6931,12 +7719,24 @@
             "description": "ekonomicke-subjekty-rpsh operations"
         },
         {
+            "name": "ekonomicke-subjekty-ros",
+            "description": "ekonomicke-subjekty-ros operations"
+        },
+        {
             "name": "ekonomicke-subjekty-ceu",
             "description": "ekonomicke-subjekty-ceu operations"
         },
         {
             "name": "ciselniky-nazevniky",
             "description": "ciselniky-nazevniky operations"
+        }
+    ],
+    "security": [
+        {
+            "BasicAuth": []
+        },
+        {
+            "BearerAuth": []
         }
     ]
 }
