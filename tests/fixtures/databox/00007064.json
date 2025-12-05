@@ -86,6 +86,23 @@
     },
     {
         "Ico": "00007064",
+        "NazevOsoby": "OSZMV (Ministerstvo vnitra)",
+        "ISDS": "acbkjxv",
+        "PDZ": "false",
+        "TypSubjektu": "OVM_REQ",
+        "AdresaSidla": {
+            "AdresaTextem": "náměstí Hrdinů 1634/3, Nusle, 14000, Praha 4",
+            "OkresNazev": {},
+            "ObecNazev": "Praha 4",
+            "CastObceNazev": "Nusle",
+            "UliceNazev": "náměstí Hrdinů",
+            "PostaKod": "14000",
+            "CisloDomovni": "1634",
+            "CisloOrientacni": "3"
+        }
+    },
+    {
+        "Ico": "00007064",
         "NazevOsoby": "Automat pro Sbírku právních předpisů územních samosprávných celků (Ministerstvo vnitra)",
         "ISDS": "ci2xihx",
         "PDZ": "false",
