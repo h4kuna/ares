@@ -19,11 +19,11 @@
     "country": "Česká republika",
     "country_code": "CZ",
     "nace": [
+        "62",
         "461",
         "471",
-        "620",
-        "7490",
-        "73110"
+        "73110",
+        "74990"
     ],
     "sources": {
         "stavZdrojeRos": true,
