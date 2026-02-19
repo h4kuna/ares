@@ -1,23 +1,24 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Vies;
 
 use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
 use stdClass;
+use function sprintf;
 
 /**
- * @phpstan-type ViesResponse object{countryCode: string, vatNumber: string, requestDate: string, valid: bool, requestIdentifier: string, name: string, address: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string, traderCompanyType: string, traderNameMatch: string, traderStreetMatch: string, traderPostalCodeMatch: string, traderCityMatch: string, traderCompanyTypeMatch: string}&\stdClass
+ * @phpstan-type ViesResponse object{countryCode: string, vatNumber: string, requestDate: string, valid: bool, requestIdentifier: string, name: string, address: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string, traderCompanyType: string, traderNameMatch: string, traderStreetMatch: string, traderPostalCodeMatch: string, traderCityMatch: string, traderCompanyTypeMatch: string}&stdClass
  */
 final class Client
 {
+
 	public static string $url = 'https://ec.europa.eu/taxation_customs/vies/rest-api';
 
 
 	public function __construct(private TransportProvider $transportProvider)
 	{
 	}
-
 
 	/**
 	 * @return ViesResponse
@@ -26,7 +27,7 @@ final class Client
 	 */
 	public function checkVatNumber(ViesEntity $viesEntity): object
 	{
-		$request = $this->transportProvider->createJsonRequest(static::$url . '/check-vat-number', $viesEntity->toParam());
+		$request = $this->transportProvider->createJsonRequest(self::$url . '/check-vat-number', $viesEntity->toParam());
 		$response = $this->transportProvider->response($request);
 
 		$data = $this->transportProvider->toJson($response);
@@ -47,9 +48,10 @@ final class Client
 	 */
 	public function status(): stdClass
 	{
-		$request = $this->transportProvider->createRequest(static::$url . '/check-status');
+		$request = $this->transportProvider->createRequest(self::$url . '/check-status');
 		$response = $this->transportProvider->response($request);
 
 		return $this->transportProvider->toJson($response);
 	}
+
 }

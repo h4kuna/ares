@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\Unit\Ares;
 
@@ -13,6 +13,7 @@ require_once __DIR__ . '/../../../bootstrap.php';
  */
 final class HelperTest extends TestCase
 {
+
 	/**
 	 * @return array<array<mixed>>
 	 */
@@ -82,12 +83,15 @@ final class HelperTest extends TestCase
 		];
 	}
 
-
 	/**
-	 * @dataProvider provideParseAddress
 	 * @param array<string, string> $expected
+	 *
+	 * @dataProvider provideParseAddress
 	 */
-	public function testParseAddress(string $address, array $expected): void
+	public function testParseAddress(
+		string $address,
+		array $expected,
+	): void
 	{
 		Assert::equal($expected, Helper::parseAddress($address));
 	}

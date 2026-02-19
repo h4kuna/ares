@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tool;
 
@@ -6,6 +6,11 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
 use h4kuna\Ares\Exception\LogicException;
+use function get_debug_type;
+use function is_string;
+use function sprintf;
+use function str_replace;
+use function trim;
 
 final class Strings
 {

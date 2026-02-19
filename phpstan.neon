@@ -8,7 +8,7 @@ parameters:
 	ignoreErrors:
 		-
 			message: "#^Variable property access on \\$this\\(h4kuna\\\\Ares\\\\Ares\\\\Core\\\\Data\\)\\.$#"
-			count: 3
+			count: 1
 			path: src/Ares/Core/Data.php
 		- '/Method h4kuna\\Ares\\Tests\\.*? throws checked exception .*? but it.s missing from the PHPDoc @throws tag\./'
 

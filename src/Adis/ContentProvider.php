@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Adis;
 
@@ -12,10 +12,13 @@ use h4kuna\Ares\Tool\Batch;
 
 final class ContentProvider
 {
-	public function __construct(private Client $client, private StatusBusinessSubjectsTransformer $stdClassTransformer)
+
+	public function __construct(
+		private Client $client,
+		private StatusBusinessSubjectsTransformer $stdClassTransformer,
+	)
 	{
 	}
-
 
 	/**
 	 * @throws ServerResponseException
@@ -28,7 +31,6 @@ final class ContentProvider
 
 		throw new LogicException('ADIS must return anything.');
 	}
-
 
 	/**
 	 * @param array<string, string> $tin

@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\E2E;
 
-use h4kuna;
-use h4kuna\Ares;
+use h4kuna\Ares\Ares\Client;
+use h4kuna\Ares\Ares\Sources;
+use h4kuna\Ares\AresFactory;
 use h4kuna\Ares\Tests\TestCase;
 use Tester\Assert;
 
@@ -17,18 +18,18 @@ final class VrEndpointTest extends TestCase
 
 	public function testBasic(): void
 	{
-		$aresFactory = new Ares\AresFactory();
+		$aresFactory = new AresFactory();
 		$transportProvider = $aresFactory->createTransportProvider($aresFactory->getStreamFactory());
 
-		$provider = new Ares\Ares\Client($transportProvider);
+		$provider = new Client($transportProvider);
 
-		$coreData = $provider->useEndpoint(Ares\Ares\Sources::CORE, '87744473');
+		$coreData = $provider->useEndpoint(Sources::CORE, '87744473');
 		Assert::same('87744473', $coreData->ico);
 
-		$data = $provider->useEndpoint(Ares\Ares\Sources::SERVICE_RES, '87744473');
+		$data = $provider->useEndpoint(Sources::SERVICE_RES, '87744473');
 		Assert::same('87744473', $data->icoId);
 	}
 
 }
 
-(new VrEndpointTest)->run();
+(new VrEndpointTest())->run();

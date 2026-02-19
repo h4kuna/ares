@@ -1,14 +1,18 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares;
 
 use Generator;
-use h4kuna\Ares\Ares\Core;
+use h4kuna\Ares\Adis\ContentProvider as AdisContentProvider;
+use h4kuna\Ares\Ares\Client as AresClient;
+use h4kuna\Ares\Ares\Core\ContentProvider as AresCoreContentProvider;
 use h4kuna\Ares\Ares\Core\Data;
+use h4kuna\Ares\DataBox\ContentProvider as DataBoxContentProvider;
 use h4kuna\Ares\Exception\AdisResponseException;
 use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
 use h4kuna\Ares\Exception\ResultException;
 use h4kuna\Ares\Exception\ServerResponseException;
+use h4kuna\Ares\Vies\ContentProvider as ViesContentProvider;
 use h4kuna\Ares\Vies\ViesEntity;
 use stdClass;
 
@@ -17,31 +21,34 @@ use stdClass;
  */
 class Ares
 {
+
 	public function __construct(
-		public Core\ContentProvider $aresContentProvider,
-		public DataBox\ContentProvider $dataBoxContentProvider,
-		public Adis\ContentProvider $adisContentProvider,
-		public Vies\ContentProvider $viesContentProvider,
-	) {
+		public AresCoreContentProvider $aresContentProvider,
+		public DataBoxContentProvider $dataBoxContentProvider,
+		public AdisContentProvider $adisContentProvider,
+		public ViesContentProvider $viesContentProvider,
+	)
+	{
 	}
 
 	/**
 	 * @deprecated use property
 	 */
-	public function getAdis(): Adis\ContentProvider
+	public function getAdis(): AdisContentProvider
 	{
 		return $this->adisContentProvider;
 	}
 
-	public function getAresClient(): Ares\Client
+	public function getAresClient(): AresClient
 	{
 		return $this->aresContentProvider->getClient();
 	}
 
 	/**
-	 * @template KeyName
 	 * @param array<KeyName, string|int> $identificationNumbers
 	 * @return Generator<(int&KeyName)|(KeyName&string), Data>
+	 *
+	 * @template KeyName
 	 *
 	 * @throws ResultException
 	 * @throws ServerResponseException
@@ -63,6 +70,7 @@ class Ares
 
 	/**
 	 * @return array<stdClass>
+	 *
 	 * @throws ResultException
 	 * @throws ServerResponseException
 	 */

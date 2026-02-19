@@ -1,23 +1,24 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\E2E;
 
-use h4kuna;
-use h4kuna\Ares;
+use h4kuna\Ares\Adis\StatusBusinessSubjects\Subject;
+use h4kuna\Ares\AresFactory;
 use h4kuna\Ares\Tests\TestCase;
+use h4kuna\Ares\Tests\UseStoredFile;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 final class AdisTest extends TestCase
 {
-	use Ares\Tests\UseStoredFile;
+
+	use UseStoredFile;
 
 	protected static function getMask(): string
 	{
 		return __DIR__ . '/../../fixtures/adis/%file%.json';
 	}
-
 
 	/**
 	 * @return array<mixed>
@@ -34,23 +35,21 @@ final class AdisTest extends TestCase
 		];
 	}
 
-
 	/**
 	 * @dataProvider provideOneTin
 	 */
 	public function testOneTin(string $tin): void
 	{
-		$adis = (new Ares\AresFactory())->create()->adisContentProvider;
+		$adis = (new AresFactory())->create()->adisContentProvider;
 
 		$subject = $adis->statusBusinessSubject($tin);
-		Assert::type(Ares\Adis\StatusBusinessSubjects\Subject::class, $subject);
+		Assert::type(Subject::class, $subject);
 		$this->assertFile($subject->tin, $subject);
 	}
 
-
 	public function testMulti(): void
 	{
-		$adis = (new Ares\AresFactory())->create()->adisContentProvider;
+		$adis = (new AresFactory())->create()->adisContentProvider;
 
 		$tins = [
 			'a' => '8702080024',
@@ -63,7 +62,7 @@ final class AdisTest extends TestCase
 
 		$results = [];
 		foreach ($adis->statusBusinessSubjects($tins) as $name => $subject) {
-			Assert::type(Ares\Adis\StatusBusinessSubjects\Subject::class, $subject);
+			Assert::type(Subject::class, $subject);
 			$this->assertFile($subject->tin, $subject);
 			$results[$name] = $subject;
 		}

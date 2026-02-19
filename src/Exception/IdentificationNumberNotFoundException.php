@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Exception;
 
@@ -9,7 +9,11 @@ final class IdentificationNumberNotFoundException extends RuntimeException
 
 	private string $in;
 
-	public function __construct(string $message = '', string $in = '', ?Throwable $previous = null)
+	public function __construct(
+		string $message = '',
+		string $in = '',
+		?Throwable $previous = null,
+	)
 	{
 		parent::__construct($message, $previous);
 		$this->in = $in;

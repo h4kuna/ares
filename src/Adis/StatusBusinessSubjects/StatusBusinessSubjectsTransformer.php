@@ -1,8 +1,9 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Adis\StatusBusinessSubjects;
 
 use stdClass;
+use function rtrim;
 
 class StatusBusinessSubjectsTransformer
 {
@@ -31,7 +32,8 @@ class StatusBusinessSubjectsTransformer
 			$exists && $isVatPayer ? $data->$attributes->nespolehlivyPlatce !== 'ANO' : null,
 			$isVatPayer,
 			$data->$attributes->cisloFu ?? '',
-			$address
+			$address,
 		);
 	}
+
 }

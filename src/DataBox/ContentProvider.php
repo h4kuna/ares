@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\DataBox;
 
@@ -10,14 +10,17 @@ use stdClass;
 
 class ContentProvider
 {
+
 	public function __construct(
 		private Client $client,
 		private StreamFactoryInterface $streamFactory,
-	) {
+	)
+	{
 	}
 
 	/**
 	 * @return list<stdClass>
+	 *
 	 * @throws ResultException
 	 * @throws ServerResponseException
 	 */
@@ -32,7 +35,10 @@ class ContentProvider
 	 * @throws ResultException
 	 * @throws ServerResponseException
 	 */
-	protected function xml(string $parameter, string $value): stdClass
+	protected function xml(
+		string $parameter,
+		string $value,
+	): stdClass
 	{
 		$xml = <<<XML
 		<GetInfoRequest xmlns="http://seznam.gov.cz/ovm/ws/v1">

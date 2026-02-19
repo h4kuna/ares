@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\Unit\Ares\Core;
 
 use h4kuna\Ares\Ares\Core\JsonToDataTransformer;
 use h4kuna\Ares\Tests\TestCase;
+use stdClass;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../../../bootstrap.php';
@@ -16,7 +17,7 @@ final class JsonToDataTransformerTest extends TestCase
 
 	public function testCompare(): void
 	{
-		$json = new \stdClass();
+		$json = new stdClass();
 		$json->ico = '1';
 		$json->pravniForma = '111';
 		$json->datumVzniku = '2022-08-13';
@@ -37,4 +38,4 @@ final class JsonToDataTransformerTest extends TestCase
 
 }
 
-(new JsonToDataTransformerTest)->run();
+(new JsonToDataTransformerTest())->run();

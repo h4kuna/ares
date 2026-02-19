@@ -1,9 +1,17 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares;
 
-use GuzzleHttp;
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\HttpFactory as GuzzleHttpFactory;
+use h4kuna\Ares\Adis\Client as AdisClient;
+use h4kuna\Ares\Adis\ContentProvider as AdisContentProvider;
 use h4kuna\Ares\Adis\StatusBusinessSubjects\StatusBusinessSubjectsTransformer;
+use h4kuna\Ares\Ares\Client as AresClient;
+use h4kuna\Ares\Ares\Core\ContentProvider as AresCoreContentProvider;
+use h4kuna\Ares\Ares\Core\JsonToDataTransformer;
+use h4kuna\Ares\DataBox\Client as DataBoxClient;
+use h4kuna\Ares\DataBox\ContentProvider as DataBoxContentProvider;
 use h4kuna\Ares\Exception\LogicException;
 use h4kuna\Ares\Http\HttpFactory;
 use h4kuna\Ares\Http\TransportProvider;
@@ -12,16 +20,18 @@ use h4kuna\Ares\Vies\ContentProvider;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use function class_exists;
 
 /**
  * @phpstan-type multiFactory RequestFactoryInterface&StreamFactoryInterface
  */
 class AresFactory
 {
+
 	/**
 	 * @var multiFactory|null
 	 */
-	private null|RequestFactoryInterface|StreamFactoryInterface $multiFactory = null;
+	private RequestFactoryInterface|StreamFactoryInterface|null $multiFactory = null;
 
 
 	public function __construct(
@@ -32,30 +42,27 @@ class AresFactory
 	{
 	}
 
-
 	public function create(): Ares
 	{
 		$streamFactory = $this->getStreamFactory();
 		$transportProvider = $this->createTransportProvider($streamFactory);
 		$adisContentProvider = $this->createAdisContentProvider($transportProvider);
-		$aresClient = new Ares\Client($transportProvider);
+		$aresClient = new AresClient($transportProvider);
 
-		$dataBoxClient = new DataBox\Client($transportProvider);
-		$dataBoxContentProvider = new DataBox\ContentProvider($dataBoxClient, $streamFactory);
+		$dataBoxClient = new DataBoxClient($transportProvider);
+		$dataBoxContentProvider = new DataBoxContentProvider($dataBoxClient, $streamFactory);
 
-		$aresContentProvider = new Ares\Core\ContentProvider(new Ares\Core\JsonToDataTransformer(), $aresClient, $adisContentProvider);
+		$aresContentProvider = new AresCoreContentProvider(new JsonToDataTransformer(), $aresClient, $adisContentProvider);
 
 		$viesContentProvider = new ContentProvider(new Client($transportProvider));
 
 		return new Ares($aresContentProvider, $dataBoxContentProvider, $adisContentProvider, $viesContentProvider);
 	}
 
-
 	public function getRequestFactory(): RequestFactoryInterface
 	{
 		return $this->requestFactory ??= $this->getMultiFactory();
 	}
-
 
 	public function getClient(): ClientInterface
 	{
@@ -64,21 +71,18 @@ class AresFactory
 		}
 		self::checkGuzzle();
 
-		return $this->client = new GuzzleHttp\Client();
+		return $this->client = new GuzzleClient();
 	}
-
 
 	public function getStreamFactory(): StreamFactoryInterface
 	{
 		return $this->streamFactory ??= $this->getMultiFactory();
 	}
 
-
-	protected function createAdisContentProvider(TransportProvider $transportProvider): Adis\ContentProvider
+	protected function createAdisContentProvider(TransportProvider $transportProvider): AdisContentProvider
 	{
-		return new Adis\ContentProvider(new Adis\Client($transportProvider), new StatusBusinessSubjectsTransformer());
+		return new AdisContentProvider(new AdisClient($transportProvider), new StatusBusinessSubjectsTransformer());
 	}
-
 
 	public function createTransportProvider(StreamFactoryInterface $streamFactory): TransportProvider
 	{
@@ -87,7 +91,6 @@ class AresFactory
 		return new TransportProvider($requestFactory, $client, $streamFactory);
 	}
 
-
 	/**
 	 * @return multiFactory
 	 */
@@ -95,13 +98,12 @@ class AresFactory
 	{
 		self::checkGuzzle();
 
-		return $this->multiFactory ??= class_exists(GuzzleHttp\Psr7\HttpFactory::class) ? new GuzzleHttp\Psr7\HttpFactory() : new HttpFactory();
+		return $this->multiFactory ??= class_exists(GuzzleHttpFactory::class) ? new GuzzleHttpFactory() : new HttpFactory();
 	}
-
 
 	private static function checkGuzzle(): void
 	{
-		if (!class_exists(GuzzleHttp\Client::class)) {
+		if (class_exists(GuzzleClient::class) === false) {
 			throw new LogicException('Guzzle not found, let implement own solution or install guzzle by: composer require guzzlehttp/guzzle');
 		}
 	}

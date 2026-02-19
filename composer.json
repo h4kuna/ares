@@ -38,17 +38,21 @@
     "nette/tester": "^2.4",
     "phpstan/phpstan": "^2.1",
     "phpstan/phpstan-strict-rules": "^2.0",
+    "shipmonk/coding-standard": "^0.2",
     "tracy/tracy": "^2.9"
   },
   "config": {
     "sort-packages": true,
     "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
       "php-http/discovery": true
     }
   },
   "scripts": {
+    "cbf": "vendor/bin/phpcbf",
     "coverage": "vendor/bin/tester --coverage coverage.html --coverage-src src/ --colors 1 -s -C tests/src",
-    "qa": ["@tests", "@stan"],
+    "cs": "vendor/bin/phpcs",
+    "qa": ["@tests", "@cs", "@stan"],
     "stan": "vendor/bin/phpstan analyse",
     "tests": "vendor/bin/tester --colors 1 -s -C tests/src"
   },

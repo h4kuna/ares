@@ -1,12 +1,16 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Vies;
+
+use function array_filter;
+use function get_object_vars;
 
 /**
  * @phpstan-type viesParam array{vatNumber: string, countryCode: string, requesterMemberStateCode: string, requesterNumber: string, traderName: string, traderStreet: string, traderPostalCode: string, traderCity: string,traderCompanyType: string}
  */
 class ViesEntity
 {
+
 	public function __construct(
 		private string $vatNumber,
 		private string $countryCode,
@@ -21,7 +25,6 @@ class ViesEntity
 	{
 	}
 
-
 	/**
 	 * @return viesParam
 	 */
@@ -32,4 +35,5 @@ class ViesEntity
 
 		return $data;
 	}
+
 }

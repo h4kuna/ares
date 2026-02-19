@@ -1,9 +1,12 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Adis\Soap;
 
+use function implode;
+
 final class Envelope
 {
+
 	public static function seznamNespolehlivyPlatce(): string
 	{
 		return self::soap('<SeznamNespolehlivyPlatceRequest xmlns="http://adis.mfcr.cz/rozhraniCRPDPH/"></SeznamNespolehlivyPlatceRequest>');
@@ -19,8 +22,7 @@ final class Envelope
 		XML);
 	}
 
-
-	public static function StatusNespolehlivyPlatceRozsireny(string ...$tin): string
+	public static function statusNespolehlivyPlatceRozsireny(string ...$tin): string
 	{
 		$dic = implode('</roz:dic><roz:dic>', $tin);
 		return self::soapExtends(<<<XML
@@ -30,8 +32,7 @@ final class Envelope
 		XML);
 	}
 
-
-	public static function StatusNespolehlivySubjektRozsireny(string ...$tin): string
+	public static function statusNespolehlivySubjektRozsireny(string ...$tin): string
 	{
 		$dic = implode('</roz:dic><roz:dic>', $tin);
 		return self::soapExtends(<<<XML
@@ -52,7 +53,6 @@ final class Envelope
 		XML;
 	}
 
-
 	private static function soapExtends(string $body): string
 	{
 		return <<<XML
@@ -64,4 +64,5 @@ final class Envelope
 		</soapenv:Envelope>
 		XML;
 	}
+
 }

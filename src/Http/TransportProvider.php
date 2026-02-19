@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Http;
 
@@ -13,14 +13,18 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use stdClass;
+use function assert;
+use function is_string;
 
 final class TransportProvider
 {
+
 	public function __construct(
 		private RequestFactoryInterface $requestFactory,
 		private ClientInterface $client,
 		private StreamFactoryInterface $streamFactory,
-	) {
+	)
+	{
 	}
 
 	/**
@@ -53,7 +57,10 @@ final class TransportProvider
 		return $json;
 	}
 
-	public function createRequest(string $url, string $method = 'GET'): RequestInterface
+	public function createRequest(
+		string $url,
+		string $method = 'GET',
+	): RequestInterface
 	{
 		return $this->requestFactory->createRequest($method, $url)
 			->withHeader('X-Powered-By', 'h4kuna/ares');
@@ -62,7 +69,10 @@ final class TransportProvider
 	/**
 	 * @param array<string, mixed> $data
 	 */
-	public function createJsonRequest(string $url, array $data = []): RequestInterface
+	public function createJsonRequest(
+		string $url,
+		array $data = [],
+	): RequestInterface
 	{
 		$request = $this->createPost($url, 'application/json');
 		if ($data !== []) {
@@ -72,7 +82,10 @@ final class TransportProvider
 		return $request;
 	}
 
-	public function createXmlRequest(string $url, string|StreamInterface $body): RequestInterface
+	public function createXmlRequest(
+		string $url,
+		string|StreamInterface $body,
+	): RequestInterface
 	{
 		if (is_string($body)) {
 			$body = $this->streamFactory->createStream($body);
@@ -82,7 +95,10 @@ final class TransportProvider
 			->withBody($body);
 	}
 
-	private function createPost(string $url, string $contentType): RequestInterface
+	private function createPost(
+		string $url,
+		string $contentType,
+	): RequestInterface
 	{
 		return $this->createRequest($url, 'POST')
 			->withHeader('Content-Type', "$contentType; charset=utf-8");

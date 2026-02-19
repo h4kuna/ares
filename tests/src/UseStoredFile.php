@@ -1,15 +1,27 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests;
 
 use Composer\InstalledVersions;
+use Exception;
 use Nette\Utils\Json;
+use ReflectionClass;
 use Tester\Assert;
+use function file_get_contents;
+use function file_put_contents;
+use function is_file;
+use function is_string;
+use function pathinfo;
+use function strtr;
+use const PATHINFO_EXTENSION;
 
 trait UseStoredFile
 {
 
-	protected function assertFile(string $filename, mixed $content): void
+	protected function assertFile(
+		string $filename,
+		mixed $content,
+	): void
 	{
 		$filename = strtr(static::getMask(), ['%file%' => $filename]);
 		$extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -20,16 +32,17 @@ trait UseStoredFile
 		Assert::same(file_get_contents($filename), self::saveContent($content, $extension));
 	}
 
-
 	protected static function getMask(): string
 	{
 		return '%file%';
 	}
 
-
-	private static function saveContent(mixed $content, string $extension): string
+	private static function saveContent(
+		mixed $content,
+		string $extension,
+	): string
 	{
-		$jsonReflection = new \ReflectionClass(Json::class);
+		$jsonReflection = new ReflectionClass(Json::class);
 		$isOld = $jsonReflection->getMethod('encode')->getParameters()[1]->name === 'options';
 
 		if (is_string($content)) {
@@ -41,14 +54,17 @@ trait UseStoredFile
 
 		return match ($extension) {
 			'json' => self::jsonToString($content, $isOld),
-			default => throw new \Exception('not implemented'),
+			default => throw new Exception('not implemented'),
 		};
 	}
 
-
-	private static function jsonToString(mixed $content, bool $isOld): string
+	private static function jsonToString(
+		mixed $content,
+		bool $isOld,
+	): string
 	{
 		$param = InstalledVersions::getVersion('nette/utils') < '4.0.0.0' ? Json::PRETTY : true;
 		return $isOld ? strtr(Json::encode($content, $param), ['\\/' => '/']) : Json::encode($content, true);
 	}
+
 }

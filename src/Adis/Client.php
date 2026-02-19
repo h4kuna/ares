@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Adis;
 
@@ -11,16 +11,18 @@ use h4kuna\Ares\Tool\Strings;
 use h4kuna\Ares\Tool\Xml;
 use SimpleXMLElement;
 use stdClass;
+use function simplexml_load_string;
 
 final class Client
 {
+
 	public static string $url = 'https://adisrws.mfcr.cz/adistc/axis2/services/rozhraniCRPDPH.rozhraniCRPDPHSOAP';
 
 	public function __construct(
 		private TransportProvider $transportProvider,
-	) {
+	)
+	{
 	}
-
 
 	/**
 	 * @param array<string, string> $chunk
@@ -30,7 +32,7 @@ final class Client
 	 */
 	public function statusBusinessSubjects(array $chunk): array
 	{
-		$xml = Envelope::StatusNespolehlivySubjektRozsireny(...$chunk);
+		$xml = Envelope::statusNespolehlivySubjektRozsireny(...$chunk);
 		$data = $this->request($xml, 'StatusNespolehlivySubjektRozsirenyResponse');
 		$attributes = '@attributes';
 
@@ -52,17 +54,25 @@ final class Client
 	/**
 	 * @throws ServerResponseException
 	 */
-	private function request(string $xml, string $name): stdClass
+	private function request(
+		string $xml,
+		string $name,
+	): stdClass
 	{
 		$request = $this->transportProvider->createXmlRequest(self::$url, $xml);
 		$response = $this->transportProvider->response($request);
 		$xml = @simplexml_load_string($response->getBody()->getContents(), namespace_or_prefix: 'soapenv', is_prefix: true);
 
-		if ($xml === false || ($xml->Body->children()->$name instanceof SimpleXMLElement) === false) {
-			throw ServerResponseException::badResponse(sprintf('Missing tag "%s" in response.', $name));
+		if ($xml === false) {
+			throw ServerResponseException::badResponse('Broken XML.');
 		}
 
-		return Xml::toJson($xml->Body->children()->$name);
+		$body = $xml->Body; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+		if (($body->children()->$name instanceof SimpleXMLElement) === false) {
+			throw ServerResponseException::badResponse("Missing tag '{$name}' in response.");
+		}
+
+		return Xml::toJson($body->children()->$name);
 	}
 
 }

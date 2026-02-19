@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Adis\StatusBusinessSubjects;
 
@@ -6,6 +6,7 @@ use stdClass;
 
 final class Subject
 {
+
 	public function __construct(
 		public bool $exists,
 		public string $type,
@@ -17,4 +18,5 @@ final class Subject
 	)
 	{
 	}
+
 }

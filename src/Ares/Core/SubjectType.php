@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares\Core;
 
 final class SubjectType
 {
+
 	public const AS = 121;
 	public const VOS = 111;
 	public const SRO = 112;

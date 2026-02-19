@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\Unit\Ares\Core;
 
@@ -6,7 +6,16 @@ use DateTimeImmutable;
 use h4kuna\Ares\Ares\Core\Data;
 use h4kuna\Ares\Ares\Sources;
 use h4kuna\Ares\Tests\TestCase;
+use ReflectionClass;
+use ReflectionProperty;
+use stdClass;
 use Tester\Assert;
+use function array_column;
+use function array_key_exists;
+use function array_search;
+use function json_encode;
+use function serialize;
+use function unserialize;
 
 require_once __DIR__ . '/../../../../bootstrap.php';
 
@@ -25,7 +34,6 @@ final class DataTest extends TestCase
 		Assert::equal($unserializeData, $data);
 	}
 
-
 	public function testToArray(): void
 	{
 		$data = self::createData();
@@ -39,7 +47,6 @@ final class DataTest extends TestCase
 		Assert::same([], $properties);
 	}
 
-
 	public function testJson(): void
 	{
 		$data = self::createData();
@@ -48,14 +55,13 @@ final class DataTest extends TestCase
 		Assert::same('{"active":true,"city":"a","company":"b","created":"2020-12-13T04:05:06+01:00","dissolved":"2021-01-14T05:06:07+01:00","city_district":"c","city_post":"d","in":"e","is_person":false,"legal_form_code":102,"legal_form_code_ros":null,"house_number":"f","street":"g","district":null,"tin":null,"vat_payer":false,"zip":"h","country":"j","country_code":"k","nace":["465"],"sources":{"stavZdrojeRes":true}}', $encode);
 	}
 
-
 	/**
 	 * @return array<string>
 	 */
 	private static function allPropertyRead(): array
 	{
-		$reflection = new \ReflectionClass(Data::class);
-		$properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
+		$reflection = new ReflectionClass(Data::class);
+		$properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
 		$properties = array_column($properties, 'name');
 		foreach (['original', 'adis'] as $property) {
 			$key = array_search($property, $properties, true);
@@ -64,7 +70,6 @@ final class DataTest extends TestCase
 
 		return $properties;
 	}
-
 
 	private static function createData(): Data
 	{
@@ -90,7 +95,7 @@ final class DataTest extends TestCase
 		$data->sources = [Sources::SERVICE_RES => true];
 		$data->country = 'j';
 		$data->country_code = 'k';
-		$data->original = new \stdClass();
+		$data->original = new stdClass();
 
 		return $data;
 	}
