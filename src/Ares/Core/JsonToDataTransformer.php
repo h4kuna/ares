@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares\Core;
 
@@ -9,7 +9,8 @@ use stdClass;
 
 class JsonToDataTransformer
 {
-	private const RegisterPriority = ['rzp', 'res', 'vr'];
+
+	private const REGISTER_PRIORITY = ['rzp', 'res', 'vr'];
 
 
 	public function transform(stdClass $json): Data
@@ -41,8 +42,10 @@ class JsonToDataTransformer
 		return $data;
 	}
 
-
-	private static function updateAddress(Data $data, stdClass $sidlo): bool
+	private static function updateAddress(
+		Data $data,
+		stdClass $sidlo,
+	): bool
 	{
 		$data->zip = Strings::trimNull(Strings::replaceSpace((string) ($sidlo->psc ?? $sidlo->pscTxt ?? ''))); // input is int
 		$data->street = Strings::trimNull($sidlo->nazevUlice ?? null);
@@ -57,15 +60,17 @@ class JsonToDataTransformer
 		return self::isAddressFilled($data);
 	}
 
-
-	private static function resolveAddress(Data $data, stdClass $json): void
+	private static function resolveAddress(
+		Data $data,
+		stdClass $json,
+	): void
 	{
 		$addressExists = isset($json->sidlo) && self::updateAddress($data, $json->sidlo);
 
 		if ($addressExists === false) {
 			$additionalData = isset($json->dalsiUdaje) ? self::prepareForAddress($json->dalsiUdaje) : [];
 			if ($additionalData !== []) {
-				foreach (self::RegisterPriority as $register) {
+				foreach (self::REGISTER_PRIORITY as $register) {
 					$key = self::keyForAddress($register, $json);
 					if (isset($additionalData[$key])) {
 						$addressExists = self::updateAddress($data, $additionalData[$key]);
@@ -89,7 +94,6 @@ class JsonToDataTransformer
 		}
 	}
 
-
 	private static function isAddressFilled(Data $data): bool
 	{
 		if ($data->zip === null) {
@@ -105,7 +109,6 @@ class JsonToDataTransformer
 			|| $data->district !== null
 			|| $data->house_number !== null;
 	}
-
 
 	/**
 	 * @param array<stdClass> $dalsiUdaje
@@ -127,15 +130,19 @@ class JsonToDataTransformer
 		return $out;
 	}
 
-
-	private static function keyForAddress(string $datovyZdroj, stdClass $json): string
+	private static function keyForAddress(
+		string $datovyZdroj,
+		stdClass $json,
+	): string
 	{
 		$pravniForma = $json->pravniForma ?? (isset($json->pravniFormaRos) ? ($json->pravniFormaRos . 'ROS') : '0');
 		return "$datovyZdroj|$pravniForma";
 	}
 
-
-	private static function resolveIsPerson(?int $pravniForma, ?int $pravniFormaRos): bool
+	private static function resolveIsPerson(
+		?int $pravniForma,
+		?int $pravniFormaRos,
+	): bool
 	{
 		if ($pravniForma === null && $pravniFormaRos === null) {
 			return false;

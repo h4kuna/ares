@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares;
 
@@ -7,6 +7,7 @@ namespace h4kuna\Ares\Ares;
  */
 final class Sources
 {
+
 	// Záznamy Veřejných rejstříků
 	public const SERVICE_VR = 'stavZdrojeVr';
 	// Záznamy Registru ekonomických subjektů

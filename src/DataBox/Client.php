@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\DataBox;
 
@@ -15,11 +15,13 @@ use stdClass;
  */
 final class Client
 {
+
 	public static string $url = 'https://www.mojedatovaschranka.cz/sds/ws/call';
 
 	public function __construct(
 		private TransportProvider $requestProvider,
-	) {
+	)
+	{
 	}
 
 	/**
@@ -34,9 +36,9 @@ final class Client
 
 		$data = Xml::toJson($response);
 
-		if (isset($data->Message)) {
-			throw ResultException::withMessage(Strings::fromMixedStrict($data->Message));
-		} elseif (isset($data->Osoba) === false) {
+		if (isset($data->Message)) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+			throw ResultException::withMessage(Strings::fromMixedStrict($data->Message)); // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+		} elseif (isset($data->Osoba) === false) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
 			throw ServerResponseException::badResponse('No content');
 		}
 

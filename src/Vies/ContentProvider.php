@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Vies;
 
@@ -6,19 +6,20 @@ use h4kuna\Ares\Exception\LogicException;
 use h4kuna\Ares\Exception\ServerResponseException;
 use Nette\Utils\Strings;
 use stdClass;
+use function is_string;
+use function substr;
 
 /**
  * @phpstan-import-type ViesResponse from Client
  */
 final class ContentProvider
 {
+
 	public function __construct(private Client $client)
 	{
 	}
 
-
 	/**
-	 * @param string|ViesEntity $vatNumber
 	 * @return ViesResponse
 	 *
 	 * @throws ServerResponseException
@@ -39,7 +40,6 @@ final class ContentProvider
 		return $this->client->checkVatNumber($viesEntity);
 	}
 
-
 	/**
 	 * @throws ServerResponseException
 	 */
@@ -47,5 +47,5 @@ final class ContentProvider
 	{
 		return $this->client->status();
 	}
-}
 
+}

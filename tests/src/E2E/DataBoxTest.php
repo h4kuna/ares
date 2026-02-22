@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\E2E;
 
 use h4kuna\Ares\AresFactory;
 use h4kuna\Ares\Tests\TestCase;
 use h4kuna\Ares\Tests\UseStoredFile;
+use function usort;
 
 require __DIR__ . '/../../bootstrap.php';
 
@@ -13,13 +14,13 @@ require __DIR__ . '/../../bootstrap.php';
  */
 final class DataBoxTest extends TestCase
 {
+
 	use UseStoredFile;
 
 	protected static function getMask(): string
 	{
 		return __DIR__ . '/../../fixtures/databox/%file%.json';
 	}
-
 
 	/**
 	 * @dataProvider provideBasic
@@ -28,12 +29,11 @@ final class DataBoxTest extends TestCase
 	{
 		$ares = (new AresFactory())->create();
 		$data = $ares->loadDataBox($in);
-		usort($data, function ($a, $b) {
+		usort($data, static function ($a, $b) {
 			return $a->ISDS <=> $b->ISDS;
 		});
 		$this->assertFile($in, $data);
 	}
-
 
 	/**
 	 * @return array<mixed>
@@ -48,4 +48,4 @@ final class DataBoxTest extends TestCase
 
 }
 
-(new DataBoxTest)->run();
+(new DataBoxTest())->run();

@@ -1,9 +1,9 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares\Core;
 
 use Generator;
-use h4kuna\Ares\Adis;
+use h4kuna\Ares\Adis\ContentProvider as AdisContentProvider;
 use h4kuna\Ares\Ares\Client;
 use h4kuna\Ares\Ares\Helper;
 use h4kuna\Ares\Ares\Sources;
@@ -12,16 +12,19 @@ use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
 use h4kuna\Ares\Exception\ResultException;
 use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Tool\Batch;
+use function iterator_to_array;
 
 final class ContentProvider
 {
+
 	private const BATCH = 100; // max identification numbers per request
 
 	public function __construct(
 		private JsonToDataTransformer $jsonTransformer,
 		private Client $client,
-		private Adis\ContentProvider $adisContentProvider,
-	) {
+		private AdisContentProvider $adisContentProvider,
+	)
+	{
 	}
 
 	public function getClient(): Client
@@ -30,16 +33,17 @@ final class ContentProvider
 	}
 
 	/**
-	 * @template KeyName
 	 * @param array<KeyName, string|int> $identificationNumbers
 	 * @return Generator<(int&KeyName)|(KeyName&string), Data>
+	 *
+	 * @template KeyName
 	 *
 	 * @throws ResultException
 	 * @throws ServerResponseException
 	 */
 	public function loadByIdentificationNumbers(array $identificationNumbers): Generator
 	{
-		$duplicity = Batch::checkDuplicities($identificationNumbers, fn (string $in) => Helper::normalizeIN($in));
+		$duplicity = Batch::checkDuplicities($identificationNumbers, static fn (string $in) => Helper::normalizeIN($in));
 		$chunks = Batch::chunk($duplicity, self::BATCH);
 
 		foreach ($chunks as $INs) {
@@ -59,7 +63,7 @@ final class ContentProvider
 
 			try {
 				$subjects = iterator_to_array($this->adisContentProvider->statusBusinessSubjects($map));
-			} catch (ServerResponseException) {
+			} catch (ServerResponseException $e) {
 				$subjects = [];
 			}
 

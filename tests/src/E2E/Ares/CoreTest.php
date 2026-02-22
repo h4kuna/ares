@@ -1,11 +1,15 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tests\E2E\Ares;
 
-use h4kuna;
-use h4kuna\Ares;
+use h4kuna\Ares\AresFactory;
+use h4kuna\Ares\Exception\IdentificationNumberNotFoundException;
 use h4kuna\Ares\Tests\TestCase;
+use h4kuna\Ares\Tests\UseStoredFile;
 use Tester\Assert;
+use Throwable;
+use function sort;
+use const SORT_NUMERIC;
 
 require_once __DIR__ . '/../../../bootstrap.php';
 
@@ -14,13 +18,13 @@ require_once __DIR__ . '/../../../bootstrap.php';
  */
 final class CoreTest extends TestCase
 {
-	use Ares\Tests\UseStoredFile;
+
+	use UseStoredFile;
 
 	protected static function getMask(): string
 	{
 		return __DIR__ . '/../../../fixtures/ares/%file%.json';
 	}
-
 
 	/**
 	 * @return array<array<string>>
@@ -36,7 +40,7 @@ final class CoreTest extends TestCase
 			['61682039'],
 			['08975884'], // address
 			['2445344'], // Skanska Residential a.s., DIČ CZ699004845
-			['2491427'],  // o.s.
+			['2491427'], // o.s.
 			['5560438'],
 			['16415345'],
 			['25110161'], // v.o.s.
@@ -51,43 +55,40 @@ final class CoreTest extends TestCase
 		];
 	}
 
-
 	/**
 	 * @dataProvider provideCore
 	 */
 	public function testCore(string $in): void
 	{
-		$data = (new Ares\AresFactory())->create()->loadBasic($in);
+		$data = (new AresFactory())->create()->loadBasic($in);
 		sort($data->nace, SORT_NUMERIC);
 		$this->assertFile($data->in, $data);
 	}
 
-
+	// phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
 	/**
-	 * @throws h4kuna\Ares\Exception\IdentificationNumberNotFoundException
+	 * @throws \h4kuna\Ares\Exception\IdentificationNumberNotFoundException
 	 */
+	// phpcs:enable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
 	public function testInactive(): void
 	{
-		$data = (new Ares\AresFactory())->create()->loadBasic('25596641');
+		$data = (new AresFactory())->create()->loadBasic('25596641');
 		Assert::false($data->active);
 	}
-
 
 	public function testGroupVAT(): void
 	{
 		$in = '2445344';
-		$data = (new Ares\AresFactory())->create()->loadBasic($in);
+		$data = (new AresFactory())->create()->loadBasic($in);
 		Assert::same('CZ699004845', $data->tin);
 		Assert::true($data->vat_payer);
 	}
 
-
 	public function testForeignPerson(): void
 	{
-		$data = (new Ares\AresFactory())->create()->loadBasic('6387446');
+		$data = (new AresFactory())->create()->loadBasic('6387446');
 		Assert::true($data->is_person);
 	}
-
 
 	public function testLoadBasicMulti(): void
 	{
@@ -98,7 +99,7 @@ final class CoreTest extends TestCase
 			'four' => '25596641',
 			'five' => '06387446',
 		];
-		$results = (new Ares\AresFactory())->create()->loadBasicMulti($identificationNumbers);
+		$results = (new AresFactory())->create()->loadBasicMulti($identificationNumbers);
 		$companies = [];
 		foreach ($results as $in => $result) {
 			$companies[$in] = $result;
@@ -109,18 +110,16 @@ final class CoreTest extends TestCase
 		Assert::true(isset($companies['three']));
 	}
 
-
 	public function testLoadBasicMultiEmpty(): void
 	{
 		$identificationNumbers = [];
-		$results = (new Ares\AresFactory())->create()->loadBasicMulti([]);
+		$results = (new AresFactory())->create()->loadBasicMulti([]);
 		foreach ($results as $result) {
 			$identificationNumbers[] = $result;
 		}
 
 		Assert::same([], $identificationNumbers);
 	}
-
 
 	/**
 	 * @return array<array<string>>
@@ -133,22 +132,21 @@ final class CoreTest extends TestCase
 		];
 	}
 
-
 	/**
 	 * @dataProvider provideNotFound
 	 */
 	public function testNotFound(string $in): void
 	{
 		try {
-			(new Ares\AresFactory())->create()->loadBasic($in);
+			(new AresFactory())->create()->loadBasic($in);
 			Assert::fail('Must throw exception');
-		} catch (Ares\Exception\IdentificationNumberNotFoundException $e) {
+		} catch (IdentificationNumberNotFoundException $e) {
 			Assert::same($in, $e->getIn());
-		} catch (\Throwable $e) {
-			Assert::fail('Must throw ' . Ares\Exception\IdentificationNumberNotFoundException::class);
+		} catch (Throwable $e) {
+			Assert::fail('Must throw ' . IdentificationNumberNotFoundException::class);
 		}
 	}
 
 }
 
-(new CoreTest)->run();
+(new CoreTest())->run();

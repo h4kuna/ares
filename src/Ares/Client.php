@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares;
 
@@ -8,13 +8,15 @@ use h4kuna\Ares\Exception\ServerResponseException;
 use h4kuna\Ares\Http\TransportProvider;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
+use function sprintf;
 
 class Client
 {
 
 	public function __construct(
 		private TransportProvider $transportProvider,
-	) {
+	)
+	{
 	}
 
 	/**
@@ -24,7 +26,10 @@ class Client
 	 * @throws ResultException
 	 * @throws ServerResponseException
 	 */
-	public function searchEndpoint(string $key, array $data = []): stdClass
+	public function searchEndpoint(
+		string $key,
+		array $data = [],
+	): stdClass
 	{
 		$request = $this->transportProvider->createJsonRequest(Helper::prepareUrlSearch($key), $data);
 		$response = $this->transportProvider->response($request);
@@ -34,10 +39,14 @@ class Client
 
 	/**
 	 * @param Sources::SERVICE_*|Sources::CORE $key
+	 *
 	 * @throws IdentificationNumberNotFoundException
 	 * @throws ServerResponseException
 	 */
-	public function useEndpoint(string $key, string $in): stdClass
+	public function useEndpoint(
+		string $key,
+		string $in,
+	): stdClass
 	{
 		$request = $this->transportProvider->createRequest(Helper::prepareUrl($key, $in));
 		$response = $this->transportProvider->response($request);
@@ -45,7 +54,7 @@ class Client
 		try {
 			$json = $this->responseToStdClass($response);
 		} catch (ResultException $e) {
-			throw new IdentificationNumberNotFoundException(sprintf("Api: %s. %s", $key, $e->getMessage()), $in, $e);
+			throw new IdentificationNumberNotFoundException(sprintf('Api: %s. %s', $key, $e->getMessage()), $in, $e);
 		}
 
 		return $json;

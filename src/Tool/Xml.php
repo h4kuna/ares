@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tool;
 
@@ -8,9 +8,12 @@ use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
 use stdClass;
+use function assert;
+use function simplexml_load_string;
 
 final class Xml
 {
+
 	/**
 	 * @throws ServerResponseException
 	 */

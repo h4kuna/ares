@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Exception;
 
@@ -7,15 +7,21 @@ use Psr\Http\Client\ClientExceptionInterface;
 
 final class AdisResponseException extends RuntimeException implements ClientExceptionInterface
 {
+
 	public function __construct(
 		public Data $data,
 		ServerResponseException $previous,
-	) {
+	)
+	{
 		parent::__construct('Validation by Adis failed, you can use $data from ARES only. Fields vat_payer and tin are not valid.', $previous);
 	}
 
-	public static function fromServerException(Data $data, ServerResponseException $e): self
+	public static function fromServerException(
+		Data $data,
+		ServerResponseException $e,
+	): self
 	{
 		return new self($data, $e);
 	}
+
 }

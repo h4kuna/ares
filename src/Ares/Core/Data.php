@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares\Core;
 
@@ -9,12 +9,15 @@ use h4kuna\Ares\Tool\Strings;
 use JsonSerializable;
 use stdClass;
 use Stringable;
+use function get_object_vars;
+use function json_encode;
 
 /**
  * @phpstan-type DataType array<string, mixed>
  */
 class Data implements JsonSerializable, Stringable
 {
+
 	public bool $active;
 
 	public ?string $city;
@@ -45,6 +48,7 @@ class Data implements JsonSerializable, Stringable
 
 	/**
 	 * <prefix>DIČ
+	 *
 	 * @todo https://github.com/h4kuna/ares/issues/30#issuecomment-1719170527
 	 */
 	public ?string $tin;
@@ -74,7 +78,6 @@ class Data implements JsonSerializable, Stringable
 	 */
 	public ?Subject $adis = null;
 
-
 	public function setAdis(Subject $adis): void
 	{
 		if ($adis->exists) {
@@ -87,7 +90,6 @@ class Data implements JsonSerializable, Stringable
 
 		$this->adis = $adis;
 	}
-
 
 	/**
 	 * @return array<string, scalar|array<string>>
@@ -103,16 +105,14 @@ class Data implements JsonSerializable, Stringable
 			}
 		}
 
-		/** @var  array<string, scalar|array<string>> $data */
+		/** @var array<string, scalar|array<string>> $data */
 		return $data;
 	}
-
 
 	public function __toString(): string
 	{
 		return (string) json_encode($this);
 	}
-
 
 	/**
 	 * @return DataType
@@ -121,7 +121,6 @@ class Data implements JsonSerializable, Stringable
 	{
 		return $this->toArray();
 	}
-
 
 	/**
 	 * @param DataType $data
@@ -132,7 +131,6 @@ class Data implements JsonSerializable, Stringable
 			$this->$name = $value;
 		}
 	}
-
 
 	/**
 	 * @return DataType

@@ -1,19 +1,25 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tool;
 
 use Closure;
+use function array_chunk;
+use function array_keys;
 
 final class Batch
 {
 
 	/**
-	 * @template NAME
 	 * @param Closure(string): string $callback
 	 * @param array<NAME, string|int> $list
 	 * @return array<string, array<(int&NAME)|(NAME&string)>>
+	 *
+	 * @template NAME
 	 */
-	public static function checkDuplicities(array $list, Closure $callback): array
+	public static function checkDuplicities(
+		array $list,
+		Closure $callback,
+	): array
 	{
 		$duplicity = [];
 		foreach ($list as $name => $value) {
@@ -24,14 +30,17 @@ final class Batch
 		return $duplicity;
 	}
 
-
 	/**
-	 * @template NAME
 	 * @param array<string, array<NAME>> $list
 	 * @param int<1, max> $batch
 	 * @return array<array<string>>
+	 *
+	 * @template NAME
 	 */
-	public static function chunk(array $list, int $batch): array
+	public static function chunk(
+		array $list,
+		int $batch,
+	): array
 	{
 		return array_chunk(array_keys($list), $batch);
 	}

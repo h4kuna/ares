@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Ares;
 
@@ -6,6 +6,14 @@ use h4kuna\Ares\Ares\Core\SubjectType;
 use h4kuna\Ares\Exception\LogicException;
 use h4kuna\Ares\Tool\Strings;
 use Nette\Utils\Strings as NetteStrings;
+use function is_numeric;
+use function sprintf;
+use function str_pad;
+use function str_replace;
+use function str_starts_with;
+use function strtoupper;
+use function trim;
+use const STR_PAD_LEFT;
 
 /**
  * @phpstan-type addressTypeRaw array{street?: string, zip?: string, city?: string, house_number?: string, country?: string}
@@ -13,25 +21,6 @@ use Nette\Utils\Strings as NetteStrings;
  */
 final class Helper
 {
-	public static string $baseUrl = 'https://ares.gov.cz/ekonomicke-subjekty-v-be/rest';
-
-	/**
-	 * @var array<string, string>
-	 */
-	public static $endpoints = [
-		Sources::SERVICE_VR => '/ekonomicke-subjekty-vr/{ico}',
-		Sources::SERVICE_RES => '/ekonomicke-subjekty-res/{ico}',
-		Sources::SERVICE_RZP => '/ekonomicke-subjekty-rzp/{ico}',
-		Sources::SERVICE_NRPZS => '/ekonomicke-subjekty-nrpzs/{ico}',
-		Sources::SERVICE_RCNS => '/ekonomicke-subjekty-rcns/{ico}',
-		Sources::SERVICE_RPSH => '/ekonomicke-subjekty-rpsh/{ico}',
-		Sources::SERVICE_RS => '/ekonomicke-subjekty-rs/{ico}',
-		Sources::SERVICE_SZR => '/ekonomicke-subjekty-szr/{ico}',
-		Sources::SERVICE_ROS => '/ekonomicke-subjekty-ros/{ico}',
-		Sources::SERVICE_CEU => '/ekonomicke-subjekty-ceu/{ico}',
-		Sources::CORE => '/ekonomicke-subjekty/{ico}',
-		Sources::DIAL => '/ciselniky-nazevniky/{ico}',
-	];
 
 	private const SERVICES = [
 		Sources::SERVICE_VR => 'NEEXISTUJICI',
@@ -49,12 +38,31 @@ final class Helper
 		Sources::SER_NO_SD => 'NEEXISTUJICI',
 	];
 
+	public static string $baseUrl = 'https://ares.gov.cz/ekonomicke-subjekty-v-be/rest';
+
+	/**
+	 * @var array<string, string>
+	 */
+	public static array $endpoints = [
+		Sources::SERVICE_VR => '/ekonomicke-subjekty-vr/{ico}',
+		Sources::SERVICE_RES => '/ekonomicke-subjekty-res/{ico}',
+		Sources::SERVICE_RZP => '/ekonomicke-subjekty-rzp/{ico}',
+		Sources::SERVICE_NRPZS => '/ekonomicke-subjekty-nrpzs/{ico}',
+		Sources::SERVICE_RCNS => '/ekonomicke-subjekty-rcns/{ico}',
+		Sources::SERVICE_RPSH => '/ekonomicke-subjekty-rpsh/{ico}',
+		Sources::SERVICE_RS => '/ekonomicke-subjekty-rs/{ico}',
+		Sources::SERVICE_SZR => '/ekonomicke-subjekty-szr/{ico}',
+		Sources::SERVICE_ROS => '/ekonomicke-subjekty-ros/{ico}',
+		Sources::SERVICE_CEU => '/ekonomicke-subjekty-ceu/{ico}',
+		Sources::CORE => '/ekonomicke-subjekty/{ico}',
+		Sources::DIAL => '/ciselniky-nazevniky/{ico}',
+	];
+
 
 	public static function endpointExists(string $source): bool
 	{
 		return isset(self::$endpoints[$source]);
 	}
-
 
 	/**
 	 * @param Sources::SERVICE_*|Sources::DIAL|Sources::CORE $source
@@ -64,11 +72,13 @@ final class Helper
 		return self::prepareUrl($source, 'vyhledat');
 	}
 
-
 	/**
 	 * @param Sources::SERVICE_*|Sources::DIAL|Sources::CORE $source
 	 */
-	public static function prepareUrl(string $source, string $in): string
+	public static function prepareUrl(
+		string $source,
+		string $in,
+	): string
 	{
 		if (self::endpointExists($source) === false) {
 			throw new LogicException(sprintf('Endpoint %s does not exists.', $source));
@@ -80,7 +90,6 @@ final class Helper
 			self::$baseUrl . self::$endpoints[$source],
 		);
 	}
-
 
 	/**
 	 * @param array<Sources::SER*, string> $registrations
@@ -96,11 +105,10 @@ final class Helper
 		return $map + self::SERVICES;
 	}
 
-
 	public static function houseNumber(
 		string $cisloDomovni,
 		string $cisloOrientacni,
-		string $cisloOrientacniPismeno
+		string $cisloOrientacniPismeno,
 	): ?string
 	{
 		$houseNumber = Strings::trimNull(trim($cisloDomovni . '/' . $cisloOrientacni, '/'));
@@ -114,7 +122,6 @@ final class Helper
 		return $houseNumber;
 	}
 
-
 	public static function isPerson(int $legalForm): bool
 	{
 		return match ($legalForm) {
@@ -123,12 +130,10 @@ final class Helper
 		};
 	}
 
-
 	public static function normalizeIN(string $in): string
 	{
 		return str_pad($in, 8, '0', STR_PAD_LEFT);
 	}
-
 
 	/**
 	 * @return addressType
@@ -148,7 +153,6 @@ final class Helper
 		return self::prepareAddressData($results ?? []);
 	}
 
-
 	/**
 	 * @param addressTypeRaw $results
 	 * @return addressType
@@ -164,7 +168,6 @@ final class Helper
 		];
 	}
 
-
 	public static function normalizeTIN(string $tin): string
 	{
 		$upper = strtoupper($tin);
@@ -174,4 +177,5 @@ final class Helper
 
 		return $upper;
 	}
+
 }

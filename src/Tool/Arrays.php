@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace h4kuna\Ares\Tool;
 
@@ -6,6 +6,7 @@ use stdClass;
 
 final class Arrays
 {
+
 	/**
 	 * @param stdClass|list<stdClass> $content
 	 * @return list<stdClass>
@@ -19,4 +20,5 @@ final class Arrays
 		/** @var list<stdClass> $content */
 		return $content;
 	}
+
 }
