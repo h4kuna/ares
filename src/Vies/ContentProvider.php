@@ -27,7 +27,7 @@ final class ContentProvider
 	public function checkVat(string|ViesEntity $vatNumber): object
 	{
 		if (is_string($vatNumber)) {
-			$match = Strings::match($vatNumber, '/(?<country>[A-Z]{2})/');
+			$match = Strings::match($vatNumber, '/^(?<country>[A-Z]{2})/');
 			if (isset($match['country']) === false) {
 				throw new LogicException('Use class ViesEntity instead of string.');
 			}
