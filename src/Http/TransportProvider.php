@@ -13,8 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use stdClass;
-use function assert;
+use function get_debug_type;
 use function is_string;
+use function sprintf;
 
 final class TransportProvider
 {
@@ -49,9 +50,12 @@ final class TransportProvider
 	{
 		try {
 			$json = Json::decode($response->getBody()->getContents());
-			assert($json instanceof stdClass);
 		} catch (JsonException $e) {
 			throw ServerResponseException::fromException($e);
+		}
+
+		if ($json instanceof stdClass === false) {
+			throw ServerResponseException::badResponse(sprintf('Expected JSON object in response, got %s.', get_debug_type($json)));
 		}
 
 		return $json;

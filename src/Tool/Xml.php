@@ -8,8 +8,9 @@ use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
 use stdClass;
-use function assert;
+use function get_debug_type;
 use function simplexml_load_string;
+use function sprintf;
 
 final class Xml
 {
@@ -30,9 +31,12 @@ final class Xml
 
 		try {
 			$data = Json::decode(Json::encode($xml));
-			assert($data instanceof stdClass);
 		} catch (JsonException $e) {
 			throw ServerResponseException::fromException($e);
+		}
+
+		if ($data instanceof stdClass === false) {
+			throw ServerResponseException::badResponse(sprintf('Expected XML convertible to object, got %s.', get_debug_type($data)));
 		}
 
 		return $data;
