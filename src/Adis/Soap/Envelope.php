@@ -49,7 +49,7 @@ final class Envelope
 			<soapenv:Body>
 				$body
 			</soapenv:Body>
-		</soapenv:Envelope>';
+		</soapenv:Envelope>
 		XML;
 	}
 
