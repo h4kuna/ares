@@ -10,7 +10,7 @@ More information about versions is in [changelog](changelog.md).
 
 ## Support development by QR code
 
-Use QR code or sponsor button where is link on my revolut.
+Use the QR code or the sponsor button, which links to my Revolut.
 
 Thank you :)
 
@@ -19,22 +19,24 @@ Thank you :)
 
 ## Installation to project
 
-The best way to install h4kuna/ares is using Composer:
+Requires PHP 8.0 or newer. The best way to install h4kuna/ares is using Composer:
 
 ```sh
 composer require h4kuna/ares
 
-# optional and default support
+# optional, default implementation of PSR-7, PSR-17 and PSR-18 used by AresFactory
 composer require guzzlehttp/guzzle
 ```
 
-Download information about customer via his IN.
+Without Guzzle, pass your own PSR-18 client and PSR-17 factories to the `AresFactory` constructor.
+
+The library downloads information about a subject by its identification number (IČO).
 
 ## ARES
 
-[Homepage](https://ares.gov.cz/stranky/vyvojar-info) documentation for developers.
+[Documentation for developers](https://ares.gov.cz/stranky/vyvojar-info).
 
-Load data by one identification number.
+Load data by one identification number. Shorter numbers are padded with leading zeros to 8 digits.
 
 ```php
 use h4kuna\Ares;
@@ -44,9 +46,9 @@ try {
     /* @var $response Ares\Ares\Core\Data */
     var_dump($response);
 } catch (Ares\Exception\IdentificationNumberNotFoundException $e) {
-    // log identification number, why is bad? Or make nothing.
+    // the identification number does not exist, log it or ignore it
 } catch (Ares\Exception\AdisResponseException $e) {
-    // if validation by adis failed, but data from ares returned
+    // validation by ADIS failed, but ARES returned the data
     /* @var $response Ares\Ares\Core\Data */
     $response = $e->data;
     $response->adis === null; // true
@@ -56,29 +58,31 @@ try {
 }
 ```
 
-Load data by many identification numbers. Limit by ARES service is set to 100 items, but library chunk it and check duplicity.
+Load data by many identification numbers. The ARES service accepts at most 100 items per request, the library splits the input into chunks and removes duplicates. The result is a `Generator` that keeps the keys of the input array and contains only the subjects that exist.
 
 ```php
 use h4kuna\Ares;
 /** @var Ares\Ares $ares */
 $numbers = ['one' => '25596641', 'two' => '26713250', 'three' => '27082440', 'four' => '11111111'];
 
-try { 
+try {
     foreach ($ares->loadBasicMulti($numbers) as $name => $r) {
         var_dump($name, $r->company);
     }
-} catch (Ares\Exception\ServerResponseException $e) {
-    // no response from server or broken json
+} catch (Ares\Exception\ResultException | Ares\Exception\ServerResponseException $e) {
+    // error response, no response from server or broken json
 }
 ```
 
 ### Other endpoints
 
-Choose endpoint from class [Sources](./src/Ares/Sources.php).
-- SERVICE_* - available other endpoints
-- CORE - is main endpoint this is used in method `$ares->loadBasic()`
-- DIAL - use if you want list of value for example `PravniForma`
-- SER_NO_* are not exists
+Choose an endpoint from the class [Sources](./src/Ares/Sources.php).
+- `SERVICE_*` - other available endpoints
+- `CORE` - the main endpoint, used by the method `$ares->loadBasic()`
+- `DIAL` - code lists (dials), for example `PravniForma`
+- `SER_NO_*` - not supported
+
+Runnable examples are in [bin](./bin).
 
 ```php
 use h4kuna\Ares;
@@ -90,7 +94,7 @@ var_dump($result);
 
 #### Dials
 
-Parameters `kodCiselniku` and `zdrojCiselniku` you can find in json file, on this page [AresRestApi-verejne_v*.json](https://ares.gov.cz/stranky/vyvojar-info), like a `ciselnikKod: PravniForma, zdroj: res`.
+You can find the parameters `kodCiselniku` and `zdrojCiselniku` in the JSON file [AresRestApi-verejne_v*.json](https://ares.gov.cz/stranky/vyvojar-info), for example `ciselnikKod: PravniForma, zdroj: res`.
 
 ```php
 use h4kuna\Ares;
@@ -106,7 +110,7 @@ foreach ($result as $item) {
 }
 ```
 
-## Data Box (datová schánka)
+## Data Box (datová schránka)
 
 [Manual](https://www.mojedatovaschranka.cz/sds/p/download/sds_webove_sluzby.pdf#view=Fit)
 
@@ -114,25 +118,27 @@ foreach ($result as $item) {
 use h4kuna\Ares;
 /** @var Ares\Ares $ares */
 try {
-    $response = $ares->loadDataBox('87744473');
-    var_dump($response->ISDS);
-} catch (h4kuna\Ares\Exception\ServerResponseException $e) {
+    // returns a list of data boxes of the subject
+    foreach ($ares->loadDataBox('87744473') as $dataBox) {
+        var_dump($dataBox->ISDS);
+    }
+} catch (Ares\Exception\ResultException | Ares\Exception\ServerResponseException $e) {
     // catch error
 }
 ```
 
 ## VIES
 
-Support [base check](https://ec.europa.eu/taxation_customs/vies/).
+Supports the [basic VAT number check](https://ec.europa.eu/taxation_customs/vies/). The VAT number must start with the country code, or pass an instance of `Ares\Vies\ViesEntity`.
 
 ```php
 use h4kuna\Ares;
 /** @var Ares\Ares $ares */
 
 try {
-    $response = $ares->checkVatVies($vatNumber);
+    $response = $ares->checkVatVies('CZ27082440');
     var_dump($response->valid); // true / false
 } catch (Ares\Exception\ServerResponseException $e) {
-    // invalid VAT
+    // service error, for example MS_UNAVAILABLE
 }
 ```
