@@ -3,8 +3,6 @@ env:
   GITHUB_RUN: 1
 
 on:
-  schedule:
-    - cron: "0 4 * * *"
   push:
   pull_request:
 
@@ -13,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.0', '8.1', '8.2', '8.3', '8.4']
+        php: ['8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
 
       fail-fast: false
 
     name: PHP ${{ matrix.php }} tests
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -31,20 +29,17 @@ jobs:
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: output
+          name: output-${{ matrix.php }}
           path: tests/**/output
 
   lowest_dependencies:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: ['8.0', '8.1', '8.2', '8.3'] # exclude 8.4
-    name: PHP Lowest Dependencies ${{ matrix.php }}
+    name: PHP Lowest Dependencies 8.0
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: '8.0'
           extensions: curl, simplexml, json
           coverage: none
 
@@ -55,10 +50,10 @@ jobs:
     name: Code Coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: '8.0'
           coverage: none
 
       - run: composer install --no-progress --prefer-dist
